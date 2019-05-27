@@ -1,0 +1,239 @@
+#include "rah.hpp"
+
+#ifdef MSVC
+#pragma warning(push, 0)
+#endif
+#include <iostream>
+#include <vector>
+#include <map>
+#include <forward_list>
+#ifdef MSVC
+#pragma warning(pop)
+#endif
+
+using namespace rah;
+
+auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
+
+#define CHECK(CONDITION) \
+std::cout << "CHECK : " << #CONDITION << std::endl; \
+if(CONDITION) \
+	std::cout << "OK" << std::endl; \
+else \
+	{std::cout << "NOT OK" << std::endl; abort();}
+
+#define EQUAL_RANGE(RANGE, IL) \
+std::cout << "CHECK : " << #RANGE << " = " << #IL << std::endl; \
+if(zip(RANGE, IL) | all_of(PairEqual)) \
+	std::cout << "OK" << std::endl; \
+else \
+	{std::cout << "NOT OK" << std::endl; abort();}
+
+template<typename T>
+using il = std::initializer_list<T>;
+
+template<typename A, typename B, typename C, typename D>
+bool operator == (std::tuple<A, B> a, std::pair<D, C> b)
+{
+	return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+
+template<typename A, typename B, typename C, typename D>
+bool operator == (std::pair<A, B> a, std::tuple<D, C> b)
+{
+	return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+
+template<typename T>
+struct WhatIsIt;
+
+int main()
+{
+	using namespace std;
+
+	// auto toto = ints(0, 4);
+	// WhatIsIt<IteratorHelper<decltype(toto), int>::Tag> prout;
+
+	// ***************************** Generators ***************************************************
+
+	// Test ints
+	EQUAL_RANGE(ints(0, 4), il<int>({ 0, 1, 2, 3 }));
+	EQUAL_RANGE(ints(10, 20, 2), il<int>({ 10, 12, 14, 16, 18 }));
+
+	// ***************************** Adaptors *****************************************************
+
+	// Test transform
+	EQUAL_RANGE(ints(0, 4) | transform([](auto a) {return a * 2; }), il<int>({ 0, 2, 4, 6 }));
+
+	// Test transform
+	{
+		std::vector<int> constVect{ 0, 1, 2, 3 };
+		EQUAL_RANGE((constVect | transform([](auto a) {return a * 2; })), il<int>({ 0, 2, 4, 6 }));
+	}
+
+	// Test slice
+	EQUAL_RANGE(ints(0, 100) | slice(10, 15), il<int>({ 10, 11, 12, 13, 14 }));
+
+	// Test stride
+	EQUAL_RANGE(ints(0, 100) | stride(20), il<int>({ 0, 20, 40, 60, 80 }));
+
+	// Test retro
+	EQUAL_RANGE(ints(0, 4) | retro(), il<int>({ 3, 2, 1, 0 }));
+
+	// Test zip
+	using tIDC = std::tuple<int, double, char>;
+	EQUAL_RANGE(zip(il<int>{ 1, 2, 3, 4 }, il<double>{ 2.5, 4.5, 6.5, 8.5 }, il<char>{ 'a', 'b', 'c', 'd' }),
+		(il<tuple<int, double, char>>{ tIDC{ 1, 2.5, 'a' }, tIDC{ 2, 4.5, 'b' }, tIDC{ 3, 6.5, 'c' }, tIDC{ 4, 8.5, 'd' } }));
+
+	// Test filter
+	EQUAL_RANGE(ints(0, 8) | filter([](auto a) {return a % 2 == 0; }), il<int>({ 0, 2, 4, 6 }));
+
+	// Test enumerate
+	using tUII = std::tuple<unsigned int, int>;
+	EQUAL_RANGE(ints(4, 8) | enumerate(), (il<tuple<unsigned int, int>>{ tUII{ 0, 4 }, tUII{ 1, 5 }, tUII{ 2, 6 }, tUII{ 3, 7 } }));
+
+	// Test mapValue
+	EQUAL_RANGE((std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | mapValue()), (il<double>{ 1.5, 2.5, 3.5, 4.5 }));
+
+	// Test mapKey
+	EQUAL_RANGE((std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | mapKey()), (il<int>{ 1, 2, 3, 4 }));
+
+	// ******************************** Reduce ****************************************************
+
+	// Test reduce
+	CHECK((ints(1, 5) | reduce(0, [](auto a, auto b) {return a + b; })) == 10);
+
+	// Test all_of
+	CHECK((il<int>{ 4, 4, 4, 4 } | all_of([](auto a) {return a == 4; })));
+	CHECK(!(il<int>{ 4, 4, 3, 4 } | all_of([](auto a) {return a == 4; })));
+
+	// Test any_of
+	CHECK((il<int>{3, 0, 1, 3, 4, 6} | any_of([](auto a) {return a == 3; })));
+
+	// Test none_of
+	CHECK(ints(0, 10, 1) | none_of([](auto a) {return a == 11; }));
+
+	// Test one_of
+	CHECK(((il<int>{0, 1, 1} | count(1)) == 2));
+
+	CHECK(((il<int>{0, 1, 1} | count_if([](auto a) {return a == 1; })) == 2));
+
+	// ***************************** count *************************************
+
+	// Test count
+	CHECK((il<int>{ 4, 4, 4, 3 } | count(4)) == 3);
+
+	// Test count
+	CHECK((il<int>{ 4, 4, 4, 3 } | count_if([](auto a) {return a == 3; })) == 1);
+
+
+	// ******************* test to_container *******************************
+
+	{
+		auto&& vec_4_5_6_7 = ints(4, 8) | to_container<std::vector<int>>();
+		EQUAL_RANGE(vec_4_5_6_7, (il<int>{ 4, 5, 6, 7 }));
+
+		auto toPair = [](auto ab) {return std::make_pair(std::get<0>(ab), std::get<1>(ab)); };
+		auto&& map_4a_5b_6c_7d = zip(ints(4, 8), ints('a', 'e')) | transform(toPair) | to_container<std::map<int, char>>();
+		EQUAL_RANGE(map_4a_5b_6c_7d, (il<std::pair<int const, char>>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } }));
+	}
+
+	// ******************* test output_interator *******************************
+	std::forward_list<int> tutu = { 101, 102, 103, 104 };
+	for (auto i : tutu | transform([](int i) {return i * 2; }))
+		std::cout << i << std::endl;
+
+	std::map<int, char> testMap = {
+		{ 1, 'a' },
+	{ 2, 'e' },
+	{ 3, 'i' },
+	{ 4, 'o' },
+	{ 5, 'u' },
+	};
+
+	std::cout << "ints(0, 10) | filter([](auto i){return i % 2 == 0;})" << std::endl;
+	for (size_t i : ints(0, 10) | filter([](auto i) {return i % 2 == 0; }))
+		std::cout << i << std::endl;
+
+	std::cout << "mapValue()" << std::endl;
+	for (auto i : testMap | mapValue())
+		std::cout << i << std::endl;
+
+	std::cout << "mapKey()" << std::endl;
+	for (auto i : testMap | mapKey())
+		std::cout << i << std::endl;
+
+	std::cout << "ints(0, 10)" << std::endl;
+	for (size_t i : ints(0, 10))
+		std::cout << i << std::endl;
+
+	std::cout << "enumerate(ints(10, 20))" << std::endl;
+	for (auto[index, value] : enumerate(ints(10, 20)))
+		std::cout << index << " " << value << std::endl;
+
+	std::cout << "transform(ints(0, 10), [](int i) {return i * 2; })" << std::endl;
+	auto r1 = ints(0, 10);
+	auto func = [](int i) {return i * 2; };
+	auto r2 = transform(r1, func);
+	for (size_t i : r2)
+		std::cout << i << std::endl;
+
+	std::cout << "transform(ints(0, 10), [](int i) {return i * 2; })" << std::endl;
+	for (size_t i : transform(ints(0, 10), [](int i) {return i * 2; }))
+		std::cout << i << std::endl;
+
+	std::cout << "ints(0, 10) | transform([](int i) {return i * 2; })" << std::endl;
+	for (size_t i : ints(0, 10) | transform([](int i) {return i * 2; }))
+		std::cout << i << std::endl;
+
+	std::cout << "ints(0, 10) | transform([](int i) {return i * 2; }) | enumerate()" << std::endl;
+	for (auto[index, value] : ints(0, 10) | transform([](int i) {return i * 2; }) | enumerate())
+		std::cout << index << " " << value << std::endl;
+
+	std::vector<char> toto = { 'a', 'b', 'c', 'd' };
+	std::cout << "toto | transform([](int i) {return i * 2; }) | enumerate()" << std::endl;
+	for (auto[index, value] : toto | transform([](char i) {return i * 2; }) | enumerate())
+		std::cout << index << " " << value << std::endl;
+
+	std::cout << "ints(0, 100) | slice(10, 20)" << std::endl;
+	for (size_t i : ints(0, 100) | slice(10, 20))
+		std::cout << i << std::endl;
+
+	std::cout << "ints(0, 3000, 3) | transform([](int i) {return i * 2; }) | enumerate() | slice(10, 20)" << std::endl;
+	for (auto[index, value] : ints(0, 3000, 3) | transform([](int i) {return i * 2; }) | enumerate() | slice(10, 20))
+		std::cout << index << " " << value << std::endl;
+
+	std::cout << "zip(toto, ints(0, 4))" << std::endl;
+	for (auto[a, b] : zip(toto, ints(0, 4)))
+		std::cout << a << " " << b << std::endl;
+
+	std::cout << "ints(0, 100) | slice(0, 20) | stride(3)" << std::endl;
+	for (size_t i : ints(0, 100) | slice(0, 20) | stride(3))
+		std::cout << i << std::endl;
+
+	std::cout << "ints(10, 20) | retro()" << std::endl;
+	for (size_t i : ints(10, 20) | retro())
+		std::cout << i << std::endl;
+
+	std::cout << "ints(0, 100) | slice(10, 20) | retro()" << std::endl;
+	for (size_t i : ints(0, 100) | slice(10, 20) | retro())
+		std::cout << i << std::endl;
+
+	std::cout << "ints(10, 20) | enumerate() | retro()" << std::endl;
+	for (auto[index, value] : ints(10, 20) | enumerate() | retro())
+		std::cout << index << " " << value << std::endl;
+
+	std::cout << "ints() | enumerate() | slice(10, 20)" << std::endl;
+	for (auto[index, value] : ints(0, 100) | enumerate() | slice(10, 20))
+		std::cout << index << " " << value << std::endl;
+
+	std::cout << "ints() | enumerate() | slice(10, 20) | retro()" << std::endl;
+	for (auto[index, value] : ints(0, 100) | enumerate() | slice(10, 20) | retro())
+		std::cout << index << " " << value << std::endl;
+
+	std::cout << "ints() | enumerate() | slice(10, 20) | retro()" << std::endl;
+	for (auto[index, value] : ints(0, 100) | enumerate() | slice(10, 20) | retro())
+		std::cout << index << " " << value << std::endl;
+
+	return 0;
+}
