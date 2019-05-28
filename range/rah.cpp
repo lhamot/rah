@@ -184,6 +184,10 @@ int main()
 		}
 	}
 
+	// ************************************** join ************************************************
+
+	EQUAL_RANGE((il<int>{ 0, 1, 2, 3 } | join(il<int>{ 4, 5, 6 })), (il<int>{0, 1, 2, 3, 4, 5, 6}));
+
 	// ******************* test output_interator *******************************
 	std::forward_list<int> tutu = { 101, 102, 103, 104 };
 	for (auto i : tutu | transform([](int i) {return i * 2; }))

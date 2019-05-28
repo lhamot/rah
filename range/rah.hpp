@@ -480,22 +480,20 @@ struct FilterIterator : IteratorHelper<FilterIterator<R, F>, range_value_type_t<
 	range_end_type_t<R> endIter;
 	F func;
 
-	auto incr()
+	void incr()
 	{
 		do
 		{
 			++iter;
 		} while (not func(*iter) && iter != endIter);
-		return *this;
 	}
 
-	auto decr()
+	void decr()
 	{
 		do
 		{
 			--iter;
 		} while (not func(*iter) && iter != beginIter);
-		return *this;
 	}
 
 	auto value() const { return *iter; }
@@ -517,6 +515,66 @@ template<typename R, typename F> auto filter(R&& range, F&& func)
 template<typename F> auto filter(F&& func)
 {
 	return MakeAdatper([=](auto&& range) {return filter(range, func); });
+}
+
+// ***************************************** join ***********************************************
+
+template<typename IterPair, typename V>
+struct JoinIterator : IteratorHelper<JoinIterator<IterPair, V>, V, std::forward_iterator_tag>::Type
+{
+	IterPair iter;
+	IterPair endIter;
+	size_t rangeIndex;
+
+	void incr()
+	{
+		if (rangeIndex == 0)
+		{
+			auto& i = std::get<0>(iter);
+			++i;
+			if (i == std::get<0>(endIter))
+				rangeIndex = 1;
+		}
+		else
+			++std::get<1>(iter);
+	}
+
+	auto value() const 
+	{ 
+		if (rangeIndex == 0)
+			return *std::get<0>(iter);
+		else
+			return *std::get<1>(iter);
+	}
+
+	bool equal(JoinIterator other) const
+	{ 
+		if (rangeIndex != other.rangeIndex)
+			return false;
+		if (rangeIndex == 0)
+			return std::get<0>(iter) == std::get<0>(other.iter);
+		else
+			return std::get<1>(iter) == std::get<1>(other.iter);
+	}
+};
+
+template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
+{
+	return iterator_range<
+		JoinIterator<
+		std::pair<range_begin_type_t<std::remove_reference_t<R1>>,
+		range_begin_type_t<std::remove_reference_t<R2>>>,
+		range_value_type_t<R1>>>
+	{
+		{ {}, std::make_pair(std::begin(range1), std::begin(range2)), std::make_pair(std::end(range1), std::end(range2)), 0 },
+		{ {}, std::make_pair(std::end(range1), std::end(range2)), std::make_pair(std::end(range1), std::end(range2)), 1 },
+	};
+}
+
+template<typename R> auto join(R&& rightRange)
+{
+	auto rightRangeRef = make_iterator_range(std::begin(rightRange), std::end(rightRange));
+	return MakeAdatper([=](auto&& leftRange) {return join(leftRange, rightRangeRef); });
 }
 
 // *************************** enumerate **********************************************************
