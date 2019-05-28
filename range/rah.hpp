@@ -193,6 +193,9 @@ struct IteratorHelper<R, F, std::forward_iterator_tag>
 	using Type = ForwardIteratorHelper<R, F>;
 };
 
+namespace lazy
+{
+
 // ********************************** ints ********************************************************
 
 template<typename T = size_t>
@@ -274,22 +277,6 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 template<typename F> auto transform(F&& func)
 {
 	return MakeAdatper([=](auto&& range) {return transform(range, func); });
-}
-
-template<typename RI, typename RO, typename F> auto transform(RI&& rangeIn, RO&& rangeOut, F&& func)
-{
-	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(func));
-	return make_iterator_range(iter, std::end(rangeOut));
-}
-
-template<typename RI1, typename RI2, typename RO, typename F> auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
-{
-	auto iter = std::transform(
-		std::begin(rangeIn1), std::end(rangeIn1),
-		std::begin(rangeIn2), std::end(rangeIn2),
-		std::begin(rangeOut),
-		std::forward<F>(func));
-	return make_iterator_range(iter, std::end(rangeOut));
 }
 
 // ***************************************** slice ********************************************************
@@ -442,6 +429,47 @@ template<typename ...R> auto zip(R&&... _ranges)
 	return iterator_range<ZipRangeIterator<decltype(iterTup)>>{ { {}, iterTup }, { {}, endTup }};
 }
 
+// ************************************ chunk *****************************************************
+
+template<typename R>
+struct ChunkIterator : IteratorHelper<ChunkIterator<R>, iterator_range<range_begin_type_t<R>>, std::forward_iterator_tag>::Type
+{
+	range_begin_type_t<R> iter;
+	range_begin_type_t<R> iter2;
+	range_end_type_t<R> endIter;
+	size_t step = 0;
+
+	auto incr()
+	{
+		iter = iter2;
+		for (size_t i = 0; i != step and iter2 != endIter; ++i)
+			++iter2;
+		return *this;
+	}
+
+	auto value() const
+	{
+		return make_iterator_range(iter, iter2);
+	}
+
+	bool equal(ChunkIterator other) const { return iter == other.iter; }
+};
+
+template<typename R> auto chunk(R&& range, size_t step)
+{
+	auto iter = std::begin(range);
+	auto endIter = std::end(range);
+	using iterator = ChunkIterator<std::remove_reference_t<R>>;
+	iterator begin = { {}, iter, iter, endIter, step };
+	begin.incr();
+	return iterator_range<iterator>{ { begin }, { {}, endIter, endIter, endIter, step }};
+}
+
+auto chunk(size_t step)
+{
+	return MakeAdatper([=](auto&& range) {return chunk(range, step); });
+}
+
 // ***************************************** filter ***********************************************
 
 template<typename R, typename F>
@@ -491,7 +519,6 @@ template<typename F> auto filter(F&& func)
 	return MakeAdatper([=](auto&& range) {return filter(range, func); });
 }
 
-
 // *************************** enumerate **********************************************************
 
 template<typename R> auto enumerate(R&& range)
@@ -529,7 +556,27 @@ auto mapKey()
 	return MakeAdatper([=](auto&& range) {return mapKey(range); });
 }
 
-// ************************* reduce *******************************************
+} // namespace lazy
+
+// ****************************************** transform *******************************************
+
+template<typename RI, typename RO, typename F> auto transform(RI&& rangeIn, RO&& rangeOut, F&& func)
+{
+	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(func));
+	return make_iterator_range(iter, std::end(rangeOut));
+}
+
+template<typename RI1, typename RI2, typename RO, typename F> auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
+{
+	auto iter = std::transform(
+		std::begin(rangeIn1), std::end(rangeIn1),
+		std::begin(rangeIn2), std::end(rangeIn2),
+		std::begin(rangeOut),
+		std::forward<F>(func));
+	return make_iterator_range(iter, std::end(rangeOut));
+}
+
+// ********************************************* reduce *******************************************
 
 template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&& func)
 {
@@ -630,17 +677,22 @@ template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
 	auto const end1 = std::end(range1);
 	auto const end2 = std::end(range2);
-	auto [iter1, iter2] = std::mismatch(std::begin(range1), end1, std::begin(range2), end2);
+	auto[iter1, iter2] = std::mismatch(std::begin(range1), end1, std::begin(range2), end2);
 	return std::make_pair(make_iterator_range(iter1, end1), make_iterator_range(iter2, end2));
 }
 
-// ************************* find ****************************************************************
+// ****************************************** find ************************************************
 
 template<typename R, typename V> auto find(R&& range, V&& value)
 {
 	auto end = std::end(range);
 	auto iter = std::find(std::begin(range), end, std::forward<V>(value));
 	return make_iterator_range(iter, end);
+}
+
+template<typename V> auto find(V&& value)
+{
+	return MakeAdatper([=](auto&& range) {return find(range, value); });
 }
 
 template<typename R, typename P> auto find_if(R&& range, P&& pred)
@@ -650,6 +702,11 @@ template<typename R, typename P> auto find_if(R&& range, P&& pred)
 	return make_iterator_range(iter, end);
 }
 
+template<typename P> auto find_if(P&& pred)
+{
+	return MakeAdatper([=](auto&& range) {return find_if(range, pred); });
+}
+
 template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 {
 	auto end = std::end(range);
@@ -657,4 +714,29 @@ template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 	return make_iterator_range(iter, end);
 }
 
+template<typename P> auto find_if_not(P&& pred)
+{
+	return MakeAdatper([=](auto&& range) {return find_if_not(range, pred); });
 }
+
+// *************************************** size ***************************************************
+
+template<typename R> auto size(R&& range)
+{
+	return std::distance(std::begin(range), std::end(range));
+}
+
+auto size()
+{
+	return MakeAdatper([=](auto&& range) { return size(range); });
+}
+
+// *************************************** equal ***************************************************
+
+template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
+{
+	return std::equal(std::begin(range1), std::end(range1), std::begin(range2), std::end(range2));
+}
+
+}
+

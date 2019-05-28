@@ -48,13 +48,14 @@ struct WhatIsIt;
 int main()
 {
 	using namespace rah;
+	using namespace rah::lazy;
 	using namespace std;
 
 	// ********************** Non-modifying sequence operations ***********************************
 
 	// Test all_of
-	//CHECK(all_of(il<int>{ 4, 4, 4, 4 }, [](auto a) {return a == 4; }));
-	//CHECK(all_of(il<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
+	CHECK(all_of(il<int>{ 4, 4, 4, 4 }, [](auto a) {return a == 4; }));
+	CHECK(all_of(il<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
 	CHECK((il<int>{ 4, 4, 4, 4 } | all_of([](auto a) {return a == 4; })));
 	CHECK((il<int>{ 4, 4, 3, 4 } | all_of([](auto a) {return a == 4; })) == false);
 
@@ -99,35 +100,6 @@ int main()
 		EQUAL_RANGE(find_if(il<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }), il<int>({ 3, 4 }));
 		EQUAL_RANGE(find_if_not(il<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }), il<int>({ 3, 4 }));
 	}
-
-	// ********************** Modifying sequence operations ***************************************
-
-
-	{
-		// type de foncion
-		// celles qui modifie le conteneur (actions) (enchainable)
-		//   => wraping de la stl, mais pipable
-		
-		// celle qui fournit des lazy iterators  (view) (enchainable)
-		
-		
-		// Celles qui produisent un résultat imediatement (algo) (pas enchainable)
-		//   => wraping de la stl, peut etre pipable...
-
-		// style rangev3
-		// toto | view::transform  // view
-		// toto | action::transform // in place
-		// transform(toto, tutu, func) // in place
-
-		// style D
-		// toto.transform  // view
-		// transform(toto)  // view
-
-		// style rah
-		// toto | transform  // view
-		// transform(toto, tutu, func) // in place
-	}
-
 
 	// ***************************** Generators ***************************************************
 
@@ -198,6 +170,19 @@ int main()
 
 	EQUAL_RANGE(generate([y = 1]() mutable { auto prev = y; y *= 2; return prev; }) | slice(0, 4), (il<int>{1, 2, 4, 8}));
 	EQUAL_RANGE(generate_n([y = 1]() mutable { auto prev = y; y *= 2; return prev; }, 4), (il<int>{1, 2, 4, 8}));
+
+	// **************************************** chunk *********************************************
+
+	{
+		auto to_test = il<int>{ 0, 1, 2, 3, 4 } | chunk(2);
+		auto ref = il<il<int>>{ {0, 1}, { 2, 3 }, { 4 } };
+		CHECK(size(to_test) == size(ref));
+		for (auto elt : zip(to_test, ref))
+		{
+			CHECK(size(std::get<0>(elt)) == size(std::get<1>(elt)));
+			CHECK(equal(std::get<0>(elt), std::get<1>(elt)));
+		}
+	}
 
 	// ******************* test output_interator *******************************
 	std::forward_list<int> tutu = { 101, 102, 103, 104 };
