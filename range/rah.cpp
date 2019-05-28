@@ -11,8 +11,6 @@
 #pragma warning(pop)
 #endif
 
-using namespace rah;
-
 auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
 
 #define CHECK(CONDITION) \
@@ -49,10 +47,87 @@ struct WhatIsIt;
 
 int main()
 {
+	using namespace rah;
 	using namespace std;
 
-	// auto toto = ints(0, 4);
-	// WhatIsIt<IteratorHelper<decltype(toto), int>::Tag> prout;
+	// ********************** Non-modifying sequence operations ***********************************
+
+	// Test all_of
+	//CHECK(all_of(il<int>{ 4, 4, 4, 4 }, [](auto a) {return a == 4; }));
+	//CHECK(all_of(il<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
+	CHECK((il<int>{ 4, 4, 4, 4 } | all_of([](auto a) {return a == 4; })));
+	CHECK((il<int>{ 4, 4, 3, 4 } | all_of([](auto a) {return a == 4; })) == false);
+
+	// Test any_of
+	CHECK((il<int>{3, 0, 1, 3, 4, 6} | any_of([](auto a) {return a == 3; })));
+	CHECK((il<int>{2, 0, 1, 3, 4, 6} | any_of([](auto a) {return a == 3; })));
+	CHECK((il<int>{2, 0, 1, 2, 4, 6} | any_of([](auto a) {return a == 3; })) == false);
+
+	// Test none_of
+	CHECK((il<int>{7, 8, 9, 10} | none_of([](auto a) {return a == 11; })));
+	CHECK((il<int>{7, 8, 9, 10, 11} | none_of([](auto a) {return a == 11; })) == false);
+
+	// foreach
+	{
+		std::vector<int> testFE{ 4, 4, 4, 4 };
+		for_each(testFE, [](auto& value) {return ++value; });
+		EQUAL_RANGE(testFE, il<int>({ 5, 5, 5, 5 }));
+		testFE | for_each([](auto& value) {return ++value; });
+		EQUAL_RANGE(testFE, il<int>({ 6, 6, 6, 6 }));
+	}
+
+	// count
+	CHECK((il<int>{ 4, 4, 4, 3 } | count(4)) == 3);
+	CHECK(count(il<int>{ 4, 4, 4, 3 }, 3) == 1);
+
+	// count_if
+	CHECK((il<int>{ 4, 4, 4, 3 } | count_if([](auto a) {return a == 3; })) == 1);
+	CHECK(count_if(il<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
+
+	// mismatch
+	{
+		auto a = { 1, 2, 3, 4 };
+		auto b = { 1, 2, 42, 42 };
+		auto[range1, range2] = mismatch(a, b);
+		EQUAL_RANGE(range1, il<int>({ 3, 4 }));
+		EQUAL_RANGE(range2, il<int>({ 42, 42 }));
+	}
+
+	// find
+	{
+		EQUAL_RANGE(find(il<int>{ 1, 2, 3, 4 }, 3), il<int>({3, 4}));
+		EQUAL_RANGE(find_if(il<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }), il<int>({ 3, 4 }));
+		EQUAL_RANGE(find_if_not(il<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }), il<int>({ 3, 4 }));
+	}
+
+	// ********************** Modifying sequence operations ***************************************
+
+
+	{
+		// type de foncion
+		// celles qui modifie le conteneur (actions) (enchainable)
+		//   => wraping de la stl, mais pipable
+		
+		// celle qui fournit des lazy iterators  (view) (enchainable)
+		
+		
+		// Celles qui produisent un résultat imediatement (algo) (pas enchainable)
+		//   => wraping de la stl, peut etre pipable...
+
+		// style rangev3
+		// toto | view::transform  // view
+		// toto | action::transform // in place
+		// transform(toto, tutu, func) // in place
+
+		// style D
+		// toto.transform  // view
+		// transform(toto)  // view
+
+		// style rah
+		// toto | transform  // view
+		// transform(toto, tutu, func) // in place
+	}
+
 
 	// ***************************** Generators ***************************************************
 
@@ -103,29 +178,10 @@ int main()
 	// Test reduce
 	CHECK((ints(1, 5) | reduce(0, [](auto a, auto b) {return a + b; })) == 10);
 
-	// Test all_of
-	CHECK((il<int>{ 4, 4, 4, 4 } | all_of([](auto a) {return a == 4; })));
-	CHECK(!(il<int>{ 4, 4, 3, 4 } | all_of([](auto a) {return a == 4; })));
-
-	// Test any_of
-	CHECK((il<int>{3, 0, 1, 3, 4, 6} | any_of([](auto a) {return a == 3; })));
-
-	// Test none_of
-	CHECK(ints(0, 10, 1) | none_of([](auto a) {return a == 11; }));
-
 	// Test one_of
 	CHECK(((il<int>{0, 1, 1} | count(1)) == 2));
 
 	CHECK(((il<int>{0, 1, 1} | count_if([](auto a) {return a == 1; })) == 2));
-
-	// ***************************** count *************************************
-
-	// Test count
-	CHECK((il<int>{ 4, 4, 4, 3 } | count(4)) == 3);
-
-	// Test count
-	CHECK((il<int>{ 4, 4, 4, 3 } | count_if([](auto a) {return a == 3; })) == 1);
-
 
 	// ******************* test to_container *******************************
 
@@ -137,6 +193,11 @@ int main()
 		auto&& map_4a_5b_6c_7d = zip(ints(4, 8), ints('a', 'e')) | transform(toPair) | to_container<std::map<int, char>>();
 		EQUAL_RANGE(map_4a_5b_6c_7d, (il<std::pair<int const, char>>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } }));
 	}
+
+	// *********************** generate ***********************************************************
+
+	EQUAL_RANGE(generate([y = 1]() mutable { auto prev = y; y *= 2; return prev; }) | slice(0, 4), (il<int>{1, 2, 4, 8}));
+	EQUAL_RANGE(generate_n([y = 1]() mutable { auto prev = y; y *= 2; return prev; }, 4), (il<int>{1, 2, 4, 8}));
 
 	// ******************* test output_interator *******************************
 	std::forward_list<int> tutu = { 101, 102, 103, 104 };

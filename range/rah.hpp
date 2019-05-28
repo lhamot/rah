@@ -53,6 +53,12 @@ struct iterator_range
 	I end() { return endIter; }
 };
 
+template<typename I>
+auto make_iterator_range(I b, I e)
+{
+	return iterator_range<I>{b, e};
+}
+
 template<typename I> I begin(iterator_range<I>& r) { return r.beginIter; }
 template<typename I> I end(iterator_range<I>& r) { return r.endIter; }
 template<typename I> I begin(iterator_range<I> const& r) { return r.beginIter; }
@@ -209,6 +215,29 @@ template<typename T = size_t> auto ints(T b, T e, T step = 1)
 	return iterator_range<IntRangeIterator<T>>{ { {}, b, step}, { {}, e, step }};
 }
 
+// ********************************** generate ****************************************************
+
+template<typename F>
+struct GenerateIterator : IteratorHelper<GenerateIterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>::Type
+{
+	mutable F func;
+	size_t iterCount = 0;
+
+	void incr() { ++iterCount; }
+	auto value() const { return func(); }
+	bool equal(GenerateIterator other) const { return iterCount == other.iterCount; }
+};
+
+template<typename F> auto generate(F&& func)
+{
+	return iterator_range<GenerateIterator<F>>{ { {}, func}, { {}, func }};
+}
+
+template<typename F> auto generate_n(F&& func, size_t count)
+{
+	return iterator_range<GenerateIterator<F>>{ { {}, func, 0}, { {}, func, count }};
+}
+
 // ******************************************* transform ******************************************
 
 template<typename R, typename F>
@@ -245,6 +274,22 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 template<typename F> auto transform(F&& func)
 {
 	return MakeAdatper([=](auto&& range) {return transform(range, func); });
+}
+
+template<typename RI, typename RO, typename F> auto transform(RI&& rangeIn, RO&& rangeOut, F&& func)
+{
+	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(func));
+	return make_iterator_range(iter, std::end(rangeOut));
+}
+
+template<typename RI1, typename RI2, typename RO, typename F> auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
+{
+	auto iter = std::transform(
+		std::begin(rangeIn1), std::end(rangeIn1),
+		std::begin(rangeIn2), std::end(rangeIn2),
+		std::begin(rangeOut),
+		std::forward<F>(func));
+	return make_iterator_range(iter, std::end(rangeOut));
 }
 
 // ***************************************** slice ********************************************************
@@ -335,7 +380,8 @@ auto retro()
 }
 
 // *************************** zip *****************************************************
-
+namespace details
+{
 template <typename Tuple, typename F, std::size_t ...Indices>
 void for_each_impl(Tuple&& tuple, F&& f, std::index_sequence<Indices...>)
 {
@@ -370,18 +416,20 @@ auto transform_each(const std::tuple<Args...>& t, F&& f) {
 
 auto get_iter_value = [](auto&& iter) { return *iter; };
 
+}
+
 template<typename IterTuple>
 struct ZipRangeIterator : IteratorHelper<
 	ZipRangeIterator<IterTuple>,
-	decltype(transform_each(fake<IterTuple>(), get_iter_value)),
+	decltype(transform_each(fake<IterTuple>(), details::get_iter_value)),
 	std::bidirectional_iterator_tag
 >::Type
 {
 	IterTuple iters;
-	void incr() { for_each(iters, [](auto& iter) { ++iter; }); }
+	void incr() { details::for_each(iters, [](auto& iter) { ++iter; }); }
 	void incr(intptr_t val) { for_each(iters, [val](auto& iter) { iter += val; }); }
-	void decr() { for_each(iters, [](auto& iter) { --iter; }); }
-	auto value() const { return transform_each(iters, get_iter_value); }
+	void decr() { details::for_each(iters, [](auto& iter) { --iter; }); }
+	auto value() const { return details::transform_each(iters, details::get_iter_value); }
 	auto sub(ZipRangeIterator other) const { return std::get<0>(iters) - std::get<0>(other.iters); }
 	bool equal(ZipRangeIterator other) const { return iters == other.iters; }
 };
@@ -552,6 +600,18 @@ template<typename P> auto count_if(P&& pred)
 	return MakeAdatper([=](auto&& range) {return count_if(range, pred); });
 }
 
+// ************************* foreach **************************************************************
+
+template<typename R, typename F> void for_each(R&& range, F&& func)
+{
+	::std::for_each(std::begin(range), std::end(range), std::forward<F>(func));
+}
+
+template<typename F> auto for_each(F&& func)
+{
+	return MakeAdatper([=](auto&& range) {return for_each(range, func); });
+}
+
 // ***************************** to_container *****************************************************
 
 template<typename C, typename R> auto to_container(R&& range)
@@ -563,4 +623,38 @@ template<typename C> auto to_container()
 {
 	return MakeAdatper([=](auto&& range) {return to_container<C>(range); });
 }
+
+// ************************* mismatch ****************************************************************
+
+template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
+{
+	auto const end1 = std::end(range1);
+	auto const end2 = std::end(range2);
+	auto [iter1, iter2] = std::mismatch(std::begin(range1), end1, std::begin(range2), end2);
+	return std::make_pair(make_iterator_range(iter1, end1), make_iterator_range(iter2, end2));
+}
+
+// ************************* find ****************************************************************
+
+template<typename R, typename V> auto find(R&& range, V&& value)
+{
+	auto end = std::end(range);
+	auto iter = std::find(std::begin(range), end, std::forward<V>(value));
+	return make_iterator_range(iter, end);
+}
+
+template<typename R, typename P> auto find_if(R&& range, P&& pred)
+{
+	auto end = std::end(range);
+	auto iter = std::find_if(std::begin(range), end, std::forward<P>(pred));
+	return make_iterator_range(iter, end);
+}
+
+template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
+{
+	auto end = std::end(range);
+	auto iter = std::find_if_not(std::begin(range), end, std::forward<P>(pred));
+	return make_iterator_range(iter, end);
+}
+
 }
