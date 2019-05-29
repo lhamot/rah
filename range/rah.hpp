@@ -86,8 +86,10 @@ auto operator | (R&& range, pipeable<MakeRange> const& adapter)
 
 // ************************************ iterator_facade ********************************************
 
-template<typename I, typename V>
-struct forward_iterator_facade
+template<typename I, typename V, typename C> struct iterator_facade;
+
+template<typename I, typename V> 
+struct iterator_facade<I, V, std::forward_iterator_tag>
 {
 	using iterator_category = std::forward_iterator_tag;
 	using value_type = V;
@@ -113,7 +115,7 @@ struct forward_iterator_facade
 };
 
 template<typename I, typename V>
-struct bidirectional_iterator_facade : forward_iterator_facade<I, V>
+struct iterator_facade<I, V, std::bidirectional_iterator_tag> : iterator_facade<I, V, std::forward_iterator_tag>
 {
 	using iterator_category = std::bidirectional_iterator_tag;
 
@@ -128,7 +130,7 @@ struct bidirectional_iterator_facade : forward_iterator_facade<I, V>
 };
 
 template<typename I, typename V>
-struct random_access_iterator_facade : bidirectional_iterator_facade<I, V>
+struct iterator_facade<I, V, std::random_access_iterator_tag> : iterator_facade<I, V, std::bidirectional_iterator_tag>
 {
 	using iterator_category = std::random_access_iterator_tag;
 
@@ -169,34 +171,13 @@ struct random_access_iterator_facade : bidirectional_iterator_facade<I, V>
 	auto operator[](intptr_t incr) const { return *(self() + incr); }
 };
 
-template<typename R, typename F, typename C>
-struct iterator_facade;
-
-template<typename R, typename F>
-struct iterator_facade<R, F, std::random_access_iterator_tag>
-{
-	using Type = random_access_iterator_facade<R, F>;
-};
-
-template<typename R, typename F>
-struct iterator_facade<R, F, std::bidirectional_iterator_tag>
-{
-	using Type = bidirectional_iterator_facade<R, F>;
-};
-
-template<typename R, typename F>
-struct iterator_facade<R, F, std::forward_iterator_tag>
-{
-	using Type = forward_iterator_facade<R, F>;
-};
-
 namespace lazy
 {
 
 // ********************************** iota ********************************************************
 
 template<typename T = size_t>
-struct iota_iterator : iterator_facade<iota_iterator<T>, T, std::random_access_iterator_tag>::Type
+struct iota_iterator : iterator_facade<iota_iterator<T>, T, std::random_access_iterator_tag>
 {
 	T val;
 	T step;
@@ -218,7 +199,7 @@ template<typename T = size_t> auto iota(T b, T e, T step = 1)
 // ********************************** generate ****************************************************
 
 template<typename F>
-struct gererate_iterator : iterator_facade<gererate_iterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>::Type
+struct gererate_iterator : iterator_facade<gererate_iterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>
 {
 	mutable F func;
 	size_t iterCount = 0;
@@ -245,7 +226,7 @@ struct transform_iterator : iterator_facade<
 	transform_iterator<R, F>,
 	decltype(fake<F>()(fake<range_value_type_t<R>>())),
 	range_iter_categ_t<R>
->::Type
+>
 {
 	range_begin_type_t<R> iter;
 	F func;
@@ -268,7 +249,8 @@ struct transform_iterator : iterator_facade<
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using iterator = transform_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>;
-	return iterator_range<iterator>{ { {}, std::begin(range), std::forward<F>(func)}, { {}, std::end(range), std::forward<F>(func) }};
+	return iterator_range<iterator>{ 
+		{ {}, std::begin(range), std::forward<F>(func)}, { {}, std::end(range), std::forward<F>(func) }};
 }
 
 template<typename F> auto transform(F&& func)
@@ -276,7 +258,7 @@ template<typename F> auto transform(F&& func)
 	return make_adatper([=](auto&& range) {return transform(range, func); });
 }
 
-// ***************************************** slice ********************************************************
+// ***************************************** slice ************************************************
 
 template<typename R> auto slice(R&& range, size_t begin, size_t end)
 {
@@ -295,7 +277,7 @@ auto slice(size_t begin, size_t end)
 // ***************************************** stride ***********************************************
 
 template<typename R>
-struct stride_iterator : iterator_facade<stride_iterator<R>, range_value_type_t<R>, range_iter_categ_t<R>>::Type
+struct stride_iterator : iterator_facade<stride_iterator<R>, range_value_type_t<R>, range_iter_categ_t<R>>
 {
 	range_begin_type_t<R> iter;
 	range_end_type_t<R> endIter;
@@ -324,7 +306,8 @@ template<typename R> auto stride(R&& range, size_t step)
 {
 	auto iter = std::begin(range);
 	auto endIter = std::end(range);
-	return iterator_range<stride_iterator<std::remove_reference_t<R>>>{ { {}, iter, endIter, step}, { {}, endIter, endIter, step }};
+	return iterator_range<stride_iterator<std::remove_reference_t<R>>>{ 
+		{ {}, iter, endIter, step}, { {}, endIter, endIter, step }};
 }
 
 auto stride(size_t step)
@@ -335,7 +318,7 @@ auto stride(size_t step)
 // ***************************************** retro ************************************************
 
 template<typename R>
-struct retro_iterator : iterator_facade<retro_iterator<R>, range_value_type_t<R>, range_iter_categ_t<R>>::Type
+struct retro_iterator : iterator_facade<retro_iterator<R>, range_value_type_t<R>, range_iter_categ_t<R>>
 {
 	range_begin_type_t<R> iter;
 
@@ -354,7 +337,8 @@ struct retro_iterator : iterator_facade<retro_iterator<R>, range_value_type_t<R>
 
 template<typename R> auto retro(R&& range)
 {
-	return iterator_range<retro_iterator<std::remove_reference_t<R>>>({ {{}, std::end(range)}, {{}, std::begin(range)} });
+	return iterator_range<retro_iterator<std::remove_reference_t<R>>>({ 
+		{{}, std::end(range)}, {{}, std::begin(range)} });
 }
 
 auto retro()
@@ -405,7 +389,7 @@ struct zip_iterator : iterator_facade<
 	zip_iterator<IterTuple>,
 	decltype(transform_each(fake<IterTuple>(), details::get_iter_value)),
 	std::bidirectional_iterator_tag
->::Type
+>
 {
 	IterTuple iters;
 	void incr() { details::for_each(iters, [](auto& iter) { ++iter; }); }
@@ -426,7 +410,7 @@ template<typename ...R> auto zip(R&&... _ranges)
 // ************************************ chunk *****************************************************
 
 template<typename R>
-struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_begin_type_t<R>>, std::forward_iterator_tag>::Type
+struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_begin_type_t<R>>, std::forward_iterator_tag>
 {
 	range_begin_type_t<R> iter;
 	range_begin_type_t<R> iter2;
@@ -462,7 +446,7 @@ auto chunk(size_t step)
 // ***************************************** filter ***********************************************
 
 template<typename R, typename F>
-struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_value_type_t<R>, range_iter_categ_t<R>>::Type
+struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_value_type_t<R>, range_iter_categ_t<R>>
 {
 	range_begin_type_t<R> beginIter;
 	range_begin_type_t<R> iter;
@@ -507,7 +491,7 @@ template<typename F> auto filter(F&& func)
 // ***************************************** join ***********************************************
 
 template<typename IterPair, typename V>
-struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forward_iterator_tag>::Type
+struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forward_iterator_tag>
 {
 	IterPair iter;
 	IterPair endIter;
@@ -611,7 +595,8 @@ template<typename RI, typename RO, typename F> auto transform(RI&& rangeIn, RO&&
 	return make_iterator_range(iter, std::end(rangeOut));
 }
 
-template<typename RI1, typename RI2, typename RO, typename F> auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
+template<typename RI1, typename RI2, typename RO, typename F> 
+auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
 {
 	auto iter = std::transform(
 		std::begin(rangeIn1), std::end(rangeIn1),
@@ -716,7 +701,7 @@ template<typename C> auto to_container()
 	return make_adatper([=](auto&& range) {return to_container<C>(range); });
 }
 
-// ************************* mismatch ****************************************************************
+// ************************* mismatch *************************************************************
 
 template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
@@ -776,7 +761,7 @@ auto size()
 	return make_adatper([=](auto&& range) { return size(range); });
 }
 
-// *************************************** equal ***************************************************
+// *************************************** equal **************************************************
 
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 {
