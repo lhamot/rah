@@ -104,7 +104,7 @@ struct iterator_facade<I, V, std::forward_iterator_tag>
 
 	auto& operator++()
 	{
-		self().incr();
+		self().increment();
 		return *this;
 	}
 
@@ -124,7 +124,7 @@ struct iterator_facade<I, V, std::bidirectional_iterator_tag> : iterator_facade<
 
 	auto& operator--()
 	{
-		self().decr();
+		self().decrement();
 		return *this;
 	}
 };
@@ -137,38 +137,38 @@ struct iterator_facade<I, V, std::random_access_iterator_tag> : iterator_facade<
 	I& self() { return *static_cast<I*>(this); }
 	I const& self() const { return *static_cast<I const*>(this); }
 
-	auto& operator+=(intptr_t incr)
+	auto& operator+=(intptr_t increment)
 	{
-		self().incr(incr);
+		self().advance(increment);
 		return *this;
 	}
 
-	auto operator+(intptr_t incr)
+	auto operator+(intptr_t increment)
 	{
 		auto iter = self();
-		iter.incr(incr);
+		iter.advance(increment);
 		return iter;
 	}
 
-	auto& operator-=(intptr_t incr)
+	auto& operator-=(intptr_t increment)
 	{
-		self().incr(-incr);
+		self().advance(-increment);
 		return *this;
 	}
 
-	auto operator-(intptr_t incr)
+	auto operator-(intptr_t increment)
 	{
 		auto iter = self();
-		iter.incr(-incr);
+		iter.advance(-increment);
 		return iter;
 	}
 
-	auto operator-(I other) const { return self().sub(other); }
-	bool operator<(I other) const { return sub(other) < 0; }
-	bool operator<=(I other) const { return sub(other) <= 0; }
-	bool operator>(I other) const { return sub(other) > 0; }
-	bool operator>=(I other) const { return sub(other) >= 0; }
-	auto operator[](intptr_t incr) const { return *(self() + incr); }
+	auto operator-(I other) const { return self().distance_to(other); }
+	bool operator<(I other) const { return distance_to(other) < 0; }
+	bool operator<=(I other) const { return distance_to(other) <= 0; }
+	bool operator>(I other) const { return distance_to(other) > 0; }
+	bool operator>=(I other) const { return distance_to(other) >= 0; }
+	auto operator[](intptr_t increment) const { return *(self() + increment); }
 };
 
 namespace lazy
@@ -182,10 +182,10 @@ struct iota_iterator : iterator_facade<iota_iterator<T>, T, std::random_access_i
 	T val;
 	T step;
 
-	void incr() { val += step; }
-	void incr(intptr_t value) { val += T(step * value); }
-	void decr() { val -= step; }
-	auto sub(iota_iterator other) const { return (val - other.val) / step; }
+	void increment() { val += step; }
+	void advance(intptr_t value) { val += T(step * value); }
+	void decrement() { val -= step; }
+	auto distance_to(iota_iterator other) const { return (val - other.val) / step; }
 	auto value() const { return val; }
 	bool equal(iota_iterator other) const { return val == other.val; }
 };
@@ -204,7 +204,7 @@ struct gererate_iterator : iterator_facade<gererate_iterator<F>, decltype(fake<F
 	mutable F func;
 	size_t iterCount = 0;
 
-	void incr() { ++iterCount; }
+	void increment() { ++iterCount; }
 	auto value() const { return func(); }
 	bool equal(gererate_iterator other) const { return iterCount == other.iterCount; }
 };
@@ -238,10 +238,10 @@ struct transform_iterator : iterator_facade<
 		return *this;
 	}
 
-	void incr() { ++iter; }
-	void incr(intptr_t off) { iter += off; }
-	void decr() { --iter; }
-	auto sub(transform_iterator r) const { return iter - r.iter; }
+	void increment() { ++iter; }
+	void advance(intptr_t off) { iter += off; }
+	void decrement() { --iter; }
+	auto distance_to(transform_iterator r) const { return iter - r.iter; }
 	auto value() const { return func(*iter); }
 	bool equal(transform_iterator r) const { return iter == r.iter; }
 };
@@ -283,22 +283,22 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_value_type_t<
 	range_end_type_t<R> endIter;
 	size_t step;
 
-	auto incr()
+	auto increment()
 	{
 		for (size_t i = 0; i < step && iter != endIter; ++i)
 			++iter;
 	}
 
-	auto decr()
+	auto decrement()
 	{
 		for (size_t i = 0; i < step; ++i)
 			--iter;
 	}
 
-	void incr(intptr_t value) { iter += step * value; }
+	void advance(intptr_t value) { iter += step * value; }
 	auto value() const { return *iter; }
 	bool equal(stride_iterator other) const { return iter == other.iter; }
-	auto sub(stride_iterator other) const { return (iter - other.iter) / step; }
+	auto distance_to(stride_iterator other) const { return (iter - other.iter) / step; }
 };
 
 
@@ -322,16 +322,16 @@ struct retro_iterator : iterator_facade<retro_iterator<R>, range_value_type_t<R>
 {
 	range_begin_type_t<R> iter;
 
-	void incr() { --iter; }
-	void decr() { ++iter; }
-	void incr(intptr_t value) { iter -= value; }
+	void increment() { --iter; }
+	void decrement() { ++iter; }
+	void advance(intptr_t value) { iter -= value; }
 	auto value() const
 	{
 		auto iter2 = iter;
 		--iter2;
 		return *iter2;
 	}
-	auto sub(retro_iterator other) const { return other.iter - iter; }
+	auto distance_to(retro_iterator other) const { return other.iter - iter; }
 	bool equal(retro_iterator other) const { return iter == other.iter; }
 };
 
@@ -392,11 +392,11 @@ struct zip_iterator : iterator_facade<
 >
 {
 	IterTuple iters;
-	void incr() { details::for_each(iters, [](auto& iter) { ++iter; }); }
-	void incr(intptr_t val) { for_each(iters, [val](auto& iter) { iter += val; }); }
-	void decr() { details::for_each(iters, [](auto& iter) { --iter; }); }
+	void increment() { details::for_each(iters, [](auto& iter) { ++iter; }); }
+	void advance(intptr_t val) { for_each(iters, [val](auto& iter) { iter += val; }); }
+	void decrement() { details::for_each(iters, [](auto& iter) { --iter; }); }
 	auto value() const { return details::transform_each(iters, details::get_iter_value); }
-	auto sub(zip_iterator other) const { return std::get<0>(iters) - std::get<0>(other.iters); }
+	auto distance_to(zip_iterator other) const { return std::get<0>(iters) - std::get<0>(other.iters); }
 	bool equal(zip_iterator other) const { return iters == other.iters; }
 };
 
@@ -417,7 +417,7 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 	range_end_type_t<R> endIter;
 	size_t step = 0;
 
-	void incr()
+	void increment()
 	{
 		iter = iter2;
 		for (size_t i = 0; i != step and iter2 != endIter; ++i)
@@ -434,7 +434,7 @@ template<typename R> auto chunk(R&& range, size_t step)
 	auto endIter = std::end(range);
 	using iterator = chunk_iterator<std::remove_reference_t<R>>;
 	iterator begin = { {}, iter, iter, endIter, step };
-	begin.incr();
+	begin.increment();
 	return iterator_range<iterator>{ { begin }, { {}, endIter, endIter, endIter, step }};
 }
 
@@ -453,7 +453,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_value_type
 	range_end_type_t<R> endIter;
 	F func;
 
-	void incr()
+	void increment()
 	{
 		do
 		{
@@ -461,7 +461,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_value_type
 		} while (not func(*iter) && iter != endIter);
 	}
 
-	void decr()
+	void decrement()
 	{
 		do
 		{
@@ -497,7 +497,7 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 	IterPair endIter;
 	size_t rangeIndex;
 
-	void incr()
+	void increment()
 	{
 		if (rangeIndex == 0)
 		{
