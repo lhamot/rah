@@ -51,6 +51,34 @@ int main()
 	using namespace rah::lazy;
 	using namespace std;
 
+	struct Elt
+	{
+		int member;
+		bool operator==(Elt elt) const
+		{
+			return member == elt.member;
+		}
+	};
+
+	// *************************************** all ************************************************
+
+	{
+		std::vector<Elt> vec = { {0}, { 1 }, { 2 }, { 3 }, { 4 } };
+		auto r = vec | all();
+		CHECK(size(r) == 5);
+		for (auto iter = std::begin(r), end = std::end(r); iter != end; ++iter)
+		{
+			iter->member = 42; // Check for mutability
+		}
+		EQUAL_RANGE(r, (il<Elt>({ {42}, { 42 }, { 42 }, { 42 }, { 42 } })));
+		for (auto&& elt : r)
+		{
+			static_assert(std::is_reference_v<decltype(elt)>, "elt is expected to be a reference");
+			elt.member = 78; // Check for mutability
+		}
+		EQUAL_RANGE(r, (il<Elt>({ {78}, { 78 }, { 78 }, { 78 }, { 78 } })));
+	}
+
 	// ********************** Non-modifying sequence operations ***********************************
 
 	// Test all_of
