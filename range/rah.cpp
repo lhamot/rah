@@ -103,14 +103,14 @@ int main()
 
 	// ***************************** Generators ***************************************************
 
-	// Test ints
-	EQUAL_RANGE(ints(0, 4), il<int>({ 0, 1, 2, 3 }));
-	EQUAL_RANGE(ints(10, 20, 2), il<int>({ 10, 12, 14, 16, 18 }));
+	// Test iota
+	EQUAL_RANGE(iota(0, 4), il<int>({ 0, 1, 2, 3 }));
+	EQUAL_RANGE(iota(10, 20, 2), il<int>({ 10, 12, 14, 16, 18 }));
 
 	// ***************************** Adaptors *****************************************************
 
 	// Test transform
-	EQUAL_RANGE(ints(0, 4) | transform([](auto a) {return a * 2; }), il<int>({ 0, 2, 4, 6 }));
+	EQUAL_RANGE(iota(0, 4) | transform([](auto a) {return a * 2; }), il<int>({ 0, 2, 4, 6 }));
 
 	// Test transform
 	{
@@ -119,13 +119,13 @@ int main()
 	}
 
 	// Test slice
-	EQUAL_RANGE(ints(0, 100) | slice(10, 15), il<int>({ 10, 11, 12, 13, 14 }));
+	EQUAL_RANGE(iota(0, 100) | slice(10, 15), il<int>({ 10, 11, 12, 13, 14 }));
 
 	// Test stride
-	EQUAL_RANGE(ints(0, 100) | stride(20), il<int>({ 0, 20, 40, 60, 80 }));
+	EQUAL_RANGE(iota(0, 100) | stride(20), il<int>({ 0, 20, 40, 60, 80 }));
 
 	// Test retro
-	EQUAL_RANGE(ints(0, 4) | retro(), il<int>({ 3, 2, 1, 0 }));
+	EQUAL_RANGE(iota(0, 4) | retro(), il<int>({ 3, 2, 1, 0 }));
 
 	// Test zip
 	using tIDC = std::tuple<int, double, char>;
@@ -133,11 +133,11 @@ int main()
 		(il<tuple<int, double, char>>{ tIDC{ 1, 2.5, 'a' }, tIDC{ 2, 4.5, 'b' }, tIDC{ 3, 6.5, 'c' }, tIDC{ 4, 8.5, 'd' } }));
 
 	// Test filter
-	EQUAL_RANGE(ints(0, 8) | filter([](auto a) {return a % 2 == 0; }), il<int>({ 0, 2, 4, 6 }));
+	EQUAL_RANGE(iota(0, 8) | filter([](auto a) {return a % 2 == 0; }), il<int>({ 0, 2, 4, 6 }));
 
 	// Test enumerate
 	using tUII = std::tuple<unsigned int, int>;
-	EQUAL_RANGE(ints(4, 8) | enumerate(), (il<tuple<unsigned int, int>>{ tUII{ 0, 4 }, tUII{ 1, 5 }, tUII{ 2, 6 }, tUII{ 3, 7 } }));
+	EQUAL_RANGE(iota(4, 8) | enumerate(), (il<tuple<unsigned int, int>>{ tUII{ 0, 4 }, tUII{ 1, 5 }, tUII{ 2, 6 }, tUII{ 3, 7 } }));
 
 	// Test mapValue
 	EQUAL_RANGE((std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | mapValue()), (il<double>{ 1.5, 2.5, 3.5, 4.5 }));
@@ -148,7 +148,7 @@ int main()
 	// ******************************** Reduce ****************************************************
 
 	// Test reduce
-	CHECK((ints(1, 5) | reduce(0, [](auto a, auto b) {return a + b; })) == 10);
+	CHECK((iota(1, 5) | reduce(0, [](auto a, auto b) {return a + b; })) == 10);
 
 	// Test one_of
 	CHECK(((il<int>{0, 1, 1} | count(1)) == 2));
@@ -158,11 +158,11 @@ int main()
 	// ******************* test to_container *******************************
 
 	{
-		auto&& vec_4_5_6_7 = ints(4, 8) | to_container<std::vector<int>>();
+		auto&& vec_4_5_6_7 = iota(4, 8) | to_container<std::vector<int>>();
 		EQUAL_RANGE(vec_4_5_6_7, (il<int>{ 4, 5, 6, 7 }));
 
 		auto toPair = [](auto ab) {return std::make_pair(std::get<0>(ab), std::get<1>(ab)); };
-		auto&& map_4a_5b_6c_7d = zip(ints(4, 8), ints('a', 'e')) | transform(toPair) | to_container<std::map<int, char>>();
+		auto&& map_4a_5b_6c_7d = zip(iota(4, 8), iota('a', 'e')) | transform(toPair) | to_container<std::map<int, char>>();
 		EQUAL_RANGE(map_4a_5b_6c_7d, (il<std::pair<int const, char>>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } }));
 	}
 
@@ -201,8 +201,8 @@ int main()
 	{ 5, 'u' },
 	};
 
-	std::cout << "ints(0, 10) | filter([](auto i){return i % 2 == 0;})" << std::endl;
-	for (size_t i : ints(0, 10) | filter([](auto i) {return i % 2 == 0; }))
+	std::cout << "iota(0, 10) | filter([](auto i){return i % 2 == 0;})" << std::endl;
+	for (size_t i : iota(0, 10) | filter([](auto i) {return i % 2 == 0; }))
 		std::cout << i << std::endl;
 
 	std::cout << "mapValue()" << std::endl;
@@ -213,31 +213,31 @@ int main()
 	for (auto i : testMap | mapKey())
 		std::cout << i << std::endl;
 
-	std::cout << "ints(0, 10)" << std::endl;
-	for (size_t i : ints(0, 10))
+	std::cout << "iota(0, 10)" << std::endl;
+	for (size_t i : iota(0, 10))
 		std::cout << i << std::endl;
 
-	std::cout << "enumerate(ints(10, 20))" << std::endl;
-	for (auto[index, value] : enumerate(ints(10, 20)))
+	std::cout << "enumerate(iota(10, 20))" << std::endl;
+	for (auto[index, value] : enumerate(iota(10, 20)))
 		std::cout << index << " " << value << std::endl;
 
-	std::cout << "transform(ints(0, 10), [](int i) {return i * 2; })" << std::endl;
-	auto r1 = ints(0, 10);
+	std::cout << "transform(iota(0, 10), [](int i) {return i * 2; })" << std::endl;
+	auto r1 = iota(0, 10);
 	auto func = [](int i) {return i * 2; };
 	auto r2 = transform(r1, func);
 	for (size_t i : r2)
 		std::cout << i << std::endl;
 
-	std::cout << "transform(ints(0, 10), [](int i) {return i * 2; })" << std::endl;
-	for (size_t i : transform(ints(0, 10), [](int i) {return i * 2; }))
+	std::cout << "transform(iota(0, 10), [](int i) {return i * 2; })" << std::endl;
+	for (size_t i : transform(iota(0, 10), [](int i) {return i * 2; }))
 		std::cout << i << std::endl;
 
-	std::cout << "ints(0, 10) | transform([](int i) {return i * 2; })" << std::endl;
-	for (size_t i : ints(0, 10) | transform([](int i) {return i * 2; }))
+	std::cout << "iota(0, 10) | transform([](int i) {return i * 2; })" << std::endl;
+	for (size_t i : iota(0, 10) | transform([](int i) {return i * 2; }))
 		std::cout << i << std::endl;
 
-	std::cout << "ints(0, 10) | transform([](int i) {return i * 2; }) | enumerate()" << std::endl;
-	for (auto[index, value] : ints(0, 10) | transform([](int i) {return i * 2; }) | enumerate())
+	std::cout << "iota(0, 10) | transform([](int i) {return i * 2; }) | enumerate()" << std::endl;
+	for (auto[index, value] : iota(0, 10) | transform([](int i) {return i * 2; }) | enumerate())
 		std::cout << index << " " << value << std::endl;
 
 	std::vector<char> toto = { 'a', 'b', 'c', 'd' };
@@ -245,44 +245,44 @@ int main()
 	for (auto[index, value] : toto | transform([](char i) {return i * 2; }) | enumerate())
 		std::cout << index << " " << value << std::endl;
 
-	std::cout << "ints(0, 100) | slice(10, 20)" << std::endl;
-	for (size_t i : ints(0, 100) | slice(10, 20))
+	std::cout << "iota(0, 100) | slice(10, 20)" << std::endl;
+	for (size_t i : iota(0, 100) | slice(10, 20))
 		std::cout << i << std::endl;
 
-	std::cout << "ints(0, 3000, 3) | transform([](int i) {return i * 2; }) | enumerate() | slice(10, 20)" << std::endl;
-	for (auto[index, value] : ints(0, 3000, 3) | transform([](int i) {return i * 2; }) | enumerate() | slice(10, 20))
+	std::cout << "iota(0, 3000, 3) | transform([](int i) {return i * 2; }) | enumerate() | slice(10, 20)" << std::endl;
+	for (auto[index, value] : iota(0, 3000, 3) | transform([](int i) {return i * 2; }) | enumerate() | slice(10, 20))
 		std::cout << index << " " << value << std::endl;
 
-	std::cout << "zip(toto, ints(0, 4))" << std::endl;
-	for (auto[a, b] : zip(toto, ints(0, 4)))
+	std::cout << "zip(toto, iota(0, 4))" << std::endl;
+	for (auto[a, b] : zip(toto, iota(0, 4)))
 		std::cout << a << " " << b << std::endl;
 
-	std::cout << "ints(0, 100) | slice(0, 20) | stride(3)" << std::endl;
-	for (size_t i : ints(0, 100) | slice(0, 20) | stride(3))
+	std::cout << "iota(0, 100) | slice(0, 20) | stride(3)" << std::endl;
+	for (size_t i : iota(0, 100) | slice(0, 20) | stride(3))
 		std::cout << i << std::endl;
 
-	std::cout << "ints(10, 20) | retro()" << std::endl;
-	for (size_t i : ints(10, 20) | retro())
+	std::cout << "iota(10, 20) | retro()" << std::endl;
+	for (size_t i : iota(10, 20) | retro())
 		std::cout << i << std::endl;
 
-	std::cout << "ints(0, 100) | slice(10, 20) | retro()" << std::endl;
-	for (size_t i : ints(0, 100) | slice(10, 20) | retro())
+	std::cout << "iota(0, 100) | slice(10, 20) | retro()" << std::endl;
+	for (size_t i : iota(0, 100) | slice(10, 20) | retro())
 		std::cout << i << std::endl;
 
-	std::cout << "ints(10, 20) | enumerate() | retro()" << std::endl;
-	for (auto[index, value] : ints(10, 20) | enumerate() | retro())
+	std::cout << "iota(10, 20) | enumerate() | retro()" << std::endl;
+	for (auto[index, value] : iota(10, 20) | enumerate() | retro())
 		std::cout << index << " " << value << std::endl;
 
-	std::cout << "ints() | enumerate() | slice(10, 20)" << std::endl;
-	for (auto[index, value] : ints(0, 100) | enumerate() | slice(10, 20))
+	std::cout << "iota() | enumerate() | slice(10, 20)" << std::endl;
+	for (auto[index, value] : iota(0, 100) | enumerate() | slice(10, 20))
 		std::cout << index << " " << value << std::endl;
 
-	std::cout << "ints() | enumerate() | slice(10, 20) | retro()" << std::endl;
-	for (auto[index, value] : ints(0, 100) | enumerate() | slice(10, 20) | retro())
+	std::cout << "iota() | enumerate() | slice(10, 20) | retro()" << std::endl;
+	for (auto[index, value] : iota(0, 100) | enumerate() | slice(10, 20) | retro())
 		std::cout << index << " " << value << std::endl;
 
-	std::cout << "ints() | enumerate() | slice(10, 20) | retro()" << std::endl;
-	for (auto[index, value] : ints(0, 100) | enumerate() | slice(10, 20) | retro())
+	std::cout << "iota() | enumerate() | slice(10, 20) | retro()" << std::endl;
+	for (auto[index, value] : iota(0, 100) | enumerate() | slice(10, 20) | retro())
 		std::cout << index << " " << value << std::endl;
 
 	return 0;
