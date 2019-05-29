@@ -83,16 +83,34 @@ auto operator | (R&& range, pipeable<MakeRange> const& adapter)
 
 // ************************************ iterator_facade ********************************************
 
-template<typename I, typename V, typename C> struct iterator_facade;
+template<typename I, typename R, typename C> struct iterator_facade;
 
-template<typename I, typename V> 
-struct iterator_facade<I, V, std::forward_iterator_tag>
+template<typename I, typename R> 
+struct iterator_facade<I, R, std::forward_iterator_tag>
 {
+	template <class Reference>
+	struct pointer_type
+	{
+		struct proxy
+		{
+			Reference m_ref;
+			Reference const* operator->() { return &m_ref; }
+			operator Reference const*() { return &m_ref; }
+		};
+		typedef proxy type;
+	};
+
+	template <class T>
+	struct pointer_type<T&> // "real" references
+	{
+		using type = T*;
+	};
+
 	using iterator_category = std::forward_iterator_tag;
-	using value_type = V;
+	using value_type = std::remove_reference_t<R>;
 	using difference_type = intptr_t;
-	using pointer = V * ;
-	using reference = V & ;
+	typedef typename pointer_type<R>::type pointer;
+	using reference = R;
 
 	static_assert(std::is_reference<value_type>::value == false, "value_type can't be a reference");
 
@@ -106,13 +124,13 @@ struct iterator_facade<I, V, std::forward_iterator_tag>
 	}
 
 	auto operator*() const { return self().dereference(); }
-	auto operator->() const { return &(self().dereference()); }
+	auto operator->() const { return pointer{ self().dereference() }; }
 	bool operator!=(I other) const { return self().equal(other) == false; }
 	bool operator==(I other) const { return self().equal(other); }
 };
 
-template<typename I, typename V>
-struct iterator_facade<I, V, std::bidirectional_iterator_tag> : iterator_facade<I, V, std::forward_iterator_tag>
+template<typename I, typename R>
+struct iterator_facade<I, R, std::bidirectional_iterator_tag> : iterator_facade<I, R, std::forward_iterator_tag>
 {
 	using iterator_category = std::bidirectional_iterator_tag;
 
@@ -126,8 +144,8 @@ struct iterator_facade<I, V, std::bidirectional_iterator_tag> : iterator_facade<
 	}
 };
 
-template<typename I, typename V>
-struct iterator_facade<I, V, std::random_access_iterator_tag> : iterator_facade<I, V, std::bidirectional_iterator_tag>
+template<typename I, typename R>
+struct iterator_facade<I, R, std::random_access_iterator_tag> : iterator_facade<I, R, std::bidirectional_iterator_tag>
 {
 	using iterator_category = std::random_access_iterator_tag;
 

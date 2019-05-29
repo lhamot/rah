@@ -60,24 +60,9 @@ int main()
 		}
 	};
 
-	// *************************************** all ************************************************
+	// **************************************** all ***********************************************
 
-	{
-		std::vector<Elt> vec = { {0}, { 1 }, { 2 }, { 3 }, { 4 } };
-		auto r = vec | all();
-		CHECK(size(r) == 5);
-		for (auto iter = std::begin(r), end = std::end(r); iter != end; ++iter)
-		{
-			iter->member = 42; // Check for mutability
-		}
-		EQUAL_RANGE(r, (il<Elt>({ {42}, { 42 }, { 42 }, { 42 }, { 42 } })));
-		for (auto&& elt : r)
-		{
-			static_assert(std::is_reference_v<decltype(elt)>, "elt is expected to be a reference");
-			elt.member = 78; // Check for mutability
-		}
-		EQUAL_RANGE(r, (il<Elt>({ {78}, { 78 }, { 78 }, { 78 }, { 78 } })));
-	}
+	EQUAL_RANGE((il<int>{0, 1, 2, 3} | all()), (il<int>{ 0, 1, 2, 3 }));
 
 	// ********************** Non-modifying sequence operations ***********************************
 
@@ -139,12 +124,6 @@ int main()
 
 	// Test transform
 	EQUAL_RANGE(iota(0, 4) | transform([](auto a) {return a * 2; }), il<int>({ 0, 2, 4, 6 }));
-
-	// Test transform
-	{
-		std::vector<int> constVect{ 0, 1, 2, 3 };
-		EQUAL_RANGE((constVect | transform([](auto a) {return a * 2; })), il<int>({ 0, 2, 4, 6 }));
-	}
 
 	// Test slice
 	EQUAL_RANGE(iota(0, 100) | slice(10, 15), il<int>({ 10, 11, 12, 13, 14 }));
@@ -215,6 +194,59 @@ int main()
 	// ************************************** join ************************************************
 
 	EQUAL_RANGE((il<int>{ 0, 1, 2, 3 } | join(il<int>{ 4, 5, 6 })), (il<int>{0, 1, 2, 3, 4, 5, 6}));
+
+	// *************************** return reference ***********************************************
+
+	{
+		std::vector<Elt> vec = { {0}, { 1 }, { 2 }, { 3 }, { 4 } };
+		auto r = vec | all();
+		for (auto iter = std::begin(r), end = std::end(r); iter != end; ++iter)
+		{
+			iter->member = 42; // Check for mutability
+		}
+		EQUAL_RANGE(r, (il<Elt>({ {42}, { 42 }, { 42 }, { 42 }, { 42 } })));
+		for (auto&& elt : r)
+		{
+			static_assert(std::is_reference_v<decltype(elt)>, "elt is expected to be a reference");
+			elt.member = 78; // Check for mutability
+		}
+		EQUAL_RANGE(r, (il<Elt>({ {78}, { 78 }, { 78 }, { 78 }, { 78 } })));
+	}
+
+	// Test return non-reference
+	{
+		std::vector<int> constVect{ 0, 1, 2, 3 };
+		EQUAL_RANGE((constVect | transform([](auto a) {return a * 2; })), il<int>({ 0, 2, 4, 6 }));
+
+		std::vector<Elt> vec = { {1} };
+		auto r_copy = vec | transform([](auto a) {return Elt{ a.member + 1 }; });
+		for (auto iter = std::begin(r_copy), end = std::end(r_copy); iter != end; ++iter)
+		{
+			CHECK(iter->member == 2); // Check for mutability
+			CHECK((*iter).member == 2); // Check for mutability
+			static_assert(std::is_rvalue_reference_v<decltype(*iter)> || (std::is_reference_v<decltype(*iter)> == false),
+				"*iter is not expected to be a reference");
+		}
+		for (auto&& elt : r_copy)
+		{
+			CHECK(elt.member == 2); // Check for mutability
+			static_assert(std::is_rvalue_reference_v<decltype(elt)> || (std::is_reference_v<decltype(elt)> == false),
+				"elt is not expected to be a reference");
+		}
+		auto r_ref = vec | transform([](auto a) {return a.member; });
+		for (auto iter = std::begin(r_ref), end = std::end(r_ref); iter != end; ++iter)
+		{
+			CHECK(*iter == 1); // Check for mutability
+			static_assert(std::is_rvalue_reference_v<decltype(*iter)> || (std::is_reference_v<decltype(*iter)> == false),
+				"*iter is not expected to be a reference");
+		}
+		for (auto&& elt : r_ref)
+		{
+			CHECK(elt == 1); // Check for mutability
+			static_assert(std::is_rvalue_reference_v<decltype(elt)> || (std::is_reference_v<decltype(elt)> == false),
+				"elt is not expected to be a reference");
+		}
+	}
 
 	// ******************* test output_interator *******************************
 	std::forward_list<int> tutu = { 101, 102, 103, 104 };
