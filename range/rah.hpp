@@ -22,10 +22,7 @@ namespace RAH_NAMESPACE
 
 // **************************** range traits ******************************************************
 
-template<typename T> T& fake()
-{
-	return *((T*)nullptr);
-}
+template<typename T> T& fake() { return *((T*)nullptr); }
 
 template<typename T>
 using range_begin_type_t = decltype(std::begin(fake<T>()));
@@ -37,7 +34,7 @@ template<typename T>
 using range_value_type_t = std::remove_reference_t<decltype(*std::begin(fake<T>()))>;
 
 template<typename R>
-using range_iter_categ_t = typename std::iterator_traits<decltype(std::begin(fake<R>()))>::iterator_category;
+using range_iter_categ_t = typename std::iterator_traits<range_begin_type_t<R>>::iterator_category;
 
 // ******************************** range *********************************************************
 
@@ -73,7 +70,7 @@ struct pipeable
 };
 
 template<typename MakeRange>
-auto make_adatper(MakeRange&& make_range)
+auto make_pipeable(MakeRange&& make_range)
 {
 	return pipeable<MakeRange>{ make_range };
 }
@@ -228,7 +225,7 @@ template<typename R> auto all(R&& range)
 
 auto all()
 {
-	return make_adatper([=](auto&& range) {return all(range); });
+	return make_pipeable([=](auto&& range) {return all(range); });
 }
 
 // ******************************************* transform ******************************************
@@ -267,7 +264,7 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 
 template<typename F> auto transform(F&& func)
 {
-	return make_adatper([=](auto&& range) {return transform(range, func); });
+	return make_pipeable([=](auto&& range) {return transform(range, func); });
 }
 
 // ***************************************** slice ************************************************
@@ -283,7 +280,7 @@ template<typename R> auto slice(R&& range, size_t begin, size_t end)
 
 auto slice(size_t begin, size_t end)
 {
-	return make_adatper([=](auto&& range) {return slice(range, begin, end); });
+	return make_pipeable([=](auto&& range) {return slice(range, begin, end); });
 }
 
 // ***************************************** stride ***********************************************
@@ -324,7 +321,7 @@ template<typename R> auto stride(R&& range, size_t step)
 
 auto stride(size_t step)
 {
-	return make_adatper([=](auto&& range) {return stride(range, step); });
+	return make_pipeable([=](auto&& range) {return stride(range, step); });
 }
 
 // ***************************************** retro ************************************************
@@ -355,7 +352,7 @@ template<typename R> auto retro(R&& range)
 
 auto retro()
 {
-	return make_adatper([=](auto&& range) {return retro(range); });
+	return make_pipeable([=](auto&& range) {return retro(range); });
 }
 
 // *************************** zip *****************************************************
@@ -452,7 +449,7 @@ template<typename R> auto chunk(R&& range, size_t step)
 
 auto chunk(size_t step)
 {
-	return make_adatper([=](auto&& range) {return chunk(range, step); });
+	return make_pipeable([=](auto&& range) {return chunk(range, step); });
 }
 
 // ***************************************** filter ***********************************************
@@ -497,7 +494,7 @@ template<typename R, typename F> auto filter(R&& range, F&& func)
 
 template<typename F> auto filter(F&& func)
 {
-	return make_adatper([=](auto&& range) {return filter(range, func); });
+	return make_pipeable([=](auto&& range) {return filter(range, func); });
 }
 
 // ***************************************** join ***********************************************
@@ -557,7 +554,7 @@ template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 template<typename R> auto join(R&& rightRange)
 {
 	auto rightRangeRef = make_iterator_range(std::begin(rightRange), std::end(rightRange));
-	return make_adatper([=](auto&& leftRange) {return join(leftRange, rightRangeRef); });
+	return make_pipeable([=](auto&& leftRange) {return join(leftRange, rightRangeRef); });
 }
 
 // *************************** enumerate **********************************************************
@@ -570,7 +567,7 @@ template<typename R> auto enumerate(R&& range)
 
 auto enumerate()
 {
-	return make_adatper([=](auto&& range) {return enumerate(range); });
+	return make_pipeable([=](auto&& range) {return enumerate(range); });
 }
 
 // ****************************** mapValue ********************************************************
@@ -582,7 +579,7 @@ template<typename R> auto mapValue(R&& range)
 
 auto mapValue()
 {
-	return make_adatper([=](auto&& range) {return mapValue(range); });
+	return make_pipeable([=](auto&& range) {return mapValue(range); });
 }
 
 // ****************************** mapKey **********************************************************
@@ -594,7 +591,7 @@ template<typename R> auto mapKey(R&& range)
 
 auto mapKey()
 {
-	return make_adatper([=](auto&& range) {return mapKey(range); });
+	return make_pipeable([=](auto&& range) {return mapKey(range); });
 }
 
 } // namespace lazy
@@ -628,7 +625,7 @@ template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&
 template<typename I, typename F>
 auto reduce(I&& init, F&& func)
 {
-	return make_adatper([=](auto&& range) {return reduce(range, init, func); });
+	return make_pipeable([=](auto&& range) {return reduce(range, init, func); });
 }
 
 // ************************* any_of *******************************************
@@ -640,7 +637,7 @@ template<typename R, typename F> auto any_of(R&& range, F&& func)
 
 template<typename P> auto any_of(P&& pred)
 {
-	return make_adatper([=](auto&& range) {return any_of(range, pred); });
+	return make_pipeable([=](auto&& range) {return any_of(range, pred); });
 }
 
 // ************************* all_of *******************************************
@@ -652,7 +649,7 @@ template<typename R, typename P> auto all_of(R&& range, P&& pred)
 
 template<typename P> auto all_of(P&& pred)
 {
-	return make_adatper([=](auto&& range) {return all_of(range, pred); });
+	return make_pipeable([=](auto&& range) {return all_of(range, pred); });
 }
 
 // ************************* none_of *******************************************
@@ -664,7 +661,7 @@ template<typename R, typename P> auto none_of(R&& range, P&& pred)
 
 template<typename P> auto none_of(P&& pred)
 {
-	return make_adatper([=](auto&& range) {return none_of(range, pred); });
+	return make_pipeable([=](auto&& range) {return none_of(range, pred); });
 }
 
 // ************************* count ****************************************************************
@@ -676,7 +673,7 @@ template<typename R, typename V> auto count(R&& range, V&& value)
 
 template<typename V> auto count(V&& value)
 {
-	return make_adatper([=](auto&& range) {return count(range, value); });
+	return make_pipeable([=](auto&& range) {return count(range, value); });
 }
 
 template<typename R, typename P> auto count_if(R&& range, P&& pred)
@@ -686,7 +683,7 @@ template<typename R, typename P> auto count_if(R&& range, P&& pred)
 
 template<typename P> auto count_if(P&& pred)
 {
-	return make_adatper([=](auto&& range) {return count_if(range, pred); });
+	return make_pipeable([=](auto&& range) {return count_if(range, pred); });
 }
 
 // ************************* foreach **************************************************************
@@ -698,7 +695,7 @@ template<typename R, typename F> void for_each(R&& range, F&& func)
 
 template<typename F> auto for_each(F&& func)
 {
-	return make_adatper([=](auto&& range) {return for_each(range, func); });
+	return make_pipeable([=](auto&& range) {return for_each(range, func); });
 }
 
 // ***************************** to_container *****************************************************
@@ -710,7 +707,7 @@ template<typename C, typename R> auto to_container(R&& range)
 
 template<typename C> auto to_container()
 {
-	return make_adatper([=](auto&& range) {return to_container<C>(range); });
+	return make_pipeable([=](auto&& range) {return to_container<C>(range); });
 }
 
 // ************************* mismatch *************************************************************
@@ -734,7 +731,7 @@ template<typename R, typename V> auto find(R&& range, V&& value)
 
 template<typename V> auto find(V&& value)
 {
-	return make_adatper([=](auto&& range) {return find(range, value); });
+	return make_pipeable([=](auto&& range) {return find(range, value); });
 }
 
 template<typename R, typename P> auto find_if(R&& range, P&& pred)
@@ -746,7 +743,7 @@ template<typename R, typename P> auto find_if(R&& range, P&& pred)
 
 template<typename P> auto find_if(P&& pred)
 {
-	return make_adatper([=](auto&& range) {return find_if(range, pred); });
+	return make_pipeable([=](auto&& range) {return find_if(range, pred); });
 }
 
 template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
@@ -758,7 +755,7 @@ template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 
 template<typename P> auto find_if_not(P&& pred)
 {
-	return make_adatper([=](auto&& range) {return find_if_not(range, pred); });
+	return make_pipeable([=](auto&& range) {return find_if_not(range, pred); });
 }
 
 // *************************************** size ***************************************************
@@ -770,7 +767,7 @@ template<typename R> auto size(R&& range)
 
 auto size()
 {
-	return make_adatper([=](auto&& range) { return size(range); });
+	return make_pipeable([=](auto&& range) { return size(range); });
 }
 
 // *************************************** equal **************************************************
