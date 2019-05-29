@@ -107,11 +107,8 @@ struct ForwardIteratorHelper
 	}
 
 	auto operator*() const { return self().value(); }
-
 	auto operator->() const { return &(self().value()); }
-
 	bool operator!=(I other) const { return self().equal(other) == false; }
-
 	bool operator==(I other) const { return self().equal(other); }
 };
 
@@ -265,7 +262,7 @@ struct TransformIterator : IteratorHelper<
 	void decr() { --iter; }
 	auto sub(TransformIterator r) const { return iter - r.iter; }
 	auto value() const { return func(*iter); }
-	auto equal(TransformIterator r) const { return iter == r.iter; }
+	bool equal(TransformIterator r) const { return iter == r.iter; }
 };
 
 template<typename R, typename F> auto transform(R&& range, F&& func)
@@ -293,7 +290,6 @@ template<typename R> auto slice(R&& range, size_t begin, size_t end)
 auto slice(size_t begin, size_t end)
 {
 	return MakeAdatper([=](auto&& range) {return slice(range, begin, end); });
-
 }
 
 // ***************************************** stride ***********************************************
@@ -317,7 +313,7 @@ struct StrideIterator : IteratorHelper<StrideIterator<R>, range_value_type_t<R>,
 			--iter;
 	}
 
-	auto incr(intptr_t value) { iter += step * value; }
+	void incr(intptr_t value) { iter += step * value; }
 	auto value() const { return *iter; }
 	bool equal(StrideIterator other) const { return iter == other.iter; }
 	auto sub(StrideIterator other) const { return (iter - other.iter) / step; }
@@ -387,7 +383,6 @@ void for_each(Tuple&& tuple, F&& f)
 		std::make_index_sequence<N>{});
 }
 
-
 template <class F, typename... Args, size_t... Is>
 auto transform_each_impl(const std::tuple<Args...>& t, F&& f, std::index_sequence<Is...>) {
 	return std::make_tuple(
@@ -403,7 +398,7 @@ auto transform_each(const std::tuple<Args...>& t, F&& f) {
 
 auto get_iter_value = [](auto&& iter) { return *iter; };
 
-}
+} // namespace details
 
 template<typename IterTuple>
 struct ZipRangeIterator : IteratorHelper<
@@ -425,7 +420,6 @@ template<typename ...R> auto zip(R&&... _ranges)
 {
 	auto iterTup = std::make_tuple(std::begin(std::forward<R>(_ranges))...);
 	auto endTup = std::make_tuple(std::end(std::forward<R>(_ranges))...);
-
 	return iterator_range<ZipRangeIterator<decltype(iterTup)>>{ { {}, iterTup }, { {}, endTup }};
 }
 
@@ -439,19 +433,14 @@ struct ChunkIterator : IteratorHelper<ChunkIterator<R>, iterator_range<range_beg
 	range_end_type_t<R> endIter;
 	size_t step = 0;
 
-	auto incr()
+	void incr()
 	{
 		iter = iter2;
 		for (size_t i = 0; i != step and iter2 != endIter; ++i)
 			++iter2;
-		return *this;
 	}
 
-	auto value() const
-	{
-		return make_iterator_range(iter, iter2);
-	}
-
+	auto value() const { return make_iterator_range(iter, iter2); }
 	bool equal(ChunkIterator other) const { return iter == other.iter; }
 };
 
@@ -497,7 +486,6 @@ struct FilterIterator : IteratorHelper<FilterIterator<R, F>, range_value_type_t<
 	}
 
 	auto value() const { return *iter; }
-
 	bool equal(FilterIterator other) const { return iter == other.iter; }
 };
 
@@ -509,7 +497,6 @@ template<typename R, typename F> auto filter(R&& range, F&& func)
 		{ {}, iter, iter, endIter, func },
 		{ {}, iter, endIter, endIter, func }
 	};
-
 }
 
 template<typename F> auto filter(F&& func)
