@@ -13,5 +13,5 @@ build:
   parallel: true
 
 test_script:
-  - cd x64/Release
+  - cd x64/%CONFIGURATION%
   - rah.exe

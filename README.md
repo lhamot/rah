@@ -54,6 +54,12 @@ rah is under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt)
 - Visual Studio 2017 (on windows 10)
 - clang 7.0 (on windows 10)
 - There is still some probleme on gcc with the `gererate_iterator`
+## Continuous integration
+
+* Windows
+
+[![Build status](https://ci.appveyor.com/api/projects/status/kn9yeci2isl6njla/branch/master?svg=true)](https://ci.appveyor.com/project/lhamot/rah/branch/master)
+
 ## How to use?
 - Just include the `rah.hpp` file in your project
 - range version of STL algorithms are in the **rah** namespace
