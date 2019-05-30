@@ -52,7 +52,7 @@ for(int i: values) // The job in done here, without memory allocation
 rah is under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt)
 ## Supported Compilers
 - Visual Studio 2017
-- More compilers will come soon
+- Clang 7.0
 ## How to use?
 - Just include the `rah.hpp` file in your project
 - range version of STL algorithms are in the **rah** namespace

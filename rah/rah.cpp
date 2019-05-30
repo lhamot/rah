@@ -17,6 +17,18 @@
 #pragma warning(pop)
 #endif
 
+template<typename A, typename B, typename C, typename D>
+bool operator == (std::tuple<A, B> a, std::pair<D, C> b)
+{
+	return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+
+template<typename A, typename B, typename C, typename D>
+bool operator == (std::pair<A, B> a, std::tuple<D, C> b)
+{
+	return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+
 auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
 
 #define CHECK(CONDITION) \
@@ -35,18 +47,6 @@ else \
 
 template<typename T>
 using il = std::initializer_list<T>;
-
-template<typename A, typename B, typename C, typename D>
-bool operator == (std::tuple<A, B> a, std::pair<D, C> b)
-{
-	return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-
-template<typename A, typename B, typename C, typename D>
-bool operator == (std::pair<A, B> a, std::tuple<D, C> b)
-{
-	return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
 
 auto print_elt = [](auto&& elt)
 {
