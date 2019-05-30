@@ -146,15 +146,15 @@ int main()
 		(il<tuple<unsigned int, int>>{ tUII{ 0, 4 }, tUII{ 1, 5 }, tUII{ 2, 6 }, tUII{ 3, 7 } })
 	);
 
-	// Test mapValue
+	// Test map_value
 	EQUAL_RANGE(
-		(std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | mapValue()), 
+		(std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | map_value()), 
 		(il<double>{ 1.5, 2.5, 3.5, 4.5 })
 	);
 
-	// Test mapKey
+	// Test map_key
 	EQUAL_RANGE(
-		(std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | mapKey()), 
+		(std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | map_key()), 
 		(il<int>{ 1, 2, 3, 4 })
 	);
 

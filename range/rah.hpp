@@ -588,28 +588,28 @@ auto enumerate()
 	return make_pipeable([=](auto&& range) {return enumerate(range); });
 }
 
-// ****************************** mapValue ********************************************************
+// ****************************** map_value ********************************************************
 
-template<typename R> auto mapValue(R&& range)
+template<typename R> auto map_value(R&& range)
 {
 	return transform(std::forward<R>(range), [](auto nvp) {return std::get<1>(nvp); });
 }
 
-auto mapValue()
+auto map_value()
 {
-	return make_pipeable([=](auto&& range) {return mapValue(range); });
+	return make_pipeable([=](auto&& range) {return map_value(range); });
 }
 
-// ****************************** mapKey **********************************************************
+// ****************************** map_key **********************************************************
 
-template<typename R> auto mapKey(R&& range)
+template<typename R> auto map_key(R&& range)
 {
 	return transform(std::forward<R>(range), [](auto nvp) {return std::get<0>(nvp); });
 }
 
-auto mapKey()
+auto map_key()
 {
-	return make_pipeable([=](auto&& range) {return mapKey(range); });
+	return make_pipeable([=](auto&& range) {return map_key(range); });
 }
 
 } // namespace lazy
