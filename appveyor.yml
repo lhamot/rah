@@ -1,0 +1,17 @@
+image: Visual Studio 2017
+
+install:
+  
+platform: x64
+
+configuration: 
+  - Release
+  - Debug
+
+build: 
+  project: rah.sln
+  parallel: true
+
+test_script:
+  - cd x64/Release
+  - rah.exe
