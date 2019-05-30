@@ -28,7 +28,7 @@ namespace RAH_NAMESPACE
 
 // **************************** range traits ******************************************************
 
-template<typename T> T& fake() { return *((T*)nullptr); }
+template<typename T> T& fake() { return *((std::remove_reference_t<T>*)nullptr); }
 
 template<typename T>
 using range_begin_type_t = decltype(std::begin(fake<T>()));
@@ -37,12 +37,15 @@ template<typename T>
 using range_end_type_t = decltype(std::end(fake<T>()));
 
 template<typename T>
-using range_value_type_t = std::remove_reference_t<decltype(*std::begin(fake<T>()))>;
+using range_ref_type_t = decltype(*std::begin(fake<T>()));
+
+template<typename T>
+using range_value_type_t = std::remove_reference_t<range_ref_type_t<T>>;
 
 template<typename R>
 using range_iter_categ_t = typename std::iterator_traits<range_begin_type_t<R>>::iterator_category;
 
-// ******************************** range *********************************************************
+// ******************************** iterator_range ************************************************
 
 template<typename I>
 struct iterator_range
@@ -67,7 +70,7 @@ template<typename I> I end(iterator_range<I>& r) { return r.endIter; }
 template<typename I> I begin(iterator_range<I> const& r) { return r.beginIter; }
 template<typename I> I end(iterator_range<I> const& r) { return r.endIter; }
 
-// ***************************************** adapter **********************************************
+// **************************************** pipeable **********************************************
 
 template<typename MakeRange>
 struct pipeable
@@ -257,7 +260,7 @@ auto all()
 template<typename R, typename F>
 struct transform_iterator : iterator_facade<
 	transform_iterator<R, F>,
-	decltype(fake<F>()(fake<range_value_type_t<R>>())),
+	decltype(fake<F>()(fake<range_ref_type_t<R>>())),
 	range_iter_categ_t<R>
 >
 {
@@ -310,7 +313,7 @@ auto slice(size_t begin, size_t end)
 // ***************************************** stride ***********************************************
 
 template<typename R>
-struct stride_iterator : iterator_facade<stride_iterator<R>, range_value_type_t<R>, range_iter_categ_t<R>>
+struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>, range_iter_categ_t<R>>
 {
 	range_begin_type_t<R> iter;
 	range_end_type_t<R> endIter;
@@ -351,7 +354,7 @@ auto stride(size_t step)
 // ***************************************** retro ************************************************
 
 template<typename R>
-struct retro_iterator : iterator_facade<retro_iterator<R>, range_value_type_t<R>, range_iter_categ_t<R>>
+struct retro_iterator : iterator_facade<retro_iterator<R>, range_ref_type_t<R>, range_iter_categ_t<R>>
 {
 	range_begin_type_t<R> iter;
 
@@ -479,7 +482,7 @@ auto chunk(size_t step)
 // ***************************************** filter ***********************************************
 
 template<typename R, typename F>
-struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_value_type_t<R>, range_iter_categ_t<R>>
+struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t<R>, range_iter_categ_t<R>>
 {
 	range_begin_type_t<R> beginIter;
 	range_begin_type_t<R> iter;
@@ -566,9 +569,8 @@ template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 {
 	return iterator_range<
 		join_iterator<
-		std::pair<range_begin_type_t<std::remove_reference_t<R1>>,
-		range_begin_type_t<std::remove_reference_t<R2>>>,
-		range_value_type_t<R1>>>
+		std::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
+		range_ref_type_t<R1>>>
 	{
 		{ {}, std::make_pair(std::begin(range1), std::begin(range2)), std::make_pair(std::end(range1), std::end(range2)), 0 },
 		{ {}, std::make_pair(std::end(range1), std::end(range2)), std::make_pair(std::end(range1), std::end(range2)), 1 },
