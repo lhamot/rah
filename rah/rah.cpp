@@ -85,12 +85,14 @@ int main()
 	EQUAL_RANGE(iota(10, 20, 2), il<int>({ 10, 12, 14, 16, 18 }));
 
 	// Test generate
+	int y = 1;
 	EQUAL_RANGE(
-		generate([y = 1]() mutable { auto prev = y; y *= 2; return prev; }) | slice(0, 4), 
+		generate([&y]() mutable { auto prev = y; y *= 2; return prev; }) | slice(0, 4), 
 		(il<int>{1, 2, 4, 8})
 	);
+	y = 1;
 	EQUAL_RANGE(
-		generate_n([y = 1]() mutable { auto prev = y; y *= 2; return prev; }, 4), 
+		generate_n([&y]() mutable { auto prev = y; y *= 2; return prev; }, 4), 
 		(il<int>{1, 2, 4, 8})
 	);
 
