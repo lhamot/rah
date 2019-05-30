@@ -1,0 +1,26 @@
+language: cpp
+sudo: false
+dist: trusty
+os:
+  - linux
+matrix:
+  include:
+    # works on Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+            - ubuntu-toolchain-r-test
+          packages:
+            - clang-5.0
+            - g++-8
+
+script:
+  - cd rah
+  - clang++-5.0 --version
+  - clang++-5.0 -otest_clang.out rah.cpp -std=c++17 -Wall -m64
+  - ./test_clang.out
+  - g++-8 --version
+  - g++-8 -otest_gcc.out rah.cpp -std=c++17 -Wall -m64
+  - ./test_gcc.out

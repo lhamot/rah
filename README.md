@@ -1,7 +1,7 @@
 
 # rah
 **rah** is **ra**nge, **h**eader-only, "single-file" C++17 library.
-**rah** was design with the code simplicity in mind. This is why it doesn't support older C++ version.
+**rah** was design with the code simplicity on top priority. This is why it doesn't support older C++ version.
 ## What is a range library?
 A range library is an extension of the iterators and STL which allow to use and extend algorithms easily.
 A range is anything that can be iterate. Typically in C++ something is a range if we can call `std::begin` and `std::end` on it.
@@ -51,10 +51,17 @@ for(int i: values) // The job in done here, without memory allocation
 ## License
 rah is under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt)
 ## Supported Compilers
-- Visual Studio 2017 (on windows 10)
-- clang 7.0 (on windows 10)
-- There is still some probleme on gcc with the `gererate_iterator`
+- On windows
+  - Visual Studio 2017
+  - clang 7
+- On Ubuntu
+  - clang 4 and 5
+  - gcc 7,8 and 9
 ## Continuous integration
+
+* Linux
+
+[![Build Status](https://travis-ci.org/lhamot/rah.svg?branch=master)](https://travis-ci.org/lhamot/rah)
 
 * Windows
 

@@ -87,12 +87,12 @@ int main()
 	// Test generate
 	int y = 1;
 	EQUAL_RANGE(
-		generate([&y]() mutable { auto prev = y; y *= 2; return prev; }) | slice(0, 4), 
+		generate([&y]() { auto prev = y; y *= 2; return prev; }) | slice(0, 4), 
 		(il<int>{1, 2, 4, 8})
 	);
 	y = 1;
 	EQUAL_RANGE(
-		generate_n([&y]() mutable { auto prev = y; y *= 2; return prev; }, 4), 
+		generate_n([&y]() { auto prev = y; y *= 2; return prev; }, 4), 
 		(il<int>{1, 2, 4, 8})
 	);
 
@@ -125,8 +125,9 @@ int main()
 
 	// Test chuck
 	{
-		auto to_test = il<int>{ 0, 1, 2, 3, 4 } | chunk(2);
-		auto ref = il<il<int>>{ {0, 1}, { 2, 3 }, { 4 } };
+		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
+		auto to_test = vec_01234 | chunk(2);
+		std::vector<vector<int>> ref({ {0, 1}, { 2, 3 }, { 4 } });
 		CHECK(size(to_test) == size(ref));
 		for (auto elt : zip(to_test, ref))
 		{
