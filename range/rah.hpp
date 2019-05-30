@@ -580,7 +580,7 @@ template<typename R> auto join(R&& rightRange)
 template<typename R> auto enumerate(R&& range)
 {
 	size_t const dist = std::distance(std::begin(std::forward<R>(range)), std::end(std::forward<R>(range)));
-	return zip(iota<size_t>(0, dist), std::forward<R>(range));
+	return zip(iota(size_t(0), dist), std::forward<R>(range));
 }
 
 auto enumerate()
@@ -616,18 +616,19 @@ auto mapKey()
 
 // ****************************************** transform *******************************************
 
-template<typename RI, typename RO, typename F> auto transform(RI&& rangeIn, RO&& rangeOut, F&& func)
+template<typename RI, typename RO, typename F>
+auto transform(RI&& rangeIn, RO&& rangeOut, F&& func)
 {
 	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(func));
 	return make_iterator_range(iter, std::end(rangeOut));
 }
 
-template<typename RI1, typename RI2, typename RO, typename F> 
+template<typename RI1, typename RI2, typename RO, typename F>
 auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
 {
 	auto iter = std::transform(
 		std::begin(rangeIn1), std::end(rangeIn1),
-		std::begin(rangeIn2), std::end(rangeIn2),
+		std::begin(rangeIn2),
 		std::begin(rangeOut),
 		std::forward<F>(func));
 	return make_iterator_range(iter, std::end(rangeOut));

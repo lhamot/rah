@@ -95,6 +95,7 @@
       <AdditionalIncludeDirectories>C:\C_libs\Range-V3-VS2015\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4820;4365;4571;4626;4625;5026;5027;4623;4774;4514;4710;4711</DisableSpecificWarnings>
       <PrecompiledHeaderFile />
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,6 +114,7 @@
       <AdditionalIncludeDirectories>C:\C_libs\Range-V3-VS2015\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4820;4365;4571;4626;4625;5026;5027;4623;4774;4514;4710;4711</DisableSpecificWarnings>
       <PrecompiledHeaderFile />
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +135,7 @@
       <AdditionalIncludeDirectories>C:\C_libs\Range-V3-VS2015\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4820;4365;4571;4626;4625;5026;5027;4623;4774;4514;4710;4711</DisableSpecificWarnings>
       <PrecompiledHeaderFile />
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +158,7 @@
       <AdditionalIncludeDirectories>C:\C_libs\Range-V3-VS2015\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4820;4365;4571;4626;4625;5026;5027;4623;4774;4514;4710;4711</DisableSpecificWarnings>
       <PrecompiledHeaderFile />
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
