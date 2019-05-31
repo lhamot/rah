@@ -1,13 +1,13 @@
 
 # rah
-**rah** is **ra**nge, **h**eader-only, "single-file" C++17 library.
-**rah** was design with the code simplicity on top priority. This is why it doesn't support older C++ version.
+**rah** is **ra**nge, **h**eader-only, "single-file" C++14/17 library.
 ## What is a range library?
 A range library is an extension of the iterators and STL which allow to use and extend algorithms easily.
 A range is anything that can be iterate. Typically in C++ something is a range if we can call `std::begin` and `std::end` on it.
 ## Why a new range library?
 Yes there are some great range libraries in C++, like [range-v3](https://github.com/ericniebler/range-v3) and [boost::range](http://www.boost.org/doc/libs/1_70_0/libs/range).
-The goal of **rah** is to be "single file" and stay easy to read and understand. 
+The goal of **rah** is to be "single file" and stay easy to read and understand. **rah** was design with the code simplicity on top priority.
+
 ## What is inside rah
 - In the namespace `rah`, there is a part of the usual algorithms present in `<algorithm>`, but in a range fashion
 	- More algorithms will be added soon
@@ -52,21 +52,16 @@ for(int i: values) // The job in done here, without memory allocation
 rah is under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt)
 ## Supported Compilers
 - On windows
-  - Visual Studio 2017
-  - clang 7
+  - Visual Studio 2017 (stdcpp14 and stdcpp17)
+  - clang 7 (-std=c++14 and -std=c++17)
 - On Ubuntu
-  - clang 4 and 5
-  - gcc 7,8 and 9
+  - clang 4 and 5 (-std=c++14 and -std=c++17)
+  - gcc 7,8 and 9 (-std=c++14 and -std=c++17)
 ## Continuous integration
-
-* Linux
-
+### Linux
 [![Build Status](https://travis-ci.org/lhamot/rah.svg?branch=master)](https://travis-ci.org/lhamot/rah)
-
-* Windows
-
+### Windows
 [![Build status](https://ci.appveyor.com/api/projects/status/kn9yeci2isl6njla/branch/master?svg=true)](https://ci.appveyor.com/project/lhamot/rah/branch/master)
-
 ## How to use?
 - Just include the `rah.hpp` file in your project
 - range version of STL algorithms are in the **rah** namespace

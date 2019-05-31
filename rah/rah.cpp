@@ -60,6 +60,14 @@ std::ostream& operator << (std::ostream& os, std::tuple<Args...> tup)
 	return os;
 }
 
+namespace test
+{
+	template< class T >
+    constexpr bool is_reference_v = std::is_reference<T>::value;
+	template< class T >
+    constexpr bool is_rvalue_reference_v = std::is_rvalue_reference<T>::value;
+}
+
 template<typename T>
 struct WhatIsIt;
 
@@ -236,9 +244,9 @@ int main()
 	{
 		auto a = { 1, 2, 3, 4 };
 		auto b = { 1, 2, 42, 42 };
-		auto[range1, range2] = mismatch(a, b);
-		EQUAL_RANGE(range1, il<int>({ 3, 4 }));
-		EQUAL_RANGE(range2, il<int>({ 42, 42 }));
+		auto r1_r2 = mismatch(a, b);
+		EQUAL_RANGE(std::get<0>(r1_r2), il<int>({ 3, 4 }));
+		EQUAL_RANGE(std::get<1>(r1_r2), il<int>({ 42, 42 }));
 	}
 
 	// Test find
@@ -263,7 +271,7 @@ int main()
 		EQUAL_RANGE(r, (il<Elt>({ {42}, { 42 }, { 42 }, { 42 }, { 42 } })));
 		for (auto&& elt : r)
 		{
-			static_assert(std::is_reference_v<decltype(elt)>, "elt is expected to be a reference");
+			static_assert(test::is_reference_v<decltype(elt)>, "elt is expected to be a reference");
 			elt.member = 78; // Check for mutability
 		}
 		EQUAL_RANGE(r, (il<Elt>({ {78}, { 78 }, { 78 }, { 78 }, { 78 } })));
@@ -283,30 +291,30 @@ int main()
 		{
 			CHECK(iter->member == 2); // Check for mutability
 			CHECK((*iter).member == 2); // Check for mutability
-			static_assert(std::is_rvalue_reference_v<decltype(*iter)> || 
-				(std::is_reference_v<decltype(*iter)> == false),
+			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
+				(test::is_reference_v<decltype(*iter)> == false),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_copy)
 		{
 			CHECK(elt.member == 2); // Check for mutability
-			static_assert(std::is_rvalue_reference_v<decltype(elt)> || 
-				(std::is_reference_v<decltype(elt)> == false),
+			static_assert(test::is_rvalue_reference_v<decltype(elt)> || 
+				(test::is_reference_v<decltype(elt)> == false),
 				"elt is not expected to be a reference");
 		}
 		auto r_ref = vec | transform([](auto a) {return a.member; });
 		for (auto iter = std::begin(r_ref), end = std::end(r_ref); iter != end; ++iter)
 		{
 			CHECK(*iter == 1); // Check for mutability
-			static_assert(std::is_rvalue_reference_v<decltype(*iter)> || 
-				(std::is_reference_v<decltype(*iter)> == false),
+			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
+				(test::is_reference_v<decltype(*iter)> == false),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_ref)
 		{
 			CHECK(elt == 1); // Check for mutability
-			static_assert(std::is_rvalue_reference_v<decltype(elt)> || 
-				(std::is_reference_v<decltype(elt)> == false),
+			static_assert(test::is_rvalue_reference_v<decltype(elt)> || 
+				(test::is_reference_v<decltype(elt)> == false),
 				"elt is not expected to be a reference");
 		}
 	}
