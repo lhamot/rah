@@ -271,7 +271,7 @@ struct transform_iterator : iterator_facade<
 	range_begin_type_t<R> iter_;
 	F func_;
 	
-	transform_iterator(range_begin_type_t<R> iter, F func) : iter_(iter), func_(func) {}
+	transform_iterator(range_begin_type_t<R> const& iter, F const& func) : iter_(iter), func_(func) {}
 
 	transform_iterator& operator=(transform_iterator const& ot)
 	{
