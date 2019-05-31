@@ -291,8 +291,7 @@ struct transform_iterator : iterator_facade<
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using iterator = transform_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>;
-	return iterator_range<iterator>{ 
-		{ std::begin(range), std::forward<F>(func)}, { std::end(range), std::forward<F>(func) }};
+	return iterator_range<iterator>{ { std::begin(range), func }, { std::end(range), func } };
 }
 
 template<typename F> auto transform(F&& func)
