@@ -236,9 +236,9 @@ int main()
 	{
 		auto a = { 1, 2, 3, 4 };
 		auto b = { 1, 2, 42, 42 };
-		auto[range1, range2] = mismatch(a, b);
-		EQUAL_RANGE(range1, il<int>({ 3, 4 }));
-		EQUAL_RANGE(range2, il<int>({ 42, 42 }));
+		auto r1_r2 = mismatch(a, b);
+		EQUAL_RANGE(std::get<0>(r1_r2), il<int>({ 3, 4 }));
+		EQUAL_RANGE(std::get<1>(r1_r2), il<int>({ 42, 42 }));
 	}
 
 	// Test find

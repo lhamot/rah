@@ -203,21 +203,23 @@ namespace lazy
 template<typename T = size_t>
 struct iota_iterator : iterator_facade<iota_iterator<T>, T, std::random_access_iterator_tag>
 {
-	T val;
-	T step;
+	T val_;
+	T step_;
+	
+	iota_iterator(T val, T step) : val_(val), step_(step) {}
 
-	void increment() { val += step; }
-	void advance(intptr_t value) { val += T(step * value); }
-	void decrement() { val -= step; }
-	auto distance_to(iota_iterator other) const { return (val - other.val) / step; }
-	auto dereference() const { return val; }
-	bool equal(iota_iterator other) const { return val == other.val; }
+	void increment() { val_ += step_; }
+	void advance(intptr_t value) { val_ += T(step_ * value); }
+	void decrement() { val_ -= step_; }
+	auto distance_to(iota_iterator other) const { return (val_ - other.val_) / step_; }
+	auto dereference() const { return val_; }
+	bool equal(iota_iterator other) const { return val_ == other.val_; }
 };
 
 template<typename T = size_t> auto iota(T b, T e, T step = 1)
 {
 	assert(step != 0);
-	return iterator_range<iota_iterator<T>>{ { {}, b, step}, { {}, e, step }};
+	return iterator_range<iota_iterator<T>>{ { b, step}, { e, step }};
 }
 
 // ********************************** generate ****************************************************
@@ -225,22 +227,24 @@ template<typename T = size_t> auto iota(T b, T e, T step = 1)
 template<typename F>
 struct gererate_iterator : iterator_facade<gererate_iterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>
 {
-	mutable F func;
-	size_t iterCount = 0;
+	mutable F func_;
+	size_t iter_count_ = 0;
+	
+	gererate_iterator(F func, size_t iter_count = 0) : func_(func), iter_count_(iter_count) {}
 
-	void increment() { ++iterCount; }
-	auto dereference() const { return func(); }
-	bool equal(gererate_iterator other) const { return iterCount == other.iterCount; }
+	void increment() { ++iter_count_; }
+	auto dereference() const { return func_(); }
+	bool equal(gererate_iterator other) const { return iter_count_ == other.iter_count_; }
 };
 
 template<typename F> auto generate(F&& func)
 {
-	return iterator_range<gererate_iterator<F>>{ { {}, func}, { {}, func }};
+	return iterator_range<gererate_iterator<F>>{ { func}, { func }};
 }
 
 template<typename F> auto generate_n(F&& func, size_t count)
 {
-	return iterator_range<gererate_iterator<F>>{ { {}, func, 0}, { {}, func, count }};
+	return iterator_range<gererate_iterator<F>>{ { func }, { func, count }};
 }
 
 // ********************************** all ********************************************************
@@ -264,29 +268,31 @@ struct transform_iterator : iterator_facade<
 	range_iter_categ_t<R>
 >
 {
-	range_begin_type_t<R> iter;
-	F func;
+	range_begin_type_t<R> iter_;
+	F func_;
+	
+	transform_iterator(range_begin_type_t<R> iter, F func) : iter_(iter), func_(func) {}
 
 	transform_iterator& operator=(transform_iterator const& ot)
 	{
-		iter = ot.iter;
-		//func = ot.func;
+		iter_ = ot.iter_;
+		//func_ = ot.func_;
 		return *this;
 	}
 
-	void increment() { ++iter; }
-	void advance(intptr_t off) { iter += off; }
-	void decrement() { --iter; }
-	auto distance_to(transform_iterator r) const { return iter - r.iter; }
-	auto dereference() const { return func(*iter); }
-	bool equal(transform_iterator r) const { return iter == r.iter; }
+	void increment() { ++iter_; }
+	void advance(intptr_t off) { iter_ += off; }
+	void decrement() { --iter_; }
+	auto distance_to(transform_iterator r) const { return iter_ - r.iter_; }
+	auto dereference() const { return func_(*iter_); }
+	bool equal(transform_iterator r) const { return iter_ == r.iter_; }
 };
 
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using iterator = transform_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>;
 	return iterator_range<iterator>{ 
-		{ {}, std::begin(range), std::forward<F>(func)}, { {}, std::end(range), std::forward<F>(func) }};
+		{ std::begin(range), std::forward<F>(func)}, { std::end(range), std::forward<F>(func) }};
 }
 
 template<typename F> auto transform(F&& func)
@@ -315,26 +321,29 @@ auto slice(size_t begin, size_t end)
 template<typename R>
 struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>, range_iter_categ_t<R>>
 {
-	range_begin_type_t<R> iter;
-	range_end_type_t<R> endIter;
-	size_t step;
+	range_begin_type_t<R> iter_;
+	range_end_type_t<R> end_;
+	size_t step_;
+	
+	stride_iterator(range_begin_type_t<R> iter, range_end_type_t<R> end, size_t step)
+		: iter_(iter), end_(end), step_(step) {}
 
 	auto increment()
 	{
-		for (size_t i = 0; i < step && iter != endIter; ++i)
-			++iter;
+		for (size_t i = 0; i < step_ && iter_ != end_; ++i)
+			++iter_;
 	}
 
 	auto decrement()
 	{
-		for (size_t i = 0; i < step; ++i)
-			--iter;
+		for (size_t i = 0; i < step_; ++i)
+			--iter_;
 	}
 
-	void advance(intptr_t value) { iter += step * value; }
-	auto dereference() const { return *iter; }
-	bool equal(stride_iterator other) const { return iter == other.iter; }
-	auto distance_to(stride_iterator other) const { return (iter - other.iter) / step; }
+	void advance(intptr_t value) { iter_ += step_ * value; }
+	auto dereference() const { return *iter_; }
+	bool equal(stride_iterator other) const { return iter_ == other.iter_; }
+	auto distance_to(stride_iterator other) const { return (iter_ - other.iter_) / step_; }
 };
 
 
@@ -343,7 +352,7 @@ template<typename R> auto stride(R&& range, size_t step)
 	auto iter = std::begin(range);
 	auto endIter = std::end(range);
 	return iterator_range<stride_iterator<std::remove_reference_t<R>>>{ 
-		{ {}, iter, endIter, step}, { {}, endIter, endIter, step }};
+		{ iter, endIter, step}, { endIter, endIter, step }};
 }
 
 auto stride(size_t step)
@@ -356,25 +365,27 @@ auto stride(size_t step)
 template<typename R>
 struct retro_iterator : iterator_facade<retro_iterator<R>, range_ref_type_t<R>, range_iter_categ_t<R>>
 {
-	range_begin_type_t<R> iter;
+	range_begin_type_t<R> iter_;
+	
+	retro_iterator(range_begin_type_t<R> iter): iter_(iter) {}
 
-	void increment() { --iter; }
-	void decrement() { ++iter; }
-	void advance(intptr_t value) { iter -= value; }
+	void increment() { --iter_; }
+	void decrement() { ++iter_; }
+	void advance(intptr_t value) { iter_ -= value; }
 	auto dereference() const
 	{
-		auto iter2 = iter;
+		auto iter2 = iter_;
 		--iter2;
 		return *iter2;
 	}
-	auto distance_to(retro_iterator other) const { return other.iter - iter; }
-	bool equal(retro_iterator other) const { return iter == other.iter; }
+	auto distance_to(retro_iterator other) const { return other.iter_ - iter_; }
+	bool equal(retro_iterator other) const { return iter_ == other.iter_; }
 };
 
 template<typename R> auto retro(R&& range)
 {
 	return iterator_range<retro_iterator<std::remove_reference_t<R>>>({ 
-		{{}, std::end(range)}, {{}, std::begin(range)} });
+		{ std::end(range) }, { std::begin(range) } });
 }
 
 auto retro()
@@ -427,20 +438,21 @@ struct zip_iterator : iterator_facade<
 	std::bidirectional_iterator_tag
 >
 {
-	IterTuple iters;
-	void increment() { details::for_each(iters, [](auto& iter) { ++iter; }); }
-	void advance(intptr_t val) { for_each(iters, [val](auto& iter) { iter += val; }); }
-	void decrement() { details::for_each(iters, [](auto& iter) { --iter; }); }
-	auto dereference() const { return details::transform_each(iters, details::get_iter_value); }
-	auto distance_to(zip_iterator other) const { return std::get<0>(iters) - std::get<0>(other.iters); }
-	bool equal(zip_iterator other) const { return iters == other.iters; }
+	IterTuple iters_;
+	zip_iterator(IterTuple iters) : iters_(iters) {}
+	void increment() { details::for_each(iters_, [](auto& iter) { ++iter; }); }
+	void advance(intptr_t val) { for_each(iters_, [val](auto& iter) { iter += val; }); }
+	void decrement() { details::for_each(iters_, [](auto& iter) { --iter; }); }
+	auto dereference() const { return details::transform_each(iters_, details::get_iter_value); }
+	auto distance_to(zip_iterator other) const { return std::get<0>(iters_) - std::get<0>(other.iters_); }
+	bool equal(zip_iterator other) const { return iters_ == other.iters_; }
 };
 
 template<typename ...R> auto zip(R&&... _ranges)
 {
 	auto iterTup = std::make_tuple(std::begin(std::forward<R>(_ranges))...);
 	auto endTup = std::make_tuple(std::end(std::forward<R>(_ranges))...);
-	return iterator_range<zip_iterator<decltype(iterTup)>>{ { {}, iterTup }, { {}, endTup }};
+	return iterator_range<zip_iterator<decltype(iterTup)>>{ { iterTup }, { endTup }};
 }
 
 // ************************************ chunk *****************************************************
@@ -448,20 +460,26 @@ template<typename ...R> auto zip(R&&... _ranges)
 template<typename R>
 struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_begin_type_t<R>>, std::forward_iterator_tag>
 {
-	range_begin_type_t<R> iter;
-	range_begin_type_t<R> iter2;
-	range_end_type_t<R> endIter;
-	size_t step = 0;
+	range_begin_type_t<R> iter_;
+	range_begin_type_t<R> iter2_;
+	range_end_type_t<R> end_;
+	size_t step_;
+	
+	chunk_iterator(
+		range_begin_type_t<R> iter, range_begin_type_t<R> iter2, range_end_type_t<R> end, size_t step = 0)
+		: iter_(iter), iter2_(iter2), end_(end), step_(step) 
+	{
+	}
 
 	void increment()
 	{
-		iter = iter2;
-		for (size_t i = 0; i != step and iter2 != endIter; ++i)
-			++iter2;
+		iter_ = iter2_;
+		for (size_t i = 0; i != step_ and iter2_ != end_; ++i)
+			++iter2_;
 	}
 
-	auto dereference() const { return make_iterator_range(iter, iter2); }
-	bool equal(chunk_iterator other) const { return iter == other.iter; }
+	auto dereference() const { return make_iterator_range(iter_, iter2_); }
+	bool equal(chunk_iterator other) const { return iter_ == other.iter_; }
 };
 
 template<typename R> auto chunk(R&& range, size_t step)
@@ -469,9 +487,9 @@ template<typename R> auto chunk(R&& range, size_t step)
 	auto iter = std::begin(range);
 	auto endIter = std::end(range);
 	using iterator = chunk_iterator<std::remove_reference_t<R>>;
-	iterator begin = { {}, iter, iter, endIter, step };
+	iterator begin = { iter, iter, endIter, step };
 	begin.increment();
-	return iterator_range<iterator>{ { begin }, { {}, endIter, endIter, endIter, step }};
+	return iterator_range<iterator>{ { begin }, { endIter, endIter, endIter, step }};
 }
 
 auto chunk(size_t step)
@@ -484,29 +502,34 @@ auto chunk(size_t step)
 template<typename R, typename F>
 struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t<R>, range_iter_categ_t<R>>
 {
-	range_begin_type_t<R> beginIter;
-	range_begin_type_t<R> iter;
-	range_end_type_t<R> endIter;
-	F func;
+	range_begin_type_t<R> begin_;
+	range_begin_type_t<R> iter_;
+	range_end_type_t<R> end_;
+	F func_;
+	
+	filter_iterator(range_begin_type_t<R> begin, range_begin_type_t<R> iter, range_end_type_t<R> end, F func)
+		: begin_(begin), iter_(iter), end_(end), func_(func)
+	{
+	}
 
 	void increment()
 	{
 		do
 		{
-			++iter;
-		} while (not func(*iter) && iter != endIter);
+			++iter_;
+		} while (not func_(*iter_) && iter_ != end_);
 	}
 
 	void decrement()
 	{
 		do
 		{
-			--iter;
-		} while (not func(*iter) && iter != beginIter);
+			--iter_;
+		} while (not func_(*iter_) && iter_ != begin_);
 	}
 
-	auto dereference() const { return *iter; }
-	bool equal(filter_iterator other) const { return iter == other.iter; }
+	auto dereference() const { return *iter_; }
+	bool equal(filter_iterator other) const { return iter_ == other.iter_; }
 };
 
 template<typename R, typename F> auto filter(R&& range, F&& func)
@@ -514,8 +537,8 @@ template<typename R, typename F> auto filter(R&& range, F&& func)
 	auto iter = std::begin(range);
 	auto endIter = std::end(range);
 	return iterator_range<filter_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>>{
-		{ {}, iter, iter, endIter, func },
-		{ {}, iter, endIter, endIter, func }
+		{ iter, iter, endIter, func },
+		{ iter, endIter, endIter, func }
 	};
 }
 
@@ -529,39 +552,44 @@ template<typename F> auto filter(F&& func)
 template<typename IterPair, typename V>
 struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forward_iterator_tag>
 {
-	IterPair iter;
-	IterPair endIter;
-	size_t rangeIndex;
+	IterPair iter_;
+	IterPair end_;
+	size_t range_index_;
+	
+	join_iterator(IterPair iter, IterPair end, size_t range_index) 
+		: iter_(iter), end_(end), range_index_(range_index) 
+	{
+	}
 
 	void increment()
 	{
-		if (rangeIndex == 0)
+		if (range_index_ == 0)
 		{
-			auto& i = std::get<0>(iter);
+			auto& i = std::get<0>(iter_);
 			++i;
-			if (i == std::get<0>(endIter))
-				rangeIndex = 1;
+			if (i == std::get<0>(end_))
+				range_index_ = 1;
 		}
 		else
-			++std::get<1>(iter);
+			++std::get<1>(iter_);
 	}
 
 	auto dereference() const 
 	{ 
-		if (rangeIndex == 0)
-			return *std::get<0>(iter);
+		if (range_index_ == 0)
+			return *std::get<0>(iter_);
 		else
-			return *std::get<1>(iter);
+			return *std::get<1>(iter_);
 	}
 
 	bool equal(join_iterator other) const
 	{ 
-		if (rangeIndex != other.rangeIndex)
+		if (range_index_ != other.range_index_)
 			return false;
-		if (rangeIndex == 0)
-			return std::get<0>(iter) == std::get<0>(other.iter);
+		if (range_index_ == 0)
+			return std::get<0>(iter_) == std::get<0>(other.iter_);
 		else
-			return std::get<1>(iter) == std::get<1>(other.iter);
+			return std::get<1>(iter_) == std::get<1>(other.iter_);
 	}
 };
 
@@ -572,8 +600,8 @@ template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 		std::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
 		range_ref_type_t<R1>>>
 	{
-		{ {}, std::make_pair(std::begin(range1), std::begin(range2)), std::make_pair(std::end(range1), std::end(range2)), 0 },
-		{ {}, std::make_pair(std::end(range1), std::end(range2)), std::make_pair(std::end(range1), std::end(range2)), 1 },
+		{ std::make_pair(std::begin(range1), std::begin(range2)), std::make_pair(std::end(range1), std::end(range2)), 0 },
+		{ std::make_pair(std::end(range1), std::end(range2)), std::make_pair(std::end(range1), std::end(range2)), 1 },
 	};
 }
 
@@ -743,8 +771,8 @@ template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
 	auto const end1 = std::end(range1);
 	auto const end2 = std::end(range2);
-	auto[iter1, iter2] = std::mismatch(std::begin(range1), end1, std::begin(range2), end2);
-	return std::make_pair(make_iterator_range(iter1, end1), make_iterator_range(iter2, end2));
+	auto i1_i2 = std::mismatch(std::begin(range1), end1, std::begin(range2), end2);
+	return std::make_pair(make_iterator_range(std::get<0>(i1_i2), end1), make_iterator_range(std::get<1>(i1_i2), end2));
 }
 
 // ****************************************** find ************************************************
