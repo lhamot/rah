@@ -17,7 +17,7 @@ std::cout << std::count(range.begin(), range.end(), 2);
 // Using range algorithm
 std::cout << rah::count(range, 2);
 ```
-- In `rah::lazy` are functions to create lazy ranges, working only when iterate, allowing some memory economy and simplifying the code, especially when wanting to chain algorithms.
+- In `rah::view` are functions to create ranges, working only when iterate, saving some memory and simplifying the code, especially when wanting to chain algorithms.
 ```cpp
 // Usual code with STL
 std::vector<int> ints;
@@ -31,20 +31,20 @@ for(int i: values)
     std::cout << i << std::endl;
 // Usinging range algorithms
 auto values = 
-    rah::lazy::transform(
-        rah::lazy::filter(
-            rah::lazy::iota(0, 10), 
+    rah::view::transform(
+        rah::view::filter(
+            rah::view::iota(0, 10), 
             [](int a) {return a % 2 == 0;})
         [](int a) {return a * 2;});
 for(int i: values) // The job in done here, without memory allocation
     std::cout << i << std::endl;
 ```
-- Most of lazy and eager algorithms have a *pipeable* version, making theme easier to write, and read.
+- Most of views have a *pipeable* version, making theme easier to write, and read.
 ```cpp
 // Using pipeable range algorithms
-auto values = rah::lazy::iota(0, 10)
-    | rah::lazy::filter([](int a) {return a % 2 == 0;}) 
-    | rah::lazy::transform([](int a) {return a * 2;});
+auto values = rah::view::iota(0, 10)
+    | rah::view::filter([](int a) {return a % 2 == 0;}) 
+    | rah::view::transform([](int a) {return a * 2;});
 for(int i: values) // The job in done here, without memory allocation
     std::cout << i << std::endl;
 ``` 
@@ -65,5 +65,5 @@ rah is under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt)
 ## How to use?
 - Just include the `rah.hpp` file in your project
 - range version of STL algorithms are in the **rah** namespace
-- lazy algorithms are in **rah::lazy** namespace
+- Views are in **rah::view** namespace
 

@@ -195,7 +195,7 @@ struct iterator_facade<I, R, std::random_access_iterator_tag> : iterator_facade<
 	auto operator[](intptr_t increment) const { return *(self() + increment); }
 };
 
-namespace lazy
+namespace view
 {
 
 // ********************************** iota ********************************************************
@@ -654,7 +654,7 @@ auto map_key()
 	return make_pipeable([=](auto&& range) {return map_key(range); });
 }
 
-} // namespace lazy
+} // namespace view
 
 // ****************************************** transform *******************************************
 

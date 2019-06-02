@@ -56,7 +56,7 @@ auto print_elt = [](auto&& elt)
 template<typename... Args>
 std::ostream& operator << (std::ostream& os, std::tuple<Args...> tup)
 {
-	::rah::lazy::details::for_each(tup, print_elt);
+	::rah::view::details::for_each(tup, print_elt);
 	return os;
 }
 
@@ -74,7 +74,7 @@ struct WhatIsIt;
 int main()
 {
 	using namespace rah;
-	using namespace rah::lazy;
+	using namespace rah::view;
 	using namespace std;
 
 	struct Elt
@@ -86,7 +86,7 @@ int main()
 		}
 	};
 
-	// ****************************** lazy algos **************************************************
+	// *********************************** views **************************************************
 
 	// Test iota
 	EQUAL_RANGE(iota(0, 4), il<int>({ 0, 1, 2, 3 }));
