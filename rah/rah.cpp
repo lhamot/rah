@@ -71,6 +71,8 @@ namespace test
 template<typename T>
 struct WhatIsIt;
 
+// void doc_code();
+
 int main()
 {
 	using namespace rah;
@@ -89,8 +91,14 @@ int main()
 	// *********************************** views **************************************************
 
 	// Test iota
-	EQUAL_RANGE(iota(0, 4), il<int>({ 0, 1, 2, 3 }));
-	EQUAL_RANGE(iota(10, 20, 2), il<int>({ 10, 12, 14, 16, 18 }));
+	EQUAL_RANGE(
+		iota(0, 4), 
+		il<int>({ 0, 1, 2, 3 })
+	);
+	EQUAL_RANGE(
+		iota(10, 20, 2), 
+		il<int>({ 10, 12, 14, 16, 18 })
+	);
 
 	// Test generate
 	int y = 1;
@@ -263,7 +271,7 @@ int main()
 
 	{
 		std::vector<Elt> vec = { {0}, { 1 }, { 2 }, { 3 }, { 4 } };
-		auto r = vec | all();
+		auto& r = vec;
 		for (auto iter = std::begin(r), end = std::end(r); iter != end; ++iter)
 		{
 			iter->member = 42; // Check for mutability
@@ -373,6 +381,8 @@ int main()
 	);
 
 	std::cout << "ALL TEST OK" << std::endl;
+
+	// doc_code();
 
 	return 0;
 }

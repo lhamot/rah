@@ -168,6 +168,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="doc.cpp" />
     <ClCompile Include="rah.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -426,14 +426,21 @@ auto transform_each(const std::tuple<Args...>& t, F&& f) {
 		t, std::forward<F>(f), std::make_index_sequence<sizeof...(Args)>{});
 }
 
-auto get_iter_value = [](auto&& iter) { return *iter; };
+struct get_iter_value
+{
+	template<typename I>
+	auto operator()(I&& iter)
+	{
+		return *std::forward<I>(iter);
+	};
+};
 
 } // namespace details
 
 template<typename IterTuple>
 struct zip_iterator : iterator_facade<
 	zip_iterator<IterTuple>,
-	decltype(transform_each(fake<IterTuple>(), details::get_iter_value)),
+	decltype(transform_each(fake<IterTuple>(), details::get_iter_value())),
 	std::bidirectional_iterator_tag
 >
 {
@@ -442,7 +449,7 @@ struct zip_iterator : iterator_facade<
 	void increment() { details::for_each(iters_, [](auto& iter) { ++iter; }); }
 	void advance(intptr_t val) { for_each(iters_, [val](auto& iter) { iter += val; }); }
 	void decrement() { details::for_each(iters_, [](auto& iter) { --iter; }); }
-	auto dereference() const { return details::transform_each(iters_, details::get_iter_value); }
+	auto dereference() const { return details::transform_each(iters_, details::get_iter_value()); }
 	auto distance_to(zip_iterator other) const { return std::get<0>(iters_) - std::get<0>(other.iters_); }
 	bool equal(zip_iterator other) const { return iters_ == other.iters_; }
 };

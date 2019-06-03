@@ -18,6 +18,9 @@
     <ClCompile Include="rah.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="doc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rah.hpp">
