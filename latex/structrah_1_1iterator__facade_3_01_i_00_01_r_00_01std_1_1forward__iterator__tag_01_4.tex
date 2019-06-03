@@ -1,0 +1,166 @@
+\hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4}{}\section{rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$ Class Template Reference}
+\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4}\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+
+
+Inerit to make a forward\+\_\+iterator.  
+
+
+
+
+{\ttfamily \#include $<$rah.\+hpp$>$}
+
+Inheritance diagram for rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type}{pointer\+\_\+type}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type_3_01_t_01_6_01_4}{pointer\+\_\+type$<$ T \& $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3ed65491660beef4bd9488a3f511c934}{iterator\+\_\+category}} = std\+::forward\+\_\+iterator\+\_\+tag
+\item 
+using \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a95da65d8da6515cbd927873f565a9cdc}{value\+\_\+type}} = std\+::remove\+\_\+reference\+\_\+t$<$ R $>$
+\item 
+using \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a9f8ec957ea36b46eae3ca8bb89b6cf1c}{difference\+\_\+type}} = intptr\+\_\+t
+\item 
+typedef pointer\+\_\+type$<$ R $>$\+::type \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae7253d3dac99a9b2bead5b6ea82ff2b1}{pointer}}
+\item 
+using \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a19aa13e142ee687a3f9dd672d68a25c7}{reference}} = R
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+I \& \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a251df6fed6851bf7c6e5a37943d2bbdb}{self}} ()
+\item 
+I const  \& \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ab4e8c072a2c2058660886dba347b0e78}{self}} () const
+\item 
+auto \& \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a12486875e5b6fb93363408b9680dba64}{operator++}} ()
+\item 
+auto \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_abd064784607e07a4fd444ce8ceb224ab}{operator $\ast$}} () const
+\item 
+auto \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a1fedf1529cf892522c1a73169b10936a}{operator-\/$>$}} () const
+\item 
+bool \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae6487405e0a877ee7c9e9fb6a27d7158}{operator!=}} (I other) const
+\item 
+bool \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3800bc53c7e3d504836bd9b125ae4600}{operator==}} (I other) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename I, typename R$>$\newline
+class rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$}
+
+Inerit to make a forward\+\_\+iterator. 
+
+Require to implement 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} increment();}
+\DoxyCodeLine{\mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a19aa13e142ee687a3f9dd672d68a25c7}{reference}} dereference() \textcolor{keyword}{const};}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{equal}}(this\_type other) \textcolor{keyword}{const};}
+\end{DoxyCode}
+ \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{structrah_1_1view_1_1gererate__iterator}{rah\+::view\+::gererate\+\_\+iterator}} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a9f8ec957ea36b46eae3ca8bb89b6cf1c}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a9f8ec957ea36b46eae3ca8bb89b6cf1c}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!difference\_type@{difference\_type}}
+\index{difference\_type@{difference\_type}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{difference\_type}{difference\_type}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+using \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::\mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a9f8ec957ea36b46eae3ca8bb89b6cf1c}{difference\+\_\+type}} =  intptr\+\_\+t}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3ed65491660beef4bd9488a3f511c934}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3ed65491660beef4bd9488a3f511c934}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!iterator\_category@{iterator\_category}}
+\index{iterator\_category@{iterator\_category}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{iterator\_category}{iterator\_category}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+using \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::\mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3ed65491660beef4bd9488a3f511c934}{iterator\+\_\+category}} =  std\+::forward\+\_\+iterator\+\_\+tag}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae7253d3dac99a9b2bead5b6ea82ff2b1}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae7253d3dac99a9b2bead5b6ea82ff2b1}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!pointer@{pointer}}
+\index{pointer@{pointer}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+typedef pointer\+\_\+type$<$R$>$\+::type \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::\mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae7253d3dac99a9b2bead5b6ea82ff2b1}{pointer}}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a19aa13e142ee687a3f9dd672d68a25c7}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a19aa13e142ee687a3f9dd672d68a25c7}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!reference@{reference}}
+\index{reference@{reference}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+using \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::\mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a19aa13e142ee687a3f9dd672d68a25c7}{reference}} =  R}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a95da65d8da6515cbd927873f565a9cdc}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a95da65d8da6515cbd927873f565a9cdc}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+using \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::\mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a95da65d8da6515cbd927873f565a9cdc}{value\+\_\+type}} =  std\+::remove\+\_\+reference\+\_\+t$<$R$>$}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_abd064784607e07a4fd444ce8ceb224ab}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_abd064784607e07a4fd444ce8ceb224ab}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!operator $\ast$@{operator $\ast$}}
+\index{operator $\ast$@{operator $\ast$}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{operator $\ast$()}{operator *()}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+auto \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::operator $\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae6487405e0a877ee7c9e9fb6a27d7158}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ae6487405e0a877ee7c9e9fb6a27d7158}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+bool \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::operator!= (\begin{DoxyParamCaption}\item[{I}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a12486875e5b6fb93363408b9680dba64}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a12486875e5b6fb93363408b9680dba64}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+auto\& \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a1fedf1529cf892522c1a73169b10936a}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a1fedf1529cf892522c1a73169b10936a}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+auto \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3800bc53c7e3d504836bd9b125ae4600}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a3800bc53c7e3d504836bd9b125ae4600}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+bool \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::operator== (\begin{DoxyParamCaption}\item[{I}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a251df6fed6851bf7c6e5a37943d2bbdb}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_a251df6fed6851bf7c6e5a37943d2bbdb}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!self@{self}}
+\index{self@{self}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{self()}{self()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+I\& \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::self (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ab4e8c072a2c2058660886dba347b0e78}\label{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_ab4e8c072a2c2058660886dba347b0e78}} 
+\index{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}!self@{self}}
+\index{self@{self}!rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$@{rah::iterator\_facade$<$ I, R, std::forward\_iterator\_tag $>$}}
+\subsubsection{\texorpdfstring{self()}{self()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename I , typename R $>$ \\
+I const\& \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::self (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+rah/\mbox{\hyperlink{rah_8hpp}{rah.\+hpp}}\end{DoxyCompactItemize}

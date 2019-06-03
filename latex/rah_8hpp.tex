@@ -1,0 +1,220 @@
+\hypertarget{rah_8hpp}{}\section{rah/rah.hpp File Reference}
+\label{rah_8hpp}\index{rah/rah.hpp@{rah/rah.hpp}}
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$iterator$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$numeric$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range$<$ I $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1pipeable}{rah\+::pipeable$<$ Make\+Range $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade$<$ I, R, C $>$}}
+\item 
+class \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$}}
+\begin{DoxyCompactList}\small\item\em Inerit to make a forward\+\_\+iterator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::pointer\+\_\+type$<$ Reference $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type_1_1proxy}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::pointer\+\_\+type$<$ Reference $>$\+::proxy}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type_3_01_t_01_6_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::pointer\+\_\+type$<$ T \& $>$}}
+\item 
+class \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::bidirectional\+\_\+iterator\+\_\+tag $>$}}
+\begin{DoxyCompactList}\small\item\em Inerit to make a bidirectional iterator. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1random__access__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::random\+\_\+access\+\_\+iterator\+\_\+tag $>$}}
+\begin{DoxyCompactList}\small\item\em Inerit to make a random access iterator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1gererate__iterator}{rah\+::view\+::gererate\+\_\+iterator$<$ F $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator$<$ R, F $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator$<$ R $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1retro__iterator}{rah\+::view\+::retro\+\_\+iterator$<$ R $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1details_1_1get__iter__value}{rah\+::view\+::details\+::get\+\_\+iter\+\_\+value}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1zip__iterator}{rah\+::view\+::zip\+\_\+iterator$<$ Iter\+Tuple $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1chunk__iterator}{rah\+::view\+::chunk\+\_\+iterator$<$ R $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{rah\+::view\+::filter\+\_\+iterator$<$ R, F $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator$<$ Iter\+Pair, V $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacerah}{rah}}
+\item 
+ \mbox{\hyperlink{namespacerah_1_1view}{rah\+::view}}
+\item 
+ \mbox{\hyperlink{namespacerah_1_1view_1_1details}{rah\+::view\+::details}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rah_8hpp_ad3a388e89994ad75cbafb263072ddfbc}{R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+CE}}~rah
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_afa7f59d1f37c7b9d9caed37551be9eaa}{rah\+::range\+\_\+begin\+\_\+type\+\_\+t}} = decltype(std\+::begin(fake$<$ T $>$()))
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_a3042a09fc211e86eea6771d01375d263}{rah\+::range\+\_\+end\+\_\+type\+\_\+t}} = decltype(std\+::end(fake$<$ T $>$()))
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_a1fac89acf62e53f57898978ab8917f26}{rah\+::range\+\_\+ref\+\_\+type\+\_\+t}} = decltype($\ast$std\+::begin(fake$<$ T $>$()))
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_a4b32e39fb106af7036b20a39c4f024c1}{rah\+::range\+\_\+value\+\_\+type\+\_\+t}} = std\+::remove\+\_\+reference\+\_\+t$<$ range\+\_\+ref\+\_\+type\+\_\+t$<$ T $>$ $>$
+\item 
+{\footnotesize template$<$typename R $>$ }\\using \mbox{\hyperlink{namespacerah_aff9b9a5748e293f6a1726308c1ac1a01}{rah\+::range\+\_\+iter\+\_\+categ\+\_\+t}} = typename std\+::iterator\+\_\+traits$<$ range\+\_\+begin\+\_\+type\+\_\+t$<$ R $>$ $>$\+::iterator\+\_\+category
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \& \mbox{\hyperlink{namespacerah_a11785bbdf970efa1bc57fc14993b77bf}{rah\+::fake}} ()
+\item 
+{\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_a0a3dd43bb465c99137bfdebb2292b102}{rah\+::make\+\_\+iterator\+\_\+range}} (I b, I e)
+\item 
+{\footnotesize template$<$typename I $>$ }\\I \mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{rah\+::begin}} (iterator\+\_\+range$<$ I $>$ \&r)
+\item 
+{\footnotesize template$<$typename I $>$ }\\I \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{rah\+::end}} (iterator\+\_\+range$<$ I $>$ \&r)
+\item 
+{\footnotesize template$<$typename I $>$ }\\I \mbox{\hyperlink{namespacerah_a14e69321e6772651b349cb31467ea3a2}{rah\+::begin}} (iterator\+\_\+range$<$ I $>$ const \&r)
+\item 
+{\footnotesize template$<$typename I $>$ }\\I \mbox{\hyperlink{namespacerah_a6b31fe80bf81abf3149df010cb265e20}{rah\+::end}} (iterator\+\_\+range$<$ I $>$ const \&r)
+\item 
+{\footnotesize template$<$typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah\+::make\+\_\+pipeable}} (Make\+Range \&\&make\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Call to create a \char`\"{}pipeable\char`\"{} function (U\+F\+CS style in c++) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a5c6923b0ef49c831571590f953253ff9}{rah\+::operator$\vert$}} (R \&\&range, pipeable$<$ Make\+Range $>$ const \&adapter)
+\item 
+{\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah\+::view\+::iota}} (T b, T e, T step=1)
+\begin{DoxyCompactList}\small\item\em Generate a range of sequentially increasing integers. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah\+::view\+::generate}} (F \&\&func)
+\begin{DoxyCompactList}\small\item\em Create an infinite range, repetitively calling func. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}{rah\+::view\+::generate\+\_\+n}} (F \&\&func, size\+\_\+t \mbox{\hyperlink{doc_8cpp_af1d2c80bfb0c6ddfcde8347d466a366b}{count}})
+\begin{DoxyCompactList}\small\item\em Create a range of N elemnts, repetitively calling func. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a08f246d1e3e728738c48741274f5e9d7}{rah\+::view\+::all}} (R \&\&range)
+\begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}{rah\+::view\+::all}} ()
+\begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}} (R \&\&range, F \&\&func)
+\begin{DoxyCompactList}\small\item\em Create a range applying a transformation to each element of the input range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}{rah\+::view\+::transform}} (F \&\&func)
+\begin{DoxyCompactList}\small\item\em Create a range applying a transformation to each element of the input range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ae4788f8f81a2830f39cf049cfa0faa87}{rah\+::view\+::slice}} (R \&\&range, size\+\_\+t begin, size\+\_\+t end)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a5de38bdaa214caef589b2adcdc59dd0b}{rah\+::view\+::slice}} (size\+\_\+t begin, size\+\_\+t end)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a112a1a8d31435c1070c4cd98cc02d96a}{rah\+::view\+::stride}} (R \&\&range, size\+\_\+t step)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a6b2ab3621be4004c35d77f06165fce78}{rah\+::view\+::stride}} (size\+\_\+t step)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{rah\+::view\+::retro}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a6c6543c61f1fb119394952a72c564753}{rah\+::view\+::retro}} ()
+\item 
+{\footnotesize template$<$typename Tuple , typename F , std\+::size\+\_\+t ... Indices$>$ }\\void \mbox{\hyperlink{namespacerah_1_1view_1_1details_aaa1e7ec8fee6c6b2109932e61ff87312}{rah\+::view\+::details\+::for\+\_\+each\+\_\+impl}} (Tuple \&\&tuple, F \&\&f, std\+::index\+\_\+sequence$<$ Indices... $>$)
+\item 
+{\footnotesize template$<$typename Tuple , typename F $>$ }\\void \mbox{\hyperlink{namespacerah_1_1view_1_1details_a377847364cb1497602498863a9255b2c}{rah\+::view\+::details\+::for\+\_\+each}} (Tuple \&\&tuple, F \&\&f)
+\item 
+{\footnotesize template$<$class F , typename... Args, size\+\_\+t... Is$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_1_1details_aa19b6b37a888a1c2a04e27766baa84cc}{rah\+::view\+::details\+::transform\+\_\+each\+\_\+impl}} (const std\+::tuple$<$ Args... $>$ \&t, F \&\&f, std\+::index\+\_\+sequence$<$ Is... $>$)
+\item 
+{\footnotesize template$<$class F , typename... Args$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_1_1details_a805ec7d23709c75de8735c3735d05148}{rah\+::view\+::details\+::transform\+\_\+each}} (const std\+::tuple$<$ Args... $>$ \&t, F \&\&f)
+\item 
+{\footnotesize template$<$typename ... R$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}{rah\+::view\+::zip}} (R \&\&... \+\_\+ranges)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}{rah\+::view\+::chunk}} (R \&\&range, size\+\_\+t step)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_ab29a0945581f92240cbcc9f81811c08b}{rah\+::view\+::chunk}} (size\+\_\+t step)
+\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}{rah\+::view\+::filter}} (R \&\&range, F \&\&func)
+\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a315ba2143c833b24d05481c68b6cf2da}{rah\+::view\+::filter}} (F \&\&func)
+\item 
+{\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa09a3ac754f081d0e8194da7dad09837}{rah\+::view\+::join}} (R1 \&\&range1, R2 \&\&range2)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a36ca079794ef3ae1702d92bf4cfd6030}{rah\+::view\+::join}} (R \&\&right\+Range)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a420160b047554df1bf986946050238ed}{rah\+::view\+::enumerate}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_ac815f5494e5a7a182cafb70224b93a6a}{rah\+::view\+::enumerate}} ()
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a7896dcebf13a4294254ed87743ba3ad0}{rah\+::view\+::map\+\_\+value}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_ad11fcca5438e227541594a917a85f77c}{rah\+::view\+::map\+\_\+value}} ()
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a273917511589d75b32d28b56b7de2655}{rah\+::view\+::map\+\_\+key}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_aac8d9437b8c96e0e8e972c4c10d584e5}{rah\+::view\+::map\+\_\+key}} ()
+\item 
+{\footnotesize template$<$typename RI , typename RO , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a61ec1c71151c208959f760fd3f45b8da}{rah\+::transform}} (RI \&\&range\+In, RO \&\&range\+Out, F \&\&func)
+\item 
+{\footnotesize template$<$typename R\+I1 , typename R\+I2 , typename RO , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a0efb6fa5c863d9695709294fb2102e69}{rah\+::transform}} (R\+I1 \&\&range\+In1, R\+I2 \&\&range\+In2, RO \&\&range\+Out, F \&\&func)
+\item 
+{\footnotesize template$<$typename R , typename I , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a5d45fbb18316845980faf1d38a36f129}{rah\+::reduce}} (R \&\&range, I \&\&init, F \&\&func)
+\item 
+{\footnotesize template$<$typename I , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_aa96bdd99dc89f511ec1ff6fad050270d}{rah\+::reduce}} (I \&\&init, F \&\&func)
+\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_afc8271027c900700eb022746c8786b93}{rah\+::any\+\_\+of}} (R \&\&range, F \&\&func)
+\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_aa3f330b2354859d8a9e6df794a1e7a1a}{rah\+::any\+\_\+of}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a182308962c8123dcbe4e4665eaef105c}{rah\+::all\+\_\+of}} (R \&\&range, P \&\&pred)
+\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a4066165c960917a330beeed75a0f96e7}{rah\+::all\+\_\+of}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a792ab1d0886062eaf30de07cac4b6a5b}{rah\+::none\+\_\+of}} (R \&\&range, P \&\&pred)
+\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_aa05e58774ee8e9e05cd3e6ed2a2fa372}{rah\+::none\+\_\+of}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{rah\+::count}} (R \&\&range, V \&\&value)
+\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_ae8400202fc4005dbade0f479dd556ec3}{rah\+::count}} (V \&\&value)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a8e6a379c05d482a52137f5647783fe27}{rah\+::count\+\_\+if}} (R \&\&range, P \&\&pred)
+\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a9e22b56a1f28a353659fed572f33f5a9}{rah\+::count\+\_\+if}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\void \mbox{\hyperlink{namespacerah_afe6ed477fd9ab2f873d76a4b50ffac39}{rah\+::for\+\_\+each}} (R \&\&range, F \&\&func)
+\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a76e2ce1a497aa3726cc9d99fb320ac67}{rah\+::for\+\_\+each}} (F \&\&func)
+\item 
+{\footnotesize template$<$typename C , typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a11fcae12055a2bcf5ac7c41e25e74a32}{rah\+::to\+\_\+container}} (R \&\&range)
+\item 
+{\footnotesize template$<$typename C $>$ }\\auto \mbox{\hyperlink{namespacerah_aac33763a1f49060e179c2c2053ec07a2}{rah\+::to\+\_\+container}} ()
+\item 
+{\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}{rah\+::mismatch}} (R1 \&\&range1, R2 \&\&range2)
+\item 
+{\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a7c7d4f08068e85923f475a069c3daeb7}{rah\+::find}} (R \&\&range, V \&\&value)
+\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a37f60e134164914703fdd0508f83ee11}{rah\+::find}} (V \&\&value)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_acbd71a185a2510e691dcd715a31edf53}{rah\+::find\+\_\+if}} (R \&\&range, P \&\&pred)
+\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a04200b08ecdef8daf99f04c58f29e459}{rah\+::find\+\_\+if}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_af758ef3c67d20ba6260319cb0e0171c5}{rah\+::find\+\_\+if\+\_\+not}} (R \&\&range, P \&\&pred)
+\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a406c37a2cf758e7329bfd696a6bf8f89}{rah\+::find\+\_\+if\+\_\+not}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a85af749badb4261aa3c97a1d98134493}{rah\+::size}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{rah\+::size}} ()
+\item 
+{\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah\+::equal}} (R1 \&\&range1, R2 \&\&range2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{rah_8hpp_ad3a388e89994ad75cbafb263072ddfbc}\label{rah_8hpp_ad3a388e89994ad75cbafb263072ddfbc}} 
+\index{rah.hpp@{rah.hpp}!RAH\_NAMESPACE@{RAH\_NAMESPACE}}
+\index{RAH\_NAMESPACE@{RAH\_NAMESPACE}!rah.hpp@{rah.hpp}}
+\subsubsection{\texorpdfstring{RAH\_NAMESPACE}{RAH\_NAMESPACE}}
+{\footnotesize\ttfamily \#define R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+CE~rah}
+

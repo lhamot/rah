@@ -1,0 +1,181 @@
+\hypertarget{rah_8cpp}{}\section{rah/rah.cpp File Reference}
+\label{rah_8cpp}\index{rah/rah.cpp@{rah/rah.cpp}}
+{\ttfamily \#include \char`\"{}rah.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$forward\+\_\+list$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_what_is_it}{What\+Is\+It$<$ T $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacetest}{test}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{C\+H\+E\+CK}}(C\+O\+N\+D\+I\+T\+I\+ON)
+\item 
+\#define \mbox{\hyperlink{rah_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}{E\+Q\+U\+A\+L\+\_\+\+R\+A\+N\+GE}}(R\+A\+N\+GE,  IL)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{rah_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} = std\+::initializer\+\_\+list$<$ T $>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename A , typename B , typename C , typename D $>$ }\\bool \mbox{\hyperlink{rah_8cpp_ab25e26d7469a6dcdb6ac799b640e352b}{operator==}} (std\+::tuple$<$ A, B $>$ a, std\+::pair$<$ D, C $>$ b)
+\item 
+{\footnotesize template$<$typename A , typename B , typename C , typename D $>$ }\\bool \mbox{\hyperlink{rah_8cpp_a3c9941c57e143022e1df4647dc88c00f}{operator==}} (std\+::pair$<$ A, B $>$ a, std\+::tuple$<$ D, C $>$ b)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\std\+::ostream \& \mbox{\hyperlink{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}{operator$<$$<$}} (std\+::ostream \&os, std\+::tuple$<$ Args... $>$ tup)
+\item 
+void \mbox{\hyperlink{rah_8cpp_a1e8aafa33599800a79b54889a5a35353}{doc\+\_\+code}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{[}make\+\_\+pipeable create\mbox{]} \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{rah_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{Pair\+Equal}} = \mbox{[}$\,$\mbox{]}(auto ab) \{return std\+::get$<$0$>$(ab) == std\+::get$<$1$>$(ab); \}
+\item 
+auto \mbox{\hyperlink{rah_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+elt}}
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \mbox{\hyperlink{namespacetest_a463d61708cea9480e55ee03141e2b951}{test\+::is\+\_\+reference\+\_\+v}} = std\+::is\+\_\+reference$<$T$>$\+::value
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \mbox{\hyperlink{namespacetest_a79cef7fd7cce0d4c7a466bcc871dca48}{test\+::is\+\_\+rvalue\+\_\+reference\+\_\+v}} = std\+::is\+\_\+rvalue\+\_\+reference$<$T$>$\+::value
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}\label{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}} 
+\index{rah.cpp@{rah.cpp}!CHECK@{CHECK}}
+\index{CHECK@{CHECK}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{CHECK}{CHECK}}
+{\footnotesize\ttfamily \#define C\+H\+E\+CK(\begin{DoxyParamCaption}\item[{}]{C\+O\+N\+D\+I\+T\+I\+ON }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"CHECK : "} << \#CONDITION << std::endl; \(\backslash\)}
+\DoxyCodeLine{if(CONDITION) \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
+\DoxyCodeLine{else \(\backslash\)}
+\DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{rah_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}\label{rah_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}} 
+\index{rah.cpp@{rah.cpp}!EQUAL\_RANGE@{EQUAL\_RANGE}}
+\index{EQUAL\_RANGE@{EQUAL\_RANGE}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{EQUAL\_RANGE}{EQUAL\_RANGE}}
+{\footnotesize\ttfamily \#define E\+Q\+U\+A\+L\+\_\+\+R\+A\+N\+GE(\begin{DoxyParamCaption}\item[{}]{R\+A\+N\+GE,  }\item[{}]{IL }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"CHECK : "} << \#RANGE << \textcolor{stringliteral}{" = "} << \#IL << std::endl; \(\backslash\)}
+\DoxyCodeLine{if(\mbox{\hyperlink{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}{zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_a182308962c8123dcbe4e4665eaef105c}{all\_of}}(\mbox{\hyperlink{rah_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
+\DoxyCodeLine{else \(\backslash\)}
+\DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
+
+\end{DoxyCode}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{rah_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}\label{rah_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}} 
+\index{rah.cpp@{rah.cpp}!il@{il}}
+\index{il@{il}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{il}{il}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{rah_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\+::initializer\+\_\+list$<$T$>$}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{rah_8cpp_a1e8aafa33599800a79b54889a5a35353}\label{rah_8cpp_a1e8aafa33599800a79b54889a5a35353}} 
+\index{rah.cpp@{rah.cpp}!doc\_code@{doc\_code}}
+\index{doc\_code@{doc\_code}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{doc\_code()}{doc\_code()}}
+{\footnotesize\ttfamily void doc\+\_\+code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{[}make\+\_\+pipeable create\mbox{]} 
+
+\mbox{[}make\+\_\+pipeable use\mbox{]}
+
+\mbox{[}make\+\_\+pipeable use\mbox{]}
+
+\mbox{[}iota\mbox{]}
+
+\mbox{[}iota\mbox{]}
+
+\mbox{[}generate\mbox{]}
+
+\mbox{[}generate\mbox{]}
+
+\mbox{[}generate\+\_\+n\mbox{]}
+
+\mbox{[}generate\+\_\+n\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}\mbox{]}
+
+\mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]} \mbox{\Hypertarget{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{rah.cpp@{rah.cpp}!main@{main}}
+\index{main@{main}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}\label{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}} 
+\index{rah.cpp@{rah.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::tuple$<$ Args... $>$}]{tup }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rah_8cpp_ab25e26d7469a6dcdb6ac799b640e352b}\label{rah_8cpp_ab25e26d7469a6dcdb6ac799b640e352b}} 
+\index{rah.cpp@{rah.cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename A , typename B , typename C , typename D $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{std\+::tuple$<$ A, B $>$}]{a,  }\item[{std\+::pair$<$ D, C $>$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rah_8cpp_a3c9941c57e143022e1df4647dc88c00f}\label{rah_8cpp_a3c9941c57e143022e1df4647dc88c00f}} 
+\index{rah.cpp@{rah.cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename A , typename B , typename C , typename D $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{std\+::pair$<$ A, B $>$}]{a,  }\item[{std\+::tuple$<$ D, C $>$}]{b }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{rah_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}\label{rah_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}} 
+\index{rah.cpp@{rah.cpp}!PairEqual@{PairEqual}}
+\index{PairEqual@{PairEqual}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{PairEqual}{PairEqual}}
+{\footnotesize\ttfamily auto Pair\+Equal = \mbox{[}$\,$\mbox{]}(auto ab) \{return std\+::get$<$0$>$(ab) == std\+::get$<$1$>$(ab); \}}
+
+\mbox{\Hypertarget{rah_8cpp_adf099222cf7b566c1025750fb0949c9a}\label{rah_8cpp_adf099222cf7b566c1025750fb0949c9a}} 
+\index{rah.cpp@{rah.cpp}!print\_elt@{print\_elt}}
+\index{print\_elt@{print\_elt}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{print\_elt}{print\_elt}}
+{\footnotesize\ttfamily auto print\+\_\+elt}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= [](\textcolor{keyword}{auto}\&\& elt)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    (std::cout << std::forward<decltype(elt)>(elt)) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
