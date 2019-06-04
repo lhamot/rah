@@ -137,6 +137,9 @@ Create a view where each element is a range of N elements of the input range.
 
 Create a view where each element is a range of N elements of the input range. 
 
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
@@ -145,9 +148,6 @@ Create a view where each element is a range of N elements of the input range.
 \DoxyCodeLine{            result.push\_back(std::vector<int>(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{std::begin}}(elts), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{std::end}}(elts)));}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
 \end{DoxyCodeInclude}
-\begin{DoxyRemark}{Remarks}
-pipeable syntax 
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}\label{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}} 
 \index{rah::view@{rah::view}!enumerate@{enumerate}}
 \index{enumerate@{enumerate}!rah::view@{rah::view}}
@@ -177,6 +177,9 @@ Pair each element of a range with its index.
 
 Pair each element of a range with its index. 
 
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> input\{ 4, 5, 6, 7 \};}
@@ -185,9 +188,6 @@ Pair each element of a range with its index.
 \DoxyCodeLine{            result.push\_back(i\_value);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
 \end{DoxyCodeInclude}
-\begin{DoxyRemark}{Remarks}
-pipeable syntax 
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}\label{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}} 
 \index{rah::view@{rah::view}!filter@{filter}}
 \index{filter@{filter}!rah::view@{rah::view}}
@@ -218,6 +218,9 @@ rah\+::view\+::filter (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyPa
 
 Create a view with only elements which are filtered. 
 
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
@@ -226,9 +229,6 @@ Create a view with only elements which are filtered.
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
 \end{DoxyCodeInclude}
-\begin{DoxyRemark}{Remarks}
-pipeable syntax 
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}\label{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}} 
 \index{rah::view@{rah::view}!generate@{generate}}
 \index{generate@{generate}!rah::view@{rah::view}}
@@ -316,6 +316,9 @@ rah\+::view\+::join (\begin{DoxyParamCaption}\item[{R \&\&}]{right\+Range }\end{
 
 Create a view that is the concatenation of 2 ranges. 
 
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> inputA\{ 0, 1, 2, 3 \};}
@@ -325,9 +328,6 @@ Create a view that is the concatenation of 2 ranges.
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6 \}));}
 \end{DoxyCodeInclude}
-\begin{DoxyRemark}{Remarks}
-pipeable syntax 
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}\label{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}} 
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
 \index{map\_key@{map\_key}!rah::view@{rah::view}}
@@ -357,6 +357,9 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 
 Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. 
 
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::map<int, double> input\{ \{1, 1.5\}, \{ 2, 2.5 \}, \{ 3, 3.5 \}, \{ 4, 4.5 \} \};}
@@ -365,9 +368,6 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \DoxyCodeLine{            result.push\_back(key);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
 \end{DoxyCodeInclude}
-\begin{DoxyRemark}{Remarks}
-pipeable syntax 
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}\label{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}} 
 \index{rah::view@{rah::view}!map\_value@{map\_value}}
 \index{map\_value@{map\_value}!rah::view@{rah::view}}
@@ -397,6 +397,9 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 
 Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the first element of the pair. 
 
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::map<int, double> input\{ \{1, 1.5\}, \{ 2, 2.5 \}, \{ 3, 3.5 \}, \{ 4, 4.5 \} \};}
@@ -405,9 +408,6 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \DoxyCodeLine{            result.push\_back(value);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
 \end{DoxyCodeInclude}
-\begin{DoxyRemark}{Remarks}
-pipeable syntax 
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}\label{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}} 
 \index{rah::view@{rah::view}!retro@{retro}}
 \index{retro@{retro}!rah::view@{rah::view}}
@@ -438,7 +438,9 @@ Create a view that traverses the source range in reverse order.
 Create a view that traverses the source range in reverse order. 
 
 \begin{DoxyRemark}{Remarks}
-pipeable syntax 
+pipeable syntax
+\end{DoxyRemark}
+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> result;}
@@ -446,8 +448,6 @@ pipeable syntax
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
 \end{DoxyCodeInclude}
-
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a0f7381d90a8dce8c910b023a8b382974}\label{namespacerah_1_1view_a0f7381d90a8dce8c910b023a8b382974}} 
 \index{rah::view@{rah::view}!slice@{slice}}
 \index{slice@{slice}!rah::view@{rah::view}}
@@ -478,7 +478,9 @@ Create a view that is a sub-\/range of a range.
 Create a view that is a sub-\/range of a range. 
 
 \begin{DoxyRemark}{Remarks}
-pipeable syntax 
+pipeable syntax
+\end{DoxyRemark}
+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3, 4, 5, 6, 7 \};}
 \DoxyCodeLine{        std::vector<int> result;}
@@ -486,8 +488,6 @@ pipeable syntax
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
-
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}\label{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}} 
 \index{rah::view@{rah::view}!stride@{stride}}
 \index{stride@{stride}!rah::view@{rah::view}}
@@ -518,7 +518,9 @@ Create a view consisting of every Nth element, starting with the first.
 Create a view consisting of every Nth element, starting with the first. 
 
 \begin{DoxyRemark}{Remarks}
-pipeable syntax 
+pipeable syntax
+\end{DoxyRemark}
+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3, 4, 5, 6, 7 \};}
 \DoxyCodeLine{        std::vector<int> result;}
@@ -526,8 +528,6 @@ pipeable syntax
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
-
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}\label{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}} 
 \index{rah::view@{rah::view}!transform@{transform}}
 \index{transform@{transform}!rah::view@{rah::view}}
@@ -559,7 +559,9 @@ rah\+::view\+::transform (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{Dox
 Create a view applying a transformation to each element of the input range. 
 
 \begin{DoxyRemark}{Remarks}
-pipeable syntax 
+pipeable syntax
+\end{DoxyRemark}
+
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> result;}
@@ -567,8 +569,6 @@ pipeable syntax
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{rah_8cpp_ad34faf8df462d924ccc1bdf875e1344b}{CHECK}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
-
-\end{DoxyRemark}
 \mbox{\Hypertarget{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}\label{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}} 
 \index{rah::view@{rah::view}!zip@{zip}}
 \index{zip@{zip}!rah::view@{rah::view}}

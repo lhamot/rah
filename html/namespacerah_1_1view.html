@@ -291,8 +291,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view where each element is a range of N elements of the input range. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec_01234{ 0, 1, 2, 3, 4 };</div><div class="line">        std::vector&lt;std::vector&lt;int&gt;&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> elts : vec_01234 | <a class="code" href="namespacerah_1_1view.html#a2859e5c6e21d7a2bf9e188539602daa7">rah::view::chunk</a>(2))</div><div class="line">            result.push_back(std::vector&lt;int&gt;(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">std::begin</a>(elts), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">std::end</a>(elts)));</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;std::vector&lt;int&gt;&gt;({ {0, 1}, { 2, 3 }, { 4 } }));</div></div><!-- fragment --><dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax </dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec_01234{ 0, 1, 2, 3, 4 };</div><div class="line">        std::vector&lt;std::vector&lt;int&gt;&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> elts : vec_01234 | <a class="code" href="namespacerah_1_1view.html#a2859e5c6e21d7a2bf9e188539602daa7">rah::view::chunk</a>(2))</div><div class="line">            result.push_back(std::vector&lt;int&gt;(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">std::begin</a>(elts), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">std::end</a>(elts)));</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;std::vector&lt;int&gt;&gt;({ {0, 1}, { 2, 3 }, { 4 } }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a3400a50c2b0e90330850128c2b7605d0"></a>
@@ -333,8 +333,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Pair each element of a range with its index. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; input{ 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;std::tuple&lt;size_t, int&gt;&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i_value : input | <a class="code" href="namespacerah_1_1view.html#a3400a50c2b0e90330850128c2b7605d0">rah::view::enumerate</a>())</div><div class="line">            result.push_back(i_value);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == (std::vector&lt;std::tuple&lt;size_t, int&gt;&gt;{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));</div></div><!-- fragment --><dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax </dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; input{ 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;std::tuple&lt;size_t, int&gt;&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i_value : input | <a class="code" href="namespacerah_1_1view.html#a3400a50c2b0e90330850128c2b7605d0">rah::view::enumerate</a>())</div><div class="line">            result.push_back(i_value);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == (std::vector&lt;std::tuple&lt;size_t, int&gt;&gt;{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a69010369aadc2a36ee9517195f783e9a"></a>
@@ -388,8 +388,8 @@ template&lt;typename F &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view with only elements which are filtered. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec_01234{ 0, 1, 2, 3, 4 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec_01234 | <a class="code" href="namespacerah_1_1view.html#a69010369aadc2a36ee9517195f783e9a">rah::view::filter</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a % 2 == 0; }))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 2, 4 }));</div></div><!-- fragment --><dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax </dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec_01234{ 0, 1, 2, 3, 4 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec_01234 | <a class="code" href="namespacerah_1_1view.html#a69010369aadc2a36ee9517195f783e9a">rah::view::filter</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a % 2 == 0; }))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 2, 4 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a05a3de164c8d1fde6ca761119d90a789"></a>
@@ -535,8 +535,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view that is the concatenation of 2 ranges. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; inputA{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; inputB{ 4, 5, 6 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : inputA | <a class="code" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">rah::view::join</a>(inputB))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3, 4, 5, 6 }));</div></div><!-- fragment --><dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax </dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; inputA{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; inputB{ 4, 5, 6 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : inputA | <a class="code" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">rah::view::join</a>(inputB))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3, 4, 5, 6 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a30b890451bfedbb15ed2114ed62beebc"></a>
@@ -577,8 +577,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Given a range of std::pair-std::tuple, create a view consisting of just the second element of the pair. </p>
-<div class="fragment"><div class="line">        std::map&lt;int, double&gt; input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> key : input | <a class="code" href="namespacerah_1_1view.html#a30b890451bfedbb15ed2114ed62beebc">rah::view::map_key</a>())</div><div class="line">            result.push_back(key);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == (std::vector&lt;int&gt;{ 1, 2, 3, 4 }));</div></div><!-- fragment --><dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax </dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::map&lt;int, double&gt; input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> key : input | <a class="code" href="namespacerah_1_1view.html#a30b890451bfedbb15ed2114ed62beebc">rah::view::map_key</a>())</div><div class="line">            result.push_back(key);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == (std::vector&lt;int&gt;{ 1, 2, 3, 4 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="abde9f999ff37f8b31f7a25598f2b4a25"></a>
@@ -619,8 +619,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Given a range of std::pair-std::tuple, create a view consisting of just the first element of the pair. </p>
-<div class="fragment"><div class="line">        std::map&lt;int, double&gt; input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };</div><div class="line">        std::vector&lt;double&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">double</span> value : input | <a class="code" href="namespacerah_1_1view.html#abde9f999ff37f8b31f7a25598f2b4a25">rah::view::map_value</a>())</div><div class="line">            result.push_back(value);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == (std::vector&lt;double&gt;{ 1.5, 2.5, 3.5, 4.5 }));</div></div><!-- fragment --><dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax </dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::map&lt;int, double&gt; input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };</div><div class="line">        std::vector&lt;double&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">double</span> value : input | <a class="code" href="namespacerah_1_1view.html#abde9f999ff37f8b31f7a25598f2b4a25">rah::view::map_value</a>())</div><div class="line">            result.push_back(value);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == (std::vector&lt;double&gt;{ 1.5, 2.5, 3.5, 4.5 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a9f47b2859b0a8a7e136f09d5c33b89e6"></a>
@@ -661,8 +661,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view that traverses the source range in reverse order. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">rah::view::retro</a>())</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 3, 2, 1, 0 }));</div></div><!-- fragment --></dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">rah::view::retro</a>())</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 3, 2, 1, 0 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a0f7381d90a8dce8c910b023a8b382974"></a>
@@ -730,8 +730,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view that is a sub-range of a range. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a0f7381d90a8dce8c910b023a8b382974">rah::view::slice</a>(2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment --></dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a0f7381d90a8dce8c910b023a8b382974">rah::view::slice</a>(2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="ad71e78df55f6f9416e2869a8c14f6779"></a>
@@ -783,8 +783,8 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view consisting of every Nth element, starting with the first. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#ad71e78df55f6f9416e2869a8c14f6779">rah::view::stride</a>(2))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 2, 4, 6 }));</div></div><!-- fragment --></dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#ad71e78df55f6f9416e2869a8c14f6779">rah::view::stride</a>(2))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 2, 4, 6 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a73d98aff6def51242231b9ec440dd026"></a>
@@ -838,8 +838,8 @@ template&lt;typename F &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view applying a transformation to each element of the input range. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026">rah::view::transform</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a * 2; }))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 2, 4, 6 }));</div></div><!-- fragment --></dd></dl>
-
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026">rah::view::transform</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a * 2; }))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b">CHECK</a>(result == std::vector&lt;int&gt;({ 0, 2, 4, 6 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a5b9cacbf101962d95221b591d7f11026"></a>
