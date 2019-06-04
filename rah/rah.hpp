@@ -530,7 +530,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 		do
 		{
 			++iter_;
-		} while (not func_(*iter_) && iter_ != end_);
+		} while (iter_ != end_ && not func_(*iter_));
 	}
 
 	void decrement()

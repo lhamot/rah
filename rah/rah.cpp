@@ -40,7 +40,7 @@ else \
 
 #define EQUAL_RANGE(RANGE, IL) \
 std::cout << "CHECK : " << #RANGE << " = " << #IL << std::endl; \
-if(zip(RANGE, IL) | all_of(PairEqual)) \
+if(rah::view::zip(RANGE, IL) | rah::all_of(PairEqual)) \
 	std::cout << "OK" << std::endl; \
 else \
 	{std::cout << "NOT OK" << std::endl; abort();}
@@ -71,13 +71,21 @@ namespace test
 template<typename T>
 struct WhatIsIt;
 
-// void doc_code();
+/// [make_pipeable create]
+auto test_count(int i)
+{
+	return rah::make_pipeable([=](auto&& range) { return std::count(std::begin(range), std::end(range), i); });
+}
+/// [make_pipeable create]
 
 int main()
 {
-	using namespace rah;
-	using namespace rah::view;
-	using namespace std;
+	{
+		/// [make_pipeable use]
+		std::vector<int> vec{ 0, 1, 2, 2, 3 };
+		assert((vec | test_count(2)) == 2);
+		/// [make_pipeable use]
+	}
 
 	struct Elt
 	{
@@ -90,100 +98,252 @@ int main()
 
 	// *********************************** views **************************************************
 
-	// Test iota
-	EQUAL_RANGE(
-		iota(0, 4), 
-		il<int>({ 0, 1, 2, 3 })
-	);
-	EQUAL_RANGE(
-		iota(10, 20, 2), 
-		il<int>({ 10, 12, 14, 16, 18 })
-	);
-
-	// Test generate
-	int y = 1;
-	EQUAL_RANGE(
-		generate([&y]() { auto prev = y; y *= 2; return prev; }) | slice(0, 4), 
-		(il<int>{1, 2, 4, 8})
-	);
-	y = 1;
-	EQUAL_RANGE(
-		generate_n([&y]() { auto prev = y; y *= 2; return prev; }, 4), 
-		(il<int>{1, 2, 4, 8})
-	);
-
-	// Test all
-	EQUAL_RANGE((il<int>{0, 1, 2, 3} | all()), (il<int>{ 0, 1, 2, 3 }));
-
-	// Test transform
-	EQUAL_RANGE(iota(0, 4) | transform([](auto a) {return a * 2; }), il<int>({ 0, 2, 4, 6 }));
-	EQUAL_RANGE(transform(iota(0, 4), [](auto a) {return a * 2; }), il<int>({ 0, 2, 4, 6 }));
-
-	// Test slice
-	EQUAL_RANGE(iota(0, 100) | slice(10, 15), il<int>({ 10, 11, 12, 13, 14 }));
-	EQUAL_RANGE(slice(iota(0, 100), 10, 15), il<int>({ 10, 11, 12, 13, 14 }));
-
-	// Test stride
-	EQUAL_RANGE(iota(0, 100) | stride(20), il<int>({ 0, 20, 40, 60, 80 }));
-	EQUAL_RANGE(stride(iota(0, 100), 20), il<int>({ 0, 20, 40, 60, 80 }));
-
-	// Test retro
-	EQUAL_RANGE(iota(0, 4) | retro(), il<int>({ 3, 2, 1, 0 }));
-	EQUAL_RANGE(retro(iota(0, 4)), il<int>({ 3, 2, 1, 0 }));
-
-	// Test zip
-	using tIDC = std::tuple<int, double, char>;
-	EQUAL_RANGE(
-		zip(il<int>{ 1, 2, 3, 4 }, il<double>{ 2.5, 4.5, 6.5, 8.5 }, il<char>{ 'a', 'b', 'c', 'd' }),
-		(il<tuple<int, double, char>>{ 
-			tIDC{ 1, 2.5, 'a' }, tIDC{ 2, 4.5, 'b' }, tIDC{ 3, 6.5, 'c' }, tIDC{ 4, 8.5, 'd' } })
-	);
-
-	// Test chuck
 	{
-		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
-		auto to_test = vec_01234 | chunk(2);
-		std::vector<vector<int>> ref({ {0, 1}, { 2, 3 }, { 4 } });
-		CHECK(size(to_test) == size(ref));
-		for (auto elt : zip(to_test, ref))
-		{
-			CHECK(size(std::get<0>(elt)) == size(std::get<1>(elt)));
-			CHECK(equal(std::get<0>(elt), std::get<1>(elt)));
-		}
+		/// [iota]
+		std::vector<int> result;
+		for (int i : rah::view::iota(10, 20, 2))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 10, 12, 14, 16, 18 }));
+		/// [iota]
 	}
 
-	// Test filter
-	EQUAL_RANGE(iota(0, 8) | filter([](auto a) {return a % 2 == 0; }), il<int>({ 0, 2, 4, 6 }));
-	EQUAL_RANGE(filter(iota(0, 8), [](auto a) {return a % 2 == 0; }), il<int>({ 0, 2, 4, 6 }));
+	{
+		/// [generate]
+		int y = 1;
+		auto gen = rah::view::generate([&y]() mutable { auto prev = y; y *= 2; return prev; });
+		std::vector<int> gen_copy;
+		std::copy_n(std::begin(gen), 4, std::back_inserter(gen_copy));
+		CHECK(gen_copy == std::vector<int>({ 1, 2, 4, 8 }));
+		/// [generate]
+	}
+	{
+		/// [generate_n]
+		std::vector<int> result;
+		int y = 1;
+		for (int i : rah::view::generate_n([&y]() mutable { auto prev = y; y *= 2; return prev; }, 4))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 1, 2, 4, 8 }));
+		/// [generate_n]
+	}
 
-	// Test join
-	EQUAL_RANGE((il<int>{ 0, 1, 2, 3 } | join(il<int>{ 4, 5, 6 })), (il<int>{0, 1, 2, 3, 4, 5, 6}));
-	EQUAL_RANGE((join(il<int>{ 0, 1, 2, 3 }, il<int>{ 4, 5, 6 })), (il<int>{0, 1, 2, 3, 4, 5, 6}));
+	// Test all
+	EQUAL_RANGE((il<int>{0, 1, 2, 3} | rah::view::all()), (il<int>{ 0, 1, 2, 3 }));
 
-	// Test enumerate
-	using tUII = std::tuple<unsigned int, int>;
-	EQUAL_RANGE(
-		iota(4, 8) | enumerate(), 
-		(il<tuple<unsigned int, int>>{ tUII{ 0, 4 }, tUII{ 1, 5 }, tUII{ 2, 6 }, tUII{ 3, 7 } })
-	);
-	EQUAL_RANGE(
-		enumerate(iota(4, 8)), 
-		(il<tuple<unsigned int, int>>{ tUII{ 0, 4 }, tUII{ 1, 5 }, tUII{ 2, 6 }, tUII{ 3, 7 } })
-	);
+	// Test transform
+	{
+		/// [rah::view::transform]
+		std::vector<int> vec{ 0, 1, 2, 3 };
+		std::vector<int> result;
+		for (int i : rah::view::transform(vec, [](auto a) {return a * 2; }))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		/// [rah::view::transform]
+	}
+	{
+		/// [rah::view::transform_pipeable]
+		std::vector<int> vec{ 0, 1, 2, 3 };
+		std::vector<int> result;
+		for (int i : vec | rah::view::transform([](auto a) {return a * 2; }))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		/// [rah::view::transform_pipeable]
+	}
 
-	// Test map_value
-	EQUAL_RANGE(
-		(std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | map_value()), 
-		(il<double>{ 1.5, 2.5, 3.5, 4.5 })
-	);
+	{
+		/// [slice]
+		std::vector<int> vec{ 0, 1, 2, 3, 4, 5, 6, 7 };
+		std::vector<int> result;
+		for (int i : rah::view::slice(vec, 2, 6))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 2, 3, 4, 5 }));
+		/// [slice]
+	}
+	{
+		/// [slice_pipeable]
+		std::vector<int> vec{ 0, 1, 2, 3, 4, 5, 6, 7 };
+		std::vector<int> result;
+		for (int i : vec | rah::view::slice(2, 6))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 2, 3, 4, 5 }));
+		/// [slice_pipeable]
+	}
 
-	// Test map_key
-	EQUAL_RANGE(
-		(std::map<int, double>{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 }} | map_key()), 
-		(il<int>{ 1, 2, 3, 4 })
-	);
+	{
+		/// [stride]
+		std::vector<int> vec{ 0, 1, 2, 3, 4, 5, 6, 7 };
+		std::vector<int> result;
+		for (int i : rah::view::stride(vec, 2))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		/// [stride]
+	}
+	{
+		/// [stride_pipeable]
+		std::vector<int> vec{ 0, 1, 2, 3, 4, 5, 6, 7 };
+		std::vector<int> result;
+		for (int i : vec | rah::view::stride(2))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		/// [stride_pipeable]
+	}
+
+	{
+		/// [retro]
+		std::vector<int> vec{ 0, 1, 2, 3 };
+		std::vector<int> result;
+		for (int i : rah::view::retro(vec))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 3, 2, 1, 0 }));
+		/// [retro]
+	}
+	{
+		/// [retro_pipeable]
+		std::vector<int> vec{ 0, 1, 2, 3 };
+		std::vector<int> result;
+		for (int i : vec | rah::view::retro())
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 3, 2, 1, 0 }));
+		/// [retro_pipeable]
+	}
+
+	{
+		/// [zip]
+		std::vector<int> inputA{ 1, 2, 3, 4 };
+		std::vector<double> inputB{ 2.5, 4.5, 6.5, 8.5 };
+		std::vector<char> inputC{ 'a', 'b', 'c', 'd' };
+		std::vector<std::tuple<int, double, char>> result;
+		for (auto a_b_c : rah::view::zip(inputA, inputB, inputC))
+			result.push_back(a_b_c);
+		CHECK(result == (std::vector<std::tuple<int, double, char>>{
+			{ 1, 2.5, 'a' },
+			{ 2, 4.5, 'b' },
+			{ 3, 6.5, 'c' },
+			{ 4, 8.5, 'd' }
+		}));
+		/// [zip]
+	}
+
+	{
+		/// [chunk]
+		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
+		std::vector<std::vector<int>> result;
+		for (auto elts : rah::view::chunk(vec_01234, 2))
+			result.push_back(std::vector<int>(std::begin(elts), std::end(elts)));
+		CHECK(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
+		/// [chunk]
+	}
+	{
+		/// [chunk_pipeable]
+		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
+		std::vector<std::vector<int>> result;
+		for (auto elts : vec_01234 | rah::view::chunk(2))
+			result.push_back(std::vector<int>(std::begin(elts), std::end(elts)));
+		CHECK(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
+		/// [chunk_pipeable]
+	}
+
+	{
+		/// [filter]
+		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
+		std::vector<int> result;
+		for (int i : rah::view::filter(vec_01234, [](auto a) {return a % 2 == 0; }))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 2, 4 }));
+		/// [filter]
+	}
+	{
+		/// [filter_pipeable]
+		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
+		std::vector<int> result;
+		for (int i : vec_01234 | rah::view::filter([](auto a) {return a % 2 == 0; }))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 2, 4 }));
+		/// [filter_pipeable]
+	}
+
+	{
+		/// [join]
+		std::vector<int> inputA{ 0, 1, 2, 3 };
+		std::vector<int> inputB{ 4, 5, 6 };
+		std::vector<int> result;
+		for (int i : rah::view::join(inputA, inputB))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
+		/// [join]
+	}
+	{
+		/// [join_pipeable]
+		std::vector<int> inputA{ 0, 1, 2, 3 };
+		std::vector<int> inputB{ 4, 5, 6 };
+		std::vector<int> result;
+		for (int i : inputA | rah::view::join(inputB))
+			result.push_back(i);
+		CHECK(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
+		/// [join_pipeable]
+	}
+
+	{
+		/// [enumerate]
+		std::vector<int> input{ 4, 5, 6, 7 };
+		std::vector<std::tuple<size_t, int>> result;
+		for (auto i_value : rah::view::enumerate(input))
+			result.push_back(i_value);
+		CHECK(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
+		/// [enumerate]
+	}
+	{
+		/// [enumerate_pipeable]
+		std::vector<int> input{ 4, 5, 6, 7 };
+		std::vector<std::tuple<size_t, int>> result;
+		for (auto i_value : input | rah::view::enumerate())
+			result.push_back(i_value);
+		CHECK(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
+		/// [enumerate_pipeable]
+	}
+
+	{
+		/// [map_value]
+		std::map<int, double> input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };
+		std::vector<double> result;
+		for (double value : rah::view::map_value(input))
+			result.push_back(value);
+		CHECK(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
+		/// [map_value]
+	}
+	{
+		/// [map_value_pipeable]
+		std::map<int, double> input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };
+		std::vector<double> result;
+		for (double value : input | rah::view::map_value())
+			result.push_back(value);
+		CHECK(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
+		/// [map_value_pipeable]
+	}
+
+	{
+		/// [map_key]
+		std::map<int, double> input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };
+		std::vector<int> result;
+		for (int key : rah::view::map_key(input))
+			result.push_back(key);
+		CHECK(result == (std::vector<int>{ 1, 2, 3, 4 }));
+		/// [map_key]
+	}
+	{
+		/// [map_key_pipeable]
+		std::map<int, double> input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };
+		std::vector<int> result;
+		for (int key : input | rah::view::map_key())
+			result.push_back(key);
+		CHECK(result == (std::vector<int>{ 1, 2, 3, 4 }));
+		/// [map_key_pipeable]
+	}
 
 	// ************************************ eager algos *******************************************
+
+	using namespace rah;
+	using namespace rah::view;
+	using namespace std;
 
 	// Test transform
 	{
@@ -266,6 +426,8 @@ int main()
 		EQUAL_RANGE(find_if_not(il<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }), il<int>({ 3, 4 }));
 		EQUAL_RANGE((il<int>{ 1, 2, 3, 4 } | find_if_not([](int i) {return i < 3; })), il<int>({ 3, 4 }));
 	}
+
+	// ********************************* test return ref and non-ref ******************************
 
 	// Test return reference
 
@@ -381,8 +543,6 @@ int main()
 	);
 
 	std::cout << "ALL TEST OK" << std::endl;
-
-	// doc_code();
 
 	return 0;
 }

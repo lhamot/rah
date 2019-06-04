@@ -7,7 +7,6 @@ A range is anything that can be iterate. Typically in C++ something is a range i
 ## Why a new range library?
 Yes there are some great range libraries in C++, like [range-v3](https://github.com/ericniebler/range-v3) and [boost::range](http://www.boost.org/doc/libs/1_70_0/libs/range).
 The goal of **rah** is to be "single file" and stay easy to read and understand. **rah** was design with the code simplicity on top priority.
-
 ## What is inside rah
 - In the namespace `rah`, there is a part of the usual algorithms present in `<algorithm>`, but in a range fashion
 	- More algorithms will be added soon
@@ -50,6 +49,8 @@ for(int i: values) // The job in done here, without memory allocation
 ``` 
 ## License
 rah is under the [Boost Software License](http://www.boost.org/LICENSE_1_0.txt)
+## Documentation
+You can find the doc [here](https://lhamot.github.io/rah/html/index.html)
 ## Supported Compilers
 - On windows
   - Visual Studio 2017 (stdcpp14 and stdcpp17)
