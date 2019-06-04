@@ -1,7 +1,7 @@
 var searchData=
 [
   ['fake',['fake',['../namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf',1,'rah']]],
-  ['filter',['filter',['../namespacerah_1_1view.html#a1eade9e2861e5bdae07b01ac9bf2c10c',1,'rah::view::filter(R &amp;&amp;range, F &amp;&amp;func)'],['../namespacerah_1_1view.html#a315ba2143c833b24d05481c68b6cf2da',1,'rah::view::filter(F &amp;&amp;func)']]],
+  ['filter',['filter',['../namespacerah_1_1view.html#a69010369aadc2a36ee9517195f783e9a',1,'rah::view::filter(R &amp;&amp;range, F &amp;&amp;func)'],['../namespacerah_1_1view.html#aa52c6f5cff4e0a4f0ed48c66e1039e3d',1,'rah::view::filter(F &amp;&amp;func)']]],
   ['filter_5fiterator',['filter_iterator',['../structrah_1_1view_1_1filter__iterator.html',1,'rah::view::filter_iterator&lt; R, F &gt;'],['../structrah_1_1view_1_1filter__iterator.html#a31543c024a816c4f3e8fc8937b2a9214',1,'rah::view::filter_iterator::filter_iterator()']]],
   ['find',['find',['../namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7',1,'rah::find(R &amp;&amp;range, V &amp;&amp;value)'],['../namespacerah.html#a37f60e134164914703fdd0508f83ee11',1,'rah::find(V &amp;&amp;value)']]],
   ['find_5fif',['find_if',['../namespacerah.html#acbd71a185a2510e691dcd715a31edf53',1,'rah::find_if(R &amp;&amp;range, P &amp;&amp;pred)'],['../namespacerah.html#a04200b08ecdef8daf99f04c58f29e459',1,'rah::find_if(P &amp;&amp;pred)']]],

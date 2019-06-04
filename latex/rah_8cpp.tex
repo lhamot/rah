@@ -36,10 +36,10 @@ struct \mbox{\hyperlink{struct_what_is_it}{What\+Is\+It$<$ T $>$}}
 \item 
 {\footnotesize template$<$typename... Args$>$ }\\std\+::ostream \& \mbox{\hyperlink{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}{operator$<$$<$}} (std\+::ostream \&os, std\+::tuple$<$ Args... $>$ tup)
 \item 
-void \mbox{\hyperlink{rah_8cpp_a1e8aafa33599800a79b54889a5a35353}{doc\+\_\+code}} ()
+auto \mbox{\hyperlink{rah_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\+\_\+count}} (int i)
 \begin{DoxyCompactList}\small\item\em \mbox{[}make\+\_\+pipeable create\mbox{]} \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{[}make\+\_\+pipeable create\mbox{]} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -78,7 +78,7 @@ auto \mbox{\hyperlink{rah_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+elt
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"CHECK : "} << \#RANGE << \textcolor{stringliteral}{" = "} << \#IL << std::endl; \(\backslash\)}
-\DoxyCodeLine{if(\mbox{\hyperlink{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}{zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_a182308962c8123dcbe4e4665eaef105c}{all\_of}}(\mbox{\hyperlink{rah_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
+\DoxyCodeLine{if(\mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_a182308962c8123dcbe4e4665eaef105c}{rah::all\_of}}(\mbox{\hyperlink{rah_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
 \DoxyCodeLine{else \(\backslash\)}
 \DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
@@ -97,11 +97,11 @@ using \mbox{\hyperlink{rah_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\+
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{rah_8cpp_a1e8aafa33599800a79b54889a5a35353}\label{rah_8cpp_a1e8aafa33599800a79b54889a5a35353}} 
-\index{rah.cpp@{rah.cpp}!doc\_code@{doc\_code}}
-\index{doc\_code@{doc\_code}!rah.cpp@{rah.cpp}}
-\subsubsection{\texorpdfstring{doc\_code()}{doc\_code()}}
-{\footnotesize\ttfamily void doc\+\_\+code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{rah.cpp@{rah.cpp}!main@{main}}
+\index{main@{main}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -129,13 +129,83 @@ using \mbox{\hyperlink{rah_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\+
 
 \mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]}
 
-\mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]} \mbox{\Hypertarget{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{rah_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
-\index{rah.cpp@{rah.cpp}!main@{main}}
-\index{main@{main}!rah.cpp@{rah.cpp}}
-\subsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]}
 
-\mbox{\Hypertarget{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}\label{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}} 
+\mbox{[}slice\mbox{]}
+
+\mbox{[}slice\mbox{]}
+
+\mbox{[}slice\+\_\+pipeable\mbox{]}
+
+\mbox{[}slice\+\_\+pipeable\mbox{]}
+
+\mbox{[}stride\mbox{]}
+
+\mbox{[}stride\mbox{]}
+
+\mbox{[}stride\+\_\+pipeable\mbox{]}
+
+\mbox{[}stride\+\_\+pipeable\mbox{]}
+
+\mbox{[}retro\mbox{]}
+
+\mbox{[}retro\mbox{]}
+
+\mbox{[}retro\+\_\+pipeable\mbox{]}
+
+\mbox{[}retro\+\_\+pipeable\mbox{]}
+
+\mbox{[}zip\mbox{]}
+
+\mbox{[}zip\mbox{]}
+
+\mbox{[}chunk\mbox{]}
+
+\mbox{[}chunk\mbox{]}
+
+\mbox{[}chunk\+\_\+pipeable\mbox{]}
+
+\mbox{[}chunk\+\_\+pipeable\mbox{]}
+
+\mbox{[}filter\mbox{]}
+
+\mbox{[}filter\mbox{]}
+
+\mbox{[}filter\+\_\+pipeable\mbox{]}
+
+\mbox{[}filter\+\_\+pipeable\mbox{]}
+
+\mbox{[}join\mbox{]}
+
+\mbox{[}join\mbox{]}
+
+\mbox{[}join\+\_\+pipeable\mbox{]}
+
+\mbox{[}join\+\_\+pipeable\mbox{]}
+
+\mbox{[}enumerate\mbox{]}
+
+\mbox{[}enumerate\mbox{]}
+
+\mbox{[}enumerate\+\_\+pipeable\mbox{]}
+
+\mbox{[}enumerate\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+value\mbox{]}
+
+\mbox{[}map\+\_\+value\mbox{]}
+
+\mbox{[}map\+\_\+value\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+value\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+key\mbox{]}
+
+\mbox{[}map\+\_\+key\mbox{]}
+
+\mbox{[}map\+\_\+key\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+key\+\_\+pipeable\mbox{]} \mbox{\Hypertarget{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}\label{rah_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}} 
 \index{rah.cpp@{rah.cpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!rah.cpp@{rah.cpp}}
 \subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
@@ -155,6 +225,16 @@ bool operator== (\begin{DoxyParamCaption}\item[{std\+::tuple$<$ A, B $>$}]{a,  }
 \subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename A , typename B , typename C , typename D $>$ \\
 bool operator== (\begin{DoxyParamCaption}\item[{std\+::pair$<$ A, B $>$}]{a,  }\item[{std\+::tuple$<$ D, C $>$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rah_8cpp_ae66a06c931008db2ce8bd097114223e2}\label{rah_8cpp_ae66a06c931008db2ce8bd097114223e2}} 
+\index{rah.cpp@{rah.cpp}!test\_count@{test\_count}}
+\index{test\_count@{test\_count}!rah.cpp@{rah.cpp}}
+\subsubsection{\texorpdfstring{test\_count()}{test\_count()}}
+{\footnotesize\ttfamily auto test\+\_\+count (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+\mbox{[}make\+\_\+pipeable create\mbox{]} 
 
 
 

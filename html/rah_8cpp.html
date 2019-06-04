@@ -116,10 +116,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a21b2e8f84ce8ce788faf2ee67adbe83a"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a21b2e8f84ce8ce788faf2ee67adbe83a"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="rah_8cpp.html#a21b2e8f84ce8ce788faf2ee67adbe83a">operator&lt;&lt;</a> (std::ostream &amp;os, std::tuple&lt; Args... &gt; tup)</td></tr>
 <tr class="separator:a21b2e8f84ce8ce788faf2ee67adbe83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e8aafa33599800a79b54889a5a35353"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rah_8cpp.html#a1e8aafa33599800a79b54889a5a35353">doc_code</a> ()</td></tr>
-<tr class="memdesc:a1e8aafa33599800a79b54889a5a35353"><td class="mdescLeft">&#160;</td><td class="mdescRight">[make_pipeable create]  <a href="#a1e8aafa33599800a79b54889a5a35353">More...</a><br /></td></tr>
-<tr class="separator:a1e8aafa33599800a79b54889a5a35353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66a06c931008db2ce8bd097114223e2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rah_8cpp.html#ae66a06c931008db2ce8bd097114223e2">test_count</a> (int i)</td></tr>
+<tr class="memdesc:ae66a06c931008db2ce8bd097114223e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">[make_pipeable create]  <a href="#ae66a06c931008db2ce8bd097114223e2">More...</a><br /></td></tr>
+<tr class="separator:ae66a06c931008db2ce8bd097114223e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rah_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">[make_pipeable create]  <a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -179,9 +180,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;CHECK : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a26c5da9052b94179d6ad8614ea2b9fda">zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">all_of</a>(<a class="code" href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="namespacerah_html_a182308962c8123dcbe4e4665eaef105c"><div class="ttname"><a href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a></div><div class="ttdeci">auto all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdef"><b>Definition:</b> rah.hpp:713</div></div>
+<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;CHECK : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>(<a class="code" href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="namespacerah_html_a182308962c8123dcbe4e4665eaef105c"><div class="ttname"><a href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a></div><div class="ttdeci">auto all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdef"><b>Definition:</b> rah.hpp:713</div></div>
 <div class="ttc" id="rah_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> rah.cpp:32</div></div>
-<div class="ttc" id="namespacerah_1_1view_html_a26c5da9052b94179d6ad8614ea2b9fda"><div class="ttname"><a href="namespacerah_1_1view.html#a26c5da9052b94179d6ad8614ea2b9fda">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdef"><b>Definition:</b> rah.hpp:457</div></div>
+<div class="ttc" id="namespacerah_1_1view_html_a5b9cacbf101962d95221b591d7f11026"><div class="ttname"><a href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah.hpp:457</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -203,14 +204,14 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a1e8aafa33599800a79b54889a5a35353"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e8aafa33599800a79b54889a5a35353">&#9670;&nbsp;</a></span>doc_code()</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void doc_code </td>
+          <td class="memname">int main </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -227,27 +228,48 @@ template&lt;typename T &gt; </div>
 <p>[generate]</p>
 <p>[generate_n]</p>
 <p>[generate_n]</p>
-<p>[<a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a range applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a range applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
 <p>[rah::view::transform_pipeable]</p>
-<p>[rah::view::transform_pipeable] </p>
-
-</div>
-</div>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>[rah::view::transform_pipeable]</p>
+<p>[slice]</p>
+<p>[slice]</p>
+<p>[slice_pipeable]</p>
+<p>[slice_pipeable]</p>
+<p>[stride]</p>
+<p>[stride]</p>
+<p>[stride_pipeable]</p>
+<p>[stride_pipeable]</p>
+<p>[retro]</p>
+<p>[retro]</p>
+<p>[retro_pipeable]</p>
+<p>[retro_pipeable]</p>
+<p>[zip]</p>
+<p>[zip]</p>
+<p>[chunk]</p>
+<p>[chunk]</p>
+<p>[chunk_pipeable]</p>
+<p>[chunk_pipeable]</p>
+<p>[filter]</p>
+<p>[filter]</p>
+<p>[filter_pipeable]</p>
+<p>[filter_pipeable]</p>
+<p>[join]</p>
+<p>[join]</p>
+<p>[join_pipeable]</p>
+<p>[join_pipeable]</p>
+<p>[enumerate]</p>
+<p>[enumerate]</p>
+<p>[enumerate_pipeable]</p>
+<p>[enumerate_pipeable]</p>
+<p>[map_value]</p>
+<p>[map_value]</p>
+<p>[map_value_pipeable]</p>
+<p>[map_value_pipeable]</p>
+<p>[map_key]</p>
+<p>[map_key]</p>
+<p>[map_key_pipeable]</p>
+<p>[map_key_pipeable] </p>
 
 </div>
 </div>
@@ -338,6 +360,26 @@ template&lt;typename A , typename B , typename C , typename D &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae66a06c931008db2ce8bd097114223e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66a06c931008db2ce8bd097114223e2">&#9670;&nbsp;</a></span>test_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto test_count </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>[make_pipeable create] </p>
 
 </div>
 </div>

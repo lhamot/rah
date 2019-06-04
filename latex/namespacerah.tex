@@ -323,16 +323,15 @@ Call to create a \char`\"{}pipeable\char`\"{} function (U\+F\+CS style in c++)
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}}(\textcolor{keywordtype}{int} i)}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{rah_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(\textcolor{keywordtype}{int} i)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{doc_8cpp_af1d2c80bfb0c6ddfcde8347d466a366b}{std::count}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{std::begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{std::end}}(range), i); \});}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{std::count}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{std::begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{std::end}}(range), i); \});}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 2, 3 \};}
-\DoxyCodeLine{        std::cout << (vec | \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}}(2)) << std::endl;}
-\DoxyCodeLine{        \textcolor{comment}{// 2}}
+\DoxyCodeLine{        assert((vec | \mbox{\hyperlink{rah_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(2)) == 2);}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}\label{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}} 
 \index{rah@{rah}!mismatch@{mismatch}}
