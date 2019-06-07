@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <list>
 #include <forward_list>
 #ifdef MSVC
 #pragma warning(pop)
@@ -86,15 +87,6 @@ int main()
 		assert((vec | test_count(2)) == 2);
 		/// [make_pipeable use]
 	}
-
-	struct Elt
-	{
-		int member;
-		bool operator==(Elt elt) const
-		{
-			return member == elt.member;
-		}
-	};
 
 	// *********************************** views **************************************************
 
@@ -339,95 +331,230 @@ int main()
 		/// [map_key_pipeable]
 	}
 
-	// ************************************ eager algos *******************************************
+	// *********************************** algos **************************************************
+
+	{
+		/// [rah::transform3]
+		std::vector<int> vecIn1{ 0, 1, 2, 3 };
+		std::vector<int> vecOut{ 0, 0, 0, 0 };
+		rah::transform(vecIn1, vecOut, [](int a) {return a + 1; });
+		CHECK(vecOut == std::vector<int>({ 1, 2, 3, 4 }));
+		/// [rah::transform3]
+	}
+	{
+		/// [rah::transform4]
+		std::vector<int> vecIn1{ 0, 1, 2, 3 };
+		std::vector<int> vecIn2{ 4, 3, 2, 1 };
+		std::vector<int> vecOut{ 0, 0, 0, 0 };
+		rah::transform(vecIn1, vecIn2, vecOut, [](int a, int b) {return a + b; });
+		CHECK(vecOut == std::vector<int>({ 4, 4, 4, 4 }));
+		/// [rah::transform4]
+	}
+
+	CHECK((rah::view::iota(0, 0) | rah::reduce(0, [](auto a, auto b) {return a + b; })) == 0);
+	{
+		/// [rah::reduce]
+		std::vector<int> vecIn1{ 1, 2, 3, 4 };
+		CHECK(rah::reduce(vecIn1, 0, [](auto a, auto b) {return a + b; }) == 10);
+		/// [rah::reduce]
+	}
+	{
+		/// [rah::reduce_pipeable]
+		std::vector<int> vecIn1{ 1, 2, 3, 4 };
+		CHECK((vecIn1 | rah::reduce(0, [](auto a, auto b) {return a + b; })) == 10);
+		/// [rah::reduce_pipeable]
+	}
+
+	/// [rah::any_of]
+	CHECK(rah::any_of(
+		std::initializer_list<int>{ 3, 0, 1, 3, 4, 6 }, 
+		[](auto a) {return a == 3; })
+	);
+	/// [rah::any_of]
+	/// [rah::any_of_pipeable]
+	CHECK((
+		std::initializer_list<int>{0, 1, 2, 3, 4, 6}
+		| rah::any_of([](auto a) {return a == 3; })
+	));
+	/// [rah::any_of_pipeable]
+	CHECK((std::initializer_list<int>{3, 0, 1, 3, 4, 6} | rah::any_of([](auto a) {return a == 3; })));
+	CHECK((std::initializer_list<int>{2, 0, 1, 2, 4, 6} | rah::any_of([](auto a) {return a == 3; })) == false);
+
+	/// [rah::all_of]
+	CHECK(rah::all_of(
+		std::initializer_list<int>{ 4, 4, 4, 4 }, 
+		[](auto a) {return a == 4; })
+	);
+	/// [rah::all_of]
+	CHECK(rah::all_of(std::initializer_list<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
+	CHECK((std::initializer_list<int>{ 4, 4, 4, 4 } | rah::all_of([](auto a) {return a == 4; })));
+	/// [rah::all_of_pipeable]
+	CHECK((
+		std::initializer_list<int>{ 4, 4, 3, 4 } 
+	    | rah::all_of([](auto a) {return a == 4; })
+	) == false);
+	/// [rah::all_of_pipeable]
+
+	/// [rah::none_of]
+	CHECK((rah::none_of(
+		std::initializer_list<int>{7, 8, 9, 10}, 
+		[](auto a) {return a == 11; })
+	));
+	/// [rah::none_of]
+	CHECK((std::initializer_list<int>{7, 8, 9, 10} | rah::none_of([](auto a) {return a == 11; })));
+	/// [rah::none_of_pipeable]
+	CHECK((
+		std::initializer_list<int>{7, 8, 9, 10, 11} 
+	    | rah::none_of([](auto a) {return a == 11; })
+	) == false);
+	/// [rah::none_of_pipeable]
+
+	/// [rah::count]
+	CHECK(rah::count(std::initializer_list<int>{ 4, 4, 4, 3 }, 3) == 1);
+	/// [rah::count]
+	/// [rah::count_pipeable]
+	CHECK((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count(4)) == 3);
+	/// [rah::count_pipeable]
+
+	/// [rah::count_if]
+	CHECK(rah::count_if(il<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
+	/// [rah::count_if]
+	/// [rah::count_if_pipeable]
+	CHECK((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count_if([](auto a) {return a == 3; })) == 1);
+	/// [rah::count_if_pipeable]
+
+	{
+		/// [rah::for_each]
+		std::vector<int> testFE{ 4, 4, 4, 4 };
+		rah::for_each(testFE, [](auto& value) {return ++value; });
+		EQUAL_RANGE(testFE, il<int>({ 5, 5, 5, 5 }));
+		/// [rah::for_each]
+	}
+	{
+		/// [rah::for_each_pipeable]
+		std::vector<int> testFE{ 4, 4, 4, 4 };
+		testFE | rah::for_each([](auto& value) {return ++value; });
+		EQUAL_RANGE(testFE, il<int>({ 5, 5, 5, 5 }));
+		/// [rah::for_each_pipeable]
+	}
+
+	{
+		/// [rah::to_container_pipeable]
+		std::vector<std::pair<int, char>> in1{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } };
+		std::map<int, char> map_4a_5b_6c_7d = in1 | rah::to_container<std::map<int, char>>();
+		CHECK(
+			map_4a_5b_6c_7d == (std::map<int, char>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } })
+		);
+
+		std::list<int> in2{ 4, 5, 6, 7 };
+		std::vector<int> out = in2 | rah::to_container<std::vector<int>>();
+		CHECK(out == (std::vector<int>{ 4, 5, 6, 7 }));
+		/// [rah::to_container_pipeable]
+	}
+	{
+		/// [rah::to_container]
+		std::vector<std::pair<int, char>> in1{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } };
+		std::map<int, char> map_4a_5b_6c_7d = rah::to_container<std::map<int, char>>(in1);
+		CHECK(
+			map_4a_5b_6c_7d == (std::map<int, char>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } })
+		);
+
+		std::list<int> in2{ 4, 5, 6, 7 };
+		std::vector<int> out = rah::to_container<std::vector<int>>(in2);
+		CHECK(out == (std::vector<int>{ 4, 5, 6, 7 }));
+		/// [rah::to_container]
+	}
+
+	{
+		/// [rah::mismatch]
+		std::vector<int> in1 = { 1, 2, 3, 4 };
+		std::vector<int> in2 = { 1, 2, 42, 42 };
+		auto r1_r2 = rah::mismatch(in1, in2);
+		std::vector<int> out1;
+		std::vector<int> out2;
+		std::copy(std::begin(std::get<0>(r1_r2)), std::end(std::get<0>(r1_r2)), std::back_inserter(out1));
+		std::copy(std::begin(std::get<1>(r1_r2)), std::end(std::get<1>(r1_r2)), std::back_inserter(out2));
+		CHECK(out1 == std::vector<int>({ 3, 4 }));
+		CHECK(out2 == std::vector<int>({ 42, 42 }));
+		/// [rah::mismatch]
+	}
+
+	{
+		/// [rah::find]
+		CHECK(
+			(rah::find(std::vector<int>{ 1, 2, 3, 4 }, 3) | rah::to_container<std::vector<int>>())
+			== std::vector<int>({3, 4})
+		);
+		/// [rah::find]
+		/// [rah::find_pipeable]
+		CHECK(
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find(3) | rah::to_container<std::vector<int>>())
+			== std::vector<int>({ 3, 4 })
+		);
+		/// [rah::find_pipeable]
+		/// [rah::find_if]
+		CHECK(
+			(rah::find_if(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }) | rah::to_container<std::vector<int>>())
+			== std::vector<int>({ 3, 4 })
+		);
+		/// [rah::find_if]
+		/// [rah::find_if_pipeable]
+		CHECK(
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if([](int i) {return i == 3; }) | rah::to_container<std::vector<int>>())
+			== std::vector<int>({ 3, 4 })
+		);
+		/// [rah::find_if_pipeable]
+		/// [rah::find_if_not]
+		CHECK(
+			(rah::find_if_not(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }) | rah::to_container<std::vector<int>>())
+			== std::vector<int>({ 3, 4 })
+		);
+		/// [rah::find_if_not]
+		/// [rah::find_if_not_pipeable]
+		CHECK(
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if_not([](int i) {return i < 3; }) | rah::to_container<std::vector<int>>())
+			== std::vector<int>({ 3, 4 })
+		);
+		/// [rah::find_if_not_pipeable]
+	}
+
+	{
+		/// [rah::size]
+		std::vector<int> vec3{ 1, 2, 3 };
+		CHECK(rah::size(vec3) == 3);
+		/// [rah::size]
+	}
+	{
+		/// [rah::size_pipeable]
+		std::vector<int> vec3{ 1, 2, 3 };
+		CHECK((vec3 | rah::size()) == 3);
+		/// [rah::size_pipeable]
+	}
+
+	{
+		/// [rah::equal]
+		std::vector<int> in1{ 1, 2, 3 };
+		std::vector<int> in2{ 1, 2, 3 };
+		std::vector<int> in3{ 11, 12, 13 };
+		CHECK(rah::equal(in1, in2));
+		CHECK(rah::equal(in1, in3) == false);
+		/// [rah::equal]
+	}
+
+	// ********************************* test return ref and non-ref ******************************
 
 	using namespace rah;
 	using namespace rah::view;
 	using namespace std;
 
-	// Test transform
+	struct Elt
 	{
-		std::vector<int> vec1{ 0, 1, 2, 3 };
-		std::vector<int> vec2{ 4, 3, 2, 1 };
-		std::vector<int> vec3{ 0, 0, 0, 0 };
-		rah::transform(vec1, vec3, [](int a) {return a + 1; });
-		EQUAL_RANGE(vec3, il<int>({ 1, 2, 3, 4 }));
-		rah::transform(vec1, vec2, vec3, [](int a, int b) {return a + b; });
-		EQUAL_RANGE(vec3, il<int>({ 4, 4, 4, 4 }));
-	}
-
-	// Test reduce
-	CHECK((iota(0, 0) | reduce(0, [](auto a, auto b) {return a + b; })) == 0);
-	CHECK((iota(1, 5) | reduce(0, [](auto a, auto b) {return a + b; })) == 10);
-	CHECK(reduce(iota(1, 5), 0, [](auto a, auto b) {return a + b; }) == 10);
-
-	// Test any_of
-	CHECK(any_of(il<int>{3, 0, 1, 3, 4, 6}, [](auto a) {return a == 3; }));
-	CHECK((il<int>{3, 0, 1, 3, 4, 6} | any_of([](auto a) {return a == 3; })));
-	CHECK((il<int>{2, 0, 1, 3, 4, 6} | any_of([](auto a) {return a == 3; })));
-	CHECK((il<int>{2, 0, 1, 2, 4, 6} | any_of([](auto a) {return a == 3; })) == false);
-
-	// Test all_of
-	CHECK(all_of(il<int>{ 4, 4, 4, 4 }, [](auto a) {return a == 4; }));
-	CHECK(all_of(il<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
-	CHECK((il<int>{ 4, 4, 4, 4 } | all_of([](auto a) {return a == 4; })));
-	CHECK((il<int>{ 4, 4, 3, 4 } | all_of([](auto a) {return a == 4; })) == false);
-
-	// Test none_of
-	CHECK((none_of(il<int>{7, 8, 9, 10}, [](auto a) {return a == 11; })));
-	CHECK((il<int>{7, 8, 9, 10} | none_of([](auto a) {return a == 11; })));
-	CHECK((il<int>{7, 8, 9, 10, 11} | none_of([](auto a) {return a == 11; })) == false);
-
-	// Test count
-	CHECK((il<int>{ 4, 4, 4, 3 } | count(4)) == 3);
-	CHECK(count(il<int>{ 4, 4, 4, 3 }, 3) == 1);
-
-	// Test count_if
-	CHECK((il<int>{ 4, 4, 4, 3 } | count_if([](auto a) {return a == 3; })) == 1);
-	CHECK(count_if(il<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
-
-	// Test foreach
-	{
-		std::vector<int> testFE{ 4, 4, 4, 4 };
-		for_each(testFE, [](auto& value) {return ++value; });
-		EQUAL_RANGE(testFE, il<int>({ 5, 5, 5, 5 }));
-		testFE | for_each([](auto& value) {return ++value; });
-		EQUAL_RANGE(testFE, il<int>({ 6, 6, 6, 6 }));
-	}
-
-	// Test to_container
-	{
-		EQUAL_RANGE(iota(4, 8) | to_container<std::vector<int>>(), (il<int>{ 4, 5, 6, 7 }));
-
-		auto toPair = [](auto ab) {return std::make_pair(std::get<0>(ab), std::get<1>(ab)); };
-		auto&& map_4a_5b_6c_7d = 
-			zip(iota(4, 8), iota('a', 'e')) | transform(toPair) | to_container<std::map<int, char>>();
-		EQUAL_RANGE(
-			map_4a_5b_6c_7d, 
-			(il<std::pair<int const, char>>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } })
-		);
-	}
-
-	// Test mismatch
-	{
-		auto a = { 1, 2, 3, 4 };
-		auto b = { 1, 2, 42, 42 };
-		auto r1_r2 = mismatch(a, b);
-		EQUAL_RANGE(std::get<0>(r1_r2), il<int>({ 3, 4 }));
-		EQUAL_RANGE(std::get<1>(r1_r2), il<int>({ 42, 42 }));
-	}
-
-	// Test find
-	{
-		EQUAL_RANGE(find(il<int>{ 1, 2, 3, 4 }, 3), il<int>({3, 4}));
-		EQUAL_RANGE((il<int>{ 1, 2, 3, 4 } | find(3)), il<int>({ 3, 4 }));
-		EQUAL_RANGE(find_if(il<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }), il<int>({ 3, 4 }));
-		EQUAL_RANGE((il<int>{ 1, 2, 3, 4 } | find_if([](int i) {return i == 3; })), il<int>({ 3, 4 }));
-		EQUAL_RANGE(find_if_not(il<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }), il<int>({ 3, 4 }));
-		EQUAL_RANGE((il<int>{ 1, 2, 3, 4 } | find_if_not([](int i) {return i < 3; })), il<int>({ 3, 4 }));
-	}
-
-	// ********************************* test return ref and non-ref ******************************
+		int member;
+		bool operator==(Elt elt) const
+		{
+			return member == elt.member;
+		}
+	};
 
 	// Test return reference
 

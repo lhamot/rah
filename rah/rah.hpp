@@ -665,44 +665,64 @@ auto map_key()
 
 // ****************************************** transform *******************************************
 
+/// @brief Applies the given function unary_op to the range rangeIn and stores the result in the range rangeOut
+///
+/// @snippet rah.cpp rah::transform3
 template<typename RI, typename RO, typename F>
-auto transform(RI&& rangeIn, RO&& rangeOut, F&& func)
+auto transform(RI&& rangeIn, RO&& rangeOut, F&& unary_op)
 {
-	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(func));
+	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(unary_op));
 	return make_iterator_range(iter, std::end(rangeOut));
 }
 
+/// @brief The binary operation binary_op is applied to pairs of elements from two ranges
+///
+/// @snippet rah.cpp rah::transform4
 template<typename RI1, typename RI2, typename RO, typename F>
-auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& func)
+auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& binary_op)
 {
 	auto iter = std::transform(
 		std::begin(rangeIn1), std::end(rangeIn1),
 		std::begin(rangeIn2),
 		std::begin(rangeOut),
-		std::forward<F>(func));
+		std::forward<F>(binary_op));
 	return make_iterator_range(iter, std::end(rangeOut));
 }
 
 // ********************************************* reduce *******************************************
 
-template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&& func)
+/// @brief Executes a reducer function on each element of the range, resulting in a single output value
+///
+/// @snippet rah.cpp rah::reduce
+template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&& reducer)
 {
-	return std::accumulate(std::begin(range), std::end(range), std::forward<I>(init), std::forward<F>(func));
+	return std::accumulate(std::begin(range), std::end(range), std::forward<I>(init), std::forward<F>(reducer));
 }
 
+/// @brief Executes a reducer function on each element of the range, resulting in a single output value
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::reduce_pipeable
 template<typename I, typename F>
-auto reduce(I&& init, F&& func)
+auto reduce(I&& init, F&& reducer)
 {
-	return make_pipeable([=](auto&& range) {return reduce(range, init, func); });
+	return make_pipeable([=](auto&& range) {return reduce(range, init, reducer); });
 }
 
 // ************************* any_of *******************************************
 
-template<typename R, typename F> auto any_of(R&& range, F&& func)
+/// @brief Checks if unary predicate pred returns true for at least one element in the range
+///
+/// @snippet rah.cpp rah::any_of
+template<typename R, typename F> auto any_of(R&& range, F&& pred)
 {
-	return std::any_of(std::begin(range), std::end(range), std::forward<F>(func));
+	return std::any_of(std::begin(range), std::end(range), std::forward<F>(pred));
 }
 
+/// @brief Checks if unary predicate pred returns true for at least one element in the range
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::any_of_pipeable
 template<typename P> auto any_of(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return any_of(range, pred); });
@@ -710,11 +730,18 @@ template<typename P> auto any_of(P&& pred)
 
 // ************************* all_of *******************************************
 
+/// @brief Checks if unary predicate pred returns true for all elements in the range
+///
+/// @snippet rah.cpp rah::all_of
 template<typename R, typename P> auto all_of(R&& range, P&& pred)
 {
 	return std::all_of(std::begin(range), std::end(range), std::forward<P>(pred));
 }
 
+/// @brief Checks if unary predicate pred returns true for all elements in the range
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::all_of_pipeable
 template<typename P> auto all_of(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return all_of(range, pred); });
@@ -722,11 +749,18 @@ template<typename P> auto all_of(P&& pred)
 
 // ************************* none_of *******************************************
 
+/// @brief Checks if unary predicate pred returns true for no elements in the range 
+///
+/// @snippet rah.cpp rah::none_of
 template<typename R, typename P> auto none_of(R&& range, P&& pred)
 {
 	return std::none_of(std::begin(range), std::end(range), std::forward<P>(pred));
 }
 
+/// @brief Checks if unary predicate pred returns true for no elements in the range 
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::none_of_pipeable
 template<typename P> auto none_of(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return none_of(range, pred); });
@@ -734,21 +768,35 @@ template<typename P> auto none_of(P&& pred)
 
 // ************************* count ****************************************************************
 
+/// @brief Counts the elements that are equal to value
+///
+/// @snippet rah.cpp rah::count
 template<typename R, typename V> auto count(R&& range, V&& value)
 {
 	return std::count(std::begin(range), std::end(range), std::forward<V>(value));
 }
 
+/// @brief Counts the elements that are equal to value
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::count_pipeable
 template<typename V> auto count(V&& value)
 {
 	return make_pipeable([=](auto&& range) {return count(range, value); });
 }
 
+/// @brief Counts elements for which predicate pred returns true
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::count_if
 template<typename R, typename P> auto count_if(R&& range, P&& pred)
 {
 	return std::count_if(std::begin(range), std::end(range), std::forward<P>(pred));
 }
 
+/// @brief Counts elements for which predicate pred returns true
+///
+/// @snippet rah.cpp rah::count_if_pipeable
 template<typename P> auto count_if(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return count_if(range, pred); });
@@ -756,11 +804,18 @@ template<typename P> auto count_if(P&& pred)
 
 // ************************* foreach **************************************************************
 
+/// @brief Applies the given function func to each element of the range
+///
+/// @snippet rah.cpp rah::for_each
 template<typename R, typename F> void for_each(R&& range, F&& func)
 {
 	::std::for_each(std::begin(range), std::end(range), std::forward<F>(func));
 }
 
+/// @brief Applies the given function func to each element of the range
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::for_each_pipeable
 template<typename F> auto for_each(F&& func)
 {
 	return make_pipeable([=](auto&& range) {return for_each(range, func); });
@@ -768,11 +823,18 @@ template<typename F> auto for_each(F&& func)
 
 // ***************************** to_container *****************************************************
 
+/// @brief Return a container of type C, filled with the content of range
+///
+/// @snippet rah.cpp rah::to_container
 template<typename C, typename R> auto to_container(R&& range)
 {
 	return C(std::begin(range), std::end(range));
 }
 
+/// @brief Return a container of type C, filled with the content of range
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::to_container_pipeable
 template<typename C> auto to_container()
 {
 	return make_pipeable([=](auto&& range) {return to_container<C>(range); });
@@ -780,6 +842,9 @@ template<typename C> auto to_container()
 
 // ************************* mismatch *************************************************************
 
+/// @brief Finds the first position where two ranges differ 
+///
+/// @snippet rah.cpp rah::mismatch
 template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
 	auto const end1 = std::end(range1);
@@ -790,6 +855,9 @@ template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 
 // ****************************************** find ************************************************
 
+/// @brief Finds the first element equal to value
+///
+/// @snippet rah.cpp rah::find
 template<typename R, typename V> auto find(R&& range, V&& value)
 {
 	auto end = std::end(range);
@@ -797,11 +865,18 @@ template<typename R, typename V> auto find(R&& range, V&& value)
 	return make_iterator_range(iter, end);
 }
 
+/// @brief Finds the first element equal to value
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::find_pipeable
 template<typename V> auto find(V&& value)
 {
 	return make_pipeable([=](auto&& range) {return find(range, value); });
 }
 
+/// @brief Finds the first element satisfying specific criteria
+///
+/// @snippet rah.cpp rah::find_if
 template<typename R, typename P> auto find_if(R&& range, P&& pred)
 {
 	auto end = std::end(range);
@@ -809,11 +884,18 @@ template<typename R, typename P> auto find_if(R&& range, P&& pred)
 	return make_iterator_range(iter, end);
 }
 
+/// @brief Finds the first element satisfying specific criteria
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::find_if_pipeable
 template<typename P> auto find_if(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return find_if(range, pred); });
 }
 
+/// @brief Finds the first element not satisfying specific criteria
+///
+/// @snippet rah.cpp rah::find_if_not
 template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 {
 	auto end = std::end(range);
@@ -821,6 +903,10 @@ template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 	return make_iterator_range(iter, end);
 }
 
+/// @brief Finds the first element not satisfying specific criteria
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::find_if_not_pipeable
 template<typename P> auto find_if_not(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return find_if_not(range, pred); });
@@ -828,11 +914,18 @@ template<typename P> auto find_if_not(P&& pred)
 
 // *************************************** size ***************************************************
 
+/// @brief Get the size of range
+///
+/// @snippet rah.cpp rah::size
 template<typename R> auto size(R&& range)
 {
 	return std::distance(std::begin(range), std::end(range));
 }
 
+/// @brief Get the size of range
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::size_pipeable
 auto size()
 {
 	return make_pipeable([=](auto&& range) { return size(range); });
@@ -840,6 +933,9 @@ auto size()
 
 // *************************************** equal **************************************************
 
+/// @brief Determines if two sets of elements are the same 
+///
+/// @snippet rah.cpp rah::equal
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 {
 	return std::equal(std::begin(range1), std::end(range1), std::begin(range2), std::end(range2));
