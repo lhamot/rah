@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['check',['CHECK',['../rah_8cpp.html#ad34faf8df462d924ccc1bdf875e1344b',1,'rah.cpp']]],
   ['chunk',['chunk',['../namespacerah_1_1view.html#a2859e5c6e21d7a2bf9e188539602daa7',1,'rah::view::chunk(R &amp;&amp;range, size_t step)'],['../namespacerah_1_1view.html#a5b3a70ad1a0373e8fadbfa26a9676077',1,'rah::view::chunk(size_t step)']]],
   ['chunk_5fiterator',['chunk_iterator',['../structrah_1_1view_1_1chunk__iterator.html',1,'rah::view::chunk_iterator&lt; R &gt;'],['../structrah_1_1view_1_1chunk__iterator.html#a2675282334475c594c96fdcc6c646895',1,'rah::view::chunk_iterator::chunk_iterator()']]],
   ['count',['count',['../namespacerah.html#aa528865cc4a45d4eb276329554f16b4b',1,'rah::count(R &amp;&amp;range, V &amp;&amp;value)'],['../namespacerah.html#ae8400202fc4005dbade0f479dd556ec3',1,'rah::count(V &amp;&amp;value)']]],

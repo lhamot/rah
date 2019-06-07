@@ -80,6 +80,7 @@ $(function() {
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
 <code>#include &lt;forward_list&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -180,8 +181,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;CHECK : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>(<a class="code" href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="namespacerah_html_a182308962c8123dcbe4e4665eaef105c"><div class="ttname"><a href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a></div><div class="ttdeci">auto all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdef"><b>Definition:</b> rah.hpp:713</div></div>
-<div class="ttc" id="rah_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> rah.cpp:32</div></div>
+<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;CHECK : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>(<a class="code" href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="namespacerah_html_a182308962c8123dcbe4e4665eaef105c"><div class="ttname"><a href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a></div><div class="ttdeci">auto all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah.hpp:736</div></div>
+<div class="ttc" id="rah_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="rah_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> rah.cpp:33</div></div>
 <div class="ttc" id="namespacerah_1_1view_html_a5b9cacbf101962d95221b591d7f11026"><div class="ttname"><a href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah.hpp:457</div></div>
 </div><!-- fragment -->
 </div>
@@ -269,7 +270,54 @@ template&lt;typename T &gt; </div>
 <p>[map_key]</p>
 <p>[map_key]</p>
 <p>[map_key_pipeable]</p>
-<p>[map_key_pipeable] </p>
+<p>[map_key_pipeable]</p>
+<p>[rah::transform3]</p>
+<p>[rah::transform3]</p>
+<p>[rah::transform4]</p>
+<p>[rah::transform4]</p>
+<p>[<a class="el" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84" title="Executes a reducer function on each element of the range, resulting in a single output value.">rah::reduce</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84" title="Executes a reducer function on each element of the range, resulting in a single output value.">rah::reduce</a>]</p>
+<p>[rah::reduce_pipeable]</p>
+<p>[rah::reduce_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#a025b40120fb932b244ae35963d7af203" title="Checks if unary predicate pred returns true for at least one element in the range.">rah::any_of</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a025b40120fb932b244ae35963d7af203" title="Checks if unary predicate pred returns true for at least one element in the range.">rah::any_of</a>] [rah::any_of_pipeable]</p>
+<p>[rah::any_of_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c" title="Checks if unary predicate pred returns true for all elements in the range.">rah::all_of</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c" title="Checks if unary predicate pred returns true for all elements in the range.">rah::all_of</a>]</p>
+<p>[rah::all_of_pipeable]</p>
+<p>[rah::all_of_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#a792ab1d0886062eaf30de07cac4b6a5b" title="Checks if unary predicate pred returns true for no elements in the range.">rah::none_of</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a792ab1d0886062eaf30de07cac4b6a5b" title="Checks if unary predicate pred returns true for no elements in the range.">rah::none_of</a>]</p>
+<p>[rah::none_of_pipeable]</p>
+<p>[rah::none_of_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b" title="Counts the elements that are equal to value.">rah::count</a>]</p>
+<p>[<a class="el" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b" title="Counts the elements that are equal to value.">rah::count</a>] [rah::count_pipeable]</p>
+<p>[rah::count_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#a8e6a379c05d482a52137f5647783fe27" title="Counts elements for which predicate pred returns true.">rah::count_if</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a8e6a379c05d482a52137f5647783fe27" title="Counts elements for which predicate pred returns true.">rah::count_if</a>] [rah::count_if_pipeable]</p>
+<p>[rah::count_if_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#afe6ed477fd9ab2f873d76a4b50ffac39" title="Applies the given function func to each element of the range.">rah::for_each</a>]</p>
+<p>[<a class="el" href="namespacerah.html#afe6ed477fd9ab2f873d76a4b50ffac39" title="Applies the given function func to each element of the range.">rah::for_each</a>]</p>
+<p>[rah::for_each_pipeable]</p>
+<p>[rah::for_each_pipeable]</p>
+<p>[rah::to_container_pipeable]</p>
+<p>[rah::to_container_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32" title="Return a container of type C, filled with the content of range.">rah::to_container</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32" title="Return a container of type C, filled with the content of range.">rah::to_container</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a5ce2d92c6f0b3dd5eb6d70600e949a97" title="Finds the first position where two ranges differ.">rah::mismatch</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a5ce2d92c6f0b3dd5eb6d70600e949a97" title="Finds the first position where two ranges differ.">rah::mismatch</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7" title="Finds the first element equal to value.">rah::find</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7" title="Finds the first element equal to value.">rah::find</a>] [rah::find_pipeable]</p>
+<p>[rah::find_pipeable] [<a class="el" href="namespacerah.html#acbd71a185a2510e691dcd715a31edf53" title="Finds the first element satisfying specific criteria.">rah::find_if</a>]</p>
+<p>[<a class="el" href="namespacerah.html#acbd71a185a2510e691dcd715a31edf53" title="Finds the first element satisfying specific criteria.">rah::find_if</a>] [rah::find_if_pipeable]</p>
+<p>[rah::find_if_pipeable] [<a class="el" href="namespacerah.html#af758ef3c67d20ba6260319cb0e0171c5" title="Finds the first element not satisfying specific criteria.">rah::find_if_not</a>]</p>
+<p>[<a class="el" href="namespacerah.html#af758ef3c67d20ba6260319cb0e0171c5" title="Finds the first element not satisfying specific criteria.">rah::find_if_not</a>] [rah::find_if_not_pipeable]</p>
+<p>[rah::find_if_not_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493" title="Get the size of range.">rah::size</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493" title="Get the size of range.">rah::size</a>] [rah::size_pipeable]</p>
+<p>[rah::size_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf" title="Determines if two sets of elements are the same.">rah::equal</a>]</p>
+<p>[<a class="el" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf" title="Determines if two sets of elements are the same.">rah::equal</a>] </p>
 
 </div>
 </div>

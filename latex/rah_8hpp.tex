@@ -153,62 +153,62 @@ auto \mbox{\hyperlink{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}{ra
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}{rah\+::view\+::map\+\_\+key}} ()
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename RI , typename RO , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a61ec1c71151c208959f760fd3f45b8da}{rah\+::transform}} (RI \&\&range\+In, RO \&\&range\+Out, F \&\&func)
-\item 
-{\footnotesize template$<$typename R\+I1 , typename R\+I2 , typename RO , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a0efb6fa5c863d9695709294fb2102e69}{rah\+::transform}} (R\+I1 \&\&range\+In1, R\+I2 \&\&range\+In2, RO \&\&range\+Out, F \&\&func)
-\item 
-{\footnotesize template$<$typename R , typename I , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a5d45fbb18316845980faf1d38a36f129}{rah\+::reduce}} (R \&\&range, I \&\&init, F \&\&func)
-\item 
-{\footnotesize template$<$typename I , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_aa96bdd99dc89f511ec1ff6fad050270d}{rah\+::reduce}} (I \&\&init, F \&\&func)
-\item 
-{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_afc8271027c900700eb022746c8786b93}{rah\+::any\+\_\+of}} (R \&\&range, F \&\&func)
-\item 
+{\footnotesize template$<$typename RI , typename RO , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a7cb27bf7219a7ee4b47cc9da217810a8}{rah\+::transform}} (RI \&\&range\+In, RO \&\&range\+Out, F \&\&unary\+\_\+op)
+\begin{DoxyCompactList}\small\item\em Applies the given function unary\+\_\+op to the range range\+In and stores the result in the range range\+Out. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R\+I1 , typename R\+I2 , typename RO , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a7bac191e66e0d3f3823e0c08382f0418}{rah\+::transform}} (R\+I1 \&\&range\+In1, R\+I2 \&\&range\+In2, RO \&\&range\+Out, F \&\&binary\+\_\+op)
+\begin{DoxyCompactList}\small\item\em The binary operation binary\+\_\+op is applied to pairs of elements from two ranges. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename I , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}{rah\+::reduce}} (R \&\&range, I \&\&init, F \&\&reducer)
+\begin{DoxyCompactList}\small\item\em Executes a reducer function on each element of the range, resulting in a single output value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename I , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a6a6b7b7e3b78bb4bd16372fbb688c152}{rah\+::reduce}} (I \&\&init, F \&\&reducer)
+\begin{DoxyCompactList}\small\item\em Executes a reducer function on each element of the range, resulting in a single output value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a025b40120fb932b244ae35963d7af203}{rah\+::any\+\_\+of}} (R \&\&range, F \&\&pred)
+\begin{DoxyCompactList}\small\item\em Checks if unary predicate pred returns true for at least one element in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_aa3f330b2354859d8a9e6df794a1e7a1a}{rah\+::any\+\_\+of}} (P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if unary predicate pred returns true for at least one element in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a182308962c8123dcbe4e4665eaef105c}{rah\+::all\+\_\+of}} (R \&\&range, P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if unary predicate pred returns true for all elements in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a4066165c960917a330beeed75a0f96e7}{rah\+::all\+\_\+of}} (P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if unary predicate pred returns true for all elements in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a792ab1d0886062eaf30de07cac4b6a5b}{rah\+::none\+\_\+of}} (R \&\&range, P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if unary predicate pred returns true for no elements in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_aa05e58774ee8e9e05cd3e6ed2a2fa372}{rah\+::none\+\_\+of}} (P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if unary predicate pred returns true for no elements in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{rah\+::count}} (R \&\&range, V \&\&value)
-\item 
+\begin{DoxyCompactList}\small\item\em Counts the elements that are equal to value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_ae8400202fc4005dbade0f479dd556ec3}{rah\+::count}} (V \&\&value)
-\item 
+\begin{DoxyCompactList}\small\item\em Counts the elements that are equal to value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a8e6a379c05d482a52137f5647783fe27}{rah\+::count\+\_\+if}} (R \&\&range, P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Counts elements for which predicate pred returns true. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a9e22b56a1f28a353659fed572f33f5a9}{rah\+::count\+\_\+if}} (P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Counts elements for which predicate pred returns true. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename F $>$ }\\void \mbox{\hyperlink{namespacerah_afe6ed477fd9ab2f873d76a4b50ffac39}{rah\+::for\+\_\+each}} (R \&\&range, F \&\&func)
-\item 
+\begin{DoxyCompactList}\small\item\em Applies the given function func to each element of the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_a76e2ce1a497aa3726cc9d99fb320ac67}{rah\+::for\+\_\+each}} (F \&\&func)
-\item 
+\begin{DoxyCompactList}\small\item\em Applies the given function func to each element of the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename C , typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a11fcae12055a2bcf5ac7c41e25e74a32}{rah\+::to\+\_\+container}} (R \&\&range)
-\item 
+\begin{DoxyCompactList}\small\item\em Return a container of type C, filled with the content of range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename C $>$ }\\auto \mbox{\hyperlink{namespacerah_aac33763a1f49060e179c2c2053ec07a2}{rah\+::to\+\_\+container}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Return a container of type C, filled with the content of range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}{rah\+::mismatch}} (R1 \&\&range1, R2 \&\&range2)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first position where two ranges differ. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a7c7d4f08068e85923f475a069c3daeb7}{rah\+::find}} (R \&\&range, V \&\&value)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first element equal to value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a37f60e134164914703fdd0508f83ee11}{rah\+::find}} (V \&\&value)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first element equal to value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_acbd71a185a2510e691dcd715a31edf53}{rah\+::find\+\_\+if}} (R \&\&range, P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first element satisfying specific criteria. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a04200b08ecdef8daf99f04c58f29e459}{rah\+::find\+\_\+if}} (P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first element satisfying specific criteria. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_af758ef3c67d20ba6260319cb0e0171c5}{rah\+::find\+\_\+if\+\_\+not}} (R \&\&range, P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first element not satisfying specific criteria. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a406c37a2cf758e7329bfd696a6bf8f89}{rah\+::find\+\_\+if\+\_\+not}} (P \&\&pred)
-\item 
+\begin{DoxyCompactList}\small\item\em Finds the first element not satisfying specific criteria. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a85af749badb4261aa3c97a1d98134493}{rah\+::size}} (R \&\&range)
-\item 
+\begin{DoxyCompactList}\small\item\em Get the size of range. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{rah\+::size}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get the size of range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah\+::equal}} (R1 \&\&range1, R2 \&\&range2)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Determines if two sets of elements are the same. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
