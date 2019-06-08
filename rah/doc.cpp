@@ -220,10 +220,21 @@
  *   - For example the rah::view::filter view is an rah::iterator_range of rah::view::filter_iterator. 
  * - Then you have to create a function taking a range and parameters (or no range for generator)
  *
- * @snippet rah.hpp Create view function
+* @code{.cpp}
+template<typename R> auto retro(R&& range)
+{
+	return make_iterator_range(
+		std::make_reverse_iterator(end(range)), std::make_reverse_iterator(begin(range)));
+}
+ * @endcode
  * - Then you can add a pipeable version of the function
  *
- * @snippet rah.hpp Create view pipeable
+ * @code{.cpp}
+auto retro()
+{
+	return make_pipeable([=](auto&& range) {return retro(range); });
+}
+ * @endcode
  *
  * # How to make an iterator
  * There is in **rah** an helper to create iterators: `rah::iterator_facade`
@@ -244,3 +255,4 @@
  * @snippet rah.cpp make_pipeable use
  *
  */
+

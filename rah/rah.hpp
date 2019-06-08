@@ -361,20 +361,16 @@ auto stride(size_t step)
 
 // ***************************************** retro ************************************************
 
-/// [Create view function]
 template<typename R> auto retro(R&& range)
 {
 	return make_iterator_range(
 		std::make_reverse_iterator(end(range)), std::make_reverse_iterator(begin(range)));
 }
-/// [Create view function]
 
-/// [Create view pipeable]
 auto retro()
 {
 	return make_pipeable([=](auto&& range) {return retro(range); });
 }
-/// [Create view pipeable]
 
 // *************************** zip *****************************************************
 /// \cond PRIVATE 
