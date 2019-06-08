@@ -36,7 +36,7 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+:
 struct \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator$<$ R $>$}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1zip__iterator}{rah\+::view\+::zip\+\_\+iterator$<$ Iter\+Tuple $>$}}
-\begin{DoxyCompactList}\small\item\em \mbox{[}Create view pipeable\mbox{]} \end{DoxyCompactList}\item 
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1chunk__iterator}{rah\+::view\+::chunk\+\_\+iterator$<$ R $>$}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{rah\+::view\+::filter\+\_\+iterator$<$ R, F $>$}}
@@ -110,9 +110,9 @@ auto \mbox{\hyperlink{namespacerah_1_1view_a727bbf69817ca3e940597885764e2032}{ra
 auto \mbox{\hyperlink{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}{rah\+::view\+::stride}} (size\+\_\+t step)
 \begin{DoxyCompactList}\small\item\em Create a view consisting of every Nth element, starting with the first. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{rah\+::view\+::retro}} (R \&\&range)
-\begin{DoxyCompactList}\small\item\em \mbox{[}Create view function\mbox{]} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a view that traverses the source range in reverse order. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}{rah\+::view\+::retro}} ()
-\begin{DoxyCompactList}\small\item\em \mbox{[}Create view function\mbox{]} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a view that traverses the source range in reverse order. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename ... R$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah\+::view\+::zip}} (R \&\&... \+\_\+ranges)
 \begin{DoxyCompactList}\small\item\em Given N ranges, return a new range where Mth element is the result of calling std\+::make\+\_\+tuple on the Mth elements of all N ranges. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{rah\+::view\+::chunk}} (R \&\&range, size\+\_\+t step)

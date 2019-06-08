@@ -18,7 +18,7 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+itera
 struct \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1zip__iterator}{zip\+\_\+iterator}}
-\begin{DoxyCompactList}\small\item\em \mbox{[}Create view pipeable\mbox{]} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,9 +45,9 @@ auto \mbox{\hyperlink{namespacerah_1_1view_a727bbf69817ca3e940597885764e2032}{sl
 auto \mbox{\hyperlink{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}{stride}} (size\+\_\+t step)
 \begin{DoxyCompactList}\small\item\em Create a view consisting of every Nth element, starting with the first. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}} (R \&\&range)
-\begin{DoxyCompactList}\small\item\em \mbox{[}Create view function\mbox{]} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a view that traverses the source range in reverse order. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}{retro}} ()
-\begin{DoxyCompactList}\small\item\em \mbox{[}Create view function\mbox{]} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a view that traverses the source range in reverse order. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename ... R$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{zip}} (R \&\&... \+\_\+ranges)
 \begin{DoxyCompactList}\small\item\em Given N ranges, return a new range where Mth element is the result of calling std\+::make\+\_\+tuple on the Mth elements of all N ranges. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{chunk}} (R \&\&range, size\+\_\+t step)
@@ -410,9 +410,7 @@ rah\+::view\+::retro (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyPa
 
 
 
-\mbox{[}Create view function\mbox{]} 
-
-Create a view that traverses the source range in reverse order.
+Create a view that traverses the source range in reverse order. 
 
 
 \begin{DoxyCodeInclude}{0}
@@ -430,11 +428,7 @@ Create a view that traverses the source range in reverse order.
 
 
 
-\mbox{[}Create view function\mbox{]} 
-
-Create a view that traverses the source range in reverse order.
-
-\mbox{[}Create view pipeable\mbox{]}
+Create a view that traverses the source range in reverse order. 
 
 \begin{DoxyRemark}{Remarks}
 pipeable syntax

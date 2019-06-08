@@ -90,7 +90,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1transform__iterator.html">transform_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1zip__iterator.html">zip_iterator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">[Create view pipeable]  <a href="structrah_1_1view_1_1zip__iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -138,10 +137,10 @@ Functions</h2></td></tr>
 <tr class="separator:abed0df62d7146e5d0905725efab0e40e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f47b2859b0a8a7e136f09d5c33b89e6"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a9f47b2859b0a8a7e136f09d5c33b89e6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">retro</a> (R &amp;&amp;range)</td></tr>
-<tr class="memdesc:a9f47b2859b0a8a7e136f09d5c33b89e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">[Create view function]  <a href="#a9f47b2859b0a8a7e136f09d5c33b89e6">More...</a><br /></td></tr>
+<tr class="memdesc:a9f47b2859b0a8a7e136f09d5c33b89e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that traverses the source range in reverse order.  <a href="#a9f47b2859b0a8a7e136f09d5c33b89e6">More...</a><br /></td></tr>
 <tr class="separator:a9f47b2859b0a8a7e136f09d5c33b89e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cafe11e62b8f98833a9172cc803f116"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a8cafe11e62b8f98833a9172cc803f116">retro</a> ()</td></tr>
-<tr class="memdesc:a8cafe11e62b8f98833a9172cc803f116"><td class="mdescLeft">&#160;</td><td class="mdescRight">[Create view function]  <a href="#a8cafe11e62b8f98833a9172cc803f116">More...</a><br /></td></tr>
+<tr class="memdesc:a8cafe11e62b8f98833a9172cc803f116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that traverses the source range in reverse order.  <a href="#a8cafe11e62b8f98833a9172cc803f116">More...</a><br /></td></tr>
 <tr class="separator:a8cafe11e62b8f98833a9172cc803f116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b9cacbf101962d95221b591d7f11026"><td class="memTemplParams" colspan="2">template&lt;typename ... R&gt; </td></tr>
 <tr class="memitem:a5b9cacbf101962d95221b591d7f11026"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">zip</a> (R &amp;&amp;... _ranges)</td></tr>
@@ -634,8 +633,7 @@ template&lt;typename R &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>[Create view function] </p>
-<p>Create a view that traverses the source range in reverse order.</p>
+<p>Create a view that traverses the source range in reverse order. </p>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">rah::view::retro</a>(vec))</div><div class="line">            result.push_back(i);</div><div class="line">        assert(result == std::vector&lt;int&gt;({ 3, 2, 1, 0 }));</div></div><!-- fragment -->
 </div>
 </div>
@@ -654,9 +652,7 @@ template&lt;typename R &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>[Create view function] </p>
-<p>Create a view that traverses the source range in reverse order.</p>
-<p>[Create view pipeable]</p>
+<p>Create a view that traverses the source range in reverse order. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">rah::view::retro</a>())</div><div class="line">            result.push_back(i);</div><div class="line">        assert(result == std::vector&lt;int&gt;({ 3, 2, 1, 0 }));</div></div><!-- fragment -->
 </div>
