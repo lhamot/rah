@@ -50,13 +50,13 @@ using range_iter_categ_t = typename std::iterator_traits<range_begin_type_t<R>>:
 template<typename I>
 struct iterator_range
 {
-	I beginIter;
-	I endIter;
+	I begin_iter;
+	I end_iter;
 
-	I begin() const { return beginIter; }
-	I begin() { return beginIter; }
-	I end() const { return endIter; }
-	I end() { return endIter; }
+	I begin() const { return begin_iter; }
+	I begin() { return begin_iter; }
+	I end() const { return end_iter; }
+	I end() { return end_iter; }
 };
 
 template<typename I>
@@ -65,10 +65,10 @@ auto make_iterator_range(I b, I e)
 	return iterator_range<I>{b, e};
 }
 
-template<typename I> I begin(iterator_range<I>& r) { return r.beginIter; }
-template<typename I> I end(iterator_range<I>& r) { return r.endIter; }
-template<typename I> I begin(iterator_range<I> const& r) { return r.beginIter; }
-template<typename I> I end(iterator_range<I> const& r) { return r.endIter; }
+template<typename I> I begin(iterator_range<I>& r) { return r.begin_iter; }
+template<typename I> I end(iterator_range<I>& r) { return r.end_iter; }
+template<typename I> I begin(iterator_range<I> const& r) { return r.begin_iter; }
+template<typename I> I end(iterator_range<I> const& r) { return r.end_iter; }
 
 // **************************************** pipeable **********************************************
 
@@ -361,38 +361,23 @@ auto stride(size_t step)
 
 // ***************************************** retro ************************************************
 
-template<typename R>
-struct retro_iterator : iterator_facade<retro_iterator<R>, range_ref_type_t<R>, range_iter_categ_t<R>>
-{
-	range_begin_type_t<R> iter_;
-	
-	retro_iterator(range_begin_type_t<R> const& iter): iter_(iter) {}
-
-	void increment() { --iter_; }
-	void decrement() { ++iter_; }
-	void advance(intptr_t value) { iter_ -= value; }
-	auto dereference() const
-	{
-		auto iter2 = iter_;
-		--iter2;
-		return *iter2;
-	}
-	auto distance_to(retro_iterator other) const { return other.iter_ - iter_; }
-	bool equal(retro_iterator other) const { return iter_ == other.iter_; }
-};
-
+/// [Create view function]
 template<typename R> auto retro(R&& range)
 {
-	return iterator_range<retro_iterator<std::remove_reference_t<R>>>({ 
-		{ end(range) }, { begin(range) } });
+	return make_iterator_range(
+		std::make_reverse_iterator(end(range)), std::make_reverse_iterator(begin(range)));
 }
+/// [Create view function]
 
+/// [Create view pipeable]
 auto retro()
 {
 	return make_pipeable([=](auto&& range) {return retro(range); });
 }
+/// [Create view pipeable]
 
 // *************************** zip *****************************************************
+/// \cond PRIVATE 
 namespace details
 {
 template <typename Tuple, typename F, std::size_t ...Indices>
@@ -436,6 +421,7 @@ struct get_iter_value
 };
 
 } // namespace details
+/// \endcond
 
 template<typename IterTuple>
 struct zip_iterator : iterator_facade<

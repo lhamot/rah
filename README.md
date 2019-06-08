@@ -3,7 +3,7 @@
 **rah** is **ra**nge, **h**eader-only, "single-file" C++14/17 library.
 ## What is a range library?
 A range library is an extension of the iterators and STL which allow to use and extend algorithms easily.
-A range is anything that can be iterate. Typically in C++ something is a range if we can call `std::begin` and `std::end` on it.
+A range is anything that can be iterate. Typically in C++ something is a range if we can call `begin(range)` and `end(range)` on it.
 ## Why a new range library?
 Yes there are some great range libraries in C++, like [range-v3](https://github.com/ericniebler/range-v3) and [boost::range](http://www.boost.org/doc/libs/1_70_0/libs/range).
 The goal of **rah** is to be "single file" and stay easy to read and understand. **rah** was design with the code simplicity on top priority.

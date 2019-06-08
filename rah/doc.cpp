@@ -1,8 +1,25 @@
+
+/// @class rah::pipeable
+/// @brief Allow to call a custom function when called whith the 'pipe' syntax on a range
+/// @see rah::make_pipeable 
+
 /// @fn rah::make_pipeable(MakeRange&& make_range)
 /// @brief Call to create a "pipeable" function (UFCS style in c++)
 ///
+/// @section create_pipeable How to create :
 /// @snippet rah.cpp make_pipeable create
+/// @section use_pipeable How to use :
 /// @snippet rah.cpp make_pipeable use
+
+/// @fn rah::make_iterator_range(I b, I e)
+/// @brief Create a rah::iterator_range with two given iterators
+
+/// @struct rah::iterator_facade
+/// @brief Inerit to make an iterator
+///
+/// @tparam I is the type of iterator which inerit from iterator_facade
+/// @tparam R is the type returned by dereferencing the iterator (It can be a reference type or not)
+/// @tparam C is the iterator category (std::forward_iterator_tag, std::bidirectional_iterator_tag, std::random_access_iterator_tag)
 
 /// @class rah::iterator_facade<I, R, std::forward_iterator_tag>
 /// @brief Inerit to make a forward_iterator
@@ -177,3 +194,53 @@
 /// @remark pipeable syntax
 ///
 /// @snippet rah.cpp map_key_pipeable
+
+/*! \mainpage rah - A range (header only) library for C++
+ *
+ * # What is a range
+ * A range is anything that can be iterate. Typically in C++ something is a range if we can call `begin(range)` and `end(range)` on it.
+ *
+ * # How to create a range
+ * In **rah** this is done by `rah::iterator_range`.
+ * Two way to create an iterator_range:
+ * - `rah::iterator_range<iterator_type>(begin_iter, end_iter);`
+ * - `rah::make_iterator_range (begin_iter, end_iter);`
+ *
+ * # What is a view
+ * A view is a range returned by a function an which doesn't modify it's input range.\n
+ * The computing is often done in a "lazy" way, that is to say at the moment of iteration.\n
+ * There is two kind of view:
+ * - Views which take a range and give a modified view on it:
+ *   - Example: `rah::view::filter`, `rah::view::transform`
+ * - Generators
+ *   - Example: `rah::view::iota`, `rah::view::generate`
+ *
+ * # How to make a view
+ * - To make a view you have to create an iterator.
+ *   - For example the rah::view::filter view is an rah::iterator_range of rah::view::filter_iterator. 
+ * - Then you have to create a function taking a range and parameters (or no range for generator)
+ *
+ * @snippet rah.hpp Create view function
+ * - Then you can add a pipeable version of the function
+ *
+ * @snippet rah.hpp Create view pipeable
+ *
+ * # How to make an iterator
+ * There is in **rah** an helper to create iterators: `rah::iterator_facade`
+ * There are three kinf of `rah::iterator_facade`:
+ * - rah::iterator_facade<I, R, std::forward_iterator_tag>
+ *   - For an example : rah::view::gererate_iterator
+ * - rah::iterator_facade<I, R, std::bidirectional_iterator_tag >
+ *   - For an example : rah::view::zip_iterator
+ * - rah::iterator_facade<I, R, std::random_access_iterator_tag>
+ *   - For an example : rah::view::iota_iterator
+ *
+ * # How to make a pipeable view or algorithm
+ *
+ * Use the rah::make_pipeable function.
+ * ## How to create a pipeable :
+ * @snippet rah.cpp make_pipeable create
+ * ## How to use a pipeable :
+ * @snippet rah.cpp make_pipeable use
+ *
+ */
