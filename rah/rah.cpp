@@ -32,15 +32,16 @@ bool operator == (std::pair<A, B> a, std::tuple<D, C> b)
 
 auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
 
-#define CHECK(CONDITION) \
-std::cout << "CHECK : " << #CONDITION << std::endl; \
+#undef assert
+#define assert(CONDITION) \
+std::cout << "assert : " << #CONDITION << std::endl; \
 if(CONDITION) \
 	std::cout << "OK" << std::endl; \
 else \
 	{std::cout << "NOT OK" << std::endl; abort();}
 
 #define EQUAL_RANGE(RANGE, IL) \
-std::cout << "CHECK : " << #RANGE << " = " << #IL << std::endl; \
+std::cout << "assert : " << #RANGE << " = " << #IL << std::endl; \
 if(rah::view::zip(RANGE, IL) | rah::all_of(PairEqual)) \
 	std::cout << "OK" << std::endl; \
 else \
@@ -95,7 +96,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::iota(10, 20, 2))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 10, 12, 14, 16, 18 }));
+		assert(result == std::vector<int>({ 10, 12, 14, 16, 18 }));
 		/// [iota]
 	}
 
@@ -105,7 +106,7 @@ int main()
 		auto gen = rah::view::generate([&y]() mutable { auto prev = y; y *= 2; return prev; });
 		std::vector<int> gen_copy;
 		std::copy_n(begin(gen), 4, std::back_inserter(gen_copy));
-		CHECK(gen_copy == std::vector<int>({ 1, 2, 4, 8 }));
+		assert(gen_copy == std::vector<int>({ 1, 2, 4, 8 }));
 		/// [generate]
 	}
 	{
@@ -114,7 +115,7 @@ int main()
 		int y = 1;
 		for (int i : rah::view::generate_n([&y]() mutable { auto prev = y; y *= 2; return prev; }, 4))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 1, 2, 4, 8 }));
+		assert(result == std::vector<int>({ 1, 2, 4, 8 }));
 		/// [generate_n]
 	}
 
@@ -128,7 +129,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::transform(vec, [](auto a) {return a * 2; }))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		assert(result == std::vector<int>({ 0, 2, 4, 6 }));
 		/// [rah::view::transform]
 	}
 	{
@@ -137,7 +138,7 @@ int main()
 		std::vector<int> result;
 		for (int i : vec | rah::view::transform([](auto a) {return a * 2; }))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		assert(result == std::vector<int>({ 0, 2, 4, 6 }));
 		/// [rah::view::transform_pipeable]
 	}
 
@@ -147,7 +148,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::slice(vec, 2, 6))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 2, 3, 4, 5 }));
+		assert(result == std::vector<int>({ 2, 3, 4, 5 }));
 		/// [slice]
 	}
 	{
@@ -156,7 +157,7 @@ int main()
 		std::vector<int> result;
 		for (int i : vec | rah::view::slice(2, 6))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 2, 3, 4, 5 }));
+		assert(result == std::vector<int>({ 2, 3, 4, 5 }));
 		/// [slice_pipeable]
 	}
 
@@ -166,7 +167,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::stride(vec, 2))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		assert(result == std::vector<int>({ 0, 2, 4, 6 }));
 		/// [stride]
 	}
 	{
@@ -175,7 +176,7 @@ int main()
 		std::vector<int> result;
 		for (int i : vec | rah::view::stride(2))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 2, 4, 6 }));
+		assert(result == std::vector<int>({ 0, 2, 4, 6 }));
 		/// [stride_pipeable]
 	}
 
@@ -185,7 +186,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::retro(vec))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 3, 2, 1, 0 }));
+		assert(result == std::vector<int>({ 3, 2, 1, 0 }));
 		/// [retro]
 	}
 	{
@@ -194,7 +195,7 @@ int main()
 		std::vector<int> result;
 		for (int i : vec | rah::view::retro())
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 3, 2, 1, 0 }));
+		assert(result == std::vector<int>({ 3, 2, 1, 0 }));
 		/// [retro_pipeable]
 	}
 
@@ -206,7 +207,7 @@ int main()
 		std::vector<std::tuple<int, double, char>> result;
 		for (auto a_b_c : rah::view::zip(inputA, inputB, inputC))
 			result.push_back(a_b_c);
-		CHECK(result == (std::vector<std::tuple<int, double, char>>{
+		assert(result == (std::vector<std::tuple<int, double, char>>{
 			{ 1, 2.5, 'a' },
 			{ 2, 4.5, 'b' },
 			{ 3, 6.5, 'c' },
@@ -221,7 +222,7 @@ int main()
 		std::vector<std::vector<int>> result;
 		for (auto elts : rah::view::chunk(vec_01234, 2))
 			result.push_back(std::vector<int>(begin(elts), end(elts)));
-		CHECK(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
+		assert(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
 		/// [chunk]
 	}
 	{
@@ -230,7 +231,7 @@ int main()
 		std::vector<std::vector<int>> result;
 		for (auto elts : vec_01234 | rah::view::chunk(2))
 			result.push_back(std::vector<int>(begin(elts), end(elts)));
-		CHECK(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
+		assert(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
 		/// [chunk_pipeable]
 	}
 
@@ -240,7 +241,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::filter(vec_01234, [](auto a) {return a % 2 == 0; }))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 2, 4 }));
+		assert(result == std::vector<int>({ 0, 2, 4 }));
 		/// [filter]
 	}
 	{
@@ -249,7 +250,7 @@ int main()
 		std::vector<int> result;
 		for (int i : vec_01234 | rah::view::filter([](auto a) {return a % 2 == 0; }))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 2, 4 }));
+		assert(result == std::vector<int>({ 0, 2, 4 }));
 		/// [filter_pipeable]
 	}
 
@@ -260,7 +261,7 @@ int main()
 		std::vector<int> result;
 		for (int i : rah::view::join(inputA, inputB))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
+		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
 		/// [join]
 	}
 	{
@@ -270,7 +271,7 @@ int main()
 		std::vector<int> result;
 		for (int i : inputA | rah::view::join(inputB))
 			result.push_back(i);
-		CHECK(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
+		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
 		/// [join_pipeable]
 	}
 
@@ -280,7 +281,7 @@ int main()
 		std::vector<std::tuple<size_t, int>> result;
 		for (auto i_value : rah::view::enumerate(input))
 			result.push_back(i_value);
-		CHECK(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
+		assert(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
 		/// [enumerate]
 	}
 	{
@@ -289,7 +290,7 @@ int main()
 		std::vector<std::tuple<size_t, int>> result;
 		for (auto i_value : input | rah::view::enumerate())
 			result.push_back(i_value);
-		CHECK(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
+		assert(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
 		/// [enumerate_pipeable]
 	}
 
@@ -299,7 +300,7 @@ int main()
 		std::vector<double> result;
 		for (double value : rah::view::map_value(input))
 			result.push_back(value);
-		CHECK(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
+		assert(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
 		/// [map_value]
 	}
 	{
@@ -308,7 +309,7 @@ int main()
 		std::vector<double> result;
 		for (double value : input | rah::view::map_value())
 			result.push_back(value);
-		CHECK(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
+		assert(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
 		/// [map_value_pipeable]
 	}
 
@@ -318,7 +319,7 @@ int main()
 		std::vector<int> result;
 		for (int key : rah::view::map_key(input))
 			result.push_back(key);
-		CHECK(result == (std::vector<int>{ 1, 2, 3, 4 }));
+		assert(result == (std::vector<int>{ 1, 2, 3, 4 }));
 		/// [map_key]
 	}
 	{
@@ -327,7 +328,7 @@ int main()
 		std::vector<int> result;
 		for (int key : input | rah::view::map_key())
 			result.push_back(key);
-		CHECK(result == (std::vector<int>{ 1, 2, 3, 4 }));
+		assert(result == (std::vector<int>{ 1, 2, 3, 4 }));
 		/// [map_key_pipeable]
 	}
 
@@ -338,7 +339,7 @@ int main()
 		std::vector<int> vecIn1{ 0, 1, 2, 3 };
 		std::vector<int> vecOut{ 0, 0, 0, 0 };
 		rah::transform(vecIn1, vecOut, [](int a) {return a + 1; });
-		CHECK(vecOut == std::vector<int>({ 1, 2, 3, 4 }));
+		assert(vecOut == std::vector<int>({ 1, 2, 3, 4 }));
 		/// [rah::transform3]
 	}
 	{
@@ -347,80 +348,80 @@ int main()
 		std::vector<int> vecIn2{ 4, 3, 2, 1 };
 		std::vector<int> vecOut{ 0, 0, 0, 0 };
 		rah::transform(vecIn1, vecIn2, vecOut, [](int a, int b) {return a + b; });
-		CHECK(vecOut == std::vector<int>({ 4, 4, 4, 4 }));
+		assert(vecOut == std::vector<int>({ 4, 4, 4, 4 }));
 		/// [rah::transform4]
 	}
 
-	CHECK((rah::view::iota(0, 0) | rah::reduce(0, [](auto a, auto b) {return a + b; })) == 0);
+	assert((rah::view::iota(0, 0) | rah::reduce(0, [](auto a, auto b) {return a + b; })) == 0);
 	{
 		/// [rah::reduce]
 		std::vector<int> vecIn1{ 1, 2, 3, 4 };
-		CHECK(rah::reduce(vecIn1, 0, [](auto a, auto b) {return a + b; }) == 10);
+		assert(rah::reduce(vecIn1, 0, [](auto a, auto b) {return a + b; }) == 10);
 		/// [rah::reduce]
 	}
 	{
 		/// [rah::reduce_pipeable]
 		std::vector<int> vecIn1{ 1, 2, 3, 4 };
-		CHECK((vecIn1 | rah::reduce(0, [](auto a, auto b) {return a + b; })) == 10);
+		assert((vecIn1 | rah::reduce(0, [](auto a, auto b) {return a + b; })) == 10);
 		/// [rah::reduce_pipeable]
 	}
 
 	/// [rah::any_of]
-	CHECK(rah::any_of(
+	assert(rah::any_of(
 		std::initializer_list<int>{ 3, 0, 1, 3, 4, 6 }, 
 		[](auto a) {return a == 3; })
 	);
 	/// [rah::any_of]
 	/// [rah::any_of_pipeable]
-	CHECK((
+	assert((
 		std::initializer_list<int>{0, 1, 2, 3, 4, 6}
 		| rah::any_of([](auto a) {return a == 3; })
 	));
 	/// [rah::any_of_pipeable]
-	CHECK((std::initializer_list<int>{3, 0, 1, 3, 4, 6} | rah::any_of([](auto a) {return a == 3; })));
-	CHECK((std::initializer_list<int>{2, 0, 1, 2, 4, 6} | rah::any_of([](auto a) {return a == 3; })) == false);
+	assert((std::initializer_list<int>{3, 0, 1, 3, 4, 6} | rah::any_of([](auto a) {return a == 3; })));
+	assert((std::initializer_list<int>{2, 0, 1, 2, 4, 6} | rah::any_of([](auto a) {return a == 3; })) == false);
 
 	/// [rah::all_of]
-	CHECK(rah::all_of(
+	assert(rah::all_of(
 		std::initializer_list<int>{ 4, 4, 4, 4 }, 
 		[](auto a) {return a == 4; })
 	);
 	/// [rah::all_of]
-	CHECK(rah::all_of(std::initializer_list<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
-	CHECK((std::initializer_list<int>{ 4, 4, 4, 4 } | rah::all_of([](auto a) {return a == 4; })));
+	assert(rah::all_of(std::initializer_list<int>{ 4, 4, 3, 4 }, [](auto a) {return a == 4; }) == false);
+	assert((std::initializer_list<int>{ 4, 4, 4, 4 } | rah::all_of([](auto a) {return a == 4; })));
 	/// [rah::all_of_pipeable]
-	CHECK((
+	assert((
 		std::initializer_list<int>{ 4, 4, 3, 4 } 
 	    | rah::all_of([](auto a) {return a == 4; })
 	) == false);
 	/// [rah::all_of_pipeable]
 
 	/// [rah::none_of]
-	CHECK((rah::none_of(
+	assert((rah::none_of(
 		std::initializer_list<int>{7, 8, 9, 10}, 
 		[](auto a) {return a == 11; })
 	));
 	/// [rah::none_of]
-	CHECK((std::initializer_list<int>{7, 8, 9, 10} | rah::none_of([](auto a) {return a == 11; })));
+	assert((std::initializer_list<int>{7, 8, 9, 10} | rah::none_of([](auto a) {return a == 11; })));
 	/// [rah::none_of_pipeable]
-	CHECK((
+	assert((
 		std::initializer_list<int>{7, 8, 9, 10, 11} 
 	    | rah::none_of([](auto a) {return a == 11; })
 	) == false);
 	/// [rah::none_of_pipeable]
 
 	/// [rah::count]
-	CHECK(rah::count(std::initializer_list<int>{ 4, 4, 4, 3 }, 3) == 1);
+	assert(rah::count(std::initializer_list<int>{ 4, 4, 4, 3 }, 3) == 1);
 	/// [rah::count]
 	/// [rah::count_pipeable]
-	CHECK((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count(4)) == 3);
+	assert((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count(4)) == 3);
 	/// [rah::count_pipeable]
 
 	/// [rah::count_if]
-	CHECK(rah::count_if(il<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
+	assert(rah::count_if(il<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
 	/// [rah::count_if]
 	/// [rah::count_if_pipeable]
-	CHECK((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count_if([](auto a) {return a == 3; })) == 1);
+	assert((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count_if([](auto a) {return a == 3; })) == 1);
 	/// [rah::count_if_pipeable]
 
 	{
@@ -442,26 +443,26 @@ int main()
 		/// [rah::to_container_pipeable]
 		std::vector<std::pair<int, char>> in1{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } };
 		std::map<int, char> map_4a_5b_6c_7d = in1 | rah::to_container<std::map<int, char>>();
-		CHECK(
+		assert(
 			map_4a_5b_6c_7d == (std::map<int, char>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } })
 		);
 
 		std::list<int> in2{ 4, 5, 6, 7 };
 		std::vector<int> out = in2 | rah::to_container<std::vector<int>>();
-		CHECK(out == (std::vector<int>{ 4, 5, 6, 7 }));
+		assert(out == (std::vector<int>{ 4, 5, 6, 7 }));
 		/// [rah::to_container_pipeable]
 	}
 	{
 		/// [rah::to_container]
 		std::vector<std::pair<int, char>> in1{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } };
 		std::map<int, char> map_4a_5b_6c_7d = rah::to_container<std::map<int, char>>(in1);
-		CHECK(
+		assert(
 			map_4a_5b_6c_7d == (std::map<int, char>{ {4, 'a'}, { 5, 'b' }, { 6, 'c' }, { 7, 'd' } })
 		);
 
 		std::list<int> in2{ 4, 5, 6, 7 };
 		std::vector<int> out = rah::to_container<std::vector<int>>(in2);
-		CHECK(out == (std::vector<int>{ 4, 5, 6, 7 }));
+		assert(out == (std::vector<int>{ 4, 5, 6, 7 }));
 		/// [rah::to_container]
 	}
 
@@ -474,44 +475,44 @@ int main()
 		std::vector<int> out2;
 		std::copy(begin(std::get<0>(r1_r2)), end(std::get<0>(r1_r2)), std::back_inserter(out1));
 		std::copy(begin(std::get<1>(r1_r2)), end(std::get<1>(r1_r2)), std::back_inserter(out2));
-		CHECK(out1 == std::vector<int>({ 3, 4 }));
-		CHECK(out2 == std::vector<int>({ 42, 42 }));
+		assert(out1 == std::vector<int>({ 3, 4 }));
+		assert(out2 == std::vector<int>({ 42, 42 }));
 		/// [rah::mismatch]
 	}
 
 	{
 		/// [rah::find]
-		CHECK(
+		assert(
 			(rah::find(std::vector<int>{ 1, 2, 3, 4 }, 3) | rah::to_container<std::vector<int>>())
 			== std::vector<int>({3, 4})
 		);
 		/// [rah::find]
 		/// [rah::find_pipeable]
-		CHECK(
+		assert(
 			(std::vector<int>{ 1, 2, 3, 4 } | rah::find(3) | rah::to_container<std::vector<int>>())
 			== std::vector<int>({ 3, 4 })
 		);
 		/// [rah::find_pipeable]
 		/// [rah::find_if]
-		CHECK(
+		assert(
 			(rah::find_if(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }) | rah::to_container<std::vector<int>>())
 			== std::vector<int>({ 3, 4 })
 		);
 		/// [rah::find_if]
 		/// [rah::find_if_pipeable]
-		CHECK(
+		assert(
 			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if([](int i) {return i == 3; }) | rah::to_container<std::vector<int>>())
 			== std::vector<int>({ 3, 4 })
 		);
 		/// [rah::find_if_pipeable]
 		/// [rah::find_if_not]
-		CHECK(
+		assert(
 			(rah::find_if_not(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }) | rah::to_container<std::vector<int>>())
 			== std::vector<int>({ 3, 4 })
 		);
 		/// [rah::find_if_not]
 		/// [rah::find_if_not_pipeable]
-		CHECK(
+		assert(
 			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if_not([](int i) {return i < 3; }) | rah::to_container<std::vector<int>>())
 			== std::vector<int>({ 3, 4 })
 		);
@@ -521,13 +522,13 @@ int main()
 	{
 		/// [rah::size]
 		std::vector<int> vec3{ 1, 2, 3 };
-		CHECK(rah::size(vec3) == 3);
+		assert(rah::size(vec3) == 3);
 		/// [rah::size]
 	}
 	{
 		/// [rah::size_pipeable]
 		std::vector<int> vec3{ 1, 2, 3 };
-		CHECK((vec3 | rah::size()) == 3);
+		assert((vec3 | rah::size()) == 3);
 		/// [rah::size_pipeable]
 	}
 
@@ -536,8 +537,8 @@ int main()
 		std::vector<int> in1{ 1, 2, 3 };
 		std::vector<int> in2{ 1, 2, 3 };
 		std::vector<int> in3{ 11, 12, 13 };
-		CHECK(rah::equal(in1, in2));
-		CHECK(rah::equal(in1, in3) == false);
+		assert(rah::equal(in1, in2));
+		assert(rah::equal(in1, in3) == false);
 		/// [rah::equal]
 	}
 
@@ -586,15 +587,15 @@ int main()
 		auto r_copy = vec | transform([](auto a) {return Elt{ a.member + 1 }; });
 		for (auto iter = begin(r_copy), end_iter = end(r_copy); iter != end_iter; ++iter)
 		{
-			CHECK(iter->member == 2); // Check for mutability
-			CHECK((*iter).member == 2); // Check for mutability
+			assert(iter->member == 2); // Check for mutability
+			assert((*iter).member == 2); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
 				(test::is_reference_v<decltype(*iter)> == false),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_copy)
 		{
-			CHECK(elt.member == 2); // Check for mutability
+			assert(elt.member == 2); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(elt)> || 
 				(test::is_reference_v<decltype(elt)> == false),
 				"elt is not expected to be a reference");
@@ -602,14 +603,14 @@ int main()
 		auto r_ref = vec | transform([](auto a) {return a.member; });
 		for (auto iter = begin(r_ref), end_iter = end(r_ref); iter != end_iter; ++iter)
 		{
-			CHECK(*iter == 1); // Check for mutability
+			assert(*iter == 1); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
 				(test::is_reference_v<decltype(*iter)> == false),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_ref)
 		{
-			CHECK(elt == 1); // Check for mutability
+			assert(elt == 1); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(elt)> || 
 				(test::is_reference_v<decltype(elt)> == false),
 				"elt is not expected to be a reference");
