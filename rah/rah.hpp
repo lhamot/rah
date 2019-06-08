@@ -31,13 +31,13 @@ namespace RAH_NAMESPACE
 template<typename T> T& fake() { return *((std::remove_reference_t<T>*)nullptr); }
 
 template<typename T>
-using range_begin_type_t = decltype(std::begin(fake<T>()));
+using range_begin_type_t = decltype(begin(fake<T>()));
 
 template<typename T>
-using range_end_type_t = decltype(std::end(fake<T>()));
+using range_end_type_t = decltype(end(fake<T>()));
 
 template<typename T>
-using range_ref_type_t = decltype(*std::begin(fake<T>()));
+using range_ref_type_t = decltype(*begin(fake<T>()));
 
 template<typename T>
 using range_value_type_t = std::remove_reference_t<range_ref_type_t<T>>;
@@ -251,7 +251,7 @@ template<typename F> auto generate_n(F&& func, size_t count)
 
 template<typename R> auto all(R&& range)
 {
-	return iterator_range<range_begin_type_t<R>>{std::begin(range), std::end(range)};
+	return iterator_range<range_begin_type_t<R>>{begin(range), end(range)};
 }
 
 auto all()
@@ -291,7 +291,7 @@ struct transform_iterator : iterator_facade<
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using iterator = transform_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>;
-	return iterator_range<iterator>{ { std::begin(range), func }, { std::end(range), func } };
+	return iterator_range<iterator>{ { begin(range), func }, { end(range), func } };
 }
 
 template<typename F> auto transform(F&& func)
@@ -301,12 +301,12 @@ template<typename F> auto transform(F&& func)
 
 // ***************************************** slice ************************************************
 
-template<typename R> auto slice(R&& range, size_t begin, size_t end)
+template<typename R> auto slice(R&& range, size_t begin_idx, size_t end_idx)
 {
-	auto iter = std::begin(range);
-	std::advance(iter, begin);
+	auto iter = begin(range);
+	std::advance(iter, begin_idx);
 	auto endIter = iter;
-	std::advance(endIter, intptr_t(end) - intptr_t(begin));
+	std::advance(endIter, intptr_t(end_idx) - intptr_t(begin_idx));
 	return iterator_range<decltype(iter)>{ {iter}, { endIter } };
 }
 
@@ -348,8 +348,8 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 
 template<typename R> auto stride(R&& range, size_t step)
 {
-	auto iter = std::begin(range);
-	auto endIter = std::end(range);
+	auto iter = begin(range);
+	auto endIter = end(range);
 	return iterator_range<stride_iterator<std::remove_reference_t<R>>>{ 
 		{ iter, endIter, step}, { endIter, endIter, step }};
 }
@@ -384,7 +384,7 @@ struct retro_iterator : iterator_facade<retro_iterator<R>, range_ref_type_t<R>, 
 template<typename R> auto retro(R&& range)
 {
 	return iterator_range<retro_iterator<std::remove_reference_t<R>>>({ 
-		{ std::end(range) }, { std::begin(range) } });
+		{ end(range) }, { begin(range) } });
 }
 
 auto retro()
@@ -456,8 +456,8 @@ struct zip_iterator : iterator_facade<
 
 template<typename ...R> auto zip(R&&... _ranges)
 {
-	auto iterTup = std::make_tuple(std::begin(std::forward<R>(_ranges))...);
-	auto endTup = std::make_tuple(std::end(std::forward<R>(_ranges))...);
+	auto iterTup = std::make_tuple(begin(std::forward<R>(_ranges))...);
+	auto endTup = std::make_tuple(end(std::forward<R>(_ranges))...);
 	return iterator_range<zip_iterator<decltype(iterTup)>>{ { iterTup }, { endTup }};
 }
 
@@ -493,8 +493,8 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 
 template<typename R> auto chunk(R&& range, size_t step)
 {
-	auto iter = std::begin(range);
-	auto endIter = std::end(range);
+	auto iter = begin(range);
+	auto endIter = end(range);
 	using iterator = chunk_iterator<std::remove_reference_t<R>>;
 	iterator begin = { iter, iter, endIter, step };
 	begin.increment();
@@ -547,8 +547,8 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 
 template<typename R, typename F> auto filter(R&& range, F&& func)
 {
-	auto iter = std::begin(range);
-	auto endIter = std::end(range);
+	auto iter = begin(range);
+	auto endIter = end(range);
 	return iterator_range<filter_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>>{
 		{ iter, iter, endIter, func },
 		{ iter, endIter, endIter, func }
@@ -613,14 +613,14 @@ template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 		std::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
 		range_ref_type_t<R1>>>
 	{
-		{ std::make_pair(std::begin(range1), std::begin(range2)), std::make_pair(std::end(range1), std::end(range2)), 0 },
-		{ std::make_pair(std::end(range1), std::end(range2)), std::make_pair(std::end(range1), std::end(range2)), 1 },
+		{ std::make_pair(begin(range1), begin(range2)), std::make_pair(end(range1), end(range2)), 0 },
+		{ std::make_pair(end(range1), end(range2)), std::make_pair(end(range1), end(range2)), 1 },
 	};
 }
 
 template<typename R> auto join(R&& rightRange)
 {
-	auto rightRangeRef = make_iterator_range(std::begin(rightRange), std::end(rightRange));
+	auto rightRangeRef = make_iterator_range(begin(rightRange), end(rightRange));
 	return make_pipeable([=](auto&& leftRange) {return join(leftRange, rightRangeRef); });
 }
 
@@ -628,7 +628,7 @@ template<typename R> auto join(R&& rightRange)
 
 template<typename R> auto enumerate(R&& range)
 {
-	size_t const dist = std::distance(std::begin(std::forward<R>(range)), std::end(std::forward<R>(range)));
+	size_t const dist = std::distance(begin(std::forward<R>(range)), end(std::forward<R>(range)));
 	return zip(iota(size_t(0), dist), std::forward<R>(range));
 }
 
@@ -671,8 +671,8 @@ auto map_key()
 template<typename RI, typename RO, typename F>
 auto transform(RI&& rangeIn, RO&& rangeOut, F&& unary_op)
 {
-	auto iter = std::transform(std::begin(rangeIn), std::end(rangeIn), std::begin(rangeOut), std::forward<F>(unary_op));
-	return make_iterator_range(iter, std::end(rangeOut));
+	auto iter = std::transform(begin(rangeIn), end(rangeIn), begin(rangeOut), std::forward<F>(unary_op));
+	return make_iterator_range(iter, end(rangeOut));
 }
 
 /// @brief The binary operation binary_op is applied to pairs of elements from two ranges
@@ -682,11 +682,11 @@ template<typename RI1, typename RI2, typename RO, typename F>
 auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& binary_op)
 {
 	auto iter = std::transform(
-		std::begin(rangeIn1), std::end(rangeIn1),
-		std::begin(rangeIn2),
-		std::begin(rangeOut),
+		begin(rangeIn1), end(rangeIn1),
+		begin(rangeIn2),
+		begin(rangeOut),
 		std::forward<F>(binary_op));
-	return make_iterator_range(iter, std::end(rangeOut));
+	return make_iterator_range(iter, end(rangeOut));
 }
 
 // ********************************************* reduce *******************************************
@@ -696,7 +696,7 @@ auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& binary_op)
 /// @snippet rah.cpp rah::reduce
 template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&& reducer)
 {
-	return std::accumulate(std::begin(range), std::end(range), std::forward<I>(init), std::forward<F>(reducer));
+	return std::accumulate(begin(range), end(range), std::forward<I>(init), std::forward<F>(reducer));
 }
 
 /// @brief Executes a reducer function on each element of the range, resulting in a single output value
@@ -716,7 +716,7 @@ auto reduce(I&& init, F&& reducer)
 /// @snippet rah.cpp rah::any_of
 template<typename R, typename F> auto any_of(R&& range, F&& pred)
 {
-	return std::any_of(std::begin(range), std::end(range), std::forward<F>(pred));
+	return std::any_of(begin(range), end(range), std::forward<F>(pred));
 }
 
 /// @brief Checks if unary predicate pred returns true for at least one element in the range
@@ -735,7 +735,7 @@ template<typename P> auto any_of(P&& pred)
 /// @snippet rah.cpp rah::all_of
 template<typename R, typename P> auto all_of(R&& range, P&& pred)
 {
-	return std::all_of(std::begin(range), std::end(range), std::forward<P>(pred));
+	return std::all_of(begin(range), end(range), std::forward<P>(pred));
 }
 
 /// @brief Checks if unary predicate pred returns true for all elements in the range
@@ -754,7 +754,7 @@ template<typename P> auto all_of(P&& pred)
 /// @snippet rah.cpp rah::none_of
 template<typename R, typename P> auto none_of(R&& range, P&& pred)
 {
-	return std::none_of(std::begin(range), std::end(range), std::forward<P>(pred));
+	return std::none_of(begin(range), end(range), std::forward<P>(pred));
 }
 
 /// @brief Checks if unary predicate pred returns true for no elements in the range 
@@ -773,7 +773,7 @@ template<typename P> auto none_of(P&& pred)
 /// @snippet rah.cpp rah::count
 template<typename R, typename V> auto count(R&& range, V&& value)
 {
-	return std::count(std::begin(range), std::end(range), std::forward<V>(value));
+	return std::count(begin(range), end(range), std::forward<V>(value));
 }
 
 /// @brief Counts the elements that are equal to value
@@ -791,7 +791,7 @@ template<typename V> auto count(V&& value)
 /// @snippet rah.cpp rah::count_if
 template<typename R, typename P> auto count_if(R&& range, P&& pred)
 {
-	return std::count_if(std::begin(range), std::end(range), std::forward<P>(pred));
+	return std::count_if(begin(range), end(range), std::forward<P>(pred));
 }
 
 /// @brief Counts elements for which predicate pred returns true
@@ -809,7 +809,7 @@ template<typename P> auto count_if(P&& pred)
 /// @snippet rah.cpp rah::for_each
 template<typename R, typename F> void for_each(R&& range, F&& func)
 {
-	::std::for_each(std::begin(range), std::end(range), std::forward<F>(func));
+	::std::for_each(begin(range), end(range), std::forward<F>(func));
 }
 
 /// @brief Applies the given function func to each element of the range
@@ -828,7 +828,7 @@ template<typename F> auto for_each(F&& func)
 /// @snippet rah.cpp rah::to_container
 template<typename C, typename R> auto to_container(R&& range)
 {
-	return C(std::begin(range), std::end(range));
+	return C(begin(range), end(range));
 }
 
 /// @brief Return a container of type C, filled with the content of range
@@ -847,9 +847,9 @@ template<typename C> auto to_container()
 /// @snippet rah.cpp rah::mismatch
 template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
-	auto const end1 = std::end(range1);
-	auto const end2 = std::end(range2);
-	auto i1_i2 = std::mismatch(std::begin(range1), end1, std::begin(range2), end2);
+	auto const end1 = end(range1);
+	auto const end2 = end(range2);
+	auto i1_i2 = std::mismatch(begin(range1), end1, begin(range2), end2);
 	return std::make_pair(make_iterator_range(std::get<0>(i1_i2), end1), make_iterator_range(std::get<1>(i1_i2), end2));
 }
 
@@ -860,9 +860,9 @@ template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 /// @snippet rah.cpp rah::find
 template<typename R, typename V> auto find(R&& range, V&& value)
 {
-	auto end = std::end(range);
-	auto iter = std::find(std::begin(range), end, std::forward<V>(value));
-	return make_iterator_range(iter, end);
+	auto end_iter = end(range);
+	auto iter = std::find(begin(range), end_iter, std::forward<V>(value));
+	return make_iterator_range(iter, end_iter);
 }
 
 /// @brief Finds the first element equal to value
@@ -879,9 +879,9 @@ template<typename V> auto find(V&& value)
 /// @snippet rah.cpp rah::find_if
 template<typename R, typename P> auto find_if(R&& range, P&& pred)
 {
-	auto end = std::end(range);
-	auto iter = std::find_if(std::begin(range), end, std::forward<P>(pred));
-	return make_iterator_range(iter, end);
+	auto end_iter = end(range);
+	auto iter = std::find_if(begin(range), end_iter, std::forward<P>(pred));
+	return make_iterator_range(iter, end_iter);
 }
 
 /// @brief Finds the first element satisfying specific criteria
@@ -898,9 +898,9 @@ template<typename P> auto find_if(P&& pred)
 /// @snippet rah.cpp rah::find_if_not
 template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 {
-	auto end = std::end(range);
-	auto iter = std::find_if_not(std::begin(range), end, std::forward<P>(pred));
-	return make_iterator_range(iter, end);
+	auto end_iter = end(range);
+	auto iter = std::find_if_not(begin(range), end_iter, std::forward<P>(pred));
+	return make_iterator_range(iter, end_iter);
 }
 
 /// @brief Finds the first element not satisfying specific criteria
@@ -919,7 +919,7 @@ template<typename P> auto find_if_not(P&& pred)
 /// @snippet rah.cpp rah::size
 template<typename R> auto size(R&& range)
 {
-	return std::distance(std::begin(range), std::end(range));
+	return std::distance(begin(range), end(range));
 }
 
 /// @brief Get the size of range
@@ -938,7 +938,7 @@ auto size()
 /// @snippet rah.cpp rah::equal
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 {
-	return std::equal(std::begin(range1), std::end(range1), std::begin(range2), std::end(range2));
+	return std::equal(begin(range1), end(range1), begin(range2), end(range2));
 }
 
 }

@@ -75,7 +75,7 @@ struct WhatIsIt;
 /// [make_pipeable create]
 auto test_count(int i)
 {
-	return rah::make_pipeable([=](auto&& range) { return std::count(std::begin(range), std::end(range), i); });
+	return rah::make_pipeable([=](auto&& range) { return std::count(begin(range), end(range), i); });
 }
 /// [make_pipeable create]
 
@@ -104,7 +104,7 @@ int main()
 		int y = 1;
 		auto gen = rah::view::generate([&y]() mutable { auto prev = y; y *= 2; return prev; });
 		std::vector<int> gen_copy;
-		std::copy_n(std::begin(gen), 4, std::back_inserter(gen_copy));
+		std::copy_n(begin(gen), 4, std::back_inserter(gen_copy));
 		CHECK(gen_copy == std::vector<int>({ 1, 2, 4, 8 }));
 		/// [generate]
 	}
@@ -220,7 +220,7 @@ int main()
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<std::vector<int>> result;
 		for (auto elts : rah::view::chunk(vec_01234, 2))
-			result.push_back(std::vector<int>(std::begin(elts), std::end(elts)));
+			result.push_back(std::vector<int>(begin(elts), end(elts)));
 		CHECK(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
 		/// [chunk]
 	}
@@ -229,7 +229,7 @@ int main()
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<std::vector<int>> result;
 		for (auto elts : vec_01234 | rah::view::chunk(2))
-			result.push_back(std::vector<int>(std::begin(elts), std::end(elts)));
+			result.push_back(std::vector<int>(begin(elts), end(elts)));
 		CHECK(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
 		/// [chunk_pipeable]
 	}
@@ -472,8 +472,8 @@ int main()
 		auto r1_r2 = rah::mismatch(in1, in2);
 		std::vector<int> out1;
 		std::vector<int> out2;
-		std::copy(std::begin(std::get<0>(r1_r2)), std::end(std::get<0>(r1_r2)), std::back_inserter(out1));
-		std::copy(std::begin(std::get<1>(r1_r2)), std::end(std::get<1>(r1_r2)), std::back_inserter(out2));
+		std::copy(begin(std::get<0>(r1_r2)), end(std::get<0>(r1_r2)), std::back_inserter(out1));
+		std::copy(begin(std::get<1>(r1_r2)), end(std::get<1>(r1_r2)), std::back_inserter(out2));
 		CHECK(out1 == std::vector<int>({ 3, 4 }));
 		CHECK(out2 == std::vector<int>({ 42, 42 }));
 		/// [rah::mismatch]
@@ -561,7 +561,7 @@ int main()
 	{
 		std::vector<Elt> vec = { {0}, { 1 }, { 2 }, { 3 }, { 4 } };
 		auto& r = vec;
-		for (auto iter = std::begin(r), end = std::end(r); iter != end; ++iter)
+		for (auto iter = begin(r), end_iter = end(r); iter != end_iter; ++iter)
 		{
 			iter->member = 42; // Check for mutability
 		}
@@ -584,7 +584,7 @@ int main()
 
 		std::vector<Elt> vec = { {1} };
 		auto r_copy = vec | transform([](auto a) {return Elt{ a.member + 1 }; });
-		for (auto iter = std::begin(r_copy), end = std::end(r_copy); iter != end; ++iter)
+		for (auto iter = begin(r_copy), end_iter = end(r_copy); iter != end_iter; ++iter)
 		{
 			CHECK(iter->member == 2); // Check for mutability
 			CHECK((*iter).member == 2); // Check for mutability
@@ -600,7 +600,7 @@ int main()
 				"elt is not expected to be a reference");
 		}
 		auto r_ref = vec | transform([](auto a) {return a.member; });
-		for (auto iter = std::begin(r_ref), end = std::end(r_ref); iter != end; ++iter)
+		for (auto iter = begin(r_ref), end_iter = end(r_ref); iter != end_iter; ++iter)
 		{
 			CHECK(*iter == 1); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
