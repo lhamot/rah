@@ -79,6 +79,7 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__facade.html">iterator_facade</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inerit to make an iterator.  <a href="structrah_1_1iterator__facade.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4.html">iterator_facade&lt; I, R, std::bidirectional_iterator_tag &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inerit to make a bidirectional iterator.  <a href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4.html#details">More...</a><br /></td></tr>
@@ -91,25 +92,26 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__range.html">iterator_range</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1pipeable.html">pipeable</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1pipeable.html">pipeable</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allow to call a custom function when called whith the 'pipe' syntax on a range.  <a href="structrah_1_1pipeable.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:afa7f59d1f37c7b9d9caed37551be9eaa"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:afa7f59d1f37c7b9d9caed37551be9eaa"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#afa7f59d1f37c7b9d9caed37551be9eaa">range_begin_type_t</a> = decltype(std::begin(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt; T &gt;()))</td></tr>
-<tr class="separator:afa7f59d1f37c7b9d9caed37551be9eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3042a09fc211e86eea6771d01375d263"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a3042a09fc211e86eea6771d01375d263"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3042a09fc211e86eea6771d01375d263">range_end_type_t</a> = decltype(std::end(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt; T &gt;()))</td></tr>
-<tr class="separator:a3042a09fc211e86eea6771d01375d263"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fac89acf62e53f57898978ab8917f26"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a1fac89acf62e53f57898978ab8917f26"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a1fac89acf62e53f57898978ab8917f26">range_ref_type_t</a> = decltype(*std::begin(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt; T &gt;()))</td></tr>
-<tr class="separator:a1fac89acf62e53f57898978ab8917f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28aff4eeddcece6be65ff0b956d32d4a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a28aff4eeddcece6be65ff0b956d32d4a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a28aff4eeddcece6be65ff0b956d32d4a">range_begin_type_t</a> = decltype(<a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt; T &gt;()))</td></tr>
+<tr class="separator:a28aff4eeddcece6be65ff0b956d32d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9657e24ae477f4482225b133fe286b65"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a9657e24ae477f4482225b133fe286b65"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a9657e24ae477f4482225b133fe286b65">range_end_type_t</a> = decltype(<a class="el" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt; T &gt;()))</td></tr>
+<tr class="separator:a9657e24ae477f4482225b133fe286b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6622426bea22e9509614fe4c574ebeca"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6622426bea22e9509614fe4c574ebeca"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a6622426bea22e9509614fe4c574ebeca">range_ref_type_t</a> = decltype(*<a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt; T &gt;()))</td></tr>
+<tr class="separator:a6622426bea22e9509614fe4c574ebeca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b32e39fb106af7036b20a39c4f024c1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a4b32e39fb106af7036b20a39c4f024c1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a4b32e39fb106af7036b20a39c4f024c1">range_value_type_t</a> = std::remove_reference_t&lt; <a class="el" href="namespacerah.html#a1fac89acf62e53f57898978ab8917f26">range_ref_type_t</a>&lt; T &gt; &gt;</td></tr>
+<tr class="memitem:a4b32e39fb106af7036b20a39c4f024c1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a4b32e39fb106af7036b20a39c4f024c1">range_value_type_t</a> = std::remove_reference_t&lt; <a class="el" href="namespacerah.html#a6622426bea22e9509614fe4c574ebeca">range_ref_type_t</a>&lt; T &gt; &gt;</td></tr>
 <tr class="separator:a4b32e39fb106af7036b20a39c4f024c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff9b9a5748e293f6a1726308c1ac1a01"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
-<tr class="memitem:aff9b9a5748e293f6a1726308c1ac1a01"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#aff9b9a5748e293f6a1726308c1ac1a01">range_iter_categ_t</a> = typename std::iterator_traits&lt; <a class="el" href="namespacerah.html#afa7f59d1f37c7b9d9caed37551be9eaa">range_begin_type_t</a>&lt; R &gt; &gt;::iterator_category</td></tr>
+<tr class="memitem:aff9b9a5748e293f6a1726308c1ac1a01"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#aff9b9a5748e293f6a1726308c1ac1a01">range_iter_categ_t</a> = typename std::iterator_traits&lt; <a class="el" href="namespacerah.html#a28aff4eeddcece6be65ff0b956d32d4a">range_begin_type_t</a>&lt; R &gt; &gt;::iterator_category</td></tr>
 <tr class="separator:aff9b9a5748e293f6a1726308c1ac1a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -117,9 +119,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a11785bbdf970efa1bc57fc14993b77bf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a11785bbdf970efa1bc57fc14993b77bf"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a> ()</td></tr>
 <tr class="separator:a11785bbdf970efa1bc57fc14993b77bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a3dd43bb465c99137bfdebb2292b102"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
-<tr class="memitem:a0a3dd43bb465c99137bfdebb2292b102"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a0a3dd43bb465c99137bfdebb2292b102">make_iterator_range</a> (I b, I e)</td></tr>
-<tr class="separator:a0a3dd43bb465c99137bfdebb2292b102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e145bfeb8a932058e20fc4cb4e7c206"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
+<tr class="memitem:a4e145bfeb8a932058e20fc4cb4e7c206"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">make_iterator_range</a> (I b, I e)</td></tr>
+<tr class="memdesc:a4e145bfeb8a932058e20fc4cb4e7c206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range</a> with two given iterators.  <a href="#a4e145bfeb8a932058e20fc4cb4e7c206">More...</a><br /></td></tr>
+<tr class="separator:a4e145bfeb8a932058e20fc4cb4e7c206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c4a19e57cc4e0753e93830f247def6d"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
 <tr class="memitem:a2c4a19e57cc4e0753e93830f247def6d"><td class="memTemplItemLeft" align="right" valign="top">I&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a> (<a class="el" href="structrah_1_1iterator__range.html">iterator_range</a>&lt; I &gt; &amp;r)</td></tr>
 <tr class="separator:a2c4a19e57cc4e0753e93830f247def6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,8 +255,8 @@ Functions</h2></td></tr>
 <tr class="separator:abf321dffb33d6a2d752aa091fdba7bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="afa7f59d1f37c7b9d9caed37551be9eaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa7f59d1f37c7b9d9caed37551be9eaa">&#9670;&nbsp;</a></span>range_begin_type_t</h2>
+<a id="a28aff4eeddcece6be65ff0b956d32d4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28aff4eeddcece6be65ff0b956d32d4a">&#9670;&nbsp;</a></span>range_begin_type_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,15 +264,15 @@ Functions</h2></td></tr>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacerah.html#afa7f59d1f37c7b9d9caed37551be9eaa">rah::range_begin_type_t</a> = typedef decltype(std::begin(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt;T&gt;()))</td>
+          <td class="memname">using <a class="el" href="namespacerah.html#a28aff4eeddcece6be65ff0b956d32d4a">rah::range_begin_type_t</a> = typedef decltype(<a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt;T&gt;()))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3042a09fc211e86eea6771d01375d263"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3042a09fc211e86eea6771d01375d263">&#9670;&nbsp;</a></span>range_end_type_t</h2>
+<a id="a9657e24ae477f4482225b133fe286b65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9657e24ae477f4482225b133fe286b65">&#9670;&nbsp;</a></span>range_end_type_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,7 +280,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacerah.html#a3042a09fc211e86eea6771d01375d263">rah::range_end_type_t</a> = typedef decltype(std::end(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt;T&gt;()))</td>
+          <td class="memname">using <a class="el" href="namespacerah.html#a9657e24ae477f4482225b133fe286b65">rah::range_end_type_t</a> = typedef decltype(<a class="el" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt;T&gt;()))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -293,15 +296,15 @@ template&lt;typename T &gt; </div>
 template&lt;typename R &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacerah.html#aff9b9a5748e293f6a1726308c1ac1a01">rah::range_iter_categ_t</a> = typedef typename std::iterator_traits&lt;<a class="el" href="namespacerah.html#afa7f59d1f37c7b9d9caed37551be9eaa">range_begin_type_t</a>&lt;R&gt; &gt;::iterator_category</td>
+          <td class="memname">using <a class="el" href="namespacerah.html#aff9b9a5748e293f6a1726308c1ac1a01">rah::range_iter_categ_t</a> = typedef typename std::iterator_traits&lt;<a class="el" href="namespacerah.html#a28aff4eeddcece6be65ff0b956d32d4a">range_begin_type_t</a>&lt;R&gt; &gt;::iterator_category</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a1fac89acf62e53f57898978ab8917f26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fac89acf62e53f57898978ab8917f26">&#9670;&nbsp;</a></span>range_ref_type_t</h2>
+<a id="a6622426bea22e9509614fe4c574ebeca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6622426bea22e9509614fe4c574ebeca">&#9670;&nbsp;</a></span>range_ref_type_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +312,7 @@ template&lt;typename R &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacerah.html#a1fac89acf62e53f57898978ab8917f26">rah::range_ref_type_t</a> = typedef decltype(*std::begin(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt;T&gt;()))</td>
+          <td class="memname">using <a class="el" href="namespacerah.html#a6622426bea22e9509614fe4c574ebeca">rah::range_ref_type_t</a> = typedef decltype(*<a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(<a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">fake</a>&lt;T&gt;()))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -325,7 +328,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacerah.html#a4b32e39fb106af7036b20a39c4f024c1">rah::range_value_type_t</a> = typedef std::remove_reference_t&lt;<a class="el" href="namespacerah.html#a1fac89acf62e53f57898978ab8917f26">range_ref_type_t</a>&lt;T&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="namespacerah.html#a4b32e39fb106af7036b20a39c4f024c1">rah::range_value_type_t</a> = typedef std::remove_reference_t&lt;<a class="el" href="namespacerah.html#a6622426bea22e9509614fe4c574ebeca">range_ref_type_t</a>&lt;T&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -362,7 +365,7 @@ template&lt;typename R , typename P &gt; </div>
 </div><div class="memdoc">
 
 <p>Checks if unary predicate pred returns true for all elements in the range. </p>
-<div class="fragment"><div class="line">    CHECK(<a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>(</div><div class="line">        std::initializer_list&lt;int&gt;{ 4, 4, 4, 4 }, </div><div class="line">        [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 4; })</div><div class="line">    );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert(<a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>(</div><div class="line">        std::initializer_list&lt;int&gt;{ 4, 4, 4, 4 }, </div><div class="line">        [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 4; })</div><div class="line">    );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a4066165c960917a330beeed75a0f96e7"></a>
@@ -385,7 +388,7 @@ template&lt;typename P &gt; </div>
 
 <p>Checks if unary predicate pred returns true for all elements in the range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">    CHECK((</div><div class="line">        std::initializer_list&lt;int&gt;{ 4, 4, 3, 4 } </div><div class="line">        | <a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 4; })</div><div class="line">    ) == <span class="keyword">false</span>);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert((</div><div class="line">        std::initializer_list&lt;int&gt;{ 4, 4, 3, 4 } </div><div class="line">        | <a class="code" href="namespacerah.html#a182308962c8123dcbe4e4665eaef105c">rah::all_of</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 4; })</div><div class="line">    ) == <span class="keyword">false</span>);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a025b40120fb932b244ae35963d7af203"></a>
@@ -417,7 +420,7 @@ template&lt;typename R , typename F &gt; </div>
 </div><div class="memdoc">
 
 <p>Checks if unary predicate pred returns true for at least one element in the range. </p>
-<div class="fragment"><div class="line">    CHECK(<a class="code" href="namespacerah.html#a025b40120fb932b244ae35963d7af203">rah::any_of</a>(</div><div class="line">        std::initializer_list&lt;int&gt;{ 3, 0, 1, 3, 4, 6 }, </div><div class="line">        [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 3; })</div><div class="line">    );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert(<a class="code" href="namespacerah.html#a025b40120fb932b244ae35963d7af203">rah::any_of</a>(</div><div class="line">        std::initializer_list&lt;int&gt;{ 3, 0, 1, 3, 4, 6 }, </div><div class="line">        [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 3; })</div><div class="line">    );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aa3f330b2354859d8a9e6df794a1e7a1a"></a>
@@ -440,7 +443,7 @@ template&lt;typename P &gt; </div>
 
 <p>Checks if unary predicate pred returns true for at least one element in the range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">    CHECK((</div><div class="line">        std::initializer_list&lt;int&gt;{0, 1, 2, 3, 4, 6}</div><div class="line">        | <a class="code" href="namespacerah.html#a025b40120fb932b244ae35963d7af203">rah::any_of</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 3; })</div><div class="line">    ));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert((</div><div class="line">        std::initializer_list&lt;int&gt;{0, 1, 2, 3, 4, 6}</div><div class="line">        | <a class="code" href="namespacerah.html#a025b40120fb932b244ae35963d7af203">rah::any_of</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 3; })</div><div class="line">    ));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a2c4a19e57cc4e0753e93830f247def6d"></a>
@@ -512,7 +515,7 @@ template&lt;typename R , typename V &gt; </div>
 </div><div class="memdoc">
 
 <p>Counts the elements that are equal to value. </p>
-<div class="fragment"><div class="line">    CHECK(<a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">rah::count</a>(std::initializer_list&lt;int&gt;{ 4, 4, 4, 3 }, 3) == 1);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert(<a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">rah::count</a>(std::initializer_list&lt;int&gt;{ 4, 4, 4, 3 }, 3) == 1);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="ae8400202fc4005dbade0f479dd556ec3"></a>
@@ -535,7 +538,7 @@ template&lt;typename V &gt; </div>
 
 <p>Counts the elements that are equal to value. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">    CHECK((std::initializer_list&lt;int&gt;{ 4, 4, 4, 3 } | <a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">rah::count</a>(4)) == 3);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert((std::initializer_list&lt;int&gt;{ 4, 4, 4, 3 } | <a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">rah::count</a>(4)) == 3);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a8e6a379c05d482a52137f5647783fe27"></a>
@@ -568,7 +571,7 @@ template&lt;typename R , typename P &gt; </div>
 
 <p>Counts elements for which predicate pred returns true. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">    CHECK(<a class="code" href="namespacerah.html#a8e6a379c05d482a52137f5647783fe27">rah::count_if</a>(il&lt;int&gt;{ 4, 4, 4, 3 }, [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 4; }) == 3);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert(<a class="code" href="namespacerah.html#a8e6a379c05d482a52137f5647783fe27">rah::count_if</a>(il&lt;int&gt;{ 4, 4, 4, 3 }, [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 4; }) == 3);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a9e22b56a1f28a353659fed572f33f5a9"></a>
@@ -590,7 +593,7 @@ template&lt;typename P &gt; </div>
 </div><div class="memdoc">
 
 <p>Counts elements for which predicate pred returns true. </p>
-<div class="fragment"><div class="line">    CHECK((std::initializer_list&lt;int&gt;{ 4, 4, 4, 3 } | <a class="code" href="namespacerah.html#a8e6a379c05d482a52137f5647783fe27">rah::count_if</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 3; })) == 1);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert((std::initializer_list&lt;int&gt;{ 4, 4, 4, 3 } | <a class="code" href="namespacerah.html#a8e6a379c05d482a52137f5647783fe27">rah::count_if</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 3; })) == 1);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aaddd1442cd76b96876e692cdefe7261d"></a>
@@ -662,7 +665,7 @@ template&lt;typename R1 , typename R2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Determines if two sets of elements are the same. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; in1{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; in2{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; in3{ 11, 12, 13 };</div><div class="line">        CHECK(<a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(in1, in2));</div><div class="line">        CHECK(<a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(in1, in3) == <span class="keyword">false</span>);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in1{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; in2{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; in3{ 11, 12, 13 };</div><div class="line">        assert(<a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(in1, in2));</div><div class="line">        assert(<a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(in1, in3) == <span class="keyword">false</span>);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a11785bbdf970efa1bc57fc14993b77bf"></a>
@@ -713,7 +716,7 @@ template&lt;typename R , typename V &gt; </div>
 </div><div class="memdoc">
 
 <p>Finds the first element equal to value. </p>
-<div class="fragment"><div class="line">        CHECK(</div><div class="line">            (<a class="code" href="namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7">rah::find</a>(std::vector&lt;int&gt;{ 1, 2, 3, 4 }, 3) | <a class="code" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32">rah::to_container</a>&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({3, 4})</div><div class="line">        );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        assert(</div><div class="line">            (<a class="code" href="namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7">rah::find</a>(std::vector&lt;int&gt;{ 1, 2, 3, 4 }, 3) | <a class="code" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32">rah::to_container</a>&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({3, 4})</div><div class="line">        );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a37f60e134164914703fdd0508f83ee11"></a>
@@ -736,7 +739,7 @@ template&lt;typename V &gt; </div>
 
 <p>Finds the first element equal to value. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        CHECK(</div><div class="line">            (std::vector&lt;int&gt;{ 1, 2, 3, 4 } | <a class="code" href="namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7">rah::find</a>(3) | rah::to_container&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        assert(</div><div class="line">            (std::vector&lt;int&gt;{ 1, 2, 3, 4 } | <a class="code" href="namespacerah.html#a7c7d4f08068e85923f475a069c3daeb7">rah::find</a>(3) | rah::to_container&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="acbd71a185a2510e691dcd715a31edf53"></a>
@@ -768,7 +771,7 @@ template&lt;typename R , typename P &gt; </div>
 </div><div class="memdoc">
 
 <p>Finds the first element satisfying specific criteria. </p>
-<div class="fragment"><div class="line">        CHECK(</div><div class="line">            (<a class="code" href="namespacerah.html#acbd71a185a2510e691dcd715a31edf53">rah::find_if</a>(std::vector&lt;int&gt;{ 1, 2, 3, 4 }, [](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i == 3; }) | <a class="code" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32">rah::to_container</a>&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        assert(</div><div class="line">            (<a class="code" href="namespacerah.html#acbd71a185a2510e691dcd715a31edf53">rah::find_if</a>(std::vector&lt;int&gt;{ 1, 2, 3, 4 }, [](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i == 3; }) | <a class="code" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32">rah::to_container</a>&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a04200b08ecdef8daf99f04c58f29e459"></a>
@@ -791,7 +794,7 @@ template&lt;typename P &gt; </div>
 
 <p>Finds the first element satisfying specific criteria. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        CHECK(</div><div class="line">            (std::vector&lt;int&gt;{ 1, 2, 3, 4 } | <a class="code" href="namespacerah.html#acbd71a185a2510e691dcd715a31edf53">rah::find_if</a>([](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i == 3; }) | <a class="code" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32">rah::to_container</a>&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        assert(</div><div class="line">            (std::vector&lt;int&gt;{ 1, 2, 3, 4 } | <a class="code" href="namespacerah.html#acbd71a185a2510e691dcd715a31edf53">rah::find_if</a>([](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i == 3; }) | <a class="code" href="namespacerah.html#a11fcae12055a2bcf5ac7c41e25e74a32">rah::to_container</a>&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="af758ef3c67d20ba6260319cb0e0171c5"></a>
@@ -823,7 +826,7 @@ template&lt;typename R , typename P &gt; </div>
 </div><div class="memdoc">
 
 <p>Finds the first element not satisfying specific criteria. </p>
-<div class="fragment"><div class="line">        CHECK(</div><div class="line">            (<a class="code" href="namespacerah.html#af758ef3c67d20ba6260319cb0e0171c5">rah::find_if_not</a>(std::vector&lt;int&gt;{ 1, 2, 3, 4 }, [](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i &lt; 3; }) | rah::to_container&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        assert(</div><div class="line">            (<a class="code" href="namespacerah.html#af758ef3c67d20ba6260319cb0e0171c5">rah::find_if_not</a>(std::vector&lt;int&gt;{ 1, 2, 3, 4 }, [](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i &lt; 3; }) | rah::to_container&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a406c37a2cf758e7329bfd696a6bf8f89"></a>
@@ -846,7 +849,7 @@ template&lt;typename P &gt; </div>
 
 <p>Finds the first element not satisfying specific criteria. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        CHECK(</div><div class="line">            (std::vector&lt;int&gt;{ 1, 2, 3, 4 } | <a class="code" href="namespacerah.html#af758ef3c67d20ba6260319cb0e0171c5">rah::find_if_not</a>([](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i &lt; 3; }) | rah::to_container&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        assert(</div><div class="line">            (std::vector&lt;int&gt;{ 1, 2, 3, 4 } | <a class="code" href="namespacerah.html#af758ef3c67d20ba6260319cb0e0171c5">rah::find_if_not</a>([](<span class="keywordtype">int</span> i) {<span class="keywordflow">return</span> i &lt; 3; }) | rah::to_container&lt;std::vector&lt;int&gt;&gt;())</div><div class="line">            == std::vector&lt;int&gt;({ 3, 4 })</div><div class="line">        );</div></div><!-- fragment -->
 </div>
 </div>
 <a id="afe6ed477fd9ab2f873d76a4b50ffac39"></a>
@@ -904,8 +907,8 @@ template&lt;typename F &gt; </div>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; testFE{ 4, 4, 4, 4 };</div><div class="line">        testFE | <a class="code" href="namespacerah.html#afe6ed477fd9ab2f873d76a4b50ffac39">rah::for_each</a>([](<span class="keyword">auto</span>&amp; value) {<span class="keywordflow">return</span> ++value; });</div><div class="line">        EQUAL_RANGE(testFE, il&lt;int&gt;({ 5, 5, 5, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
-<a id="a0a3dd43bb465c99137bfdebb2292b102"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a3dd43bb465c99137bfdebb2292b102">&#9670;&nbsp;</a></span>make_iterator_range()</h2>
+<a id="a4e145bfeb8a932058e20fc4cb4e7c206"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e145bfeb8a932058e20fc4cb4e7c206">&#9670;&nbsp;</a></span>make_iterator_range()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -913,7 +916,7 @@ template&lt;typename F &gt; </div>
 template&lt;typename I &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto rah::make_iterator_range </td>
+          <td class="memname">rah::make_iterator_range </td>
           <td>(</td>
           <td class="paramtype">I&#160;</td>
           <td class="paramname"><em>b</em>, </td>
@@ -931,6 +934,8 @@ template&lt;typename I &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Create a <a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range</a> with two given iterators. </p>
 
 </div>
 </div>
@@ -953,7 +958,11 @@ template&lt;typename MakeRange &gt; </div>
 </div><div class="memdoc">
 
 <p>Call to create a "pipeable" function (UFCS style in c++) </p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> test_count(<span class="keywordtype">int</span> i)</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55">rah::make_pipeable</a>([=](<span class="keyword">auto</span>&amp;&amp; range) { <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">std::count</a>(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">std::begin</a>(range), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">std::end</a>(range), i); });</div><div class="line">}</div></div><!-- fragment --><div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 2, 3 };</div><div class="line">        assert((vec | test_count(2)) == 2);</div></div><!-- fragment -->
+<h1><a class="anchor" id="create_pipeable"></a>
+How to create :</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> test_count(<span class="keywordtype">int</span> i)</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55">rah::make_pipeable</a>([=](<span class="keyword">auto</span>&amp;&amp; range) { <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">std::count</a>(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(range), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(range), i); });</div><div class="line">}</div></div><!-- fragment --><h1><a class="anchor" id="use_pipeable"></a>
+How to use :</h1>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 2, 3 };</div><div class="line">        assert((vec | test_count(2)) == 2);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a5ce2d92c6f0b3dd5eb6d70600e949a97"></a>
@@ -985,7 +994,7 @@ template&lt;typename R1 , typename R2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Finds the first position where two ranges differ. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; in1 = { 1, 2, 3, 4 };</div><div class="line">        std::vector&lt;int&gt; in2 = { 1, 2, 42, 42 };</div><div class="line">        <span class="keyword">auto</span> r1_r2 = <a class="code" href="namespacerah.html#a5ce2d92c6f0b3dd5eb6d70600e949a97">rah::mismatch</a>(in1, in2);</div><div class="line">        std::vector&lt;int&gt; out1;</div><div class="line">        std::vector&lt;int&gt; out2;</div><div class="line">        std::copy(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">std::begin</a>(std::get&lt;0&gt;(r1_r2)), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">std::end</a>(std::get&lt;0&gt;(r1_r2)), std::back_inserter(out1));</div><div class="line">        std::copy(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">std::begin</a>(std::get&lt;1&gt;(r1_r2)), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">std::end</a>(std::get&lt;1&gt;(r1_r2)), std::back_inserter(out2));</div><div class="line">        CHECK(out1 == std::vector&lt;int&gt;({ 3, 4 }));</div><div class="line">        CHECK(out2 == std::vector&lt;int&gt;({ 42, 42 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in1 = { 1, 2, 3, 4 };</div><div class="line">        std::vector&lt;int&gt; in2 = { 1, 2, 42, 42 };</div><div class="line">        <span class="keyword">auto</span> r1_r2 = <a class="code" href="namespacerah.html#a5ce2d92c6f0b3dd5eb6d70600e949a97">rah::mismatch</a>(in1, in2);</div><div class="line">        std::vector&lt;int&gt; out1;</div><div class="line">        std::vector&lt;int&gt; out2;</div><div class="line">        std::copy(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(std::get&lt;0&gt;(r1_r2)), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(std::get&lt;0&gt;(r1_r2)), std::back_inserter(out1));</div><div class="line">        std::copy(<a class="code" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>(std::get&lt;1&gt;(r1_r2)), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(std::get&lt;1&gt;(r1_r2)), std::back_inserter(out2));</div><div class="line">        assert(out1 == std::vector&lt;int&gt;({ 3, 4 }));</div><div class="line">        assert(out2 == std::vector&lt;int&gt;({ 42, 42 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a792ab1d0886062eaf30de07cac4b6a5b"></a>
@@ -1017,7 +1026,7 @@ template&lt;typename R , typename P &gt; </div>
 </div><div class="memdoc">
 
 <p>Checks if unary predicate pred returns true for no elements in the range. </p>
-<div class="fragment"><div class="line">    CHECK((<a class="code" href="namespacerah.html#a792ab1d0886062eaf30de07cac4b6a5b">rah::none_of</a>(</div><div class="line">        std::initializer_list&lt;int&gt;{7, 8, 9, 10}, </div><div class="line">        [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 11; })</div><div class="line">    ));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert((<a class="code" href="namespacerah.html#a792ab1d0886062eaf30de07cac4b6a5b">rah::none_of</a>(</div><div class="line">        std::initializer_list&lt;int&gt;{7, 8, 9, 10}, </div><div class="line">        [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 11; })</div><div class="line">    ));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aa05e58774ee8e9e05cd3e6ed2a2fa372"></a>
@@ -1040,7 +1049,7 @@ template&lt;typename P &gt; </div>
 
 <p>Checks if unary predicate pred returns true for no elements in the range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">    CHECK((</div><div class="line">        std::initializer_list&lt;int&gt;{7, 8, 9, 10, 11} </div><div class="line">        | <a class="code" href="namespacerah.html#a792ab1d0886062eaf30de07cac4b6a5b">rah::none_of</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 11; })</div><div class="line">    ) == <span class="keyword">false</span>);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">    assert((</div><div class="line">        std::initializer_list&lt;int&gt;{7, 8, 9, 10, 11} </div><div class="line">        | <a class="code" href="namespacerah.html#a792ab1d0886062eaf30de07cac4b6a5b">rah::none_of</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a == 11; })</div><div class="line">    ) == <span class="keyword">false</span>);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a5c6923b0ef49c831571590f953253ff9"></a>
@@ -1108,7 +1117,7 @@ template&lt;typename R , typename I , typename F &gt; </div>
 </div><div class="memdoc">
 
 <p>Executes a reducer function on each element of the range, resulting in a single output value. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 1, 2, 3, 4 };</div><div class="line">        CHECK(<a class="code" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84">rah::reduce</a>(vecIn1, 0, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a + b; }) == 10);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 1, 2, 3, 4 };</div><div class="line">        assert(<a class="code" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84">rah::reduce</a>(vecIn1, 0, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a + b; }) == 10);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a6a6b7b7e3b78bb4bd16372fbb688c152"></a>
@@ -1141,7 +1150,7 @@ template&lt;typename I , typename F &gt; </div>
 
 <p>Executes a reducer function on each element of the range, resulting in a single output value. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 1, 2, 3, 4 };</div><div class="line">        CHECK((vecIn1 | <a class="code" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84">rah::reduce</a>(0, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a + b; })) == 10);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 1, 2, 3, 4 };</div><div class="line">        assert((vecIn1 | <a class="code" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84">rah::reduce</a>(0, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a + b; })) == 10);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a85af749badb4261aa3c97a1d98134493"></a>
@@ -1163,7 +1172,7 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the size of range. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec3{ 1, 2, 3 };</div><div class="line">        CHECK(<a class="code" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493">rah::size</a>(vec3) == 3);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec3{ 1, 2, 3 };</div><div class="line">        assert(<a class="code" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493">rah::size</a>(vec3) == 3);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aaee48fa7a804b4fd19c6a78bdd8d4c85"></a>
@@ -1183,7 +1192,7 @@ template&lt;typename R &gt; </div>
 
 <p>Get the size of range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec3{ 1, 2, 3 };</div><div class="line">        CHECK((vec3 | <a class="code" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493">rah::size</a>()) == 3);</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec3{ 1, 2, 3 };</div><div class="line">        assert((vec3 | <a class="code" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493">rah::size</a>()) == 3);</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a11fcae12055a2bcf5ac7c41e25e74a32"></a>
@@ -1205,7 +1214,7 @@ template&lt;typename C , typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Return a container of type C, filled with the content of range. </p>
-<div class="fragment"><div class="line">        std::vector&lt;std::pair&lt;int, char&gt;&gt; in1{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } };</div><div class="line">        std::map&lt;int, char&gt; map_4a_5b_6c_7d = rah::to_container&lt;std::map&lt;int, char&gt;&gt;(in1);</div><div class="line">        CHECK(</div><div class="line">            map_4a_5b_6c_7d == (std::map&lt;int, char&gt;{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } })</div><div class="line">        );</div><div class="line"></div><div class="line">        std::list&lt;int&gt; in2{ 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; out = rah::to_container&lt;std::vector&lt;int&gt;&gt;(in2);</div><div class="line">        CHECK(out == (std::vector&lt;int&gt;{ 4, 5, 6, 7 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;std::pair&lt;int, char&gt;&gt; in1{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } };</div><div class="line">        std::map&lt;int, char&gt; map_4a_5b_6c_7d = rah::to_container&lt;std::map&lt;int, char&gt;&gt;(in1);</div><div class="line">        assert(</div><div class="line">            map_4a_5b_6c_7d == (std::map&lt;int, char&gt;{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } })</div><div class="line">        );</div><div class="line"></div><div class="line">        std::list&lt;int&gt; in2{ 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; out = rah::to_container&lt;std::vector&lt;int&gt;&gt;(in2);</div><div class="line">        assert(out == (std::vector&lt;int&gt;{ 4, 5, 6, 7 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aac33763a1f49060e179c2c2053ec07a2"></a>
@@ -1227,7 +1236,7 @@ template&lt;typename C &gt; </div>
 
 <p>Return a container of type C, filled with the content of range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;std::pair&lt;int, char&gt;&gt; in1{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } };</div><div class="line">        std::map&lt;int, char&gt; map_4a_5b_6c_7d = in1 | rah::to_container&lt;std::map&lt;int, char&gt;&gt;();</div><div class="line">        CHECK(</div><div class="line">            map_4a_5b_6c_7d == (std::map&lt;int, char&gt;{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } })</div><div class="line">        );</div><div class="line"></div><div class="line">        std::list&lt;int&gt; in2{ 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; out = in2 | rah::to_container&lt;std::vector&lt;int&gt;&gt;();</div><div class="line">        CHECK(out == (std::vector&lt;int&gt;{ 4, 5, 6, 7 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;std::pair&lt;int, char&gt;&gt; in1{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } };</div><div class="line">        std::map&lt;int, char&gt; map_4a_5b_6c_7d = in1 | rah::to_container&lt;std::map&lt;int, char&gt;&gt;();</div><div class="line">        assert(</div><div class="line">            map_4a_5b_6c_7d == (std::map&lt;int, char&gt;{ {4, <span class="charliteral">&#39;a&#39;</span>}, { 5, <span class="charliteral">&#39;b&#39;</span> }, { 6, <span class="charliteral">&#39;c&#39;</span> }, { 7, <span class="charliteral">&#39;d&#39;</span> } })</div><div class="line">        );</div><div class="line"></div><div class="line">        std::list&lt;int&gt; in2{ 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; out = in2 | rah::to_container&lt;std::vector&lt;int&gt;&gt;();</div><div class="line">        assert(out == (std::vector&lt;int&gt;{ 4, 5, 6, 7 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a7cb27bf7219a7ee4b47cc9da217810a8"></a>
@@ -1265,7 +1274,7 @@ template&lt;typename RI , typename RO , typename F &gt; </div>
 </div><div class="memdoc">
 
 <p>Applies the given function unary_op to the range rangeIn and stores the result in the range rangeOut. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; vecOut{ 0, 0, 0, 0 };</div><div class="line">        <a class="code" href="namespacerah.html#a7cb27bf7219a7ee4b47cc9da217810a8">rah::transform</a>(vecIn1, vecOut, [](<span class="keywordtype">int</span> a) {<span class="keywordflow">return</span> a + 1; });</div><div class="line">        CHECK(vecOut == std::vector&lt;int&gt;({ 1, 2, 3, 4 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; vecOut{ 0, 0, 0, 0 };</div><div class="line">        <a class="code" href="namespacerah.html#a7cb27bf7219a7ee4b47cc9da217810a8">rah::transform</a>(vecIn1, vecOut, [](<span class="keywordtype">int</span> a) {<span class="keywordflow">return</span> a + 1; });</div><div class="line">        assert(vecOut == std::vector&lt;int&gt;({ 1, 2, 3, 4 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a7bac191e66e0d3f3823e0c08382f0418"></a>
@@ -1309,7 +1318,7 @@ template&lt;typename RI1 , typename RI2 , typename RO , typename F &gt; </div>
 </div><div class="memdoc">
 
 <p>The binary operation binary_op is applied to pairs of elements from two ranges. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; vecIn2{ 4, 3, 2, 1 };</div><div class="line">        std::vector&lt;int&gt; vecOut{ 0, 0, 0, 0 };</div><div class="line">        <a class="code" href="namespacerah.html#a7cb27bf7219a7ee4b47cc9da217810a8">rah::transform</a>(vecIn1, vecIn2, vecOut, [](<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b) {<span class="keywordflow">return</span> a + b; });</div><div class="line">        CHECK(vecOut == std::vector&lt;int&gt;({ 4, 4, 4, 4 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; vecIn2{ 4, 3, 2, 1 };</div><div class="line">        std::vector&lt;int&gt; vecOut{ 0, 0, 0, 0 };</div><div class="line">        <a class="code" href="namespacerah.html#a7cb27bf7219a7ee4b47cc9da217810a8">rah::transform</a>(vecIn1, vecIn2, vecOut, [](<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b) {<span class="keywordflow">return</span> a + b; });</div><div class="line">        assert(vecOut == std::vector&lt;int&gt;({ 4, 4, 4, 4 }));</div></div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
