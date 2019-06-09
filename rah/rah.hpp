@@ -72,10 +72,10 @@ template<typename I> I end(iterator_range<I> const& r) { return r.end_iter; }
 
 // **************************************** pipeable **********************************************
 
-template<typename MakeRange>
+template<typename Func>
 struct pipeable
 {
-	MakeRange make_range;
+	Func func;
 };
 
 template<typename MakeRange>
@@ -87,7 +87,7 @@ auto make_pipeable(MakeRange&& make_range)
 template<typename R, typename MakeRange>
 auto operator | (R&& range, pipeable<MakeRange> const& adapter)
 {
-	return adapter.make_range(std::forward<R>(range));
+	return adapter.func(std::forward<R>(range));
 }
 
 // ************************************ iterator_facade ********************************************
@@ -645,6 +645,25 @@ auto map_key()
 
 } // namespace view
 
+// ****************************************** empty ***********************************************
+
+/// @brief Check if the range if empty
+///
+/// @snippet rah.cpp rah::empty
+template<typename R> bool empty(R&& range)
+{
+	return begin(range) == end(range);
+}
+
+/// @brief Check if the range if empty
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::empty_pipeable
+auto empty()
+{
+	return make_pipeable([](auto&& range) {return empty(range); });
+}
+
 // ****************************************** transform *******************************************
 
 /// @brief Applies the given function unary_op to the range rangeIn and stores the result in the range rangeOut
@@ -696,7 +715,7 @@ auto reduce(I&& init, F&& reducer)
 /// @brief Checks if unary predicate pred returns true for at least one element in the range
 ///
 /// @snippet rah.cpp rah::any_of
-template<typename R, typename F> auto any_of(R&& range, F&& pred)
+template<typename R, typename F> bool any_of(R&& range, F&& pred)
 {
 	return std::any_of(begin(range), end(range), std::forward<F>(pred));
 }
@@ -715,7 +734,7 @@ template<typename P> auto any_of(P&& pred)
 /// @brief Checks if unary predicate pred returns true for all elements in the range
 ///
 /// @snippet rah.cpp rah::all_of
-template<typename R, typename P> auto all_of(R&& range, P&& pred)
+template<typename R, typename P> bool all_of(R&& range, P&& pred)
 {
 	return std::all_of(begin(range), end(range), std::forward<P>(pred));
 }
@@ -734,7 +753,7 @@ template<typename P> auto all_of(P&& pred)
 /// @brief Checks if unary predicate pred returns true for no elements in the range 
 ///
 /// @snippet rah.cpp rah::none_of
-template<typename R, typename P> auto none_of(R&& range, P&& pred)
+template<typename R, typename P> bool none_of(R&& range, P&& pred)
 {
 	return std::none_of(begin(range), end(range), std::forward<P>(pred));
 }

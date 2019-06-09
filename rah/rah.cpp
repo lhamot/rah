@@ -542,6 +542,15 @@ int main()
 		/// [rah::equal]
 	}
 
+	/// [rah::empty]
+	assert(not (rah::empty(std::vector<int>{ 1, 2, 3 })));
+	assert(rah::empty(std::vector<int>()));
+	/// [rah::empty]
+	/// [rah::empty_pipeable]
+	assert(not (std::vector<int>{ 1, 2, 3 } | rah::empty()));
+	assert(std::vector<int>() | rah::empty());
+	/// [rah::empty_pipeable]
+
 	// ********************************* test return ref and non-ref ******************************
 
 	using namespace rah;
