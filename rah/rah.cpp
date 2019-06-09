@@ -483,38 +483,36 @@ int main()
 	{
 		/// [rah::find]
 		assert(
-			(rah::find(std::vector<int>{ 1, 2, 3, 4 }, 3) | rah::to_container<std::vector<int>>())
-			== std::vector<int>({3, 4})
+			(rah::find(std::vector<int>{ 1, 2, 3, 4 }, 3) | rah::equal(std::initializer_list<int>({3, 4})))
 		);
 		/// [rah::find]
 		/// [rah::find_pipeable]
 		assert(
-			(std::vector<int>{ 1, 2, 3, 4 } | rah::find(3) | rah::to_container<std::vector<int>>())
-			== std::vector<int>({ 3, 4 })
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find(3) | rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_pipeable]
 		/// [rah::find_if]
 		assert(
-			(rah::find_if(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }) | rah::to_container<std::vector<int>>())
-			== std::vector<int>({ 3, 4 })
+			(rah::find_if(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }) 
+				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if]
 		/// [rah::find_if_pipeable]
 		assert(
-			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if([](int i) {return i == 3; }) | rah::to_container<std::vector<int>>())
-			== std::vector<int>({ 3, 4 })
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if([](int i) {return i == 3; }) 
+				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if_pipeable]
 		/// [rah::find_if_not]
 		assert(
-			(rah::find_if_not(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }) | rah::to_container<std::vector<int>>())
-			== std::vector<int>({ 3, 4 })
+			(rah::find_if_not(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }) 
+				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if_not]
 		/// [rah::find_if_not_pipeable]
 		assert(
-			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if_not([](int i) {return i < 3; }) | rah::to_container<std::vector<int>>())
-			== std::vector<int>({ 3, 4 })
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if_not([](int i) {return i < 3; }) 
+				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if_not_pipeable]
 	}
@@ -541,6 +539,15 @@ int main()
 		assert(rah::equal(in1, in3) == false);
 		/// [rah::equal]
 	}
+	{
+		/// [rah::equal_pipeable]
+		std::vector<int> in1{ 1, 2, 3 };
+		std::vector<int> in2{ 1, 2, 3 };
+		std::vector<int> in3{ 11, 12, 13 };
+		assert(in1 | rah::equal(in2));
+		assert(not (in1 | rah::equal(in3)));
+		/// [rah::equal_pipeable]
+	}
 
 	/// [rah::empty]
 	assert(not (rah::empty(std::vector<int>{ 1, 2, 3 })));
@@ -550,6 +557,23 @@ int main()
 	assert(not (std::vector<int>{ 1, 2, 3 } | rah::empty()));
 	assert(std::vector<int>() | rah::empty());
 	/// [rah::empty_pipeable]
+
+	{
+		/// [rah::copy]
+		std::vector<int> in{ 1, 2, 3 };
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		assert(rah::copy(in, out) | rah::equal(std::initializer_list<int>({ 4, 5 })));
+		assert(out == (std::vector<int>{ 1, 2, 3, 4, 5 }));
+		/// [rah::copy]
+	}
+	{
+		/// [rah::copy_into]
+		std::vector<int> in{ 1, 2, 3 };
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		assert((in | rah::copy_into(out) | rah::equal(std::initializer_list<int>({ 4, 5 }))));
+		assert(out == (std::vector<int>{ 1, 2, 3, 4, 5 }));
+		/// [rah::copy_into]
+	}
 
 	// ********************************* test return ref and non-ref ******************************
 

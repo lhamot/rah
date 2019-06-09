@@ -65,9 +65,13 @@ auto make_iterator_range(I b, I e)
 	return iterator_range<I>{b, e};
 }
 
+/// Get the begin iterator of the range
 template<typename I> I begin(iterator_range<I>& r) { return r.begin_iter; }
+/// Get the "past the" end iterator of the range
 template<typename I> I end(iterator_range<I>& r) { return r.end_iter; }
+/// Get the begin iterator of the range
 template<typename I> I begin(iterator_range<I> const& r) { return r.begin_iter; }
+/// Get the "past the" end iterator of the range
 template<typename I> I end(iterator_range<I> const& r) { return r.end_iter; }
 
 // **************************************** pipeable **********************************************
@@ -913,6 +917,30 @@ template<typename P> auto find_if_not(P&& pred)
 	return make_pipeable([=](auto&& range) {return find_if_not(range, pred); });
 }
 
+// *************************************** copy ***************************************************
+
+/// @brief Copy in range into an other
+/// @return The part of out after the copied part
+///
+/// @snippet rah.cpp rah::copy
+template<typename R1, typename R2> auto copy(R1&& in, R2&& out)
+{
+	auto iter = std::copy(begin(in), end(in), begin(out));
+	return make_iterator_range(iter, end(out));
+}
+
+/// @brief Copy in range into an other
+/// @return The part of out after the copied part
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::copy_into
+template<typename R2> auto copy_into(R2&& out)
+{
+	auto all_out = out | rah::view::all();
+	return make_pipeable([=](auto&& in) {return copy(in, all_out); });
+}
+
+
 // *************************************** size ***************************************************
 
 /// @brief Get the size of range
@@ -940,6 +968,16 @@ auto size()
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 {
 	return std::equal(begin(range1), end(range1), begin(range2), end(range2));
+}
+
+/// @brief Determines if two sets of elements are the same 
+/// @remark pipeable syntax
+///
+/// @snippet rah.cpp rah::equal_pipeable
+template<typename R1> auto equal(R1&& range2)
+{
+	auto all_range2 = range2 | rah::view::all();
+	return make_pipeable([=](auto&& range1) { return equal(range1, all_range2); });
 }
 
 }
