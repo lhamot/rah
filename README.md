@@ -1,12 +1,13 @@
-
 # rah
 **rah** is **ra**nge, **h**eader-only, "single-file" C++14/17 library.
 ## What is a range library?
-A range library is an extension of the iterators and STL which allow to use and extend algorithms easily.
 A range is anything that can be iterate. Typically in C++ something is a range if we can call `begin(range)` and `end(range)` on it.
+
+A range library allow to create ranges and algorithms using them.
 ## Why a new range library?
 Yes there are some great range libraries in C++, like [range-v3](https://github.com/ericniebler/range-v3) and [boost::range](http://www.boost.org/doc/libs/1_70_0/libs/range).
-The goal of **rah** is to be "single file" and stay easy to read and understand. **rah** was design with the code simplicity on top priority.
+
+**rah** can't so mush comlete than those libraries, but the goal of **rah** is to be "single file" and stay easy to integrate, to read and to understand. **rah** was design with the code simplicity on top priority.
 ## What is inside rah
 - In the namespace `rah`, there is a part of the usual algorithms present in `<algorithm>`, but in a range fashion
 	- More algorithms will be added soon
@@ -28,7 +29,7 @@ std::vector<int> values;
 std::transform(even.begin(), even.end(), std::back_inserter(values), [](int a) {return a * 2;});
 for(int i: values)
     std::cout << i << std::endl;
-// Usinging range algorithms
+// Using range algorithms
 auto values = 
     rah::view::transform(
         rah::view::filter(
@@ -67,4 +68,9 @@ You can find the doc [here](https://lhamot.github.io/rah/html/index.html)
 - Just include the `rah.hpp` file in your project
 - range version of STL algorithms are in the **rah** namespace
 - Views are in **rah::view** namespace
+- Watch the [doc](https://lhamot.github.io/rah/html/index.html)
+## The future of **rah**
+- Add some way to create and use appendable ranges (equivalent to `std::back_inserter`)
+- Wrap more std algorithms
+- Add more ranges
 
