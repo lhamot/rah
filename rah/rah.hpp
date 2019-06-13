@@ -15,6 +15,7 @@
 #include <tuple>
 #include <algorithm>
 #include <numeric>
+#include <ciso646>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -89,7 +90,7 @@ auto make_pipeable(MakeRange&& make_range)
 }
 
 template<typename R, typename MakeRange>
-auto operator | (R&& range, pipeable<MakeRange> const& adapter)
+auto operator | (R&& range, pipeable<MakeRange> const& adapter) ->decltype(adapter.func(std::forward<R>(range)))
 {
 	return adapter.func(std::forward<R>(range));
 }
@@ -98,7 +99,7 @@ auto operator | (R&& range, pipeable<MakeRange> const& adapter)
 
 template<typename I, typename R, typename C> struct iterator_facade;
 
-template<typename I, typename R> 
+template<typename I, typename R>
 struct iterator_facade<I, R, std::forward_iterator_tag>
 {
 	template <class Reference>
@@ -220,10 +221,10 @@ struct iterator_facade<I, R, std::random_access_iterator_tag> : iterator_facade<
 	}
 
 	auto operator-(I other) const { return self().distance_to(other); }
-	bool operator<(I other) const { return distance_to(other) < 0; }
-	bool operator<=(I other) const { return distance_to(other) <= 0; }
-	bool operator>(I other) const { return distance_to(other) > 0; }
-	bool operator>=(I other) const { return distance_to(other) >= 0; }
+	bool operator<(I other) const { return self().distance_to(other) < 0; }
+	bool operator<=(I other) const { return self().distance_to(other) <= 0; }
+	bool operator>(I other) const { return self().distance_to(other) > 0; }
+	bool operator>=(I other) const { return self().distance_to(other) >= 0; }
 	auto operator[](intptr_t increment) const { return *(self() + increment); }
 };
 
@@ -258,7 +259,7 @@ struct iota_iterator : iterator_facade<iota_iterator<T>, T, std::random_access_i
 {
 	T val_;
 	T step_;
-	
+
 	iota_iterator(T val, T step) : val_(val), step_(step) {}
 
 	void increment() { val_ += step_; }
@@ -282,7 +283,7 @@ struct gererate_iterator : iterator_facade<gererate_iterator<F>, decltype(fake<F
 {
 	mutable F func_;
 	size_t iter_count_ = 0;
-	
+
 	gererate_iterator(F const& func, size_t iter_count = 0) : func_(func), iter_count_(iter_count) {}
 
 	void increment() { ++iter_count_; }
@@ -323,7 +324,7 @@ struct transform_iterator : iterator_facade<
 {
 	range_begin_type_t<R> iter_;
 	F func_;
-	
+
 	transform_iterator(range_begin_type_t<R> const& iter, F const& func) : iter_(iter), func_(func) {}
 
 	transform_iterator& operator=(transform_iterator const& ot)
@@ -376,7 +377,7 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 	range_begin_type_t<R> iter_;
 	range_end_type_t<R> end_;
 	size_t step_;
-	
+
 	stride_iterator(range_begin_type_t<R> const& iter, range_end_type_t<R> const& end, size_t step)
 		: iter_(iter), end_(end), step_(step) {}
 
@@ -403,7 +404,7 @@ template<typename R> auto stride(R&& range, size_t step)
 {
 	auto iter = begin(range);
 	auto endIter = end(range);
-	return iterator_range<stride_iterator<std::remove_reference_t<R>>>{ 
+	return iterator_range<stride_iterator<std::remove_reference_t<R>>>{
 		{ iter, endIter, step}, { endIter, endIter, step }};
 }
 
@@ -505,13 +506,13 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 	range_begin_type_t<R> iter2_;
 	range_end_type_t<R> end_;
 	size_t step_;
-	
+
 	chunk_iterator(
-		range_begin_type_t<R> const& iter, 
-		range_begin_type_t<R> const& iter2, 
-		range_end_type_t<R> const& end, 
+		range_begin_type_t<R> const& iter,
+		range_begin_type_t<R> const& iter2,
+		range_end_type_t<R> const& end,
 		size_t step = 0)
-		: iter_(iter), iter2_(iter2), end_(end), step_(step) 
+		: iter_(iter), iter2_(iter2), end_(end), step_(step)
 	{
 	}
 
@@ -550,11 +551,11 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	range_begin_type_t<R> iter_;
 	range_end_type_t<R> end_;
 	F func_;
-	
+
 	filter_iterator(
-		range_begin_type_t<R> const& begin, 
-		range_begin_type_t<R> const& iter, 
-		range_end_type_t<R> const& end, 
+		range_begin_type_t<R> const& begin,
+		range_begin_type_t<R> const& iter,
+		range_end_type_t<R> const& end,
 		F func)
 		: begin_(begin), iter_(iter), end_(end), func_(func)
 	{
@@ -603,9 +604,9 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 	IterPair iter_;
 	IterPair end_;
 	size_t range_index_;
-	
-	join_iterator(IterPair const& iter, IterPair const& end, size_t range_index) 
-		: iter_(iter), end_(end), range_index_(range_index) 
+
+	join_iterator(IterPair const& iter, IterPair const& end, size_t range_index)
+		: iter_(iter), end_(end), range_index_(range_index)
 	{
 	}
 
@@ -622,8 +623,8 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 			++std::get<1>(iter_);
 	}
 
-	auto dereference() const 
-	{ 
+	auto dereference() const
+	{
 		if (range_index_ == 0)
 			return *std::get<0>(iter_);
 		else
@@ -631,7 +632,7 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 	}
 
 	bool equal(join_iterator other) const
-	{ 
+	{
 		if (range_index_ != other.range_index_)
 			return false;
 		if (range_index_ == 0)

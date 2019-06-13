@@ -14,6 +14,7 @@
 #include <map>
 #include <list>
 #include <forward_list>
+#include <ciso646>
 #include <sstream>
 #ifdef MSVC
 #pragma warning(pop)
@@ -65,10 +66,10 @@ std::ostream& operator << (std::ostream& os, std::tuple<Args...> tup)
 
 namespace test
 {
-	template< class T >
-    constexpr bool is_reference_v = std::is_reference<T>::value;
-	template< class T >
-    constexpr bool is_rvalue_reference_v = std::is_rvalue_reference<T>::value;
+template< class T >
+constexpr bool is_reference_v = std::is_reference<T>::value;
+template< class T >
+constexpr bool is_rvalue_reference_v = std::is_rvalue_reference<T>::value;
 }
 
 template<typename T>
@@ -375,22 +376,22 @@ int main()
 
 	/// [rah::any_of]
 	assert(rah::any_of(
-		std::initializer_list<int>{ 3, 0, 1, 3, 4, 6 }, 
+		std::initializer_list<int>{ 3, 0, 1, 3, 4, 6 },
 		[](auto a) {return a == 3; })
 	);
 	/// [rah::any_of]
 	/// [rah::any_of_pipeable]
 	assert((
 		std::initializer_list<int>{0, 1, 2, 3, 4, 6}
-		| rah::any_of([](auto a) {return a == 3; })
-	));
+	| rah::any_of([](auto a) {return a == 3; })
+		));
 	/// [rah::any_of_pipeable]
 	assert((std::initializer_list<int>{3, 0, 1, 3, 4, 6} | rah::any_of([](auto a) {return a == 3; })));
 	assert((std::initializer_list<int>{2, 0, 1, 2, 4, 6} | rah::any_of([](auto a) {return a == 3; })) == false);
 
 	/// [rah::all_of]
 	assert(rah::all_of(
-		std::initializer_list<int>{ 4, 4, 4, 4 }, 
+		std::initializer_list<int>{ 4, 4, 4, 4 },
 		[](auto a) {return a == 4; })
 	);
 	/// [rah::all_of]
@@ -398,23 +399,23 @@ int main()
 	assert((std::initializer_list<int>{ 4, 4, 4, 4 } | rah::all_of([](auto a) {return a == 4; })));
 	/// [rah::all_of_pipeable]
 	assert((
-		std::initializer_list<int>{ 4, 4, 3, 4 } 
-	    | rah::all_of([](auto a) {return a == 4; })
-	) == false);
+		std::initializer_list<int>{ 4, 4, 3, 4 }
+	| rah::all_of([](auto a) {return a == 4; })
+		) == false);
 	/// [rah::all_of_pipeable]
 
 	/// [rah::none_of]
 	assert((rah::none_of(
-		std::initializer_list<int>{7, 8, 9, 10}, 
+		std::initializer_list<int>{7, 8, 9, 10},
 		[](auto a) {return a == 11; })
-	));
+		));
 	/// [rah::none_of]
 	assert((std::initializer_list<int>{7, 8, 9, 10} | rah::none_of([](auto a) {return a == 11; })));
 	/// [rah::none_of_pipeable]
 	assert((
-		std::initializer_list<int>{7, 8, 9, 10, 11} 
-	    | rah::none_of([](auto a) {return a == 11; })
-	) == false);
+		std::initializer_list<int>{7, 8, 9, 10, 11}
+	| rah::none_of([](auto a) {return a == 11; })
+		) == false);
 	/// [rah::none_of_pipeable]
 
 	/// [rah::count]
@@ -490,7 +491,7 @@ int main()
 	{
 		/// [rah::find]
 		assert(
-			(rah::find(std::vector<int>{ 1, 2, 3, 4 }, 3) | rah::equal(std::initializer_list<int>({3, 4})))
+			(rah::find(std::vector<int>{ 1, 2, 3, 4 }, 3) | rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find]
 		/// [rah::find_pipeable]
@@ -500,25 +501,25 @@ int main()
 		/// [rah::find_pipeable]
 		/// [rah::find_if]
 		assert(
-			(rah::find_if(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; }) 
+			(rah::find_if(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i == 3; })
 				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if]
 		/// [rah::find_if_pipeable]
 		assert(
-			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if([](int i) {return i == 3; }) 
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if([](int i) {return i == 3; })
 				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if_pipeable]
 		/// [rah::find_if_not]
 		assert(
-			(rah::find_if_not(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; }) 
+			(rah::find_if_not(std::vector<int>{ 1, 2, 3, 4 }, [](int i) {return i < 3; })
 				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if_not]
 		/// [rah::find_if_not_pipeable]
 		assert(
-			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if_not([](int i) {return i < 3; }) 
+			(std::vector<int>{ 1, 2, 3, 4 } | rah::find_if_not([](int i) {return i < 3; })
 				| rah::equal(std::initializer_list<int>({ 3, 4 })))
 		);
 		/// [rah::find_if_not_pipeable]
@@ -652,14 +653,14 @@ int main()
 		{
 			assert(iter->member == 2); // Check for mutability
 			assert((*iter).member == 2); // Check for mutability
-			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
+			static_assert(test::is_rvalue_reference_v<decltype(*iter)> ||
 				(test::is_reference_v<decltype(*iter)> == false),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_copy)
 		{
 			assert(elt.member == 2); // Check for mutability
-			static_assert(test::is_rvalue_reference_v<decltype(elt)> || 
+			static_assert(test::is_rvalue_reference_v<decltype(elt)> ||
 				(test::is_reference_v<decltype(elt)> == false),
 				"elt is not expected to be a reference");
 		}
@@ -667,14 +668,14 @@ int main()
 		for (auto iter = begin(r_ref), end_iter = end(r_ref); iter != end_iter; ++iter)
 		{
 			assert(*iter == 1); // Check for mutability
-			static_assert(test::is_rvalue_reference_v<decltype(*iter)> || 
+			static_assert(test::is_rvalue_reference_v<decltype(*iter)> ||
 				(test::is_reference_v<decltype(*iter)> == false),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_ref)
 		{
 			assert(elt == 1); // Check for mutability
-			static_assert(test::is_rvalue_reference_v<decltype(elt)> || 
+			static_assert(test::is_rvalue_reference_v<decltype(elt)> ||
 				(test::is_reference_v<decltype(elt)> == false),
 				"elt is not expected to be a reference");
 		}
