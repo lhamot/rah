@@ -54,6 +54,7 @@ rah is licensed under the [Boost Software License](http://www.boost.org/LICENSE_
 You can find the doc [here](https://lhamot.github.io/rah/html/index.html)
 ## Supported Compilers
 - On Windows
+  - Visual Studio 2015 (stdcpp14)
   - Visual Studio 2017 (stdcpp14 and stdcpp17)
   - clang 7 (-std=c++14 and -std=c++17)
 - On Linux
