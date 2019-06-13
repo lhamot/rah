@@ -143,6 +143,34 @@ struct iterator_facade<I, R, std::forward_iterator_tag>
 };
 
 template<typename I, typename R>
+struct iterator_facade<I, R, std::output_iterator_tag>
+{
+	using iterator_category = std::forward_iterator_tag;
+	using value_type = std::remove_reference_t<R>;
+	using difference_type = intptr_t;
+	using pointer = value_type*;
+	using reference = R;
+
+	static_assert(std::is_reference<value_type>::value == false, "value_type can't be a reference");
+
+	I& self() { return *static_cast<I*>(this); }
+	I const& self() const { return *static_cast<I const*>(this); }
+
+	auto& operator++() { return *this; }
+	auto& operator*() const { return *this; }
+	bool operator!=(I other) const { return true; }
+	bool operator==(I other) const { return false; }
+
+	template<typename V>
+	auto operator=(V&& value) const
+	{
+		self().put(std::forward<V>(value));
+		return self();
+	}
+};
+
+
+template<typename I, typename R>
 struct iterator_facade<I, R, std::bidirectional_iterator_tag> : iterator_facade<I, R, std::forward_iterator_tag>
 {
 	using iterator_category = std::bidirectional_iterator_tag;
@@ -198,6 +226,27 @@ struct iterator_facade<I, R, std::random_access_iterator_tag> : iterator_facade<
 	bool operator>=(I other) const { return distance_to(other) >= 0; }
 	auto operator[](intptr_t increment) const { return *(self() + increment); }
 };
+
+// ********************************** back_inserter ***********************************************
+
+template<typename C>
+struct back_insert_iterator : iterator_facade<back_insert_iterator<C>, range_ref_type_t<C>, std::output_iterator_tag>
+{
+	C* container_;
+	back_insert_iterator(C& container) : container_(&container) { }
+	template<typename V> void put(V&& value) const { container_->emplace_back(value); }
+};
+
+/// @brief Make a range which insert into the back of the a container
+///
+/// @snippet rah.cpp rah::back_inserter
+template<typename C> auto back_inserter(C&& container)
+{
+	using Container = std::remove_reference_t<C>;
+	auto begin = back_insert_iterator<Container>(container);
+	auto end = back_insert_iterator<Container>(container);
+	return rah::make_iterator_range(begin, end);
+}
 
 namespace view
 {
@@ -978,6 +1027,27 @@ template<typename R1> auto equal(R1&& range2)
 {
 	auto all_range2 = range2 | rah::view::all();
 	return make_pipeable([=](auto&& range1) { return equal(range1, all_range2); });
+}
+
+// *********************************** stream_inserter ********************************************
+
+template<typename S>
+struct stream_inserter_iterator : iterator_facade<stream_inserter_iterator<S>, typename S::char_type, std::output_iterator_tag>
+{
+	S* stream_;
+	stream_inserter_iterator(S& stream) : stream_(&stream) { }
+	template<typename V> void put(V&& value) const { (*stream_) << value; }
+};
+
+/// @brief Make a range which output to a stream
+///
+/// @snippet rah.cpp rah::stream_inserter
+template<typename S> auto stream_inserter(S&& stream)
+{
+	using Stream = std::remove_reference_t<S>;
+	auto begin = stream_inserter_iterator<Stream>(stream);
+	auto end = stream_inserter_iterator<Stream>(stream);
+	return rah::make_iterator_range(begin, end);
 }
 
 }

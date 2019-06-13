@@ -14,6 +14,7 @@
 #include <map>
 #include <list>
 #include <forward_list>
+#include <sstream>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -335,10 +336,16 @@ int main()
 	// *********************************** algos **************************************************
 
 	{
-		/// [rah::transform3]
 		std::vector<int> vecIn1{ 0, 1, 2, 3 };
 		std::vector<int> vecOut{ 0, 0, 0, 0 };
 		rah::transform(vecIn1, vecOut, [](int a) {return a + 1; });
+		assert(vecOut == std::vector<int>({ 1, 2, 3, 4 }));
+	}
+	{
+		/// [rah::transform3]
+		std::vector<int> vecIn1{ 0, 1, 2, 3 };
+		std::vector<int> vecOut;
+		rah::transform(vecIn1, rah::back_inserter(vecOut), [](int a) {return a + 1; });
 		assert(vecOut == std::vector<int>({ 1, 2, 3, 4 }));
 		/// [rah::transform3]
 	}
@@ -346,8 +353,8 @@ int main()
 		/// [rah::transform4]
 		std::vector<int> vecIn1{ 0, 1, 2, 3 };
 		std::vector<int> vecIn2{ 4, 3, 2, 1 };
-		std::vector<int> vecOut{ 0, 0, 0, 0 };
-		rah::transform(vecIn1, vecIn2, vecOut, [](int a, int b) {return a + b; });
+		std::vector<int> vecOut;
+		rah::transform(vecIn1, vecIn2, rah::back_inserter(vecOut), [](int a, int b) {return a + b; });
 		assert(vecOut == std::vector<int>({ 4, 4, 4, 4 }));
 		/// [rah::transform4]
 	}
@@ -562,9 +569,18 @@ int main()
 		/// [rah::copy]
 		std::vector<int> in{ 1, 2, 3 };
 		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		// std::vector<int> out{ 0, 0 }; // Trigger an assert
 		assert(rah::copy(in, out) | rah::equal(std::initializer_list<int>({ 4, 5 })));
 		assert(out == (std::vector<int>{ 1, 2, 3, 4, 5 }));
 		/// [rah::copy]
+	}
+	{
+		/// [rah::back_inserter]
+		std::vector<int> in{ 1, 2, 3 };
+		std::vector<int> out;
+		rah::copy(in, rah::back_inserter(out));
+		assert(out == std::vector<int>({ 1, 2, 3 }));
+		/// [rah::back_inserter]
 	}
 	{
 		/// [rah::copy_into]
@@ -573,6 +589,20 @@ int main()
 		assert((in | rah::copy_into(out) | rah::equal(std::initializer_list<int>({ 4, 5 }))));
 		assert(out == (std::vector<int>{ 1, 2, 3, 4, 5 }));
 		/// [rah::copy_into]
+	}
+	{
+		std::vector<int> in{ 1, 2, 3 };
+		std::vector<int> out;
+		in | rah::copy_into(rah::back_inserter(out));
+		assert(out == (std::vector<int>{ 1, 2, 3 }));
+	}
+	{
+		/// [rah::stream_inserter]
+		std::string in("Test");
+		std::stringstream out;
+		in | rah::copy_into(rah::stream_inserter(out));
+		assert(out.str() == in);
+		/// [rah::stream_inserter]
 	}
 
 	// ********************************* test return ref and non-ref ******************************
