@@ -238,7 +238,7 @@ Create an infinite range, repetitively calling func.
 \DoxyCodeLine{        \textcolor{keywordtype}{int} y = 1;}
 \DoxyCodeLine{        \textcolor{keyword}{auto} gen = \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah::view::generate}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \});}
 \DoxyCodeLine{        std::vector<int> gen\_copy;}
-\DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(gen), 4, std::back\_inserter(gen\_copy));}
+\DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(gen), 4, \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(gen\_copy));}
 \DoxyCodeLine{        assert(gen\_copy == std::vector<int>(\{ 1, 2, 4, 8 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}\label{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}} 

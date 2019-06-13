@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['func',['func',['../structrah_1_1pipeable.html#a2d26d18babf4edf2303bdb8b9a9dd165',1,'rah::pipeable']]],
-  ['func_5f',['func_',['../structrah_1_1view_1_1gererate__iterator.html#a990cec2a833b541afcaaf062443656e6',1,'rah::view::gererate_iterator::func_()'],['../structrah_1_1view_1_1transform__iterator.html#a02ac2e8035d0b7917ee44967069def0d',1,'rah::view::transform_iterator::func_()'],['../structrah_1_1view_1_1filter__iterator.html#af7b67ab1c3cb7d935e4292b4839e8435',1,'rah::view::filter_iterator::func_()']]]
+  ['end_5f',['end_',['../structrah_1_1view_1_1stride__iterator.html#abd80314a0e4408629e33f43b5272f74e',1,'rah::view::stride_iterator::end_()'],['../structrah_1_1view_1_1chunk__iterator.html#a37b0e8a9c07d2061a63ea52c8166f1e2',1,'rah::view::chunk_iterator::end_()'],['../structrah_1_1view_1_1filter__iterator.html#a69dcb1274e789cbe4074946ffe60fd7a',1,'rah::view::filter_iterator::end_()'],['../structrah_1_1view_1_1join__iterator.html#a7bd5e10c317952b8642e3eee04259413',1,'rah::view::join_iterator::end_()']]],
+  ['end_5fiter',['end_iter',['../structrah_1_1iterator__range.html#aa9bfeef57b703dbdd5444afb426db863',1,'rah::iterator_range']]]
 ];

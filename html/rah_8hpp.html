@@ -81,6 +81,7 @@ $(function() {
 <code>#include &lt;tuple&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;numeric&gt;</code><br />
+<code>#include &lt;ciso646&gt;</code><br />
 </div>
 <p><a href="rah_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -103,11 +104,15 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type_3_01_t_01_6_01_4.html">rah::iterator_facade&lt; I, R, std::forward_iterator_tag &gt;::pointer_type&lt; T &amp; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1output__iterator__tag_01_4.html">rah::iterator_facade&lt; I, R, std::output_iterator_tag &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4.html">rah::iterator_facade&lt; I, R, std::bidirectional_iterator_tag &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inerit to make a bidirectional iterator.  <a href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1random__access__iterator__tag_01_4.html">rah::iterator_facade&lt; I, R, std::random_access_iterator_tag &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inerit to make a random access iterator.  <a href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1random__access__iterator__tag_01_4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1back__insert__iterator.html">rah::back_insert_iterator&lt; C &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,6 +129,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1filter__iterator.html">rah::view::filter_iterator&lt; R, F &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1join__iterator.html">rah::view::join_iterator&lt; IterPair, V &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1stream__inserter__iterator.html">rah::stream_inserter_iterator&lt; S &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -185,9 +192,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a274b78c4c0af5dd58ce280f02223fb55"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55">rah::make_pipeable</a> (MakeRange &amp;&amp;make_range)</td></tr>
 <tr class="memdesc:a274b78c4c0af5dd58ce280f02223fb55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to create a "pipeable" function (UFCS style in c++)  <a href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55">More...</a><br /></td></tr>
 <tr class="separator:a274b78c4c0af5dd58ce280f02223fb55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6923b0ef49c831571590f953253ff9"><td class="memTemplParams" colspan="2">template&lt;typename R , typename MakeRange &gt; </td></tr>
-<tr class="memitem:a5c6923b0ef49c831571590f953253ff9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a5c6923b0ef49c831571590f953253ff9">rah::operator|</a> (R &amp;&amp;range, pipeable&lt; MakeRange &gt; const &amp;adapter)</td></tr>
-<tr class="separator:a5c6923b0ef49c831571590f953253ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ebb23bb276c853ef14a86bed84b6df9"><td class="memTemplParams" colspan="2">template&lt;typename R , typename MakeRange &gt; </td></tr>
+<tr class="memitem:a5ebb23bb276c853ef14a86bed84b6df9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a5ebb23bb276c853ef14a86bed84b6df9">rah::operator|</a> (R &amp;&amp;range, pipeable&lt; MakeRange &gt; const &amp;adapter) -&gt; decltype(adapter.func(std::forward&lt; R &gt;(range)))</td></tr>
+<tr class="separator:a5ebb23bb276c853ef14a86bed84b6df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0698f952bc3c4f1961929bbddb5812fe"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
+<tr class="memitem:a0698f952bc3c4f1961929bbddb5812fe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a0698f952bc3c4f1961929bbddb5812fe">rah::back_inserter</a> (C &amp;&amp;container)</td></tr>
+<tr class="memdesc:a0698f952bc3c4f1961929bbddb5812fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a range which insert into the back of the a container.  <a href="namespacerah.html#a0698f952bc3c4f1961929bbddb5812fe">More...</a><br /></td></tr>
+<tr class="separator:a0698f952bc3c4f1961929bbddb5812fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplParams" colspan="2">template&lt;typename T  = size_t&gt; </td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">rah::view::iota</a> (T b, T e, T step=1)</td></tr>
 <tr class="memdesc:aa5f05009b0c914331b0e5dbe62656b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequentially increasing integers.  <a href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">More...</a><br /></td></tr>
@@ -414,6 +425,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a3434aacc26937d3ff50b5db4286feda6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3434aacc26937d3ff50b5db4286feda6">rah::equal</a> (R1 &amp;&amp;range2)</td></tr>
 <tr class="memdesc:a3434aacc26937d3ff50b5db4286feda6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if two sets of elements are the same.  <a href="namespacerah.html#a3434aacc26937d3ff50b5db4286feda6">More...</a><br /></td></tr>
 <tr class="separator:a3434aacc26937d3ff50b5db4286feda6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="memTemplParams" colspan="2">template&lt;typename S &gt; </td></tr>
+<tr class="memitem:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3f7b590b1bd8a44b5b2d6f4e35f1837c">rah::stream_inserter</a> (S &amp;&amp;stream)</td></tr>
+<tr class="memdesc:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a range which output to a stream.  <a href="namespacerah.html#a3f7b590b1bd8a44b5b2d6f4e35f1837c">More...</a><br /></td></tr>
+<tr class="separator:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad3a388e89994ad75cbafb263072ddfbc"></a>

@@ -6,6 +6,7 @@
 {\ttfamily \#include $<$tuple$>$}\newline
 {\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include $<$numeric$>$}\newline
+{\ttfamily \#include $<$ciso646$>$}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,10 +24,14 @@ struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_
 \item 
 struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type_3_01_t_01_6_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$\+::pointer\+\_\+type$<$ T \& $>$}}
 \item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1output__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::output\+\_\+iterator\+\_\+tag $>$}}
+\item 
 class \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::bidirectional\+\_\+iterator\+\_\+tag $>$}}
 \begin{DoxyCompactList}\small\item\em Inerit to make a bidirectional iterator. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1random__access__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$ I, R, std\+::random\+\_\+access\+\_\+iterator\+\_\+tag $>$}}
 \begin{DoxyCompactList}\small\item\em Inerit to make a random access iterator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structrah_1_1back__insert__iterator}{rah\+::back\+\_\+insert\+\_\+iterator$<$ C $>$}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator$<$ T $>$}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1gererate__iterator}{rah\+::view\+::gererate\+\_\+iterator$<$ F $>$}}
@@ -42,6 +47,8 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1chunk__iterator}{rah\+::view\+::chu
 struct \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{rah\+::view\+::filter\+\_\+iterator$<$ R, F $>$}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator$<$ Iter\+Pair, V $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1stream__inserter__iterator}{rah\+::stream\+\_\+inserter\+\_\+iterator$<$ S $>$}}
 \end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
@@ -85,8 +92,10 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join
 \begin{DoxyCompactList}\small\item\em Get the \char`\"{}past the\char`\"{} end iterator of the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah\+::make\+\_\+pipeable}} (Make\+Range \&\&make\+\_\+range)
 \begin{DoxyCompactList}\small\item\em Call to create a \char`\"{}pipeable\char`\"{} function (U\+F\+CS style in c++) \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a5c6923b0ef49c831571590f953253ff9}{rah\+::operator$\vert$}} (R \&\&range, pipeable$<$ Make\+Range $>$ const \&adapter)
+{\footnotesize template$<$typename R , typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a5ebb23bb276c853ef14a86bed84b6df9}{rah\+::operator$\vert$}} (R \&\&range, pipeable$<$ Make\+Range $>$ const \&adapter) -\/$>$ decltype(adapter.\+func(std\+::forward$<$ R $>$(range)))
 \item 
+{\footnotesize template$<$typename C $>$ }\\auto \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{rah\+::back\+\_\+inserter}} (C \&\&container)
+\begin{DoxyCompactList}\small\item\em Make a range which insert into the back of the a container. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah\+::view\+::iota}} (T b, T e, T step=1)
 \begin{DoxyCompactList}\small\item\em Generate a range of sequentially increasing integers. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah\+::view\+::generate}} (F \&\&func)
@@ -204,7 +213,9 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{rah\+::siz
 {\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah\+::equal}} (R1 \&\&range1, R2 \&\&range2)
 \begin{DoxyCompactList}\small\item\em Determines if two sets of elements are the same. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R1 $>$ }\\auto \mbox{\hyperlink{namespacerah_a3434aacc26937d3ff50b5db4286feda6}{rah\+::equal}} (R1 \&\&range2)
-\begin{DoxyCompactList}\small\item\em Determines if two sets of elements are the same. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Determines if two sets of elements are the same. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename S $>$ }\\auto \mbox{\hyperlink{namespacerah_a3f7b590b1bd8a44b5b2d6f4e35f1837c}{rah\+::stream\+\_\+inserter}} (S \&\&stream)
+\begin{DoxyCompactList}\small\item\em Make a range which output to a stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Macro Definition Documentation}
