@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['is_5freference_5fv',['is_reference_v',['../namespacetest.html#a463d61708cea9480e55ee03141e2b951',1,'test']]],
+  ['is_5frvalue_5freference_5fv',['is_rvalue_reference_v',['../namespacetest.html#a79cef7fd7cce0d4c7a466bcc871dca48',1,'test']]],
   ['iter2_5f',['iter2_',['../structrah_1_1view_1_1chunk__iterator.html#a99000f50d2444885032d0346fc0edd52',1,'rah::view::chunk_iterator']]],
   ['iter_5f',['iter_',['../structrah_1_1view_1_1transform__iterator.html#ac3c20401254ca24682913ba0e9c56284',1,'rah::view::transform_iterator::iter_()'],['../structrah_1_1view_1_1stride__iterator.html#a65e7fa92e8026ce48e3c132e808e9ffc',1,'rah::view::stride_iterator::iter_()'],['../structrah_1_1view_1_1chunk__iterator.html#aef5f9e293b2ab1757b52977197568fbf',1,'rah::view::chunk_iterator::iter_()'],['../structrah_1_1view_1_1filter__iterator.html#ad4016a695a004f72b1a942abd9193c71',1,'rah::view::filter_iterator::iter_()'],['../structrah_1_1view_1_1join__iterator.html#a53c423f97b1bb286a5eacd76de3d73c9',1,'rah::view::join_iterator::iter_()']]],
   ['iter_5fcount_5f',['iter_count_',['../structrah_1_1view_1_1gererate__iterator.html#a59591e436791b5adf62e0cca9ad348a1',1,'rah::view::gererate_iterator']]],

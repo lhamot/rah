@@ -118,7 +118,7 @@ Create a view where each element is a range of N elements of the input range.
 \DoxyCodeLine{        std::vector<std::vector<int>> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{rah::view::chunk}}(vec\_01234, 2))}
 \DoxyCodeLine{            result.push\_back(std::vector<int>(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(elts), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(elts)));}
-\DoxyCodeLine{        assert(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a5b3a70ad1a0373e8fadbfa26a9676077}\label{namespacerah_1_1view_a5b3a70ad1a0373e8fadbfa26a9676077}} 
 \index{rah::view@{rah::view}!chunk@{chunk}}
@@ -139,7 +139,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<std::vector<int>> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{rah::view::chunk}}(2))}
 \DoxyCodeLine{            result.push\_back(std::vector<int>(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(elts), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(elts)));}
-\DoxyCodeLine{        assert(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}\label{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}} 
 \index{rah::view@{rah::view}!enumerate@{enumerate}}
@@ -158,7 +158,7 @@ Pair each element of a range with its index.
 \DoxyCodeLine{        std::vector<std::tuple<size\_t, int>> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i\_value : \mbox{\hyperlink{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}{rah::view::enumerate}}(input))}
 \DoxyCodeLine{            result.push\_back(i\_value);}
-\DoxyCodeLine{        assert(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a592731562abd27c9c71f744885322545}\label{namespacerah_1_1view_a592731562abd27c9c71f744885322545}} 
 \index{rah::view@{rah::view}!enumerate@{enumerate}}
@@ -179,7 +179,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<std::tuple<size\_t, int>> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i\_value : input | \mbox{\hyperlink{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}{rah::view::enumerate}}())}
 \DoxyCodeLine{            result.push\_back(i\_value);}
-\DoxyCodeLine{        assert(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}\label{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}} 
 \index{rah::view@{rah::view}!filter@{filter}}
@@ -198,7 +198,7 @@ Create a view with only elements which are filtered.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah::view::filter}}(vec\_01234, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a \% 2 == 0; \}))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 2, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_aa52c6f5cff4e0a4f0ed48c66e1039e3d}\label{namespacerah_1_1view_aa52c6f5cff4e0a4f0ed48c66e1039e3d}} 
 \index{rah::view@{rah::view}!filter@{filter}}
@@ -220,7 +220,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah::view::filter}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a \% 2 == 0; \}))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 2, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}\label{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}} 
 \index{rah::view@{rah::view}!generate@{generate}}
@@ -239,7 +239,7 @@ Create an infinite range, repetitively calling func.
 \DoxyCodeLine{        \textcolor{keyword}{auto} gen = \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah::view::generate}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \});}
 \DoxyCodeLine{        std::vector<int> gen\_copy;}
 \DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(gen), 4, \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(gen\_copy));}
-\DoxyCodeLine{        assert(gen\_copy == std::vector<int>(\{ 1, 2, 4, 8 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(gen\_copy == std::vector<int>(\{ 1, 2, 4, 8 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}\label{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}} 
 \index{rah::view@{rah::view}!generate\_n@{generate\_n}}
@@ -258,7 +258,7 @@ Create a range of N elemnts, repetitively calling func.
 \DoxyCodeLine{        \textcolor{keywordtype}{int} y = 1;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}{rah::view::generate\_n}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \}, 4))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 1, 2, 4, 8 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 4, 8 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}\label{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}} 
 \index{rah::view@{rah::view}!iota@{iota}}
@@ -276,7 +276,7 @@ Generate a range of sequentially increasing integers.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah::view::iota}}(10, 20, 2))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 10, 12, 14, 16, 18 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 10, 12, 14, 16, 18 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}\label{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}} 
 \index{rah::view@{rah::view}!join@{join}}
@@ -296,7 +296,7 @@ Create a view that is the concatenation of 2 ranges.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}{rah::view::join}}(inputA, inputB))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a9311214c2d98f420e73b679e02bd7f7f}\label{namespacerah_1_1view_a9311214c2d98f420e73b679e02bd7f7f}} 
 \index{rah::view@{rah::view}!join@{join}}
@@ -319,7 +319,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : inputA | \mbox{\hyperlink{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}{rah::view::join}}(inputB))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}\label{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}} 
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
@@ -338,7 +338,7 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} key : \mbox{\hyperlink{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}{rah::view::map\_key}}(input))}
 \DoxyCodeLine{            result.push\_back(key);}
-\DoxyCodeLine{        assert(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}\label{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}} 
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
@@ -359,7 +359,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} key : input | \mbox{\hyperlink{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}{rah::view::map\_key}}())}
 \DoxyCodeLine{            result.push\_back(key);}
-\DoxyCodeLine{        assert(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}\label{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}} 
 \index{rah::view@{rah::view}!map\_value@{map\_value}}
@@ -378,7 +378,7 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \DoxyCodeLine{        std::vector<double> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} value : \mbox{\hyperlink{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}{rah::view::map\_value}}(input))}
 \DoxyCodeLine{            result.push\_back(value);}
-\DoxyCodeLine{        assert(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}\label{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}} 
 \index{rah::view@{rah::view}!map\_value@{map\_value}}
@@ -399,7 +399,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<double> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} value : input | \mbox{\hyperlink{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}{rah::view::map\_value}}())}
 \DoxyCodeLine{            result.push\_back(value);}
-\DoxyCodeLine{        assert(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}\label{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}} 
 \index{rah::view@{rah::view}!retro@{retro}}
@@ -418,7 +418,7 @@ Create a view that traverses the source range in reverse order.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{rah::view::retro}}(vec))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}\label{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}} 
 \index{rah::view@{rah::view}!retro@{retro}}
@@ -439,7 +439,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{rah::view::retro}}())}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a4e7a243408052f64886e6349650df16c}\label{namespacerah_1_1view_a4e7a243408052f64886e6349650df16c}} 
 \index{rah::view@{rah::view}!slice@{slice}}
@@ -458,7 +458,7 @@ Create a view that is a sub-\/range of a range.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a4e7a243408052f64886e6349650df16c}{rah::view::slice}}(vec, 2, 6))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a727bbf69817ca3e940597885764e2032}\label{namespacerah_1_1view_a727bbf69817ca3e940597885764e2032}} 
 \index{rah::view@{rah::view}!slice@{slice}}
@@ -479,7 +479,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a4e7a243408052f64886e6349650df16c}{rah::view::slice}}(2, 6))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}\label{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}} 
 \index{rah::view@{rah::view}!stride@{stride}}
@@ -498,7 +498,7 @@ Create a view consisting of every Nth element, starting with the first.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}{rah::view::stride}}(vec, 2))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}\label{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}} 
 \index{rah::view@{rah::view}!stride@{stride}}
@@ -519,7 +519,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}{rah::view::stride}}(2))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}\label{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}} 
 \index{rah::view@{rah::view}!transform@{transform}}
@@ -538,7 +538,7 @@ Create a view applying a transformation to each element of the input range.
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah::view::transform}}(vec, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a * 2; \}))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}\label{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}} 
 \index{rah::view@{rah::view}!transform@{transform}}
@@ -560,7 +560,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah::view::transform}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a * 2; \}))}
 \DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        assert(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}\label{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}} 
 \index{rah::view@{rah::view}!zip@{zip}}
@@ -581,7 +581,7 @@ Given N ranges, return a new range where Mth element is the result of calling st
 \DoxyCodeLine{        std::vector<std::tuple<int, double, char>> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} a\_b\_c : \mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(inputA, inputB, inputC))}
 \DoxyCodeLine{            result.push\_back(a\_b\_c);}
-\DoxyCodeLine{        assert(result == (std::vector<std::tuple<int, double, char>>\{}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<int, double, char>>\{}
 \DoxyCodeLine{            \{ 1, 2.5, \textcolor{charliteral}{'a'} \},}
 \DoxyCodeLine{            \{ 2, 4.5, \textcolor{charliteral}{'b'} \},}
 \DoxyCodeLine{            \{ 3, 6.5, \textcolor{charliteral}{'c'} \},}
