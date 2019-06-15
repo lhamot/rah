@@ -1,5 +1,11 @@
+//
+// Copyright (c) 2019 Loïc HAMOT
+//
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+//
 
-/// @class rah::pipeable
+/// @struct rah::pipeable
 /// @brief Allow to call a custom function when called whith the 'pipe' syntax on a range
 /// @see rah::make_pipeable 
 
@@ -7,9 +13,9 @@
 /// @brief Call to create a "pipeable" function (UFCS style in c++)
 ///
 /// @section create_pipeable How to create :
-/// @snippet rah.cpp make_pipeable create
+/// @snippet test.cpp make_pipeable create
 /// @section use_pipeable How to use :
-/// @snippet rah.cpp make_pipeable use
+/// @snippet test.cpp make_pipeable use
 
 /// @fn rah::make_iterator_range(I b, I e)
 /// @brief Create a rah::iterator_range with two given iterators
@@ -21,10 +27,20 @@
 /// @tparam R is the type returned by dereferencing the iterator (It can be a reference type or not)
 /// @tparam C is the iterator category (std::forward_iterator_tag, std::bidirectional_iterator_tag, std::random_access_iterator_tag)
 
-/// @class rah::iterator_facade<I, R, std::forward_iterator_tag>
+/// @struct rah::iterator_facade<I, R, std::output_iterator_tag>
+/// @brief Inerit to make an appendable range
+///
+/// Required to implement  :
+/// @code{cpp}
+/// template<typename V> void put(V&& value) const;
+/// @endcode
+/// @see rah::back_inserter
+/// @see rah::stream_inserter
+
+/// @struct rah::iterator_facade<I, R, std::forward_iterator_tag>
 /// @brief Inerit to make a forward_iterator
 ///
-/// Require to implement 
+/// Required to implement  :
 /// @code{cpp}
 /// void increment();
 /// reference dereference() const;
@@ -32,10 +48,10 @@
 /// @endcode
 /// @see rah::view::gererate_iterator
 
-/// @class rah::iterator_facade<I, R, std::bidirectional_iterator_tag>
+/// @struct rah::iterator_facade<I, R, std::bidirectional_iterator_tag>
 /// @brief Inerit to make a bidirectional iterator
 ///
-/// Require to implement 
+/// Required to implement  :
 /// @code{cpp}
 /// void increment();
 /// void decrement();
@@ -44,10 +60,10 @@
 /// @endcode
 /// @see rah::view::zip_iterator
 
-/// @class rah::iterator_facade<I, R, std::random_access_iterator_tag>
+/// @struct rah::iterator_facade<I, R, std::random_access_iterator_tag>
 /// @brief Inerit to make a random access iterator
 ///
-/// Require to implement 
+/// Required to implement  :
 /// @code{cpp}
 /// void increment();
 /// void advance(intptr_t val);
@@ -61,17 +77,17 @@
 /// @fn rah::view::iota(T, T, T)
 /// @brief Generate a range of sequentially increasing integers
 ///
-/// @snippet rah.cpp iota
+/// @snippet test.cpp iota
 
 /// @fn rah::view::generate(F&& func)
 /// @brief Create an infinite range, repetitively calling func
 ///
-/// @snippet rah.cpp generate
+/// @snippet test.cpp generate
 
 /// @fn rah::view::generate_n(F&& func, size_t count)
 /// @brief Create a range of N elemnts, repetitively calling func
 ///
-/// @snippet rah.cpp generate_n
+/// @snippet test.cpp generate_n
 
 /// @fn rah::view::all(R&& range)
 /// @brief Create a view on the whole range
@@ -83,117 +99,117 @@
 /// @fn rah::view::transform(R&& range, F&& func)
 /// @brief Create a view applying a transformation to each element of the input range
 ///
-/// @snippet rah.cpp rah::view::transform
+/// @snippet test.cpp rah::view::transform
 
 /// @fn rah::view::transform(F&& func)
 /// @brief Create a view applying a transformation to each element of the input range
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp rah::view::transform_pipeable
+/// @snippet test.cpp rah::view::transform_pipeable
 
 /// @fn rah::view::slice(R&& range, size_t begin, size_t end)
 /// @brief Create a view that is a sub-range of a range
 ///
-/// @snippet rah.cpp slice
+/// @snippet test.cpp slice
 
 /// @fn rah::view::slice(size_t begin, size_t end)
 /// @brief Create a view that is a sub-range of a range
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp slice_pipeable
+/// @snippet test.cpp slice_pipeable
 
 /// @fn rah::view::stride(R&& range, size_t step)
 /// @brief Create a view consisting of every Nth element, starting with the first
 ///
-/// @snippet rah.cpp stride
+/// @snippet test.cpp stride
 
 /// @fn rah::view::stride(size_t step)
 /// @brief Create a view consisting of every Nth element, starting with the first
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp stride_pipeable
+/// @snippet test.cpp stride_pipeable
 
 /// @fn rah::view::retro(R&& range)
 /// @brief Create a view that traverses the source range in reverse order
 ///
-/// @snippet rah.cpp retro
+/// @snippet test.cpp retro
 
 /// @fn rah::view::retro()
 /// @brief Create a view that traverses the source range in reverse order
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp retro_pipeable
+/// @snippet test.cpp retro_pipeable
 
 /// @fn rah::view::zip(R&&... _ranges)
 /// @brief Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the Mth elements of all N ranges. 
 ///
-/// @snippet rah.cpp zip
+/// @snippet test.cpp zip
 
 /// @fn rah::view::chunk(R&& range, size_t step)
 /// @brief Create a view where each element is a range of N elements of the input range
 ///
-/// @snippet rah.cpp chunk
+/// @snippet test.cpp chunk
 
 /// @fn rah::view::chunk(size_t step)
 /// @brief Create a view where each element is a range of N elements of the input range
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp chunk_pipeable
+/// @snippet test.cpp chunk_pipeable
 
 /// @fn rah::view::filter(R&& range, F&& func)
 /// @brief Create a view with only elements which are filtered
 ///
-/// @snippet rah.cpp filter
+/// @snippet test.cpp filter
 
 /// @fn rah::view::filter(F&& func)
 /// @brief Create a view with only elements which are filtered
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp filter_pipeable
+/// @snippet test.cpp filter_pipeable
 
 /// @fn rah::view::join(R1&& range1, R2&& range2)
 /// @brief Create a view that is the concatenation of 2 ranges
 ///
-/// @snippet rah.cpp join
+/// @snippet test.cpp join
 
 /// @fn rah::view::join(R&& rightRange)
 /// @brief Create a view that is the concatenation of 2 ranges
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp join_pipeable
+/// @snippet test.cpp join_pipeable
 
 /// @fn rah::view::enumerate(R&& range)
 /// @brief Pair each element of a range with its index. 
 ///
-/// @snippet rah.cpp enumerate
+/// @snippet test.cpp enumerate
 
 /// @fn rah::view::enumerate()
 /// @brief Pair each element of a range with its index. 
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp enumerate_pipeable
+/// @snippet test.cpp enumerate_pipeable
 
 /// @fn rah::view::map_value(R&& range)
 /// @brief Given a range of std::pair-std::tuple, create a view consisting of just the first element of the pair. 
 ///
-/// @snippet rah.cpp map_value
+/// @snippet test.cpp map_value
 
 /// @fn rah::view::map_value()
 /// @brief Given a range of std::pair-std::tuple, create a view consisting of just the first element of the pair. 
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp map_value_pipeable
+/// @snippet test.cpp map_value_pipeable
 
 /// @fn rah::view::map_key(R&& range)
 /// @brief Given a range of std::pair-std::tuple, create a view consisting of just the second element of the pair. 
 ///
-/// @snippet rah.cpp map_key
+/// @snippet test.cpp map_key
 
 /// @fn rah::view::map_key()
 /// @brief Given a range of std::pair-std::tuple, create a view consisting of just the second element of the pair. 
 /// @remark pipeable syntax
 ///
-/// @snippet rah.cpp map_key_pipeable
+/// @snippet test.cpp map_key_pipeable
 
 /*! \mainpage rah - A range (header only) library for C++
  *
@@ -250,9 +266,9 @@ auto retro()
  *
  * Use the rah::make_pipeable function.
  * ## How to create a pipeable :
- * @snippet rah.cpp make_pipeable create
+ * @snippet test.cpp make_pipeable create
  * ## How to use a pipeable :
- * @snippet rah.cpp make_pipeable use
+ * @snippet test.cpp make_pipeable use
  *
  */
 

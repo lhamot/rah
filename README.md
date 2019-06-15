@@ -71,6 +71,5 @@ You can find the doc [here](https://lhamot.github.io/rah/html/index.html)
 - Views are in **rah::view** namespace
 - Read the [doc](https://lhamot.github.io/rah/html/index.html)
 ## The future of **rah**
-- Add some way to create and use appendable ranges (equivalent to `std::back_inserter`)
 - Wrap more std algorithms
 - Add more ranges
