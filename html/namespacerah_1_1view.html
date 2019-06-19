@@ -190,6 +190,14 @@ Functions</h2></td></tr>
 <tr class="memitem:aa42d84e34eaf06e2d04d650d1483ac68"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa42d84e34eaf06e2d04d650d1483ac68">map_key</a> ()</td></tr>
 <tr class="memdesc:aa42d84e34eaf06e2d04d650d1483ac68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a range of std::pair-std::tuple, create a view consisting of just the second element of the pair.  <a href="#aa42d84e34eaf06e2d04d650d1483ac68">More...</a><br /></td></tr>
 <tr class="separator:aa42d84e34eaf06e2d04d650d1483ac68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P  = is_lesser, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">sort</a> (R &amp;&amp;range, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a sorted view of a range.  <a href="#a343ff36ca2b6470f2a55a89dfb4e3dc9">More...</a><br /></td></tr>
+<tr class="separator:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee3389bbe781c123aceb0d017a470e11"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_lesser, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aee3389bbe781c123aceb0d017a470e11"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aee3389bbe781c123aceb0d017a470e11">sort</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:aee3389bbe781c123aceb0d017a470e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a sorted view of a range.  <a href="#aee3389bbe781c123aceb0d017a470e11">More...</a><br /></td></tr>
+<tr class="separator:aee3389bbe781c123aceb0d017a470e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a08f246d1e3e728738c48741274f5e9d7"></a>
@@ -724,6 +732,66 @@ template&lt;typename R &gt; </div>
 <p>Create a view that is a sub-range of a range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a4e7a243408052f64886e6349650df16c">rah::view::slice</a>(2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a343ff36ca2b6470f2a55a89dfb4e3dc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a343ff36ca2b6470f2a55a89dfb4e3dc9">&#9670;&nbsp;</a></span>sort() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R , typename P  = is_lesser, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::view::sort </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">P &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pred</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Make a sorted view of a range. </p>
+<dl class="section return"><dt>Returns</dt><dd>A view that is sorted </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This view is not lasy. The sorting is computed immediately.</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 2, 1, 5, 3, 4 };</div><div class="line">        <span class="keyword">auto</span>&amp;&amp; result = <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">rah::view::sort</a>(in);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 1, 5, 3, 4 }));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 1, 2, 3, 4, 5 }));</div></div><!-- fragment --><div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 2, 1, 5, 3, 4 };</div><div class="line">        <span class="keyword">auto</span>&amp;&amp; result = <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">rah::view::sort</a>(in, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a &lt; b; });</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 1, 5, 3, 4 }));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="aee3389bbe781c123aceb0d017a470e11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee3389bbe781c123aceb0d017a470e11">&#9670;&nbsp;</a></span>sort() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename P  = is_lesser, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::view::sort </td>
+          <td>(</td>
+          <td class="paramtype">P &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pred</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Make a sorted view of a range. </p>
+<dl class="section return"><dt>Returns</dt><dd>A view that is sorted </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This view is not lasy. The sorting is computed immediately. </dd>
+<dd>
+pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 2, 1, 5, 3, 4 };</div><div class="line">        <span class="keyword">auto</span>&amp;&amp; result = in | <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">rah::view::sort</a>();</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 1, 5, 3, 4 }));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 1, 2, 3, 4, 5 }));</div></div><!-- fragment --><div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 2, 1, 5, 3, 4 };</div><div class="line">        <span class="keyword">auto</span>&amp;&amp; result = in | <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">rah::view::sort</a>([](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a &lt; b; });</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 1, 5, 3, 4 }));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="ad71e78df55f6f9416e2869a8c14f6779"></a>

@@ -73,7 +73,11 @@ auto \mbox{\hyperlink{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}{ma
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}{map\+\_\+key}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}{map\+\_\+key}} ()
-\begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{sort}} (R \&\&range, P \&\&pred=\{\})
+\begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}{sort}} (P \&\&pred=\{\})
+\begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -480,6 +484,70 @@ pipeable syntax
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a4e7a243408052f64886e6349650df16c}{rah::view::slice}}(2, 6))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}\label{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}} 
+\index{rah::view@{rah::view}!sort@{sort}}
+\index{sort@{sort}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
+auto rah\+::view\+::sort (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+
+
+Make a sorted view of a range. 
+
+\begin{DoxyReturn}{Returns}
+A view that is sorted 
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+This view is not lasy. The sorting is computed immediately.
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{rah::view::sort}}(in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{rah::view::sort}}(in, [](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}\label{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}} 
+\index{rah::view@{rah::view}!sort@{sort}}
+\index{sort@{sort}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+auto rah\+::view\+::sort (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+
+
+Make a sorted view of a range. 
+
+\begin{DoxyReturn}{Returns}
+A view that is sorted 
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+This view is not lasy. The sorting is computed immediately. 
+
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{rah::view::sort}}();}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{rah::view::sort}}([](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}\label{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}} 
 \index{rah::view@{rah::view}!stride@{stride}}

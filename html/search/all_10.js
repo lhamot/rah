@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['val_5f',['val_',['../structrah_1_1view_1_1iota__iterator.html#a7a2ef77dc1a09b2eea42804c2297d057',1,'rah::view::iota_iterator']]],
-  ['value_5ftype',['value_type',['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4.html#a95da65d8da6515cbd927873f565a9cdc',1,'rah::iterator_facade&lt; I, R, std::forward_iterator_tag &gt;::value_type()'],['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1output__iterator__tag_01_4.html#aeafcf4359545a589d72a23f8500e9b74',1,'rah::iterator_facade&lt; I, R, std::output_iterator_tag &gt;::value_type()']]]
+  ['unique',['unique',['../namespacerah.html#a7c4f0afb068c908600b357e111148df7',1,'rah::unique(R &amp;&amp;range, P &amp;&amp;pred={})'],['../namespacerah.html#aafbbb6f9bd014675985d33d93221acca',1,'rah::unique(P &amp;&amp;pred={})'],['../namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6',1,'rah::action::unique(C &amp;&amp;container, P &amp;&amp;pred={})'],['../namespacerah_1_1action.html#a2b3773f4b775a1e64307307556af24cd',1,'rah::action::unique(P &amp;&amp;pred={})']]]
 ];

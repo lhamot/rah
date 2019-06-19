@@ -82,11 +82,16 @@ $(function() {
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;numeric&gt;</code><br />
 <code>#include &lt;ciso646&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="rah_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1is__range.html">rah::is_range&lt; R, typename &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1is__range_3_01_r_00_01decltype_07begin_07fake_3_01_r_01_4_07_08_08_00_01end_07fake_cf1a9a1e2579209cb82001bc9eda23c1.html">rah::is_range&lt; R, decltype(begin(fake&lt; R &gt;()), end(fake&lt; R &gt;()), 0)&gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range&lt; I &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1pipeable.html">rah::pipeable&lt; Func &gt;</a></td></tr>
@@ -115,6 +120,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1back__insert__iterator.html">rah::back_insert_iterator&lt; C &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1is__lesser.html">rah::is_lesser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the '&lt;' operator on two values of any type.  <a href="structrah_1_1is__lesser.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1gererate__iterator.html">rah::view::gererate_iterator&lt; F &gt;</a></td></tr>
@@ -133,12 +141,17 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1stream__inserter__iterator.html">rah::stream_inserter_iterator&lt; S &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1is__equal.html">rah::is_equal</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the '==' operator on two values of any type.  <a href="structrah_1_1is__equal.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacerah"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah.html">rah</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacerah_1_1view"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html">rah::view</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacerah_1_1action"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html">rah::action</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -296,6 +309,14 @@ Functions</h2></td></tr>
 <tr class="memitem:aa42d84e34eaf06e2d04d650d1483ac68"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa42d84e34eaf06e2d04d650d1483ac68">rah::view::map_key</a> ()</td></tr>
 <tr class="memdesc:aa42d84e34eaf06e2d04d650d1483ac68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a range of std::pair-std::tuple, create a view consisting of just the second element of the pair.  <a href="namespacerah_1_1view.html#aa42d84e34eaf06e2d04d650d1483ac68">More...</a><br /></td></tr>
 <tr class="separator:aa42d84e34eaf06e2d04d650d1483ac68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P  = is_lesser, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">rah::view::sort</a> (R &amp;&amp;range, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a sorted view of a range.  <a href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">More...</a><br /></td></tr>
+<tr class="separator:a343ff36ca2b6470f2a55a89dfb4e3dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee3389bbe781c123aceb0d017a470e11"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_lesser, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aee3389bbe781c123aceb0d017a470e11"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aee3389bbe781c123aceb0d017a470e11">rah::view::sort</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:aee3389bbe781c123aceb0d017a470e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a sorted view of a range.  <a href="namespacerah_1_1view.html#aee3389bbe781c123aceb0d017a470e11">More...</a><br /></td></tr>
+<tr class="separator:aee3389bbe781c123aceb0d017a470e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51feb1497566c28de396f50735fd259b"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a51feb1497566c28de396f50735fd259b"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a51feb1497566c28de396f50735fd259b">rah::empty</a> (R &amp;&amp;range)</td></tr>
 <tr class="memdesc:a51feb1497566c28de396f50735fd259b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the range if empty.  <a href="namespacerah.html#a51feb1497566c28de396f50735fd259b">More...</a><br /></td></tr>
@@ -359,10 +380,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a9e22b56a1f28a353659fed572f33f5a9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a9e22b56a1f28a353659fed572f33f5a9">rah::count_if</a> (P &amp;&amp;pred)</td></tr>
 <tr class="memdesc:a9e22b56a1f28a353659fed572f33f5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts elements for which predicate pred returns true.  <a href="namespacerah.html#a9e22b56a1f28a353659fed572f33f5a9">More...</a><br /></td></tr>
 <tr class="separator:a9e22b56a1f28a353659fed572f33f5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe6ed477fd9ab2f873d76a4b50ffac39"><td class="memTemplParams" colspan="2">template&lt;typename R , typename F &gt; </td></tr>
-<tr class="memitem:afe6ed477fd9ab2f873d76a4b50ffac39"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#afe6ed477fd9ab2f873d76a4b50ffac39">rah::for_each</a> (R &amp;&amp;range, F &amp;&amp;func)</td></tr>
-<tr class="memdesc:afe6ed477fd9ab2f873d76a4b50ffac39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function func to each element of the range.  <a href="namespacerah.html#afe6ed477fd9ab2f873d76a4b50ffac39">More...</a><br /></td></tr>
-<tr class="separator:afe6ed477fd9ab2f873d76a4b50ffac39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd971bc9f9c098df8422e221adfb199f"><td class="memTemplParams" colspan="2">template&lt;typename R , typename F &gt; </td></tr>
+<tr class="memitem:afd971bc9f9c098df8422e221adfb199f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#afd971bc9f9c098df8422e221adfb199f">rah::for_each</a> (R &amp;&amp;range, F &amp;&amp;func)</td></tr>
+<tr class="memdesc:afd971bc9f9c098df8422e221adfb199f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function func to each element of the range.  <a href="namespacerah.html#afd971bc9f9c098df8422e221adfb199f">More...</a><br /></td></tr>
+<tr class="separator:afd971bc9f9c098df8422e221adfb199f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76e2ce1a497aa3726cc9d99fb320ac67"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a76e2ce1a497aa3726cc9d99fb320ac67"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a76e2ce1a497aa3726cc9d99fb320ac67">rah::for_each</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:a76e2ce1a497aa3726cc9d99fb320ac67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function func to each element of the range.  <a href="namespacerah.html#a76e2ce1a497aa3726cc9d99fb320ac67">More...</a><br /></td></tr>
@@ -430,6 +451,66 @@ Functions</h2></td></tr>
 <tr class="memitem:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3f7b590b1bd8a44b5b2d6f4e35f1837c">rah::stream_inserter</a> (S &amp;&amp;stream)</td></tr>
 <tr class="memdesc:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a range which output to a stream.  <a href="namespacerah.html#a3f7b590b1bd8a44b5b2d6f4e35f1837c">More...</a><br /></td></tr>
 <tr class="separator:a3f7b590b1bd8a44b5b2d6f4e35f1837c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afba9495316f20f6caee735c15feb349c"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P &gt; </td></tr>
+<tr class="memitem:afba9495316f20f6caee735c15feb349c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#afba9495316f20f6caee735c15feb349c">rah::remove_if</a> (R &amp;&amp;range, P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:afba9495316f20f6caee735c15feb349c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep at the begining of the range only elements for which pred(elt) is false<br />
+.  <a href="namespacerah.html#afba9495316f20f6caee735c15feb349c">More...</a><br /></td></tr>
+<tr class="separator:afba9495316f20f6caee735c15feb349c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af598cf91c554f6d6938c320578e6bb02"><td class="memTemplParams" colspan="2">template&lt;typename P &gt; </td></tr>
+<tr class="memitem:af598cf91c554f6d6938c320578e6bb02"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#af598cf91c554f6d6938c320578e6bb02">rah::remove_if</a> (P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:af598cf91c554f6d6938c320578e6bb02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep at the begining of the range only elements for which pred(elt) is false<br />
+.  <a href="namespacerah.html#af598cf91c554f6d6938c320578e6bb02">More...</a><br /></td></tr>
+<tr class="separator:af598cf91c554f6d6938c320578e6bb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b055c0e04f784b9abc89a27ef4534dd"><td class="memTemplParams" colspan="2">template&lt;typename C , typename R &gt; </td></tr>
+<tr class="memitem:a3b055c0e04f784b9abc89a27ef4534dd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3b055c0e04f784b9abc89a27ef4534dd">rah::erase</a> (C &amp;&amp;container, R &amp;&amp;subrange)</td></tr>
+<tr class="memdesc:a3b055c0e04f784b9abc89a27ef4534dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase a sub-range of a given container.  <a href="namespacerah.html#a3b055c0e04f784b9abc89a27ef4534dd">More...</a><br /></td></tr>
+<tr class="separator:a3b055c0e04f784b9abc89a27ef4534dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ea7a94642c23e9f3db6f6b890f2987"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a80ea7a94642c23e9f3db6f6b890f2987"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a80ea7a94642c23e9f3db6f6b890f2987">rah::erase</a> (R &amp;&amp;range)</td></tr>
+<tr class="memdesc:a80ea7a94642c23e9f3db6f6b890f2987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase a sub-range of a given container.  <a href="namespacerah.html#a80ea7a94642c23e9f3db6f6b890f2987">More...</a><br /></td></tr>
+<tr class="separator:a80ea7a94642c23e9f3db6f6b890f2987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02bc4f7618438272f7ec9f3c819d5990"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P  = is_lesser, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a02bc4f7618438272f7ec9f3c819d5990"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a02bc4f7618438272f7ec9f3c819d5990">rah::sort</a> (R &amp;range, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a02bc4f7618438272f7ec9f3c819d5990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort a range in place, using the given predicate.  <a href="namespacerah.html#a02bc4f7618438272f7ec9f3c819d5990">More...</a><br /></td></tr>
+<tr class="separator:a02bc4f7618438272f7ec9f3c819d5990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a938d529ef4564281a5dca2ce49b538"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_lesser, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a3a938d529ef4564281a5dca2ce49b538"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3a938d529ef4564281a5dca2ce49b538">rah::sort</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a3a938d529ef4564281a5dca2ce49b538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort a range in place, using the given predicate.  <a href="namespacerah.html#a3a938d529ef4564281a5dca2ce49b538">More...</a><br /></td></tr>
+<tr class="separator:a3a938d529ef4564281a5dca2ce49b538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4f0afb068c908600b357e111148df7"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P  = is_equal, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a7c4f0afb068c908600b357e111148df7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a7c4f0afb068c908600b357e111148df7">rah::unique</a> (R &amp;&amp;range, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a7c4f0afb068c908600b357e111148df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successuve values which are equals.  <a href="namespacerah.html#a7c4f0afb068c908600b357e111148df7">More...</a><br /></td></tr>
+<tr class="separator:a7c4f0afb068c908600b357e111148df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafbbb6f9bd014675985d33d93221acca"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_equal, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aafbbb6f9bd014675985d33d93221acca"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#aafbbb6f9bd014675985d33d93221acca">rah::unique</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:aafbbb6f9bd014675985d33d93221acca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successuve values which are equals.  <a href="namespacerah.html#aafbbb6f9bd014675985d33d93221acca">More...</a><br /></td></tr>
+<tr class="separator:aafbbb6f9bd014675985d33d93221acca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea663eead5f5aa262ef890d7393daad6"><td class="memTemplParams" colspan="2">template&lt;typename C , typename P  = is_equal, typename  = std::enable_if_t&lt;is_range&lt;C&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aea663eead5f5aa262ef890d7393daad6"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6">rah::action::unique</a> (C &amp;&amp;container, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:aea663eead5f5aa262ef890d7393daad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successive values which are equals.  <a href="namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6">More...</a><br /></td></tr>
+<tr class="separator:aea663eead5f5aa262ef890d7393daad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3773f4b775a1e64307307556af24cd"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_equal, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a2b3773f4b775a1e64307307556af24cd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#a2b3773f4b775a1e64307307556af24cd">rah::action::unique</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a2b3773f4b775a1e64307307556af24cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successuve values which are equals.  <a href="namespacerah_1_1action.html#a2b3773f4b775a1e64307307556af24cd">More...</a><br /></td></tr>
+<tr class="separator:a2b3773f4b775a1e64307307556af24cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759ca023dec90e65e7d0e0327ae11af7"><td class="memTemplParams" colspan="2">template&lt;typename C , typename P &gt; </td></tr>
+<tr class="memitem:a759ca023dec90e65e7d0e0327ae11af7"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#a759ca023dec90e65e7d0e0327ae11af7">rah::action::remove_if</a> (C &amp;&amp;container, P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:a759ca023dec90e65e7d0e0327ae11af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep only elements for which pred(elt) is false<br />
+.  <a href="namespacerah_1_1action.html#a759ca023dec90e65e7d0e0327ae11af7">More...</a><br /></td></tr>
+<tr class="separator:a759ca023dec90e65e7d0e0327ae11af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a708ce68c6ed2b20ef9c0cdb6b697c980"><td class="memTemplParams" colspan="2">template&lt;typename P &gt; </td></tr>
+<tr class="memitem:a708ce68c6ed2b20ef9c0cdb6b697c980"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#a708ce68c6ed2b20ef9c0cdb6b697c980">rah::action::remove_if</a> (P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:a708ce68c6ed2b20ef9c0cdb6b697c980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep only elements for which pred(elt) is false<br />
+.  <a href="namespacerah_1_1action.html#a708ce68c6ed2b20ef9c0cdb6b697c980">More...</a><br /></td></tr>
+<tr class="separator:a708ce68c6ed2b20ef9c0cdb6b697c980"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8518431f6e5e7415a6739c65e874ab8"><td class="memTemplParams" colspan="2">template&lt;typename C , typename P  = is_lesser, typename  = std::enable_if_t&lt;is_range&lt;C&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:ae8518431f6e5e7415a6739c65e874ab8"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#ae8518431f6e5e7415a6739c65e874ab8">rah::action::sort</a> (C &amp;&amp;container, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:ae8518431f6e5e7415a6739c65e874ab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort a range in place, using the given predicate.  <a href="namespacerah_1_1action.html#ae8518431f6e5e7415a6739c65e874ab8">More...</a><br /></td></tr>
+<tr class="separator:ae8518431f6e5e7415a6739c65e874ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1603fdf8fc87e84c277c216a5176674"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_lesser, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:ac1603fdf8fc87e84c277c216a5176674"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#ac1603fdf8fc87e84c277c216a5176674">rah::action::sort</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:ac1603fdf8fc87e84c277c216a5176674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort a range in place, using the given predicate.  <a href="namespacerah_1_1action.html#ac1603fdf8fc87e84c277c216a5176674">More...</a><br /></td></tr>
+<tr class="separator:ac1603fdf8fc87e84c277c216a5176674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad3a388e89994ad75cbafb263072ddfbc"></a>

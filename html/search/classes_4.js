@@ -1,6 +1,10 @@
 var searchData=
 [
   ['iota_5fiterator',['iota_iterator',['../structrah_1_1view_1_1iota__iterator.html',1,'rah::view']]],
+  ['is_5fequal',['is_equal',['../structrah_1_1is__equal.html',1,'rah']]],
+  ['is_5flesser',['is_lesser',['../structrah_1_1is__lesser.html',1,'rah']]],
+  ['is_5frange',['is_range',['../structrah_1_1is__range.html',1,'rah']]],
+  ['is_5frange_3c_20r_2c_20decltype_28begin_28fake_3c_20r_20_3e_28_29_29_2c_20end_28fake_3c_20r_20_3e_28_29_29_2c_200_29_3e',['is_range&lt; R, decltype(begin(fake&lt; R &gt;()), end(fake&lt; R &gt;()), 0)&gt;',['../structrah_1_1is__range_3_01_r_00_01decltype_07begin_07fake_3_01_r_01_4_07_08_08_00_01end_07fake_cf1a9a1e2579209cb82001bc9eda23c1.html',1,'rah']]],
   ['iterator_5ffacade',['iterator_facade',['../structrah_1_1iterator__facade.html',1,'rah']]],
   ['iterator_5ffacade_3c_20back_5finsert_5fiterator_3c_20c_20_3e_2c_20range_5fref_5ftype_5ft_3c_20c_20_3e_2c_20std_3a_3aoutput_5fiterator_5ftag_20_3e',['iterator_facade&lt; back_insert_iterator&lt; C &gt;, range_ref_type_t&lt; C &gt;, std::output_iterator_tag &gt;',['../structrah_1_1iterator__facade.html',1,'rah']]],
   ['iterator_5ffacade_3c_20chunk_5fiterator_3c_20r_20_3e_2c_20iterator_5frange_3c_20range_5fbegin_5ftype_5ft_3c_20r_20_3e_20_3e_2c_20std_3a_3aforward_5fiterator_5ftag_20_3e',['iterator_facade&lt; chunk_iterator&lt; R &gt;, iterator_range&lt; range_begin_type_t&lt; R &gt; &gt;, std::forward_iterator_tag &gt;',['../structrah_1_1iterator__facade.html',1,'rah']]],
