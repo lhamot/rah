@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <numeric>
 #include <ciso646>
+#include <vector>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -45,6 +46,12 @@ using range_value_type_t = std::remove_reference_t<range_ref_type_t<T>>;
 
 template<typename R>
 using range_iter_categ_t = typename std::iterator_traits<range_begin_type_t<R>>::iterator_category;
+
+template<typename R, typename = int>
+struct is_range { static constexpr bool value = false; };
+
+template<typename R>
+struct is_range <R, decltype(begin(fake<R>()), end(fake<R>()), 0)> { static constexpr bool value = true; };
 
 // ******************************** iterator_range ************************************************
 
@@ -249,6 +256,12 @@ template<typename C> auto back_inserter(C&& container)
 	auto end = back_insert_iterator<Container>(container);
 	return rah::make_iterator_range(begin, end);
 }
+
+/// Apply the '<' operator on two values of any type
+struct is_lesser
+{
+	template<typename A, typename B> bool operator()(A&& a, B&& b) { return a < b; }
+};
 
 namespace view
 {
@@ -692,12 +705,45 @@ auto map_value()
 
 template<typename R> auto map_key(R&& range)
 {
-	return transform(std::forward<R>(range), [](auto nvp) {return std::get<0>(nvp); });
+	return RAH_NAMESPACE::view::transform(std::forward<R>(range), [](auto nvp) {return std::get<0>(nvp); });
 }
 
 auto map_key()
 {
 	return make_pipeable([=](auto&& range) {return map_key(range); });
+}
+
+// *********************************** sort *******************************************************
+
+/// @brief Make a sorted view of a range
+/// @return A view that is sorted
+/// @remark This view is not lasy. The sorting is computed immediately.
+///
+/// @snippet test.cpp rah::view::sort
+/// @snippet test.cpp rah::view::sort_pred
+template<typename R, typename P = is_lesser, typename = std::enable_if_t<is_range<R>::value>>
+auto sort(R&& range, P&& pred = {})
+{
+	using value_type = range_value_type_t<R>;
+	using Container = typename std::vector<value_type>;
+	Container result;
+	result.reserve(size(range));
+	std::copy(begin(range), end(range), std::back_inserter(result));
+	std::sort(begin(result), end(result), pred);
+	return result;
+}
+
+/// @brief Make a sorted view of a range
+/// @return A view that is sorted
+/// @remark This view is not lasy. The sorting is computed immediately.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::view::sort_pipeable
+/// @snippet test.cpp rah::view::sort_pred_pipeable
+template<typename P = is_lesser, typename = std::enable_if_t<not is_range<P>::value>>
+auto sort(P&& pred = {})
+{
+	return make_pipeable([=](auto&& range) { return view::sort(std::forward<decltype(range)>(range), pred); });
 }
 
 } // namespace view
@@ -729,8 +775,7 @@ auto empty()
 template<typename RI, typename RO, typename F>
 auto transform(RI&& rangeIn, RO&& rangeOut, F&& unary_op)
 {
-	auto iter = std::transform(begin(rangeIn), end(rangeIn), begin(rangeOut), std::forward<F>(unary_op));
-	return make_iterator_range(iter, end(rangeOut));
+	return std::transform(begin(rangeIn), end(rangeIn), begin(rangeOut), std::forward<F>(unary_op));
 }
 
 /// @brief The binary operation binary_op is applied to pairs of elements from two ranges
@@ -739,12 +784,11 @@ auto transform(RI&& rangeIn, RO&& rangeOut, F&& unary_op)
 template<typename RI1, typename RI2, typename RO, typename F>
 auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& binary_op)
 {
-	auto iter = std::transform(
+	return std::transform(
 		begin(rangeIn1), end(rangeIn1),
 		begin(rangeIn2),
 		begin(rangeOut),
 		std::forward<F>(binary_op));
-	return make_iterator_range(iter, end(rangeOut));
 }
 
 // ********************************************* reduce *******************************************
@@ -865,9 +909,9 @@ template<typename P> auto count_if(P&& pred)
 /// @brief Applies the given function func to each element of the range
 ///
 /// @snippet test.cpp rah::for_each
-template<typename R, typename F> void for_each(R&& range, F&& func)
+template<typename R, typename F> auto for_each(R&& range, F&& func)
 {
-	::std::for_each(begin(range), end(range), std::forward<F>(func));
+	return ::std::for_each(begin(range), end(range), std::forward<F>(func));
 }
 
 /// @brief Applies the given function func to each element of the range
@@ -905,10 +949,7 @@ template<typename C> auto to_container()
 /// @snippet test.cpp rah::mismatch
 template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
-	auto const end1 = end(range1);
-	auto const end2 = end(range2);
-	auto i1_i2 = std::mismatch(begin(range1), end1, begin(range2), end2);
-	return std::make_pair(make_iterator_range(std::get<0>(i1_i2), end1), make_iterator_range(std::get<1>(i1_i2), end2));
+	return std::mismatch(begin(range1), end(range1), begin(range2), end(range2));
 }
 
 // ****************************************** find ************************************************
@@ -918,9 +959,7 @@ template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 /// @snippet test.cpp rah::find
 template<typename R, typename V> auto find(R&& range, V&& value)
 {
-	auto end_iter = end(range);
-	auto iter = std::find(begin(range), end_iter, std::forward<V>(value));
-	return make_iterator_range(iter, end_iter);
+	return std::find(begin(range), end(range), std::forward<V>(value));
 }
 
 /// @brief Finds the first element equal to value
@@ -937,9 +976,7 @@ template<typename V> auto find(V&& value)
 /// @snippet test.cpp rah::find_if
 template<typename R, typename P> auto find_if(R&& range, P&& pred)
 {
-	auto end_iter = end(range);
-	auto iter = std::find_if(begin(range), end_iter, std::forward<P>(pred));
-	return make_iterator_range(iter, end_iter);
+	return std::find_if(begin(range), end(range), std::forward<P>(pred));
 }
 
 /// @brief Finds the first element satisfying specific criteria
@@ -956,9 +993,7 @@ template<typename P> auto find_if(P&& pred)
 /// @snippet test.cpp rah::find_if_not
 template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 {
-	auto end_iter = end(range);
-	auto iter = std::find_if_not(begin(range), end_iter, std::forward<P>(pred));
-	return make_iterator_range(iter, end_iter);
+	return std::find_if_not(begin(range), end(range), std::forward<P>(pred));
 }
 
 /// @brief Finds the first element not satisfying specific criteria
@@ -978,8 +1013,7 @@ template<typename P> auto find_if_not(P&& pred)
 /// @snippet test.cpp rah::copy
 template<typename R1, typename R2> auto copy(R1&& in, R2&& out)
 {
-	auto iter = std::copy(begin(in), end(in), begin(out));
-	return make_iterator_range(iter, end(out));
+	return std::copy(begin(in), end(in), begin(out));
 }
 
 /// @brief Copy in range into an other
@@ -1030,7 +1064,7 @@ template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 template<typename R1> auto equal(R1&& range2)
 {
 	auto all_range2 = range2 | rah::view::all();
-	return make_pipeable([=](auto&& range1) { return equal(range1, all_range2); });
+	return make_pipeable([=](auto&& range1) { return equal(std::forward<decltype(range1)>(range1), all_range2); });
 }
 
 // *********************************** stream_inserter ********************************************
@@ -1054,5 +1088,181 @@ template<typename S> auto stream_inserter(S&& stream)
 	return rah::make_iterator_range(begin, end);
 }
 
+// *********************************** remove_if **************************************************
+
+/// @brief Keep at the begining of the range only elements for which pred(elt) is false\n
+/// @return Return the (end) part of the range to erase.
+///
+/// @snippet test.cpp rah::remove_if
+template<typename R, typename P> auto remove_if(R&& range, P&& pred)
+{
+	return std::remove_if(begin(range), end(range), std::forward<P>(pred));
 }
 
+/// @brief Keep at the begining of the range only elements for which pred(elt) is false\n
+/// @return The (end) part of the range to erase.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::remove_if_pipeable
+template<typename P> auto remove_if(P&& pred)
+{
+	return make_pipeable([=](auto&& range) { return remove_if(range, pred); });
+}
+
+// *********************************** erase ******************************************************
+
+/// @brief Erase a sub-range of a given container
+/// @return A view on the resulting container
+///
+/// @snippet test.cpp rah::erase
+template<typename C, typename R> auto erase(C&& container, R&& subrange)
+{
+	container.erase(begin(subrange), end(subrange));
+	return container | rah::view::all();
+}
+
+/// @brief Erase a sub-range of a given container
+/// @return A view on the resulting container
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::erase
+template<typename R> auto erase(R&& range)
+{
+	auto all_range = range | rah::view::all();
+	return make_pipeable([=](auto&& cont) { return rah::erase(cont, all_range); });
+}
+
+// *********************************** sort *******************************************************
+
+/// @brief Sort a range in place, using the given predicate.
+///
+/// @snippet test.cpp rah::sort
+/// @snippet test.cpp rah::sort_pred
+template<typename R, typename P = is_lesser, typename = std::enable_if_t<is_range<R>::value>>
+void sort(R& range, P&& pred = {})
+{
+	std::sort(begin(range), end(range), pred);
+}
+
+/// @brief Sort a range in place, using the given predicate.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::sort_pipeable
+/// @snippet test.cpp rah::sort_pred_pipeable
+template<typename P = is_lesser, typename = std::enable_if_t<not is_range<P>::value>>
+auto sort(P&& pred = {})
+{
+	return make_pipeable([=](auto& range) { return sort(range, pred); });
+}
+
+// *********************************** unique *****************************************************
+
+/// Apply the '==' operator on two values of any type
+struct is_equal
+{
+	template<typename A, typename B> bool operator()(A&& a, B&& b) { return a == b; }
+};
+
+/// @brief Remove all but first successuve values which are equals. Without resizing the range.
+/// @return The end part of the range, which have to be remove.
+///
+/// @snippet test.cpp rah::unique
+/// @snippet test.cpp rah::unique_pred
+template<typename R, typename P = is_equal, typename = std::enable_if_t<is_range<R>::value>>
+auto unique(R&& range, P&& pred = {})
+{
+	return std::unique(begin(range), end(range), pred);
+}
+
+/// @brief Remove all but first successuve values which are equals. Without resizing the range.
+/// @return The end part of the range, which have to be remove.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::unique_pipeable
+/// @snippet test.cpp rah::unique_pred_pipeable
+template<typename P = is_equal, typename = std::enable_if_t<not is_range<P>::value>>
+auto unique(P&& pred = {})
+{
+	return make_pipeable([=](auto&& range) { return unique(std::forward<decltype(range)>(range), pred); });
+}
+
+namespace action
+{
+
+// *********************************** unique *****************************************************
+
+/// @brief Remove all but first successive values which are equals.
+/// @return Reference to container
+///
+/// @snippet test.cpp rah::action::unique
+/// @snippet test.cpp rah::action::unique_pred
+template<typename C, typename P = is_equal, typename = std::enable_if_t<is_range<C>::value>>
+auto&& unique(C&& container, P&& pred = {})
+{
+	container.erase(RAH_NAMESPACE::unique(container, pred), container.end());
+	return std::forward<C>(container);
+}
+
+/// @brief Remove all but first successuve values which are equals.
+/// @return Reference to container
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::action::unique_pipeable
+/// @snippet test.cpp rah::action::unique_pred_pipeable
+template<typename P = is_equal, typename = std::enable_if_t<not is_range<P>::value>>
+auto unique(P&& pred = {})
+{
+	return make_pipeable([=](auto&& range) -> auto&& { return action::unique(std::forward<decltype(range)>(range), pred); });
+}
+
+// *********************************** remove_if **************************************************
+
+/// @brief Keep only elements for which pred(elt) is false\n
+/// @return reference to the container
+///
+/// @snippet test.cpp rah::action::remove_if
+template<typename C, typename P> auto&& remove_if(C&& container, P&& pred)
+{
+	container.erase(RAH_NAMESPACE::remove_if(container, std::forward<P>(pred)), container.end());
+	return std::forward<C>(container);
+}
+
+/// @brief Keep only elements for which pred(elt) is false\n
+/// @return reference to the container
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::action::remove_if_pipeable
+template<typename P> auto remove_if(P&& pred)
+{
+	return make_pipeable([=](auto&& range) -> auto&& { return remove_if(std::forward<decltype(range)>(range), pred); });
+}
+
+// *********************************** sort *******************************************************
+
+/// @brief Sort a range in place, using the given predicate.
+/// @return reference to container
+///
+/// @snippet test.cpp rah::action::sort
+/// @snippet test.cpp rah::action::sort_pred
+template<typename C, typename P = is_lesser, typename = std::enable_if_t<is_range<C>::value>>
+auto&& sort(C&& container, P&& pred = {})
+{
+	RAH_NAMESPACE::sort(container, pred);
+	return std::forward<C>(container);
+}
+
+/// @brief Sort a range in place, using the given predicate.
+/// @return reference to container
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::action::sort_pipeable
+/// @snippet test.cpp rah::action::sort_pred_pipeable
+template<typename P = is_lesser, typename = std::enable_if_t<not is_range<P>::value>>
+auto sort(P&& pred = {})
+{
+	return make_pipeable([=](auto&& range) -> auto&& { return action::sort(std::forward<decltype(range)>(range), pred); });
+}
+
+}
+
+}
