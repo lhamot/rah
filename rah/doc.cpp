@@ -233,7 +233,7 @@
  *
  * # How to make a view
  * - To make a view you have to create an iterator.
- *   - For example the rah::view::filter view is an rah::iterator_range of rah::view::filter_iterator. 
+ *   - For example the rah::view::filter view is an rah::iterator_range of rah::view::filter_iterator.
  * - Then you have to create a function taking a range and parameters (or no range for generator)
  *
 * @code{.cpp}
@@ -254,9 +254,9 @@ auto retro()
  *
  * # How to make an iterator
  * There is in **rah** an helper to create iterators: `rah::iterator_facade`
- * There are three kinf of `rah::iterator_facade`:
+ * There are three kind of `rah::iterator_facade`:
  * - rah::iterator_facade<I, R, std::forward_iterator_tag>
- *   - For an example : rah::view::gererate_iterator
+ *   - For an example : rah::view::generate_iterator
  * - rah::iterator_facade<I, R, std::bidirectional_iterator_tag >
  *   - For an example : rah::view::zip_iterator
  * - rah::iterator_facade<I, R, std::random_access_iterator_tag>

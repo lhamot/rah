@@ -295,26 +295,26 @@ template<typename T = size_t> auto iota(T b, T e, T step = 1)
 
 /// @see rah::generate
 template<typename F>
-struct gererate_iterator : iterator_facade<gererate_iterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>
+struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>
 {
 	mutable F func_;
 	size_t iter_count_ = 0;
 
-	gererate_iterator(F const& func, size_t iter_count = 0) : func_(func), iter_count_(iter_count) {}
+	generate_iterator(F const& func, size_t iter_count = 0) : func_(func), iter_count_(iter_count) {}
 
 	void increment() { ++iter_count_; }
 	auto dereference() const { return func_(); }
-	bool equal(gererate_iterator other) const { return iter_count_ == other.iter_count_; }
+	bool equal(generate_iterator other) const { return iter_count_ == other.iter_count_; }
 };
 
 template<typename F> auto generate(F&& func)
 {
-	return iterator_range<gererate_iterator<F>>{ { func}, { func }};
+	return iterator_range<generate_iterator<F>>{ { func}, { func }};
 }
 
 template<typename F> auto generate_n(F&& func, size_t count)
 {
-	return iterator_range<gererate_iterator<F>>{ { func }, { func, count }};
+	return iterator_range<generate_iterator<F>>{ { func }, { func, count }};
 }
 
 // ********************************** all ********************************************************
