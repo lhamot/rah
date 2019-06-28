@@ -17,6 +17,7 @@
 #include <numeric>
 #include <ciso646>
 #include <vector>
+#include <array>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -28,8 +29,11 @@
 namespace RAH_NAMESPACE
 {
 
+constexpr intptr_t End = -1; ///< Used with rah::view::slice to point to the end
+
 // **************************** range traits ******************************************************
 
+/// Used in decltype to get an instance of a type
 template<typename T> T& fake() { return *((std::remove_reference_t<T>*)nullptr); }
 
 template<typename T>
@@ -102,7 +106,7 @@ auto operator | (R&& range, pipeable<MakeRange> const& adapter) ->decltype(adapt
 	return adapter.func(std::forward<R>(range));
 }
 
-// ************************************ iterator_facade ********************************************
+// ************************************ iterator_facade *******************************************
 
 template<typename I, typename R, typename C> struct iterator_facade;
 
@@ -265,6 +269,13 @@ struct is_lesser
 
 namespace view
 {
+// ********************************** single ******************************************************
+
+template<typename V>
+auto single(V&& value)
+{
+	return std::array<V, 1>{std::forward<V>(value)};
+}
 
 // ********************************** iota ********************************************************
 
@@ -317,7 +328,7 @@ template<typename F> auto generate_n(F&& func, size_t count)
 	return iterator_range<generate_iterator<F>>{ { func }, { func, count }};
 }
 
-// ********************************** all ********************************************************
+// ********************************** all *********************************************************
 
 template<typename R> auto all(R&& range)
 {
@@ -361,7 +372,9 @@ struct transform_iterator : iterator_facade<
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using iterator = transform_iterator<std::remove_reference_t<R>, std::remove_reference_t<F>>;
-	return iterator_range<iterator>{ { begin(range), func }, { end(range), func } };
+	auto iter1 = begin(range);
+	auto iter2 = end(range);
+	return iterator_range<iterator>{ { iter1, func }, { iter2, func } };
 }
 
 template<typename F> auto transform(F&& func)
@@ -371,16 +384,30 @@ template<typename F> auto transform(F&& func)
 
 // ***************************************** slice ************************************************
 
-template<typename R> auto slice(R&& range, size_t begin_idx, size_t end_idx)
+template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)
 {
-	auto iter = begin(range);
-	std::advance(iter, begin_idx);
-	auto endIter = iter;
-	std::advance(endIter, intptr_t(end_idx) - intptr_t(begin_idx));
-	return iterator_range<decltype(iter)>{ {iter}, { endIter } };
+	auto findIter = [](auto b, auto e, intptr_t idx)
+	{
+		if (idx < 0)
+		{
+			idx += 1;
+			std::advance(e, idx);
+			return e;
+		}
+		else
+		{
+			std::advance(b, idx);
+			return b;
+		}
+	};
+	auto b_in = begin(range);
+	auto e_in = end(range);
+	auto b_out = findIter(b_in, e_in, begin_idx);
+	auto e_out = findIter(b_in, e_in, end_idx);
+	return iterator_range<decltype(b_out)>{ {b_out}, { e_out } };
 }
 
-auto slice(size_t begin, size_t end)
+auto slice(intptr_t begin, intptr_t end)
 {
 	return make_pipeable([=](auto&& range) {return slice(range, begin, end); });
 }
@@ -442,7 +469,7 @@ auto retro()
 	return make_pipeable([=](auto&& range) {return retro(range); });
 }
 
-// *************************** zip *****************************************************
+// *************************** zip ****************************************************************
 /// \cond PRIVATE 
 namespace details
 {
@@ -658,6 +685,12 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 	}
 };
 
+/// @brief return the same range
+template<typename R1> auto join(R1&& range1) 
+{ 
+	return std::forward<R1>(range1); 
+}
+
 template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 {
 	return iterator_range<
@@ -670,10 +703,11 @@ template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 	};
 }
 
-template<typename R> auto join(R&& rightRange)
+/// @see rah::view::join(R1&& range1, R2&& range2)
+template<typename R1, typename R2, typename ...Ranges> 
+auto join(R1&& range1, R2&& range2, Ranges&&... ranges)
 {
-	auto rightRangeRef = make_iterator_range(begin(rightRange), end(rightRange));
-	return make_pipeable([=](auto&& leftRange) {return join(leftRange, rightRangeRef); });
+	return join(join(std::forward<R1>(range1), std::forward<R2>(range2)), ranges...);
 }
 
 // *************************** enumerate **********************************************************
@@ -765,6 +799,45 @@ template<typename R> bool empty(R&& range)
 auto empty()
 {
 	return make_pipeable([](auto&& range) {return empty(range); });
+}
+
+// ****************************************** equal_range ***********************************************
+
+/// @brief Returns a range containing all elements equivalent to value in the range
+///
+/// @snippet test.cpp rah::equal_range
+template<typename R, typename V> auto equal_range(R&& range, V&& value)
+{
+	auto pair = std::equal_range(begin(range), end(range), std::forward<V>(value));
+	return make_iterator_range(std::get<0>(pair), std::get<1>(pair));
+}
+
+/// @brief Returns a range containing all elements equivalent to value in the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::equal_range_pipeable
+template<typename V> auto equal_range(V&& value)
+{
+	return make_pipeable([=](auto&& range) {return equal_range(std::forward<decltype(range)>(range), value); });
+}
+
+// ****************************************** binary_search ***********************************************
+
+/// @brief Checks if an element equivalent to value appears within the range
+///
+/// @snippet test.cpp rah::binary_search
+template<typename R, typename V> auto binary_search(R&& range, V&& value)
+{
+	return std::binary_search(begin(range), end(range), std::forward<V>(value));
+}
+
+/// @brief Checks if an element equivalent to value appears within the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::binary_search_pipeable
+template<typename V> auto binary_search(V&& value)
+{
+	return make_pipeable([=](auto&& range) {return binary_search(std::forward<decltype(range)>(range), value); });
 }
 
 // ****************************************** transform *******************************************
@@ -1020,13 +1093,53 @@ template<typename R1, typename R2> auto copy(R1&& in, R2&& out)
 /// @return The part of out after the copied part
 /// @remark pipeable syntax
 ///
-/// @snippet test.cpp rah::copy_into
-template<typename R2> auto copy_into(R2&& out)
+/// @snippet test.cpp rah::copy_pipeable
+template<typename R2> auto copy(R2&& out)
 {
 	auto all_out = out | rah::view::all();
 	return make_pipeable([=](auto&& in) {return copy(in, all_out); });
 }
 
+// *************************************** back_insert ***************************************************
+
+/// @brief Insert *in* in back of *front*
+///
+/// @snippet test.cpp rah::back_insert
+template<typename R1, typename R2> auto back_insert(R1&& in, R2&& out)
+{
+	return copy(in, RAH_NAMESPACE::back_inserter(out));
+}
+
+/// @brief Insert *in* in back of *front*
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::back_insert_pipeable
+template<typename R2> auto back_insert(R2&& out)
+{
+	return make_pipeable([&](auto&& in) {return back_insert(in, out); });
+}
+
+// *************************************** copy_if ***************************************************
+
+/// @brief Copies the elements for which the predicate pred returns true
+/// @return The part of out after the copied part
+///
+/// @snippet test.cpp rah::copy_if
+template<typename R1, typename R2, typename P> auto copy_if(R1&& in, R2&& out, P&& pred)
+{
+	return std::copy_if(begin(in), end(in), begin(out), std::forward<P>(pred));
+}
+
+/// @brief Copies the elements for which the predicate pred returns true
+/// @return The part of out after the copied part
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::copy_if_pipeable
+template<typename R2, typename P> auto copy_if(R2&& out, P&& pred)
+{
+	auto all_out = out | rah::view::all();
+	return make_pipeable([=](auto&& in) {return copy_if(in, all_out, pred); });
+}
 
 // *************************************** size ***************************************************
 
@@ -1125,7 +1238,7 @@ template<typename C, typename R> auto erase(C&& container, R&& subrange)
 /// @return A view on the resulting container
 /// @remark pipeable syntax
 ///
-/// @snippet test.cpp rah::erase
+/// @snippet test.cpp rah::erase_pipeable
 template<typename R> auto erase(R&& range)
 {
 	auto all_range = range | rah::view::all();
@@ -1153,6 +1266,50 @@ template<typename P = is_lesser, typename = std::enable_if_t<not is_range<P>::va
 auto sort(P&& pred = {})
 {
 	return make_pipeable([=](auto& range) { return sort(range, pred); });
+}
+
+// *********************************** stable_sort ************************************************
+
+/// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved. 
+///
+/// @snippet test.cpp rah::stable_sort
+/// @snippet test.cpp rah::stable_sort_pred
+template<typename R, typename P = is_lesser, typename = std::enable_if_t<is_range<R>::value>>
+void stable_sort(R& range, P&& pred = {})
+{
+	std::stable_sort(begin(range), end(range), pred);
+}
+
+/// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::stable_sort_pipeable
+/// @snippet test.cpp rah::stable_sort_pred_pipeable
+template<typename P = is_lesser, typename = std::enable_if_t<not is_range<P>::value>>
+auto stable_sort(P&& pred = {})
+{
+	return make_pipeable([=](auto& range) { return stable_sort(range, pred); });
+}
+
+// *********************************** shuffle *******************************************************
+
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+///
+/// @snippet test.cpp rah::shuffle
+template<typename R, typename URBG>
+void shuffle(R& range, URBG&& g)
+{
+	std::shuffle(begin(range), end(range), std::forward<URBG>(g));
+}
+
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::shuffle_pipeable
+template<typename URBG>
+auto shuffle(URBG&& g)
+{
+	return make_pipeable([&g](auto& range) { return RAH_NAMESPACE::shuffle(range, g); });
 }
 
 // *********************************** unique *****************************************************
@@ -1184,6 +1341,36 @@ template<typename P = is_equal, typename = std::enable_if_t<not is_range<P>::val
 auto unique(P&& pred = {})
 {
 	return make_pipeable([=](auto&& range) { return unique(std::forward<decltype(range)>(range), pred); });
+}
+
+// *********************************** set_difference ************************************************
+
+/// @brief Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out
+/// The resulting range is also sorted.
+///
+/// @snippet test.cpp rah::set_difference
+template<typename IN1, typename IN2, typename OUT>
+void set_difference(IN1&& in1, IN2&& in2, OUT&& out)
+{
+	std::set_difference(
+		begin(in1), end(in1),
+		begin(in2), end(in2),
+		begin(out));
+}
+
+// *********************************** set_intersection ************************************************
+
+/// @brief Copies the elements from the sorted range in1 which are also found in the sorted range in2 to the range out
+/// The resulting range is also sorted.
+///
+/// @snippet test.cpp rah::set_intersection
+template<typename IN1, typename IN2, typename OUT>
+void set_intersection(IN1&& in1, IN2&& in2, OUT&& out)
+{
+	std::set_intersection(
+		begin(in1), end(in1),
+		begin(in2), end(in2),
+		begin(out));
 }
 
 namespace action
@@ -1261,6 +1448,31 @@ template<typename P = is_lesser, typename = std::enable_if_t<not is_range<P>::va
 auto sort(P&& pred = {})
 {
 	return make_pipeable([=](auto&& range) -> auto&& { return action::sort(std::forward<decltype(range)>(range), pred); });
+}
+
+// *********************************** shuffle *******************************************************
+
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @return reference to container
+///
+/// @snippet test.cpp rah::action::shuffle
+template<typename C, typename URBG>
+auto&& shuffle(C&& container, URBG&& g)
+{
+	URBG gen = std::forward<URBG>(g);
+	RAH_NAMESPACE::shuffle(container, gen);
+	return std::forward<C>(container);
+}
+
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @return reference to container
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::action::shuffle_pipeable
+template<typename URBG>
+auto shuffle(URBG&& g)
+{
+	return make_pipeable([&](auto&& range) -> auto&& { return action::shuffle(std::forward<decltype(range)>(range), g); });
 }
 
 }

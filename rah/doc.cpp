@@ -107,12 +107,12 @@
 ///
 /// @snippet test.cpp rah::view::transform_pipeable
 
-/// @fn rah::view::slice(R&& range, size_t begin, size_t end)
+/// @fn rah::view::slice(R&& range, intptr_t begin, intptr_t end)
 /// @brief Create a view that is a sub-range of a range
 ///
 /// @snippet test.cpp slice
 
-/// @fn rah::view::slice(size_t begin, size_t end)
+/// @fn rah::view::slice(intptr_t begin, intptr_t end)
 /// @brief Create a view that is a sub-range of a range
 /// @remark pipeable syntax
 ///
@@ -210,6 +210,11 @@
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp map_key_pipeable
+
+/// @fn rah::view::single(V&& value)
+/// @brief Given value, create a view containing one element
+///
+/// @snippet test.cpp single
 
 /*! \mainpage rah - A range (header only) library for C++
  *

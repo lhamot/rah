@@ -16,6 +16,7 @@
 #include <forward_list>
 #include <ciso646>
 #include <sstream>
+#include <random>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -82,8 +83,27 @@ auto test_count(int i)
 }
 /// [make_pipeable create]
 
+template<typename R, typename = std::enable_if_t<rah::is_range<R>::value>>
+void toto(R&&) {}
+
+template<typename V>
+auto toto(std::initializer_list<V> il) 
+{ 
+	return toto(rah::make_iterator_range(begin(il), end(il))); 
+}
+
+bool is_odd(int val)
+{
+	return val % 2 == 0;
+}
+
 int main()
 {
+	{
+		std::vector<int> vec{ 0, 1, 2, 2, 3 };
+		toto(vec);
+		toto({ 0, 1, 2, 2, 3 });
+	}
 	{
 		/// [make_pipeable use]
 		std::vector<int> vec{ 0, 1, 2, 2, 3 };
@@ -92,6 +112,15 @@ int main()
 	}
 
 	// *********************************** views **************************************************
+
+	{
+		/// [single]
+		std::vector<int> result;
+		for (int i : rah::view::single(20))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 20 }));
+		/// [single]
+	}
 
 	{
 		/// [iota]
@@ -151,6 +180,10 @@ int main()
 		for (int i : rah::view::slice(vec, 2, 6))
 			result.push_back(i);
 		assert(result == std::vector<int>({ 2, 3, 4, 5 }));
+		std::vector<int> result2;
+		for (int i : rah::view::slice(vec, rah::End - 6, rah::End - 2))
+			result2.push_back(i);
+		assert(result2 == std::vector<int>({ 2, 3, 4, 5 }));
 		/// [slice]
 	}
 	{
@@ -247,6 +280,13 @@ int main()
 		/// [filter]
 	}
 	{
+		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
+		std::vector<int> result;
+		for (int i : rah::view::filter(vec_01234, &is_odd))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 0, 2, 4 }));
+	}
+	{
 		/// [filter_pipeable]
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<int> result;
@@ -260,23 +300,27 @@ int main()
 		/// [join]
 		std::vector<int> inputA{ 0, 1, 2, 3 };
 		std::vector<int> inputB{ 4, 5, 6 };
-		std::vector<int> result;
-		for (int i : rah::view::join(inputA, inputB))
-			result.push_back(i);
-		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
+		std::vector<int> inputC{ 7, 8, 9, 10, 11 };
+		{
+			std::vector<int> result;
+			for (int i : rah::view::join(inputA))
+				result.push_back(i);
+			assert(result == std::vector<int>({ 0, 1, 2, 3 }));
+		}
+		{
+			std::vector<int> result;
+			for (int i : rah::view::join(inputA, inputB))
+				result.push_back(i);
+			assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
+		}
+		{
+			std::vector<int> result;
+			for (int i : rah::view::join(inputA, inputB, inputC))
+				result.push_back(i);
+			assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }));
+		}
 		/// [join]
 	}
-	{
-		/// [join_pipeable]
-		std::vector<int> inputA{ 0, 1, 2, 3 };
-		std::vector<int> inputB{ 4, 5, 6 };
-		std::vector<int> result;
-		for (int i : inputA | rah::view::join(inputB))
-			result.push_back(i);
-		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
-		/// [join_pipeable]
-	}
-
 	{
 		/// [enumerate]
 		std::vector<int> input{ 4, 5, 6, 7 };
@@ -336,6 +380,68 @@ int main()
 
 	// *********************************** algos **************************************************
 
+	{
+		/// [rah::equal_range]
+		std::vector<int> vecIn1{ 1, 2, 2, 3, 4 };
+		{
+			std::vector<int> out;
+			for (int i : rah::equal_range(vecIn1, 0))
+				out.push_back(i);
+			assert(out == std::vector<int>({ }));
+		}
+		{
+			std::vector<int> out;
+			for (int i : rah::equal_range(vecIn1, 1))
+				out.push_back(i);
+			assert(out == std::vector<int>({ 1 }));
+		}
+		{
+			std::vector<int> out;
+			for (int i : rah::equal_range(vecIn1, 2))
+				out.push_back(i);
+			assert(out == std::vector<int>({ 2, 2 }));
+		}
+		/// [rah::equal_range]
+	}
+	{
+		/// [rah::equal_range_pipeable]
+		std::vector<int> vecIn1{ 1, 2, 2, 3, 4 };
+		{
+			std::vector<int> out;
+			for (int i : vecIn1 | rah::equal_range(0))
+				out.push_back(i);
+			assert(out == std::vector<int>({ }));
+		}
+		{
+			std::vector<int> out;
+			for (int i : vecIn1 | rah::equal_range(1))
+				out.push_back(i);
+			assert(out == std::vector<int>({ 1 }));
+		}
+		{
+			std::vector<int> out;
+			for (int i : vecIn1 | rah::equal_range(2))
+				out.push_back(i);
+			assert(out == std::vector<int>({ 2, 2 }));
+		}
+		/// [rah::equal_range_pipeable]
+	}
+	{
+		/// [rah::binary_search]
+		std::vector<int> vecIn1{ 1, 2, 2, 3, 4 };
+		assert(not rah::binary_search(vecIn1, 0));
+		assert(rah::binary_search(vecIn1, 1));
+		assert(rah::binary_search(vecIn1, 2));
+		/// [rah::binary_search]
+	}
+	{
+		/// [rah::binary_search_pipeable]
+		std::vector<int> vecIn1{ 1, 2, 2, 3, 4 };
+		assert(not (vecIn1 | rah::binary_search(0)));
+		assert(vecIn1 | rah::binary_search(1));
+		assert(vecIn1 | rah::binary_search(2));
+		/// [rah::binary_search_pipeable]
+	}
 	{
 		std::vector<int> vecIn1{ 0, 1, 2, 3 };
 		std::vector<int> vecOut{ 0, 0, 0, 0 };
@@ -426,7 +532,7 @@ int main()
 	/// [rah::count_pipeable]
 
 	/// [rah::count_if]
-	assert(rah::count_if(il<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
+	assert(rah::count_if(std::initializer_list<int>{ 4, 4, 4, 3 }, [](auto a) {return a == 4; }) == 3);
 	/// [rah::count_if]
 	/// [rah::count_if_pipeable]
 	assert((std::initializer_list<int>{ 4, 4, 4, 3 } | rah::count_if([](auto a) {return a == 3; })) == 1);
@@ -436,14 +542,14 @@ int main()
 		/// [rah::for_each]
 		std::vector<int> testFE{ 4, 4, 4, 4 };
 		rah::for_each(testFE, [](auto& value) {return ++value; });
-		EQUAL_RANGE(testFE, il<int>({ 5, 5, 5, 5 }));
+		EQUAL_RANGE(testFE, std::initializer_list<int>({ 5, 5, 5, 5 }));
 		/// [rah::for_each]
 	}
 	{
 		/// [rah::for_each_pipeable]
 		std::vector<int> testFE{ 4, 4, 4, 4 };
 		testFE | rah::for_each([](auto& value) {return ++value; });
-		EQUAL_RANGE(testFE, il<int>({ 5, 5, 5, 5 }));
+		EQUAL_RANGE(testFE, std::initializer_list<int>({ 5, 5, 5, 5 }));
 		/// [rah::for_each_pipeable]
 	}
 
@@ -590,6 +696,31 @@ int main()
 		/// [rah::copy]
 	}
 	{
+		/// [rah::copy_pipeable]
+		std::vector<int> in{ 1, 2, 3 };
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		auto iter = in | rah::copy(out);
+		assert((rah::make_iterator_range(iter, end(out)) | rah::equal(std::initializer_list<int>{ 4, 5 })));
+		assert(out == (std::vector<int>{ 1, 2, 3, 4, 5 }));
+		/// [rah::copy_pipeable]
+	}
+	{
+		/// [rah::copy_if]
+		std::vector<int> in{ 1, 2, 3, 4 };
+		std::vector<int> out{ 0, 0, 5, 6 };
+		assert(rah::make_iterator_range(rah::copy_if(in, out, [](int i) {return i % 2 == 0; }), end(out)) | rah::equal(std::initializer_list<int>({ 5, 6 })));
+		assert(out == (std::vector<int>{ 2, 4, 5, 6 }));
+		/// [rah::copy_if]
+	}
+	{
+		/// [rah::copy_if_pipeable]
+		std::vector<int> in{ 1, 2, 3, 4 };
+		std::vector<int> out{ 0, 0, 5, 6 };
+		assert(rah::make_iterator_range(in | rah::copy_if(out, [](int i) {return i % 2 == 0; }), end(out)) | rah::equal(std::initializer_list<int>({ 5, 6 })));
+		assert(out == (std::vector<int>{ 2, 4, 5, 6 }));
+		/// [rah::copy_if_pipeable]
+	}
+	{
 		/// [rah::back_inserter]
 		std::vector<int> in{ 1, 2, 3 };
 		std::vector<int> out;
@@ -598,25 +729,32 @@ int main()
 		/// [rah::back_inserter]
 	}
 	{
-		/// [rah::copy_into]
+		/// [rah::back_insert]
 		std::vector<int> in{ 1, 2, 3 };
-		std::vector<int> out{ 0, 0, 0, 4, 5 };
-		auto iter = in | rah::copy_into(out);
-		assert((rah::make_iterator_range(iter, end(out)) | rah::equal(std::initializer_list<int>({ 4, 5 }))));
-		assert(out == (std::vector<int>{ 1, 2, 3, 4, 5 }));
-		/// [rah::copy_into]
+		std::vector<int> out{ 10 };
+		rah::back_insert(in, out);
+		assert(out == (std::vector<int>{ 10, 1, 2, 3 }));
+		/// [rah::back_insert]
+	}
+	{
+		/// [rah::back_insert_pipeable]
+		std::vector<int> in{ 1, 2, 3 };
+		std::vector<int> out{ 10 };
+		in | rah::back_insert(out);
+		assert(out == (std::vector<int>{ 10, 1, 2, 3 }));
+		/// [rah::back_insert_pipeable]
 	}
 	{
 		std::vector<int> in{ 1, 2, 3 };
 		std::vector<int> out;
-		in | rah::copy_into(rah::back_inserter(out));
+		in | rah::copy(rah::back_inserter(out));
 		assert(out == (std::vector<int>{ 1, 2, 3 }));
 	}
 	{
 		/// [rah::stream_inserter]
 		std::string in("Test");
 		std::stringstream out;
-		in | rah::copy_into(rah::stream_inserter(out));
+		in | rah::copy(rah::stream_inserter(out));
 		assert(out.str() == in);
 		/// [rah::stream_inserter]
 	}
@@ -688,6 +826,64 @@ int main()
 		/// [rah::sort_pred_pipeable]
 	}
 
+	/// [rah::stable_sort]
+	struct CmpA
+	{
+		int a;
+		int b;
+		bool operator<(CmpA rhs) const
+		{
+			return a < rhs.a;
+		}
+		bool operator==(CmpA rhs) const
+		{
+			return a == rhs.a && b == rhs.b;
+		}
+	};
+	{
+		std::vector<CmpA> in{ { 4, 1 }, { 2, 1 }, { 4, 2 }, { 1, 1 }, { 4, 3 }, { 2, 2 }, { 4, 4 } };
+		rah::stable_sort(in);
+		assert(in == std::vector<CmpA>({ { 1, 1 }, { 2, 1 }, { 2, 2 }, { 4, 1 }, { 4, 2 }, { 4, 3 }, { 4, 4 } }));
+	}
+	/// [rah::stable_sort]
+	{
+		std::vector<CmpA> in{ { 4, 1 }, { 2, 1 }, { 4, 2 }, { 1, 1 }, { 4, 3 }, { 2, 2 }, { 4, 4 } };
+		/// [rah::stable_sort_pipeable]
+		in | rah::stable_sort();
+		assert(in == std::vector<CmpA>({ { 1, 1 }, { 2, 1 }, { 2, 2 }, { 4, 1 }, { 4, 2 }, { 4, 3 }, { 4, 4 } }));
+		/// [rah::stable_sort_pipeable]
+	}
+	{
+		/// [rah::stable_sort_pred]
+		std::vector<CmpA> in{ { 4, 1 }, { 2, 1 }, { 4, 2 }, { 1, 1 }, { 4, 3 }, { 2, 2 }, { 4, 4 } };
+		rah::stable_sort(in, [](CmpA l, CmpA r) { return l.b < r.b; });
+		assert(in == std::vector<CmpA>({ { 4, 1 }, { 2, 1 }, { 1, 1 }, { 4, 2 }, { 2, 2 }, { 4, 3 }, { 4, 4 } }));
+		/// [rah::stable_sort_pred]
+	}
+	{
+		/// [rah::stable_sort_pred_pipeable]
+		std::vector<CmpA> in{ { 4, 1 }, { 2, 1 }, { 4, 2 }, { 1, 1 }, { 4, 3 }, { 2, 2 }, { 4, 4 } };
+		in | rah::stable_sort([](CmpA l, CmpA r) { return l.b < r.b; });
+		assert(in == std::vector<CmpA>({ { 4, 1 }, { 2, 1 }, { 1, 1 }, { 4, 2 }, { 2, 2 }, { 4, 3 }, { 4, 4 } }));
+		/// [rah::stable_sort_pred_pipeable]
+	}
+
+	{
+		/// [rah::shuffle]
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::vector<int> in{ 1, 2, 3, 4, 5, 6 };
+		rah::shuffle(in, g);
+		/// [rah::shuffle]
+	}
+	{
+		/// [rah::shuffle_pipeable]
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::vector<int> in{ 1, 2, 3, 4, 5, 6 };
+		in | rah::shuffle(g);
+		/// [rah::shuffle_pipeable]
+	}
 	{
 		/// [rah::unique]
 		std::vector<int> in{ 2, 1, 1, 1, 5, 3, 3, 4 };
@@ -715,6 +911,25 @@ int main()
 		in.erase(in | rah::unique([](auto a, auto b) {return a == b; }), end(in));
 		assert(in == std::vector<int>({ 2, 1, 5, 3, 4 }));
 		/// [rah::unique_pred_pipeable]
+	}
+
+	{
+		/// [rah::set_difference]
+		std::vector<int> in1{ 1,    3, 4 };
+		std::vector<int> in2{ 1, 2, 3    };
+		std::vector<int> out{ 0, 0, 0, 0 };
+		rah::set_difference(in1, in2, out);
+		assert(out == std::vector<int>({4, 0, 0, 0}));
+		/// [rah::set_difference]
+	}
+	{
+		/// [rah::set_intersection]
+		std::vector<int> in1{ 1,    3, 4 };
+		std::vector<int> in2{ 1, 2, 3    };
+		std::vector<int> out{ 0, 0, 0, 0 };
+		rah::set_intersection(in1, in2, out);
+		assert(out == std::vector<int>({ 1, 3, 0, 0 }));
+		/// [rah::set_intersection]
 	}
 
 	{
@@ -797,6 +1012,22 @@ int main()
 		assert(&result == &in);
 		assert(in == std::vector<int>({ 1, 2, 3, 4, 5 }));
 		/// [rah::action::sort_pred_pipeable]
+	}
+	{
+		/// [rah::action::shuffle]
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::vector<int> in{ 1, 2, 3, 4, 5, 6 };
+		assert(&rah::action::shuffle(in, g) == &in);
+		/// [rah::action::shuffle]
+	}
+	{
+		/// [rah::action::shuffle_pipeable]
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::vector<int> in{ 1, 2, 3, 4, 5, 6 };
+		assert(&(in | rah::action::shuffle(g)) == &in);
+		/// [rah::action::shuffle_pipeable]
 	}
 
 	{
