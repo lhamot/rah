@@ -79,7 +79,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1filter__iterator.html">filter_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1gererate__iterator.html">gererate_iterator</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1generate__iterator.html">generate_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html">iota_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,6 +94,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a582017379aa588d2c1c7bac58f4856af"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a582017379aa588d2c1c7bac58f4856af"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a582017379aa588d2c1c7bac58f4856af">single</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a582017379aa588d2c1c7bac58f4856af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given value, create a view containing one element.  <a href="#a582017379aa588d2c1c7bac58f4856af">More...</a><br /></td></tr>
+<tr class="separator:a582017379aa588d2c1c7bac58f4856af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplParams" colspan="2">template&lt;typename T  = size_t&gt; </td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">iota</a> (T b, T e, T step=1)</td></tr>
 <tr class="memdesc:aa5f05009b0c914331b0e5dbe62656b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequentially increasing integers.  <a href="#aa5f05009b0c914331b0e5dbe62656b5a">More...</a><br /></td></tr>
@@ -121,13 +125,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a814771afc1cfedc6418915550bcd5bbd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a814771afc1cfedc6418915550bcd5bbd">transform</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:a814771afc1cfedc6418915550bcd5bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view applying a transformation to each element of the input range.  <a href="#a814771afc1cfedc6418915550bcd5bbd">More...</a><br /></td></tr>
 <tr class="separator:a814771afc1cfedc6418915550bcd5bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e7a243408052f64886e6349650df16c"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
-<tr class="memitem:a4e7a243408052f64886e6349650df16c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a4e7a243408052f64886e6349650df16c">slice</a> (R &amp;&amp;range, size_t begin_idx, size_t end_idx)</td></tr>
-<tr class="memdesc:a4e7a243408052f64886e6349650df16c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="#a4e7a243408052f64886e6349650df16c">More...</a><br /></td></tr>
-<tr class="separator:a4e7a243408052f64886e6349650df16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a727bbf69817ca3e940597885764e2032"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a727bbf69817ca3e940597885764e2032">slice</a> (size_t <a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>, size_t <a class="el" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>)</td></tr>
-<tr class="memdesc:a727bbf69817ca3e940597885764e2032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="#a727bbf69817ca3e940597885764e2032">More...</a><br /></td></tr>
-<tr class="separator:a727bbf69817ca3e940597885764e2032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e48a024bda08769061de4ad6addd9c"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a26e48a024bda08769061de4ad6addd9c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">slice</a> (R &amp;&amp;range, intptr_t begin_idx, intptr_t end_idx)</td></tr>
+<tr class="memdesc:a26e48a024bda08769061de4ad6addd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="#a26e48a024bda08769061de4ad6addd9c">More...</a><br /></td></tr>
+<tr class="separator:a26e48a024bda08769061de4ad6addd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68942bf66ff2c838d6ed12008bc275c5"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a68942bf66ff2c838d6ed12008bc275c5">slice</a> (intptr_t <a class="el" href="namespacerah.html#a2c4a19e57cc4e0753e93830f247def6d">begin</a>, intptr_t <a class="el" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>)</td></tr>
+<tr class="memdesc:a68942bf66ff2c838d6ed12008bc275c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="#a68942bf66ff2c838d6ed12008bc275c5">More...</a><br /></td></tr>
+<tr class="separator:a68942bf66ff2c838d6ed12008bc275c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad71e78df55f6f9416e2869a8c14f6779"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:ad71e78df55f6f9416e2869a8c14f6779"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#ad71e78df55f6f9416e2869a8c14f6779">stride</a> (R &amp;&amp;range, size_t step)</td></tr>
 <tr class="memdesc:ad71e78df55f6f9416e2869a8c14f6779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view consisting of every Nth element, starting with the first.  <a href="#ad71e78df55f6f9416e2869a8c14f6779">More...</a><br /></td></tr>
@@ -161,14 +165,17 @@ Functions</h2></td></tr>
 <tr class="memitem:aa52c6f5cff4e0a4f0ed48c66e1039e3d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa52c6f5cff4e0a4f0ed48c66e1039e3d">filter</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:aa52c6f5cff4e0a4f0ed48c66e1039e3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view with only elements which are filtered.  <a href="#aa52c6f5cff4e0a4f0ed48c66e1039e3d">More...</a><br /></td></tr>
 <tr class="separator:aa52c6f5cff4e0a4f0ed48c66e1039e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad4d41145f1becad813d2ed6d7da044"><td class="memTemplParams" colspan="2">template&lt;typename R1 &gt; </td></tr>
+<tr class="memitem:a0ad4d41145f1becad813d2ed6d7da044"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044">join</a> (R1 &amp;&amp;range1)</td></tr>
+<tr class="memdesc:a0ad4d41145f1becad813d2ed6d7da044"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the same range  <a href="#a0ad4d41145f1becad813d2ed6d7da044">More...</a><br /></td></tr>
+<tr class="separator:a0ad4d41145f1becad813d2ed6d7da044"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af66edb5fcde9f79ebd69fce81df0e883"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 &gt; </td></tr>
 <tr class="memitem:af66edb5fcde9f79ebd69fce81df0e883"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">join</a> (R1 &amp;&amp;range1, R2 &amp;&amp;range2)</td></tr>
 <tr class="memdesc:af66edb5fcde9f79ebd69fce81df0e883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is the concatenation of 2 ranges.  <a href="#af66edb5fcde9f79ebd69fce81df0e883">More...</a><br /></td></tr>
 <tr class="separator:af66edb5fcde9f79ebd69fce81df0e883"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9311214c2d98f420e73b679e02bd7f7f"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
-<tr class="memitem:a9311214c2d98f420e73b679e02bd7f7f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a9311214c2d98f420e73b679e02bd7f7f">join</a> (R &amp;&amp;rightRange)</td></tr>
-<tr class="memdesc:a9311214c2d98f420e73b679e02bd7f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is the concatenation of 2 ranges.  <a href="#a9311214c2d98f420e73b679e02bd7f7f">More...</a><br /></td></tr>
-<tr class="separator:a9311214c2d98f420e73b679e02bd7f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a85dacbeaee5eca22203b82142f485"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 , typename ... Ranges&gt; </td></tr>
+<tr class="memitem:a71a85dacbeaee5eca22203b82142f485"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a71a85dacbeaee5eca22203b82142f485">join</a> (R1 &amp;&amp;range1, R2 &amp;&amp;range2, Ranges &amp;&amp;... ranges)</td></tr>
+<tr class="separator:a71a85dacbeaee5eca22203b82142f485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3400a50c2b0e90330850128c2b7605d0"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a3400a50c2b0e90330850128c2b7605d0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a3400a50c2b0e90330850128c2b7605d0">enumerate</a> (R &amp;&amp;range)</td></tr>
 <tr class="memdesc:a3400a50c2b0e90330850128c2b7605d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pair each element of a range with its index.  <a href="#a3400a50c2b0e90330850128c2b7605d0">More...</a><br /></td></tr>
@@ -484,8 +491,30 @@ template&lt;typename T  = size_t&gt; </div>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">rah::view::iota</a>(10, 20, 2))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 10, 12, 14, 16, 18 }));</div></div><!-- fragment -->
 </div>
 </div>
+<a id="a0ad4d41145f1becad813d2ed6d7da044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ad4d41145f1becad813d2ed6d7da044">&#9670;&nbsp;</a></span>join() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R1 &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::view::join </td>
+          <td>(</td>
+          <td class="paramtype">R1 &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range1</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>return the same range </p>
+
+</div>
+</div>
 <a id="af66edb5fcde9f79ebd69fce81df0e883"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af66edb5fcde9f79ebd69fce81df0e883">&#9670;&nbsp;</a></span>join() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af66edb5fcde9f79ebd69fce81df0e883">&#9670;&nbsp;</a></span>join() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -513,30 +542,44 @@ template&lt;typename R1 , typename R2 &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view that is the concatenation of 2 ranges. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; inputA{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; inputB{ 4, 5, 6 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">rah::view::join</a>(inputA, inputB))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3, 4, 5, 6 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; inputA{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; inputB{ 4, 5, 6 };</div><div class="line">        std::vector&lt;int&gt; inputC{ 7, 8, 9, 10, 11 };</div><div class="line">        {</div><div class="line">            std::vector&lt;int&gt; result;</div><div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044">rah::view::join</a>(inputA))</div><div class="line">                result.push_back(i);</div><div class="line">            <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3 }));</div><div class="line">        }</div><div class="line">        {</div><div class="line">            std::vector&lt;int&gt; result;</div><div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044">rah::view::join</a>(inputA, inputB))</div><div class="line">                result.push_back(i);</div><div class="line">            <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3, 4, 5, 6 }));</div><div class="line">        }</div><div class="line">        {</div><div class="line">            std::vector&lt;int&gt; result;</div><div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044">rah::view::join</a>(inputA, inputB, inputC))</div><div class="line">                result.push_back(i);</div><div class="line">            <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }));</div><div class="line">        }</div></div><!-- fragment -->
 </div>
 </div>
-<a id="a9311214c2d98f420e73b679e02bd7f7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9311214c2d98f420e73b679e02bd7f7f">&#9670;&nbsp;</a></span>join() <span class="overload">[2/2]</span></h2>
+<a id="a71a85dacbeaee5eca22203b82142f485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71a85dacbeaee5eca22203b82142f485">&#9670;&nbsp;</a></span>join() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename R &gt; </div>
+template&lt;typename R1 , typename R2 , typename ... Ranges&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">rah::view::join </td>
+          <td class="memname">auto rah::view::join </td>
           <td>(</td>
-          <td class="paramtype">R &amp;&amp;&#160;</td>
-          <td class="paramname"><em>rightRange</em></td><td>)</td>
+          <td class="paramtype">R1 &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">R2 &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ranges &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>ranges</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883" title="Create a view that is the concatenation of 2 ranges.">rah::view::join(R1&amp;&amp; range1, R2&amp;&amp; range2)</a> </dd></dl>
 
-<p>Create a view that is the concatenation of 2 ranges. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; inputA{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; inputB{ 4, 5, 6 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : inputA | <a class="code" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">rah::view::join</a>(inputB))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 0, 1, 2, 3, 4, 5, 6 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a30b890451bfedbb15ed2114ed62beebc"></a>
@@ -665,8 +708,30 @@ template&lt;typename R &gt; </div>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">rah::view::retro</a>())</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 3, 2, 1, 0 }));</div></div><!-- fragment -->
 </div>
 </div>
-<a id="a4e7a243408052f64886e6349650df16c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e7a243408052f64886e6349650df16c">&#9670;&nbsp;</a></span>slice() <span class="overload">[1/2]</span></h2>
+<a id="a582017379aa588d2c1c7bac58f4856af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a582017379aa588d2c1c7bac58f4856af">&#9670;&nbsp;</a></span>single()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">rah::view::single </td>
+          <td>(</td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Given value, create a view containing one element. </p>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a582017379aa588d2c1c7bac58f4856af">rah::view::single</a>(20))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 20 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a26e48a024bda08769061de4ad6addd9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e48a024bda08769061de4ad6addd9c">&#9670;&nbsp;</a></span>slice() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -682,13 +747,13 @@ template&lt;typename R &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">intptr_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">intptr_t&#160;</td>
           <td class="paramname"><em>end</em>&#160;</td>
         </tr>
         <tr>
@@ -700,11 +765,11 @@ template&lt;typename R &gt; </div>
 </div><div class="memdoc">
 
 <p>Create a view that is a sub-range of a range. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a4e7a243408052f64886e6349650df16c">rah::view::slice</a>(vec, 2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">rah::view::slice</a>(vec, 2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div><div class="line">        std::vector&lt;int&gt; result2;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">rah::view::slice</a>(vec, <a class="code" href="namespacerah.html#a5af06eebbd592c36368022990839b982">rah::End</a> - 6, <a class="code" href="namespacerah.html#a5af06eebbd592c36368022990839b982">rah::End</a> - 2))</div><div class="line">            result2.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result2 == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
-<a id="a727bbf69817ca3e940597885764e2032"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a727bbf69817ca3e940597885764e2032">&#9670;&nbsp;</a></span>slice() <span class="overload">[2/2]</span></h2>
+<a id="a68942bf66ff2c838d6ed12008bc275c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68942bf66ff2c838d6ed12008bc275c5">&#9670;&nbsp;</a></span>slice() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -712,13 +777,13 @@ template&lt;typename R &gt; </div>
         <tr>
           <td class="memname">rah::view::slice </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">intptr_t&#160;</td>
           <td class="paramname"><em>begin</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
+          <td class="paramtype">intptr_t&#160;</td>
           <td class="paramname"><em>end</em>&#160;</td>
         </tr>
         <tr>
@@ -731,7 +796,7 @@ template&lt;typename R &gt; </div>
 
 <p>Create a view that is a sub-range of a range. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a4e7a243408052f64886e6349650df16c">rah::view::slice</a>(2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 3, 4, 5, 6, 7 };</div><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : vec | <a class="code" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">rah::view::slice</a>(2, 6))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 2, 3, 4, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a343ff36ca2b6470f2a55a89dfb4e3dc9"></a>

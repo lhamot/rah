@@ -70,7 +70,8 @@ $(function() {
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">rah.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -83,6 +84,7 @@ $(function() {
 <code>#include &lt;numeric&gt;</code><br />
 <code>#include &lt;ciso646&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 </div>
 <p><a href="rah_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -125,7 +127,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1gererate__iterator.html">rah::view::gererate_iterator&lt; F &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1generate__iterator.html">rah::view::generate_iterator&lt; F &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1transform__iterator.html">rah::view::transform_iterator&lt; R, F &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +183,7 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a11785bbdf970efa1bc57fc14993b77bf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a11785bbdf970efa1bc57fc14993b77bf"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">rah::fake</a> ()</td></tr>
+<tr class="memdesc:a11785bbdf970efa1bc57fc14993b77bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in decltype to get an instance of a type.  <a href="namespacerah.html#a11785bbdf970efa1bc57fc14993b77bf">More...</a><br /></td></tr>
 <tr class="separator:a11785bbdf970efa1bc57fc14993b77bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e145bfeb8a932058e20fc4cb4e7c206"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
 <tr class="memitem:a4e145bfeb8a932058e20fc4cb4e7c206"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">rah::make_iterator_range</a> (I b, I e)</td></tr>
@@ -213,6 +216,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a0698f952bc3c4f1961929bbddb5812fe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a0698f952bc3c4f1961929bbddb5812fe">rah::back_inserter</a> (C &amp;&amp;container)</td></tr>
 <tr class="memdesc:a0698f952bc3c4f1961929bbddb5812fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a range which insert into the back of the a container.  <a href="namespacerah.html#a0698f952bc3c4f1961929bbddb5812fe">More...</a><br /></td></tr>
 <tr class="separator:a0698f952bc3c4f1961929bbddb5812fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582017379aa588d2c1c7bac58f4856af"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a582017379aa588d2c1c7bac58f4856af"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a582017379aa588d2c1c7bac58f4856af">rah::view::single</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a582017379aa588d2c1c7bac58f4856af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given value, create a view containing one element.  <a href="namespacerah_1_1view.html#a582017379aa588d2c1c7bac58f4856af">More...</a><br /></td></tr>
+<tr class="separator:a582017379aa588d2c1c7bac58f4856af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplParams" colspan="2">template&lt;typename T  = size_t&gt; </td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">rah::view::iota</a> (T b, T e, T step=1)</td></tr>
 <tr class="memdesc:aa5f05009b0c914331b0e5dbe62656b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequentially increasing integers.  <a href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">More...</a><br /></td></tr>
@@ -240,13 +247,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a814771afc1cfedc6418915550bcd5bbd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a814771afc1cfedc6418915550bcd5bbd">rah::view::transform</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:a814771afc1cfedc6418915550bcd5bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view applying a transformation to each element of the input range.  <a href="namespacerah_1_1view.html#a814771afc1cfedc6418915550bcd5bbd">More...</a><br /></td></tr>
 <tr class="separator:a814771afc1cfedc6418915550bcd5bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e7a243408052f64886e6349650df16c"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
-<tr class="memitem:a4e7a243408052f64886e6349650df16c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a4e7a243408052f64886e6349650df16c">rah::view::slice</a> (R &amp;&amp;range, size_t begin_idx, size_t end_idx)</td></tr>
-<tr class="memdesc:a4e7a243408052f64886e6349650df16c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="namespacerah_1_1view.html#a4e7a243408052f64886e6349650df16c">More...</a><br /></td></tr>
-<tr class="separator:a4e7a243408052f64886e6349650df16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a727bbf69817ca3e940597885764e2032"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a727bbf69817ca3e940597885764e2032">rah::view::slice</a> (size_t begin, size_t end)</td></tr>
-<tr class="memdesc:a727bbf69817ca3e940597885764e2032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="namespacerah_1_1view.html#a727bbf69817ca3e940597885764e2032">More...</a><br /></td></tr>
-<tr class="separator:a727bbf69817ca3e940597885764e2032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e48a024bda08769061de4ad6addd9c"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a26e48a024bda08769061de4ad6addd9c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">rah::view::slice</a> (R &amp;&amp;range, intptr_t begin_idx, intptr_t end_idx)</td></tr>
+<tr class="memdesc:a26e48a024bda08769061de4ad6addd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">More...</a><br /></td></tr>
+<tr class="separator:a26e48a024bda08769061de4ad6addd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68942bf66ff2c838d6ed12008bc275c5"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a68942bf66ff2c838d6ed12008bc275c5">rah::view::slice</a> (intptr_t begin, intptr_t end)</td></tr>
+<tr class="memdesc:a68942bf66ff2c838d6ed12008bc275c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="namespacerah_1_1view.html#a68942bf66ff2c838d6ed12008bc275c5">More...</a><br /></td></tr>
+<tr class="separator:a68942bf66ff2c838d6ed12008bc275c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad71e78df55f6f9416e2869a8c14f6779"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:ad71e78df55f6f9416e2869a8c14f6779"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#ad71e78df55f6f9416e2869a8c14f6779">rah::view::stride</a> (R &amp;&amp;range, size_t step)</td></tr>
 <tr class="memdesc:ad71e78df55f6f9416e2869a8c14f6779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view consisting of every Nth element, starting with the first.  <a href="namespacerah_1_1view.html#ad71e78df55f6f9416e2869a8c14f6779">More...</a><br /></td></tr>
@@ -280,14 +287,17 @@ Functions</h2></td></tr>
 <tr class="memitem:aa52c6f5cff4e0a4f0ed48c66e1039e3d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa52c6f5cff4e0a4f0ed48c66e1039e3d">rah::view::filter</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:aa52c6f5cff4e0a4f0ed48c66e1039e3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view with only elements which are filtered.  <a href="namespacerah_1_1view.html#aa52c6f5cff4e0a4f0ed48c66e1039e3d">More...</a><br /></td></tr>
 <tr class="separator:aa52c6f5cff4e0a4f0ed48c66e1039e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad4d41145f1becad813d2ed6d7da044"><td class="memTemplParams" colspan="2">template&lt;typename R1 &gt; </td></tr>
+<tr class="memitem:a0ad4d41145f1becad813d2ed6d7da044"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044">rah::view::join</a> (R1 &amp;&amp;range1)</td></tr>
+<tr class="memdesc:a0ad4d41145f1becad813d2ed6d7da044"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the same range  <a href="namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044">More...</a><br /></td></tr>
+<tr class="separator:a0ad4d41145f1becad813d2ed6d7da044"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af66edb5fcde9f79ebd69fce81df0e883"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 &gt; </td></tr>
 <tr class="memitem:af66edb5fcde9f79ebd69fce81df0e883"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">rah::view::join</a> (R1 &amp;&amp;range1, R2 &amp;&amp;range2)</td></tr>
 <tr class="memdesc:af66edb5fcde9f79ebd69fce81df0e883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is the concatenation of 2 ranges.  <a href="namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883">More...</a><br /></td></tr>
 <tr class="separator:af66edb5fcde9f79ebd69fce81df0e883"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9311214c2d98f420e73b679e02bd7f7f"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
-<tr class="memitem:a9311214c2d98f420e73b679e02bd7f7f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a9311214c2d98f420e73b679e02bd7f7f">rah::view::join</a> (R &amp;&amp;rightRange)</td></tr>
-<tr class="memdesc:a9311214c2d98f420e73b679e02bd7f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is the concatenation of 2 ranges.  <a href="namespacerah_1_1view.html#a9311214c2d98f420e73b679e02bd7f7f">More...</a><br /></td></tr>
-<tr class="separator:a9311214c2d98f420e73b679e02bd7f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a85dacbeaee5eca22203b82142f485"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 , typename ... Ranges&gt; </td></tr>
+<tr class="memitem:a71a85dacbeaee5eca22203b82142f485"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a71a85dacbeaee5eca22203b82142f485">rah::view::join</a> (R1 &amp;&amp;range1, R2 &amp;&amp;range2, Ranges &amp;&amp;... ranges)</td></tr>
+<tr class="separator:a71a85dacbeaee5eca22203b82142f485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3400a50c2b0e90330850128c2b7605d0"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a3400a50c2b0e90330850128c2b7605d0"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a3400a50c2b0e90330850128c2b7605d0">rah::view::enumerate</a> (R &amp;&amp;range)</td></tr>
 <tr class="memdesc:a3400a50c2b0e90330850128c2b7605d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pair each element of a range with its index.  <a href="namespacerah_1_1view.html#a3400a50c2b0e90330850128c2b7605d0">More...</a><br /></td></tr>
@@ -324,6 +334,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a6ceb90c934b1c4927ab4e08b985ef6c5"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah.html#a6ceb90c934b1c4927ab4e08b985ef6c5">rah::empty</a> ()</td></tr>
 <tr class="memdesc:a6ceb90c934b1c4927ab4e08b985ef6c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the range if empty.  <a href="namespacerah.html#a6ceb90c934b1c4927ab4e08b985ef6c5">More...</a><br /></td></tr>
 <tr class="separator:a6ceb90c934b1c4927ab4e08b985ef6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a095c61033422b8ebe6dc2cc214867aca"><td class="memTemplParams" colspan="2">template&lt;typename R , typename V &gt; </td></tr>
+<tr class="memitem:a095c61033422b8ebe6dc2cc214867aca"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a095c61033422b8ebe6dc2cc214867aca">rah::equal_range</a> (R &amp;&amp;range, V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a095c61033422b8ebe6dc2cc214867aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a range containing all elements equivalent to value in the range.  <a href="namespacerah.html#a095c61033422b8ebe6dc2cc214867aca">More...</a><br /></td></tr>
+<tr class="separator:a095c61033422b8ebe6dc2cc214867aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa191bbe5b7dbb9b2e7a21a87dbb9a8a"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:afa191bbe5b7dbb9b2e7a21a87dbb9a8a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#afa191bbe5b7dbb9b2e7a21a87dbb9a8a">rah::equal_range</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:afa191bbe5b7dbb9b2e7a21a87dbb9a8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a range containing all elements equivalent to value in the range.  <a href="namespacerah.html#afa191bbe5b7dbb9b2e7a21a87dbb9a8a">More...</a><br /></td></tr>
+<tr class="separator:afa191bbe5b7dbb9b2e7a21a87dbb9a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eef379d9f3039fd12f43d5220434976"><td class="memTemplParams" colspan="2">template&lt;typename R , typename V &gt; </td></tr>
+<tr class="memitem:a5eef379d9f3039fd12f43d5220434976"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a5eef379d9f3039fd12f43d5220434976">rah::binary_search</a> (R &amp;&amp;range, V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a5eef379d9f3039fd12f43d5220434976"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an element equivalent to value appears within the range.  <a href="namespacerah.html#a5eef379d9f3039fd12f43d5220434976">More...</a><br /></td></tr>
+<tr class="separator:a5eef379d9f3039fd12f43d5220434976"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ac532c28d2c52c80adf91a7b8829bd6"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a8ac532c28d2c52c80adf91a7b8829bd6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a8ac532c28d2c52c80adf91a7b8829bd6">rah::binary_search</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a8ac532c28d2c52c80adf91a7b8829bd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an element equivalent to value appears within the range.  <a href="namespacerah.html#a8ac532c28d2c52c80adf91a7b8829bd6">More...</a><br /></td></tr>
+<tr class="separator:a8ac532c28d2c52c80adf91a7b8829bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cb27bf7219a7ee4b47cc9da217810a8"><td class="memTemplParams" colspan="2">template&lt;typename RI , typename RO , typename F &gt; </td></tr>
 <tr class="memitem:a7cb27bf7219a7ee4b47cc9da217810a8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a7cb27bf7219a7ee4b47cc9da217810a8">rah::transform</a> (RI &amp;&amp;rangeIn, RO &amp;&amp;rangeOut, F &amp;&amp;unary_op)</td></tr>
 <tr class="memdesc:a7cb27bf7219a7ee4b47cc9da217810a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function unary_op to the range rangeIn and stores the result in the range rangeOut.  <a href="namespacerah.html#a7cb27bf7219a7ee4b47cc9da217810a8">More...</a><br /></td></tr>
@@ -428,10 +454,26 @@ Functions</h2></td></tr>
 <tr class="memitem:a1d0f36ff683cedc9090956ea389b3312"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">rah::copy</a> (R1 &amp;&amp;in, R2 &amp;&amp;out)</td></tr>
 <tr class="memdesc:a1d0f36ff683cedc9090956ea389b3312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy in range into an other.  <a href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">More...</a><br /></td></tr>
 <tr class="separator:a1d0f36ff683cedc9090956ea389b3312"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9c29fa208b4ab8bfb9c226a1f82b9a1"><td class="memTemplParams" colspan="2">template&lt;typename R2 &gt; </td></tr>
-<tr class="memitem:ad9c29fa208b4ab8bfb9c226a1f82b9a1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ad9c29fa208b4ab8bfb9c226a1f82b9a1">rah::copy_into</a> (R2 &amp;&amp;out)</td></tr>
-<tr class="memdesc:ad9c29fa208b4ab8bfb9c226a1f82b9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy in range into an other.  <a href="namespacerah.html#ad9c29fa208b4ab8bfb9c226a1f82b9a1">More...</a><br /></td></tr>
-<tr class="separator:ad9c29fa208b4ab8bfb9c226a1f82b9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3873d79b7f878223f24062ba562eba9"><td class="memTemplParams" colspan="2">template&lt;typename R2 &gt; </td></tr>
+<tr class="memitem:ab3873d79b7f878223f24062ba562eba9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ab3873d79b7f878223f24062ba562eba9">rah::copy</a> (R2 &amp;&amp;out)</td></tr>
+<tr class="memdesc:ab3873d79b7f878223f24062ba562eba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy in range into an other.  <a href="namespacerah.html#ab3873d79b7f878223f24062ba562eba9">More...</a><br /></td></tr>
+<tr class="separator:ab3873d79b7f878223f24062ba562eba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2734b7f57efb773c6df8ac55b9d040cd"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 &gt; </td></tr>
+<tr class="memitem:a2734b7f57efb773c6df8ac55b9d040cd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a2734b7f57efb773c6df8ac55b9d040cd">rah::back_insert</a> (R1 &amp;&amp;in, R2 &amp;&amp;out)</td></tr>
+<tr class="memdesc:a2734b7f57efb773c6df8ac55b9d040cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert <em>in</em> in back of <em>front</em>  <a href="namespacerah.html#a2734b7f57efb773c6df8ac55b9d040cd">More...</a><br /></td></tr>
+<tr class="separator:a2734b7f57efb773c6df8ac55b9d040cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c3ab6d88fc54b3638ef699d465e86b4"><td class="memTemplParams" colspan="2">template&lt;typename R2 &gt; </td></tr>
+<tr class="memitem:a1c3ab6d88fc54b3638ef699d465e86b4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a1c3ab6d88fc54b3638ef699d465e86b4">rah::back_insert</a> (R2 &amp;&amp;out)</td></tr>
+<tr class="memdesc:a1c3ab6d88fc54b3638ef699d465e86b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert <em>in</em> in back of <em>front</em>  <a href="namespacerah.html#a1c3ab6d88fc54b3638ef699d465e86b4">More...</a><br /></td></tr>
+<tr class="separator:a1c3ab6d88fc54b3638ef699d465e86b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a550a133fe8c6de600a83959c82a0c592"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 , typename P &gt; </td></tr>
+<tr class="memitem:a550a133fe8c6de600a83959c82a0c592"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a550a133fe8c6de600a83959c82a0c592">rah::copy_if</a> (R1 &amp;&amp;in, R2 &amp;&amp;out, P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:a550a133fe8c6de600a83959c82a0c592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements for which the predicate pred returns true.  <a href="namespacerah.html#a550a133fe8c6de600a83959c82a0c592">More...</a><br /></td></tr>
+<tr class="separator:a550a133fe8c6de600a83959c82a0c592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f17e9431b258cc701fa59672a65d7db"><td class="memTemplParams" colspan="2">template&lt;typename R2 , typename P &gt; </td></tr>
+<tr class="memitem:a1f17e9431b258cc701fa59672a65d7db"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a1f17e9431b258cc701fa59672a65d7db">rah::copy_if</a> (R2 &amp;&amp;out, P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:a1f17e9431b258cc701fa59672a65d7db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements for which the predicate pred returns true.  <a href="namespacerah.html#a1f17e9431b258cc701fa59672a65d7db">More...</a><br /></td></tr>
+<tr class="separator:a1f17e9431b258cc701fa59672a65d7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85af749badb4261aa3c97a1d98134493"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a85af749badb4261aa3c97a1d98134493"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a85af749badb4261aa3c97a1d98134493">rah::size</a> (R &amp;&amp;range)</td></tr>
 <tr class="memdesc:a85af749badb4261aa3c97a1d98134493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of range.  <a href="namespacerah.html#a85af749badb4261aa3c97a1d98134493">More...</a><br /></td></tr>
@@ -477,6 +519,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a3a938d529ef4564281a5dca2ce49b538"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3a938d529ef4564281a5dca2ce49b538">rah::sort</a> (P &amp;&amp;pred={})</td></tr>
 <tr class="memdesc:a3a938d529ef4564281a5dca2ce49b538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort a range in place, using the given predicate.  <a href="namespacerah.html#a3a938d529ef4564281a5dca2ce49b538">More...</a><br /></td></tr>
 <tr class="separator:a3a938d529ef4564281a5dca2ce49b538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a215c9f80364af9121e2be42d1ebacdbf"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P  = is_lesser, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a215c9f80364af9121e2be42d1ebacdbf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a215c9f80364af9121e2be42d1ebacdbf">rah::stable_sort</a> (R &amp;range, P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:a215c9f80364af9121e2be42d1ebacdbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the elements in the range in ascending order.  <a href="namespacerah.html#a215c9f80364af9121e2be42d1ebacdbf">More...</a><br /></td></tr>
+<tr class="separator:a215c9f80364af9121e2be42d1ebacdbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45a27d7e9403b82624632e1ee3daf6f"><td class="memTemplParams" colspan="2">template&lt;typename P  = is_lesser, typename  = std::enable_if_t&lt;not is_range&lt;P&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aa45a27d7e9403b82624632e1ee3daf6f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#aa45a27d7e9403b82624632e1ee3daf6f">rah::stable_sort</a> (P &amp;&amp;pred={})</td></tr>
+<tr class="memdesc:aa45a27d7e9403b82624632e1ee3daf6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts the elements in the range in ascending order.  <a href="namespacerah.html#aa45a27d7e9403b82624632e1ee3daf6f">More...</a><br /></td></tr>
+<tr class="separator:aa45a27d7e9403b82624632e1ee3daf6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d00692710a6ee8e5b3110a56bbd59c"><td class="memTemplParams" colspan="2">template&lt;typename R , typename URBG &gt; </td></tr>
+<tr class="memitem:ab1d00692710a6ee8e5b3110a56bbd59c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ab1d00692710a6ee8e5b3110a56bbd59c">rah::shuffle</a> (R &amp;range, URBG &amp;&amp;g)</td></tr>
+<tr class="memdesc:ab1d00692710a6ee8e5b3110a56bbd59c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.  <a href="namespacerah.html#ab1d00692710a6ee8e5b3110a56bbd59c">More...</a><br /></td></tr>
+<tr class="separator:ab1d00692710a6ee8e5b3110a56bbd59c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f2ab22986c011ca40816c52638e0ad"><td class="memTemplParams" colspan="2">template&lt;typename URBG &gt; </td></tr>
+<tr class="memitem:a93f2ab22986c011ca40816c52638e0ad"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a93f2ab22986c011ca40816c52638e0ad">rah::shuffle</a> (URBG &amp;&amp;g)</td></tr>
+<tr class="memdesc:a93f2ab22986c011ca40816c52638e0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.  <a href="namespacerah.html#a93f2ab22986c011ca40816c52638e0ad">More...</a><br /></td></tr>
+<tr class="separator:a93f2ab22986c011ca40816c52638e0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c4f0afb068c908600b357e111148df7"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P  = is_equal, typename  = std::enable_if_t&lt;is_range&lt;R&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a7c4f0afb068c908600b357e111148df7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a7c4f0afb068c908600b357e111148df7">rah::unique</a> (R &amp;&amp;range, P &amp;&amp;pred={})</td></tr>
 <tr class="memdesc:a7c4f0afb068c908600b357e111148df7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successuve values which are equals.  <a href="namespacerah.html#a7c4f0afb068c908600b357e111148df7">More...</a><br /></td></tr>
@@ -485,6 +543,14 @@ Functions</h2></td></tr>
 <tr class="memitem:aafbbb6f9bd014675985d33d93221acca"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#aafbbb6f9bd014675985d33d93221acca">rah::unique</a> (P &amp;&amp;pred={})</td></tr>
 <tr class="memdesc:aafbbb6f9bd014675985d33d93221acca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successuve values which are equals.  <a href="namespacerah.html#aafbbb6f9bd014675985d33d93221acca">More...</a><br /></td></tr>
 <tr class="separator:aafbbb6f9bd014675985d33d93221acca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca8dbcc943f7c503acea5f58f231a5af"><td class="memTemplParams" colspan="2">template&lt;typename IN1 , typename IN2 , typename OUT &gt; </td></tr>
+<tr class="memitem:aca8dbcc943f7c503acea5f58f231a5af"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#aca8dbcc943f7c503acea5f58f231a5af">rah::set_difference</a> (IN1 &amp;&amp;in1, IN2 &amp;&amp;in2, OUT &amp;&amp;out)</td></tr>
+<tr class="memdesc:aca8dbcc943f7c503acea5f58f231a5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out The resulting range is also sorted.  <a href="namespacerah.html#aca8dbcc943f7c503acea5f58f231a5af">More...</a><br /></td></tr>
+<tr class="separator:aca8dbcc943f7c503acea5f58f231a5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41cb09a0285e2a6814b8aa99f90ba987"><td class="memTemplParams" colspan="2">template&lt;typename IN1 , typename IN2 , typename OUT &gt; </td></tr>
+<tr class="memitem:a41cb09a0285e2a6814b8aa99f90ba987"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a41cb09a0285e2a6814b8aa99f90ba987">rah::set_intersection</a> (IN1 &amp;&amp;in1, IN2 &amp;&amp;in2, OUT &amp;&amp;out)</td></tr>
+<tr class="memdesc:a41cb09a0285e2a6814b8aa99f90ba987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements from the sorted range in1 which are also found in the sorted range in2 to the range out The resulting range is also sorted.  <a href="namespacerah.html#a41cb09a0285e2a6814b8aa99f90ba987">More...</a><br /></td></tr>
+<tr class="separator:a41cb09a0285e2a6814b8aa99f90ba987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea663eead5f5aa262ef890d7393daad6"><td class="memTemplParams" colspan="2">template&lt;typename C , typename P  = is_equal, typename  = std::enable_if_t&lt;is_range&lt;C&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:aea663eead5f5aa262ef890d7393daad6"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6">rah::action::unique</a> (C &amp;&amp;container, P &amp;&amp;pred={})</td></tr>
 <tr class="memdesc:aea663eead5f5aa262ef890d7393daad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all but first successive values which are equals.  <a href="namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6">More...</a><br /></td></tr>
@@ -511,6 +577,20 @@ Functions</h2></td></tr>
 <tr class="memitem:ac1603fdf8fc87e84c277c216a5176674"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#ac1603fdf8fc87e84c277c216a5176674">rah::action::sort</a> (P &amp;&amp;pred={})</td></tr>
 <tr class="memdesc:ac1603fdf8fc87e84c277c216a5176674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort a range in place, using the given predicate.  <a href="namespacerah_1_1action.html#ac1603fdf8fc87e84c277c216a5176674">More...</a><br /></td></tr>
 <tr class="separator:ac1603fdf8fc87e84c277c216a5176674"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9352bcbc01fd4fa9eeba64766fa32b3"><td class="memTemplParams" colspan="2">template&lt;typename C , typename URBG &gt; </td></tr>
+<tr class="memitem:ab9352bcbc01fd4fa9eeba64766fa32b3"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#ab9352bcbc01fd4fa9eeba64766fa32b3">rah::action::shuffle</a> (C &amp;&amp;container, URBG &amp;&amp;g)</td></tr>
+<tr class="memdesc:ab9352bcbc01fd4fa9eeba64766fa32b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.  <a href="namespacerah_1_1action.html#ab9352bcbc01fd4fa9eeba64766fa32b3">More...</a><br /></td></tr>
+<tr class="separator:ab9352bcbc01fd4fa9eeba64766fa32b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add6b8e704a8e603302290792a45a5c06"><td class="memTemplParams" colspan="2">template&lt;typename URBG &gt; </td></tr>
+<tr class="memitem:add6b8e704a8e603302290792a45a5c06"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#add6b8e704a8e603302290792a45a5c06">rah::action::shuffle</a> (URBG &amp;&amp;g)</td></tr>
+<tr class="memdesc:add6b8e704a8e603302290792a45a5c06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.  <a href="namespacerah_1_1action.html#add6b8e704a8e603302290792a45a5c06">More...</a><br /></td></tr>
+<tr class="separator:add6b8e704a8e603302290792a45a5c06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a5af06eebbd592c36368022990839b982"><td class="memItemLeft" align="right" valign="top">constexpr intptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah.html#a5af06eebbd592c36368022990839b982">rah::End</a> = -1</td></tr>
+<tr class="memdesc:a5af06eebbd592c36368022990839b982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used with <a class="el" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c" title="Create a view that is a sub-range of a range.">rah::view::slice</a> to point to the end.  <a href="namespacerah.html#a5af06eebbd592c36368022990839b982">More...</a><br /></td></tr>
+<tr class="separator:a5af06eebbd592c36368022990839b982"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad3a388e89994ad75cbafb263072ddfbc"></a>
