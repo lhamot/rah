@@ -1,0 +1,255 @@
+\hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view}{}\section{R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+CE\+::view Namespace Reference}
+\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view}\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1chunk__iterator}{chunk\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1filter__iterator}{filter\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1gererate__iterator}{gererate\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1iota__iterator}{iota\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1join__iterator}{join\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1retro__iterator}{retro\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{struct_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_1_1zip__iterator}{zip\+\_\+iterator}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a35f45fd1457f206af50004cb2c929bff}{iota}} (T b, T e, T step=1)
+\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a8f775415ab56d1024c456a3941504a4e}{generate}} (F \&\&func)
+\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a9f7fb766d26e6d8016b650e166a5dbd5}{generate\+\_\+n}} (F \&\&func, size\+\_\+t \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_a7c7b2627a4cd1c0877ea39d0b1bae608}{count}})
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a97c539065057a274bc3209460378504c}{all}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_afcf2f13d2403381f7fc39fdaf0899033}{all}} ()
+\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_afc88512dbbf36e723e366e7e9777b4ba}{transform}} (R \&\&range, F \&\&func)
+\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_abd91e5c36a5a72bcfad61004c569b733}{transform}} (F \&\&func)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a75574da8231039293d2a8e1f38484d25}{slice}} (R \&\&range, size\+\_\+t \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_a40db588db40ca52dae948613525ac1b4}{begin}}, size\+\_\+t \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_ad5f90a809a5221569377c400175a20bf}{end}})
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_af14d4072d2e0799f4b4391307e086c0f}{slice}} (size\+\_\+t \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_a40db588db40ca52dae948613525ac1b4}{begin}}, size\+\_\+t \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_ad5f90a809a5221569377c400175a20bf}{end}})
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a510c62d1b397ade76b0fd5781d5b8448}{stride}} (R \&\&range, size\+\_\+t step)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_ab23b0277ae97dfa110e3055e80572d85}{stride}} (size\+\_\+t step)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a4d4a106caf2572f8a50895cb8399397a}{retro}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a4fc357c166e9ac704adda574a1cc3a87}{retro}} ()
+\item 
+{\footnotesize template$<$typename ... R$>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_ad2ae22a5f8e0df5b5abea7da154f6b33}{zip}} (R \&\&... \+\_\+ranges)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a946e1de327673cea84d3daacbb95df1d}{chunk}} (R \&\&range, size\+\_\+t step)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a05946dc9ac0988bc420dc44094d38481}{chunk}} (size\+\_\+t step)
+\item 
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a06496211184d63bcf2a7e091f6710164}{filter}} (R \&\&range, F \&\&func)
+\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a45acfa62cf05ef407a766b6c038b06cd}{filter}} (F \&\&func)
+\item 
+{\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a0458ad47a1a488d40cc98913042a6cb2}{join}} (R1 \&\&range1, R2 \&\&range2)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3aa69fad7b8d770b21d40e5c035a4915}{join}} (R \&\&right\+Range)
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_af6c7a1ce5dc82cc30a2cb2b5bd06bbc9}{enumerate}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a9ad7523e299040463d2a6a199d9280af}{enumerate}} ()
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3b3bc1ea8a0f62e62fd78dedcecf12de}{map\+\_\+value}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_aafb6ab43a3bb190d38c15d322912254a}{map\+\_\+value}} ()
+\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a6c84c62b5257eb2001b350a684cf4382}{map\+\_\+key}} (R \&\&range)
+\item 
+auto \mbox{\hyperlink{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3609e93701c48bc01de9598ac05b0762}{map\+\_\+key}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a97c539065057a274bc3209460378504c}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a97c539065057a274bc3209460378504c}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!all@{all}}
+\index{all@{all}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{all()}{all()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::all (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_afcf2f13d2403381f7fc39fdaf0899033}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_afcf2f13d2403381f7fc39fdaf0899033}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!all@{all}}
+\index{all@{all}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{all()}{all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a946e1de327673cea84d3daacbb95df1d}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a946e1de327673cea84d3daacbb95df1d}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!chunk@{chunk}}
+\index{chunk@{chunk}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{chunk()}{chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::chunk (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a05946dc9ac0988bc420dc44094d38481}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a05946dc9ac0988bc420dc44094d38481}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!chunk@{chunk}}
+\index{chunk@{chunk}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{chunk()}{chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_af6c7a1ce5dc82cc30a2cb2b5bd06bbc9}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_af6c7a1ce5dc82cc30a2cb2b5bd06bbc9}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!enumerate@{enumerate}}
+\index{enumerate@{enumerate}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::enumerate (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a9ad7523e299040463d2a6a199d9280af}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a9ad7523e299040463d2a6a199d9280af}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!enumerate@{enumerate}}
+\index{enumerate@{enumerate}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::enumerate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a06496211184d63bcf2a7e091f6710164}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a06496211184d63bcf2a7e091f6710164}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!filter@{filter}}
+\index{filter@{filter}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{filter()}{filter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename F $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::filter (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a45acfa62cf05ef407a766b6c038b06cd}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a45acfa62cf05ef407a766b6c038b06cd}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!filter@{filter}}
+\index{filter@{filter}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{filter()}{filter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::filter (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a8f775415ab56d1024c456a3941504a4e}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a8f775415ab56d1024c456a3941504a4e}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!generate@{generate}}
+\index{generate@{generate}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::generate (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a9f7fb766d26e6d8016b650e166a5dbd5}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a9f7fb766d26e6d8016b650e166a5dbd5}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!generate\_n@{generate\_n}}
+\index{generate\_n@{generate\_n}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{generate\_n()}{generate\_n()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::generate\+\_\+n (\begin{DoxyParamCaption}\item[{F \&\&}]{func,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a35f45fd1457f206af50004cb2c929bff}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a35f45fd1457f206af50004cb2c929bff}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!iota@{iota}}
+\index{iota@{iota}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{iota()}{iota()}}
+{\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::iota (\begin{DoxyParamCaption}\item[{T}]{b,  }\item[{T}]{e,  }\item[{T}]{step = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a0458ad47a1a488d40cc98913042a6cb2}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a0458ad47a1a488d40cc98913042a6cb2}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!join@{join}}
+\index{join@{join}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R1 , typename R2 $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::join (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1,  }\item[{R2 \&\&}]{range2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3aa69fad7b8d770b21d40e5c035a4915}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3aa69fad7b8d770b21d40e5c035a4915}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!join@{join}}
+\index{join@{join}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::join (\begin{DoxyParamCaption}\item[{R \&\&}]{right\+Range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a6c84c62b5257eb2001b350a684cf4382}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a6c84c62b5257eb2001b350a684cf4382}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!map\_key@{map\_key}}
+\index{map\_key@{map\_key}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{map\_key()}{map\_key()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3609e93701c48bc01de9598ac05b0762}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3609e93701c48bc01de9598ac05b0762}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!map\_key@{map\_key}}
+\index{map\_key@{map\_key}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{map\_key()}{map\_key()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3b3bc1ea8a0f62e62fd78dedcecf12de}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a3b3bc1ea8a0f62e62fd78dedcecf12de}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!map\_value@{map\_value}}
+\index{map\_value@{map\_value}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{map\_value()}{map\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_aafb6ab43a3bb190d38c15d322912254a}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_aafb6ab43a3bb190d38c15d322912254a}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!map\_value@{map\_value}}
+\index{map\_value@{map\_value}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{map\_value()}{map\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a4d4a106caf2572f8a50895cb8399397a}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a4d4a106caf2572f8a50895cb8399397a}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!retro@{retro}}
+\index{retro@{retro}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{retro()}{retro()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::retro (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a4fc357c166e9ac704adda574a1cc3a87}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a4fc357c166e9ac704adda574a1cc3a87}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!retro@{retro}}
+\index{retro@{retro}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{retro()}{retro()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::retro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a75574da8231039293d2a8e1f38484d25}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a75574da8231039293d2a8e1f38484d25}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!slice@{slice}}
+\index{slice@{slice}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{slice()}{slice()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::slice (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{begin,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_af14d4072d2e0799f4b4391307e086c0f}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_af14d4072d2e0799f4b4391307e086c0f}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!slice@{slice}}
+\index{slice@{slice}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{slice()}{slice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::slice (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{begin,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a510c62d1b397ade76b0fd5781d5b8448}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_a510c62d1b397ade76b0fd5781d5b8448}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!stride@{stride}}
+\index{stride@{stride}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{stride()}{stride()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::stride (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_ab23b0277ae97dfa110e3055e80572d85}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_ab23b0277ae97dfa110e3055e80572d85}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!stride@{stride}}
+\index{stride@{stride}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{stride()}{stride()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::stride (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_afc88512dbbf36e723e366e7e9777b4ba}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_afc88512dbbf36e723e366e7e9777b4ba}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!transform@{transform}}
+\index{transform@{transform}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename F $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::transform (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_abd91e5c36a5a72bcfad61004c569b733}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_abd91e5c36a5a72bcfad61004c569b733}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!transform@{transform}}
+\index{transform@{transform}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::transform (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_ad2ae22a5f8e0df5b5abea7da154f6b33}\label{namespace_r_a_h___n_a_m_e_s_p_a_c_e_1_1view_ad2ae22a5f8e0df5b5abea7da154f6b33}} 
+\index{RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}!zip@{zip}}
+\index{zip@{zip}!RAH\_NAMESPACE::view@{RAH\_NAMESPACE::view}}
+\subsubsection{\texorpdfstring{zip()}{zip()}}
+{\footnotesize\ttfamily template$<$typename ... R$>$ \\
+auto R\+A\+H\+\_\+\+N\+A\+M\+E\+S\+P\+A\+C\+E\+::view\+::zip (\begin{DoxyParamCaption}\item[{R \&\&...}]{\+\_\+ranges }\end{DoxyParamCaption})}
+

@@ -1,0 +1,97 @@
+\section*{What is a range}
+
+A range is anything that can be iterate. Typically in C++ something is a range if we can call {\ttfamily begin(range)} and {\ttfamily end(range)} on it.
+
+\section*{How to create a range}
+
+In {\bfseries{rah}} this is done by {\ttfamily \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}}}. Two way to create an iterator\+\_\+range\+:
+\begin{DoxyItemize}
+\item {\ttfamily \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}}$<$iterator\+\_\+type$>$(begin\+\_\+iter, end\+\_\+iter);}
+\item {\ttfamily \mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah\+::make\+\_\+iterator\+\_\+range}} (begin\+\_\+iter, end\+\_\+iter);}
+\end{DoxyItemize}
+
+\section*{What is a view}
+
+A view is a range returned by a function an which doesn\textquotesingle{}t modify it\textquotesingle{}s input range.~\newline
+ The computing is often done in a \char`\"{}lazy\char`\"{} way, that is to say at the moment of iteration.~\newline
+ There is two kind of view\+:
+\begin{DoxyItemize}
+\item Views which take a range and give a modified view on it\+:
+\begin{DoxyItemize}
+\item Example\+: {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah\+::view\+::filter}}}, {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}}
+\end{DoxyItemize}
+\item Generators
+\begin{DoxyItemize}
+\item Example\+: {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah\+::view\+::iota}}}, {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah\+::view\+::generate}}}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\section*{How to make a view}
+
+
+\begin{DoxyItemize}
+\item To make a view you have to create an iterator.
+\begin{DoxyItemize}
+\item For example the \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah\+::view\+::filter}} view is an \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}} of \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{rah\+::view\+::filter\+\_\+iterator}}.
+\end{DoxyItemize}
+\item Then you have to create a function taking a range and parameters (or no range for generator)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename} R> \textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}(R\&\& range)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{make\_iterator\_range}}(}
+\DoxyCodeLine{        std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range)), std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range)));}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item Then you can add a pipeable version of the function
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{\textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}(range); \});}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+\section*{How to make an iterator}
+
+There is in {\bfseries{rah}} an helper to create iterators\+: {\ttfamily \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}} There are three kind of {\ttfamily \mbox{\hyperlink{structrah_1_1iterator__facade}{rah\+::iterator\+\_\+facade}}}\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$\+I, R, std\+::forward\+\_\+iterator\+\_\+tag$>$}}
+\begin{DoxyItemize}
+\item For an example \+: \mbox{\hyperlink{structrah_1_1view_1_1generate__iterator}{rah\+::view\+::generate\+\_\+iterator}}
+\end{DoxyItemize}
+\item \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$\+I, R, std\+::bidirectional\+\_\+iterator\+\_\+tag $>$}}
+\begin{DoxyItemize}
+\item For an example \+: \mbox{\hyperlink{structrah_1_1view_1_1zip__iterator}{rah\+::view\+::zip\+\_\+iterator}}
+\end{DoxyItemize}
+\item \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1random__access__iterator__tag_01_4}{rah\+::iterator\+\_\+facade$<$\+I, R, std\+::random\+\_\+access\+\_\+iterator\+\_\+tag$>$}}
+\begin{DoxyItemize}
+\item For an example \+: \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\section*{How to make a pipeable view or algorithm}
+
+Use the \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah\+::make\+\_\+pipeable}} function. \subsection*{How to create a pipeable \+:}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{test_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(\textcolor{keywordtype}{int} i)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{std::count}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range), i); \});}
+\DoxyCodeLine{\}}
+\end{DoxyCodeInclude}
+\subsection*{How to use a pipeable \+:}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 2, 3 \};}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((vec | \mbox{\hyperlink{test_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(2)) == 2);}
+\end{DoxyCodeInclude}

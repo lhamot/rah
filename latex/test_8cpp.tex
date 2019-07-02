@@ -1,0 +1,603 @@
+\hypertarget{test_8cpp}{}\section{rah/test.cpp File Reference}
+\label{test_8cpp}\index{rah/test.cpp@{rah/test.cpp}}
+{\ttfamily \#include \char`\"{}rah.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$forward\+\_\+list$>$}\newline
+{\ttfamily \#include $<$ciso646$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_what_is_it}{What\+Is\+It$<$ T $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacetest}{test}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(C\+O\+N\+D\+I\+T\+I\+ON)
+\item 
+\#define \mbox{\hyperlink{test_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}{E\+Q\+U\+A\+L\+\_\+\+R\+A\+N\+GE}}(R\+A\+N\+GE,  IL)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} = std\+::initializer\+\_\+list$<$ T $>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename A , typename B , typename C , typename D $>$ }\\bool \mbox{\hyperlink{test_8cpp_ab25e26d7469a6dcdb6ac799b640e352b}{operator==}} (std\+::tuple$<$ A, B $>$ a, std\+::pair$<$ D, C $>$ b)
+\item 
+{\footnotesize template$<$typename A , typename B , typename C , typename D $>$ }\\bool \mbox{\hyperlink{test_8cpp_a3c9941c57e143022e1df4647dc88c00f}{operator==}} (std\+::pair$<$ A, B $>$ a, std\+::tuple$<$ D, C $>$ b)
+\item 
+{\footnotesize template$<$typename... Args$>$ }\\std\+::ostream \& \mbox{\hyperlink{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}{operator$<$$<$}} (std\+::ostream \&os, std\+::tuple$<$ Args... $>$ tup)
+\item 
+auto \mbox{\hyperlink{test_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\+\_\+count}} (int i)
+\begin{DoxyCompactList}\small\item\em \mbox{[}make\+\_\+pipeable create\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename  = std\+::enable\+\_\+if\+\_\+t$<$rah\+::is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\void \mbox{\hyperlink{test_8cpp_a0432dc5df4e86b128872ea23281ae0f5}{toto}} (R \&\&)
+\begin{DoxyCompactList}\small\item\em \mbox{[}make\+\_\+pipeable create\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{test_8cpp_a49c553d27eec315ca5780e7a750412e9}{toto}} (std\+::initializer\+\_\+list$<$ V $>$ \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}})
+\item 
+bool \mbox{\hyperlink{test_8cpp_aeee558f4839208476ccf8fbea8c21907}{is\+\_\+odd}} (int val)
+\item 
+int \mbox{\hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+auto \mbox{\hyperlink{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{Pair\+Equal}} = \mbox{[}$\,$\mbox{]}(auto ab) \{return std\+::get$<$0$>$(ab) == std\+::get$<$1$>$(ab); \}
+\item 
+auto \mbox{\hyperlink{test_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+elt}}
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \mbox{\hyperlink{namespacetest_a463d61708cea9480e55ee03141e2b951}{test\+::is\+\_\+reference\+\_\+v}} = std\+::is\+\_\+reference$<$T$>$\+::value
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \mbox{\hyperlink{namespacetest_a79cef7fd7cce0d4c7a466bcc871dca48}{test\+::is\+\_\+rvalue\+\_\+reference\+\_\+v}} = std\+::is\+\_\+rvalue\+\_\+reference$<$T$>$\+::value
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{test_8cpp_a697b813778d7c62ced8c21c69291b30a}\label{test_8cpp_a697b813778d7c62ced8c21c69291b30a}} 
+\index{test.cpp@{test.cpp}!assert@{assert}}
+\index{assert@{assert}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{assert}{assert}}
+{\footnotesize\ttfamily \#define assert(\begin{DoxyParamCaption}\item[{}]{C\+O\+N\+D\+I\+T\+I\+ON }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"assert : "} << \#CONDITION << std::endl; \(\backslash\)}
+\DoxyCodeLine{if(CONDITION) \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
+\DoxyCodeLine{else \(\backslash\)}
+\DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{test_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}\label{test_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}} 
+\index{test.cpp@{test.cpp}!EQUAL\_RANGE@{EQUAL\_RANGE}}
+\index{EQUAL\_RANGE@{EQUAL\_RANGE}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{EQUAL\_RANGE}{EQUAL\_RANGE}}
+{\footnotesize\ttfamily \#define E\+Q\+U\+A\+L\+\_\+\+R\+A\+N\+GE(\begin{DoxyParamCaption}\item[{}]{R\+A\+N\+GE,  }\item[{}]{IL }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"assert : "} << \#RANGE << \textcolor{stringliteral}{" = "} << \#IL << std::endl; \(\backslash\)}
+\DoxyCodeLine{if(\mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_aaf7abb6066c8adfe6959691c3a3ea4e2}{rah::all\_of}}(\mbox{\hyperlink{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
+\DoxyCodeLine{else \(\backslash\)}
+\DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
+
+\end{DoxyCode}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}\label{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}} 
+\index{test.cpp@{test.cpp}!il@{il}}
+\index{il@{il}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{il}{il}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\+::initializer\+\_\+list$<$T$>$}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test_8cpp_aeee558f4839208476ccf8fbea8c21907}\label{test_8cpp_aeee558f4839208476ccf8fbea8c21907}} 
+\index{test.cpp@{test.cpp}!is\_odd@{is\_odd}}
+\index{is\_odd@{is\_odd}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{is\_odd()}{is\_odd()}}
+{\footnotesize\ttfamily bool is\+\_\+odd (\begin{DoxyParamCaption}\item[{int}]{val }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{test.cpp@{test.cpp}!main@{main}}
+\index{main@{main}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}make\+\_\+pipeable use\mbox{]}
+
+\mbox{[}make\+\_\+pipeable use\mbox{]}
+
+\mbox{[}single\mbox{]}
+
+\mbox{[}single\mbox{]}
+
+\mbox{[}iota\mbox{]}
+
+\mbox{[}iota\mbox{]}
+
+\mbox{[}generate\mbox{]}
+
+\mbox{[}generate\mbox{]}
+
+\mbox{[}generate\+\_\+n\mbox{]}
+
+\mbox{[}generate\+\_\+n\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}\mbox{]}
+
+\mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::view\+::transform\+\_\+pipeable\mbox{]}
+
+\mbox{[}slice\mbox{]}
+
+\mbox{[}slice\mbox{]}
+
+\mbox{[}slice\+\_\+pipeable\mbox{]}
+
+\mbox{[}slice\+\_\+pipeable\mbox{]}
+
+\mbox{[}stride\mbox{]}
+
+\mbox{[}stride\mbox{]}
+
+\mbox{[}stride\+\_\+pipeable\mbox{]}
+
+\mbox{[}stride\+\_\+pipeable\mbox{]}
+
+\mbox{[}retro\mbox{]}
+
+\mbox{[}retro\mbox{]}
+
+\mbox{[}retro\+\_\+pipeable\mbox{]}
+
+\mbox{[}retro\+\_\+pipeable\mbox{]}
+
+\mbox{[}zip\mbox{]}
+
+\mbox{[}zip\mbox{]}
+
+\mbox{[}chunk\mbox{]}
+
+\mbox{[}chunk\mbox{]}
+
+\mbox{[}chunk\+\_\+pipeable\mbox{]}
+
+\mbox{[}chunk\+\_\+pipeable\mbox{]}
+
+\mbox{[}filter\mbox{]}
+
+\mbox{[}filter\mbox{]}
+
+\mbox{[}filter\+\_\+pipeable\mbox{]}
+
+\mbox{[}filter\+\_\+pipeable\mbox{]}
+
+\mbox{[}join\mbox{]}
+
+\mbox{[}join\mbox{]}
+
+\mbox{[}enumerate\mbox{]}
+
+\mbox{[}enumerate\mbox{]}
+
+\mbox{[}enumerate\+\_\+pipeable\mbox{]}
+
+\mbox{[}enumerate\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+value\mbox{]}
+
+\mbox{[}map\+\_\+value\mbox{]}
+
+\mbox{[}map\+\_\+value\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+value\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+key\mbox{]}
+
+\mbox{[}map\+\_\+key\mbox{]}
+
+\mbox{[}map\+\_\+key\+\_\+pipeable\mbox{]}
+
+\mbox{[}map\+\_\+key\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a095c61033422b8ebe6dc2cc214867aca}{rah\+::equal\+\_\+range}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a095c61033422b8ebe6dc2cc214867aca}{rah\+::equal\+\_\+range}}\mbox{]}
+
+\mbox{[}rah\+::equal\+\_\+range\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::equal\+\_\+range\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a5eef379d9f3039fd12f43d5220434976}{rah\+::binary\+\_\+search}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a5eef379d9f3039fd12f43d5220434976}{rah\+::binary\+\_\+search}}\mbox{]}
+
+\mbox{[}rah\+::binary\+\_\+search\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::binary\+\_\+search\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::transform3\mbox{]}
+
+\mbox{[}rah\+::transform3\mbox{]}
+
+\mbox{[}rah\+::transform4\mbox{]}
+
+\mbox{[}rah\+::transform4\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}{rah\+::reduce}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}{rah\+::reduce}}\mbox{]}
+
+\mbox{[}rah\+::reduce\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::reduce\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a836c57da2bd108c491f3ba96786f6aa4}{rah\+::any\+\_\+of}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a836c57da2bd108c491f3ba96786f6aa4}{rah\+::any\+\_\+of}}\mbox{]} \mbox{[}rah\+::any\+\_\+of\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::any\+\_\+of\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_aaf7abb6066c8adfe6959691c3a3ea4e2}{rah\+::all\+\_\+of}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_aaf7abb6066c8adfe6959691c3a3ea4e2}{rah\+::all\+\_\+of}}\mbox{]}
+
+\mbox{[}rah\+::all\+\_\+of\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::all\+\_\+of\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a2a3ff8b7f73d480ac0827f9a41a3c92a}{rah\+::none\+\_\+of}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a2a3ff8b7f73d480ac0827f9a41a3c92a}{rah\+::none\+\_\+of}}\mbox{]}
+
+\mbox{[}rah\+::none\+\_\+of\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::none\+\_\+of\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{rah\+::count}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{rah\+::count}}\mbox{]} \mbox{[}rah\+::count\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::count\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a8e6a379c05d482a52137f5647783fe27}{rah\+::count\+\_\+if}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a8e6a379c05d482a52137f5647783fe27}{rah\+::count\+\_\+if}}\mbox{]} \mbox{[}rah\+::count\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::count\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_afd971bc9f9c098df8422e221adfb199f}{rah\+::for\+\_\+each}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_afd971bc9f9c098df8422e221adfb199f}{rah\+::for\+\_\+each}}\mbox{]}
+
+\mbox{[}rah\+::for\+\_\+each\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::for\+\_\+each\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::to\+\_\+container\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::to\+\_\+container\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a11fcae12055a2bcf5ac7c41e25e74a32}{rah\+::to\+\_\+container}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a11fcae12055a2bcf5ac7c41e25e74a32}{rah\+::to\+\_\+container}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}{rah\+::mismatch}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}{rah\+::mismatch}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a7c7d4f08068e85923f475a069c3daeb7}{rah\+::find}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a7c7d4f08068e85923f475a069c3daeb7}{rah\+::find}}\mbox{]}
+
+\mbox{[}rah\+::find\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::find\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_acbd71a185a2510e691dcd715a31edf53}{rah\+::find\+\_\+if}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_acbd71a185a2510e691dcd715a31edf53}{rah\+::find\+\_\+if}}\mbox{]}
+
+\mbox{[}rah\+::find\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::find\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_af758ef3c67d20ba6260319cb0e0171c5}{rah\+::find\+\_\+if\+\_\+not}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_af758ef3c67d20ba6260319cb0e0171c5}{rah\+::find\+\_\+if\+\_\+not}}\mbox{]}
+
+\mbox{[}rah\+::find\+\_\+if\+\_\+not\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::find\+\_\+if\+\_\+not\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a85af749badb4261aa3c97a1d98134493}{rah\+::size}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a85af749badb4261aa3c97a1d98134493}{rah\+::size}}\mbox{]}
+
+\mbox{[}rah\+::size\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::size\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah\+::equal}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah\+::equal}}\mbox{]}
+
+\mbox{[}rah\+::equal\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::equal\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a51feb1497566c28de396f50735fd259b}{rah\+::empty}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a51feb1497566c28de396f50735fd259b}{rah\+::empty}}\mbox{]} \mbox{[}rah\+::empty\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::empty\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah\+::copy}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah\+::copy}}\mbox{]}
+
+\mbox{[}rah\+::copy\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::copy\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a550a133fe8c6de600a83959c82a0c592}{rah\+::copy\+\_\+if}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a550a133fe8c6de600a83959c82a0c592}{rah\+::copy\+\_\+if}}\mbox{]}
+
+\mbox{[}rah\+::copy\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::copy\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{rah\+::back\+\_\+inserter}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{rah\+::back\+\_\+inserter}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a2734b7f57efb773c6df8ac55b9d040cd}{rah\+::back\+\_\+insert}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a2734b7f57efb773c6df8ac55b9d040cd}{rah\+::back\+\_\+insert}}\mbox{]}
+
+\mbox{[}rah\+::back\+\_\+insert\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::back\+\_\+insert\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a3f7b590b1bd8a44b5b2d6f4e35f1837c}{rah\+::stream\+\_\+inserter}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a3f7b590b1bd8a44b5b2d6f4e35f1837c}{rah\+::stream\+\_\+inserter}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_afba9495316f20f6caee735c15feb349c}{rah\+::remove\+\_\+if}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_afba9495316f20f6caee735c15feb349c}{rah\+::remove\+\_\+if}}\mbox{]}
+
+\mbox{[}rah\+::remove\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::remove\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a3b055c0e04f784b9abc89a27ef4534dd}{rah\+::erase}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a3b055c0e04f784b9abc89a27ef4534dd}{rah\+::erase}}\mbox{]}
+
+\mbox{[}rah\+::erase\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::erase\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::erase\+\_\+remove\+\_\+if\mbox{]}
+
+\mbox{[}rah\+::erase\+\_\+remove\+\_\+if\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a02bc4f7618438272f7ec9f3c819d5990}{rah\+::sort}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a02bc4f7618438272f7ec9f3c819d5990}{rah\+::sort}}\mbox{]}
+
+\mbox{[}rah\+::sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}{rah\+::stable\+\_\+sort}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}{rah\+::stable\+\_\+sort}}\mbox{]}
+
+\mbox{[}rah\+::stable\+\_\+sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::stable\+\_\+sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::stable\+\_\+sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::stable\+\_\+sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::stable\+\_\+sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::stable\+\_\+sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_ab1d00692710a6ee8e5b3110a56bbd59c}{rah\+::shuffle}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_ab1d00692710a6ee8e5b3110a56bbd59c}{rah\+::shuffle}}\mbox{]}
+
+\mbox{[}rah\+::shuffle\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::shuffle\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a7c4f0afb068c908600b357e111148df7}{rah\+::unique}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a7c4f0afb068c908600b357e111148df7}{rah\+::unique}}\mbox{]}
+
+\mbox{[}rah\+::unique\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::unique\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::unique\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::unique\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::unique\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::unique\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_aca8dbcc943f7c503acea5f58f231a5af}{rah\+::set\+\_\+difference}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_aca8dbcc943f7c503acea5f58f231a5af}{rah\+::set\+\_\+difference}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a41cb09a0285e2a6814b8aa99f90ba987}{rah\+::set\+\_\+intersection}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_a41cb09a0285e2a6814b8aa99f90ba987}{rah\+::set\+\_\+intersection}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{rah\+::action\+::unique}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{rah\+::action\+::unique}}\mbox{]}
+
+\mbox{[}rah\+::action\+::unique\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::unique\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::unique\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::action\+::unique\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::action\+::unique\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::unique\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}{rah\+::action\+::remove\+\_\+if}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}{rah\+::action\+::remove\+\_\+if}}\mbox{]}
+
+\mbox{[}rah\+::action\+::remove\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::remove\+\_\+if\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{rah\+::action\+::sort}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{rah\+::action\+::sort}}\mbox{]}
+
+\mbox{[}rah\+::action\+::sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::action\+::sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::action\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{rah\+::action\+::shuffle}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{rah\+::action\+::shuffle}}\mbox{]}
+
+\mbox{[}rah\+::action\+::shuffle\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::action\+::shuffle\+\_\+pipeable\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{rah\+::view\+::sort}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{rah\+::view\+::sort}}\mbox{]}
+
+\mbox{[}rah\+::view\+::sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::view\+::sort\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::view\+::sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::view\+::sort\+\_\+pred\mbox{]}
+
+\mbox{[}rah\+::view\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::view\+::sort\+\_\+pred\+\_\+pipeable\mbox{]} \mbox{\Hypertarget{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}\label{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}} 
+\index{test.cpp@{test.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::tuple$<$ Args... $>$}]{tup }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{test_8cpp_ab25e26d7469a6dcdb6ac799b640e352b}\label{test_8cpp_ab25e26d7469a6dcdb6ac799b640e352b}} 
+\index{test.cpp@{test.cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename A , typename B , typename C , typename D $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{std\+::tuple$<$ A, B $>$}]{a,  }\item[{std\+::pair$<$ D, C $>$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{test_8cpp_a3c9941c57e143022e1df4647dc88c00f}\label{test_8cpp_a3c9941c57e143022e1df4647dc88c00f}} 
+\index{test.cpp@{test.cpp}!operator==@{operator==}}
+\index{operator==@{operator==}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename A , typename B , typename C , typename D $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{std\+::pair$<$ A, B $>$}]{a,  }\item[{std\+::tuple$<$ D, C $>$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{test_8cpp_ae66a06c931008db2ce8bd097114223e2}\label{test_8cpp_ae66a06c931008db2ce8bd097114223e2}} 
+\index{test.cpp@{test.cpp}!test\_count@{test\_count}}
+\index{test\_count@{test\_count}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{test\_count()}{test\_count()}}
+{\footnotesize\ttfamily auto test\+\_\+count (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+\mbox{[}make\+\_\+pipeable create\mbox{]} 
+
+\mbox{\Hypertarget{test_8cpp_a0432dc5df4e86b128872ea23281ae0f5}\label{test_8cpp_a0432dc5df4e86b128872ea23281ae0f5}} 
+\index{test.cpp@{test.cpp}!toto@{toto}}
+\index{toto@{toto}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{toto()}{toto()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename  = std\+::enable\+\_\+if\+\_\+t$<$rah\+::is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
+void toto (\begin{DoxyParamCaption}\item[{R \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{[}make\+\_\+pipeable create\mbox{]} 
+
+\mbox{\Hypertarget{test_8cpp_a49c553d27eec315ca5780e7a750412e9}\label{test_8cpp_a49c553d27eec315ca5780e7a750412e9}} 
+\index{test.cpp@{test.cpp}!toto@{toto}}
+\index{toto@{toto}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{toto()}{toto()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename V $>$ \\
+auto toto (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ V $>$}]{il }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}\label{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}} 
+\index{test.cpp@{test.cpp}!PairEqual@{PairEqual}}
+\index{PairEqual@{PairEqual}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{PairEqual}{PairEqual}}
+{\footnotesize\ttfamily auto Pair\+Equal = \mbox{[}$\,$\mbox{]}(auto ab) \{return std\+::get$<$0$>$(ab) == std\+::get$<$1$>$(ab); \}}
+
+\mbox{\Hypertarget{test_8cpp_adf099222cf7b566c1025750fb0949c9a}\label{test_8cpp_adf099222cf7b566c1025750fb0949c9a}} 
+\index{test.cpp@{test.cpp}!print\_elt@{print\_elt}}
+\index{print\_elt@{print\_elt}!test.cpp@{test.cpp}}
+\subsubsection{\texorpdfstring{print\_elt}{print\_elt}}
+{\footnotesize\ttfamily auto print\+\_\+elt}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= [](\textcolor{keyword}{auto}\&\& elt)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    (std::cout << std::forward<decltype(elt)>(elt)) << \textcolor{stringliteral}{" "};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
