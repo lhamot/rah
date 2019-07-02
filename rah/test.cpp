@@ -114,6 +114,13 @@ int main()
 	// *********************************** views **************************************************
 
 	{
+		std::vector<int> result;
+		int value = 20;
+		for (int i : rah::view::single(value))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 20 }));
+	}
+	{
 		/// [single]
 		std::vector<int> result;
 		for (int i : rah::view::single(20))

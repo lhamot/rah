@@ -274,7 +274,7 @@ namespace view
 template<typename V>
 auto single(V&& value)
 {
-	return std::array<V, 1>{std::forward<V>(value)};
+	return std::array<std::remove_reference_t<V>, 1>{std::forward<V>(value)};
 }
 
 // ********************************** iota ********************************************************
@@ -693,13 +693,17 @@ template<typename R1> auto join(R1&& range1)
 
 template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 {
+	auto begin_range1 = std::make_pair(begin(range1), begin(range2));
+	auto begin_range2 = std::make_pair(end(range1), end(range2));
+	auto end_range1 = std::make_pair(end(range1), end(range2));
+	auto end_range2 = std::make_pair(end(range1), end(range2));
 	return iterator_range<
 		join_iterator<
 		std::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
 		range_ref_type_t<R1>>>
 	{
-		{ std::make_pair(begin(range1), begin(range2)), std::make_pair(end(range1), end(range2)), 0 },
-		{ std::make_pair(end(range1), end(range2)), std::make_pair(end(range1), end(range2)), 1 },
+		{ begin_range1, begin_range2, 0 },
+		{ end_range1, end_range2, 1 },
 	};
 }
 
