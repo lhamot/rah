@@ -761,7 +761,7 @@ auto sort(R&& range, P&& pred = {})
 	using value_type = range_value_type_t<R>;
 	using Container = typename std::vector<value_type>;
 	Container result;
-	result.reserve(size(range));
+	result.reserve(std::distance(begin(range), end(range)));
 	std::copy(begin(range), end(range), std::back_inserter(result));
 	std::sort(begin(result), end(result), pred);
 	return result;
