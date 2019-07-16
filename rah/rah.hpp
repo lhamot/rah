@@ -277,6 +277,41 @@ auto single(V&& value)
 	return std::array<std::remove_reference_t<V>, 1>{std::forward<V>(value)};
 }
 
+// ******************************************* counted ********************************************
+
+template<typename I>
+struct counted_iterator : iterator_facade<
+	counted_iterator<I>,
+	decltype(*fake<I>()),
+	typename std::iterator_traits<I>::iterator_category
+>
+{
+	I iter_;
+	size_t count_;
+
+	counted_iterator(I iter, size_t count) : iter_(iter), count_(count) {}
+
+	void increment() { ++iter_; ++count_; }
+	void advance(intptr_t off) { iter_ += off; count_ += off; }
+	void decrement() { --iter_; --count_; }
+	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
+	auto dereference() const { return *iter_; }
+	bool equal(counted_iterator r) const { return count_ == r.count_; }
+};
+
+template<typename R> auto counted(R&& range, size_t count)
+{
+	using iterator = counted_iterator<range_begin_type_t<R>>;
+	iterator iter1(begin(range), 0);
+	iterator iter2(begin(range), count);
+	return make_iterator_range(iter1, iter2);
+}
+
+auto counted(size_t count)
+{
+	return make_pipeable([=](auto&& range) {return counted(range, count); });
+}
+
 // ********************************** iota ********************************************************
 
 /// @see rah::iota
@@ -332,13 +367,12 @@ template<typename F>
 struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F>()()), std::forward_iterator_tag>
 {
 	mutable F func_;
-	size_t iter_count_ = 0;
 
-	generate_iterator(F const& func, size_t iter_count = 0) : func_(func), iter_count_(iter_count) {}
+	generate_iterator(F const& func) : func_(func) {}
 
-	void increment() { ++iter_count_; }
+	void increment() { }
 	auto dereference() const { return func_(); }
-	bool equal(generate_iterator other) const { return iter_count_ == other.iter_count_; }
+	bool equal(generate_iterator other) const { return true; }
 };
 
 template<typename F> auto generate(F&& func)
@@ -348,7 +382,7 @@ template<typename F> auto generate(F&& func)
 
 template<typename F> auto generate_n(F&& func, size_t count)
 {
-	return iterator_range<generate_iterator<F>>{ { func }, { func, count }};
+	return generate(std::forward<F>(func)) | counted(count);
 }
 
 // ********************************** all *********************************************************
@@ -403,41 +437,6 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 template<typename F> auto transform(F&& func)
 {
 	return make_pipeable([=](auto&& range) {return transform(range, func); });
-}
-
-// ******************************************* counted ********************************************
-
-template<typename I>
-struct counted_iterator : iterator_facade<
-	counted_iterator<I>,
-	decltype(*fake<I>()),
-	typename std::iterator_traits<I>::iterator_category
->
-{
-	I iter_;
-	size_t count_;
-
-	counted_iterator(I iter, size_t count) : iter_(iter), count_(count) {}
-
-	void increment() { ++iter_; ++count_; }
-	void advance(intptr_t off) { iter_ += off; count_ += off; }
-	void decrement() { --iter_; --count_; }
-	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
-	auto dereference() const { return *iter_; }
-	bool equal(counted_iterator r) const { return count_ == r.count_; }
-};
-
-template<typename R> auto counted(R&& range, size_t count)
-{
-	using iterator = counted_iterator<range_begin_type_t<R>>;
-	iterator iter1(begin(range), 0);
-	iterator iter2(begin(range), count);
-	return make_iterator_range( iter1, iter2 );
-}
-
-auto counted(size_t count)
-{
-	return make_pipeable([=](auto&& range) {return counted(range, count); });
 }
 
 // ***************************************** slice ************************************************
