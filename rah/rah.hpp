@@ -405,6 +405,41 @@ template<typename F> auto transform(F&& func)
 	return make_pipeable([=](auto&& range) {return transform(range, func); });
 }
 
+// ******************************************* counted ********************************************
+
+template<typename I>
+struct counted_iterator : iterator_facade<
+	counted_iterator<I>,
+	decltype(*fake<I>()),
+	typename std::iterator_traits<I>::iterator_category
+>
+{
+	I iter_;
+	size_t count_;
+
+	counted_iterator(I iter, size_t count) : iter_(iter), count_(count) {}
+
+	void increment() { ++iter_; ++count_; }
+	void advance(intptr_t off) { iter_ += off; count_ += off; }
+	void decrement() { --iter_; --count_; }
+	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
+	auto dereference() const { return *iter_; }
+	bool equal(counted_iterator r) const { return count_ == r.count_; }
+};
+
+template<typename R> auto counted(R&& range, size_t count)
+{
+	using iterator = counted_iterator<range_begin_type_t<R>>;
+	iterator iter1(begin(range), 0);
+	iterator iter2(begin(range), count);
+	return make_iterator_range( iter1, iter2 );
+}
+
+auto counted(size_t count)
+{
+	return make_pipeable([=](auto&& range) {return counted(range, count); });
+}
+
 // ***************************************** slice ************************************************
 
 template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)

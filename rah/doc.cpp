@@ -112,6 +112,17 @@
 ///
 /// @snippet test.cpp rah::view::transform_pipeable
 
+/// @fn rah::view::counted(R&& range, size_t count)
+/// @brief Create a view containing the @b count next element of range
+///
+/// @snippet test.cpp counted
+
+/// @fn rah::view::counted(size_t count)
+/// @brief Create a view containing the @b count next element of range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp counted_pipeable
+
 /// @fn rah::view::slice(R&& range, intptr_t begin, intptr_t end)
 /// @brief Create a view that is a sub-range of a range
 ///

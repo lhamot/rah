@@ -166,6 +166,26 @@ int main()
 		/// [repeat]
 	}
 
+	{
+		/// [counted]
+		std::vector<int> in{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+		auto range = rah::view::counted(in, 5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		/// [counted]
+	}
+
+	{
+		/// [counted_pipeable]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = in | rah::view::counted(5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		/// [counted_pipeable]
+	}
+
 	// Test all
 	EQUAL_RANGE((il<int>{0, 1, 2, 3} | rah::view::all()), (il<int>{ 0, 1, 2, 3 }));
 
