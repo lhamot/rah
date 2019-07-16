@@ -167,16 +167,16 @@
 ///
 /// @snippet test.cpp filter_pipeable
 
-/// @fn rah::view::join(R1&& range1, R2&& range2)
+/// @fn rah::view::concat(R1&& range1, R2&& range2)
 /// @brief Create a view that is the concatenation of 2 ranges
 ///
-/// @snippet test.cpp join
+/// @snippet test.cpp concat
 
-/// @fn rah::view::join(R&& rightRange)
+/// @fn rah::view::concat(R&& rightRange)
 /// @brief Create a view that is the concatenation of 2 ranges
 /// @remark pipeable syntax
 ///
-/// @snippet test.cpp join_pipeable
+/// @snippet test.cpp concat_pipeable
 
 /// @fn rah::view::enumerate(R&& range)
 /// @brief Pair each element of a range with its index. 

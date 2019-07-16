@@ -639,16 +639,16 @@ template<typename F> auto filter(F&& func)
 	return make_pipeable([=](auto&& range) {return filter(range, func); });
 }
 
-// ***************************************** join ***********************************************
+// ***************************************** concat ***********************************************
 
 template<typename IterPair, typename V>
-struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forward_iterator_tag>
+struct concat_iterator : iterator_facade<concat_iterator<IterPair, V>, V, std::forward_iterator_tag>
 {
 	IterPair iter_;
 	IterPair end_;
 	size_t range_index_;
 
-	join_iterator(IterPair const& iter, IterPair const& end, size_t range_index)
+	concat_iterator(IterPair const& iter, IterPair const& end, size_t range_index)
 		: iter_(iter), end_(end), range_index_(range_index)
 	{
 	}
@@ -674,7 +674,7 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 			return *std::get<1>(iter_);
 	}
 
-	bool equal(join_iterator other) const
+	bool equal(concat_iterator other) const
 	{
 		if (range_index_ != other.range_index_)
 			return false;
@@ -686,19 +686,19 @@ struct join_iterator : iterator_facade<join_iterator<IterPair, V>, V, std::forwa
 };
 
 /// @brief return the same range
-template<typename R1> auto join(R1&& range1) 
+template<typename R1> auto concat(R1&& range1) 
 { 
 	return std::forward<R1>(range1); 
 }
 
-template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
+template<typename R1, typename R2> auto concat(R1&& range1, R2&& range2)
 {
 	auto begin_range1 = std::make_pair(begin(range1), begin(range2));
 	auto begin_range2 = std::make_pair(end(range1), end(range2));
 	auto end_range1 = std::make_pair(end(range1), end(range2));
 	auto end_range2 = std::make_pair(end(range1), end(range2));
 	return iterator_range<
-		join_iterator<
+		concat_iterator<
 		std::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
 		range_ref_type_t<R1>>>
 	{
@@ -707,11 +707,11 @@ template<typename R1, typename R2> auto join(R1&& range1, R2&& range2)
 	};
 }
 
-/// @see rah::view::join(R1&& range1, R2&& range2)
+/// @see rah::view::concat(R1&& range1, R2&& range2)
 template<typename R1, typename R2, typename ...Ranges> 
-auto join(R1&& range1, R2&& range2, Ranges&&... ranges)
+auto concat(R1&& range1, R2&& range2, Ranges&&... ranges)
 {
-	return join(join(std::forward<R1>(range1), std::forward<R2>(range2)), ranges...);
+	return concat(concat(std::forward<R1>(range1), std::forward<R2>(range2)), ranges...);
 }
 
 // *************************** enumerate **********************************************************

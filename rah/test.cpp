@@ -304,29 +304,29 @@ int main()
 	}
 
 	{
-		/// [join]
+		/// [concat]
 		std::vector<int> inputA{ 0, 1, 2, 3 };
 		std::vector<int> inputB{ 4, 5, 6 };
 		std::vector<int> inputC{ 7, 8, 9, 10, 11 };
 		{
 			std::vector<int> result;
-			for (int i : rah::view::join(inputA))
+			for (int i : rah::view::concat(inputA))
 				result.push_back(i);
 			assert(result == std::vector<int>({ 0, 1, 2, 3 }));
 		}
 		{
 			std::vector<int> result;
-			for (int i : rah::view::join(inputA, inputB))
+			for (int i : rah::view::concat(inputA, inputB))
 				result.push_back(i);
 			assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6 }));
 		}
 		{
 			std::vector<int> result;
-			for (int i : rah::view::join(inputA, inputB, inputC))
+			for (int i : rah::view::concat(inputA, inputB, inputC))
 				result.push_back(i);
 			assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }));
 		}
-		/// [join]
+		/// [concat]
 	}
 	{
 		/// [enumerate]
