@@ -5,13 +5,17 @@
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1chunk__iterator}{chunk\+\_\+iterator}}
 \item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1concat__iterator}{concat\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{filter\+\_\+iterator}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1generate__iterator}{generate\+\_\+iterator}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{iota\+\_\+iterator}}
 \item 
-struct \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{join\+\_\+iterator}}
+struct \mbox{\hyperlink{structrah_1_1view_1_1repeat__iterator}{repeat\+\_\+iterator}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}
 \item 
@@ -22,85 +26,91 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1zip__iterator}{zip\+\_\+iterator}}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a582017379aa588d2c1c7bac58f4856af}{single}} (V \&\&value)
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ad37c24275c6eb4642a20466545a9baa3}{single}} (V \&\&value)
 \begin{DoxyCompactList}\small\item\em Given value, create a view containing one element. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{iota}} (T b, T e, T step=1)
+{\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ae66c3be408888c58118b1974cdece592}{iota}} (T b, T e, T step=1)
 \begin{DoxyCompactList}\small\item\em Generate a range of sequentially increasing integers. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{generate}} (F \&\&func)
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_abd22c411fe9e0bea622ba7f829743362}{repeat}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Generate an infinite range of the given value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}{generate}} (F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create an infinite range, repetitively calling func. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}{generate\+\_\+n}} (F \&\&func, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a2be56bf9b855cf33b152868326d78958}{generate\+\_\+n}} (F \&\&func, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
 \begin{DoxyCompactList}\small\item\em Create a range of N elemnts, repetitively calling func. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a08f246d1e3e728738c48741274f5e9d7}{all}} (R \&\&range)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_acc7f1420accc862d2ac433ba9c697e95}{all}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}{all}} ()
+auto \mbox{\hyperlink{namespacerah_1_1view_aeed660f7f6a4e0fbefffa4e42de7642a}{all}} ()
 \begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{transform}} (R \&\&range, F \&\&func)
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ad8750f5c95edcf4f26b0a1c1eec3d676}{transform}} (R \&\&range, F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create a view applying a transformation to each element of the input range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}{transform}} (F \&\&func)
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a7c981c90e5ad03eca3ec738176feaf7d}{transform}} (F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create a view applying a transformation to each element of the input range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a26e48a024bda08769061de4ad6addd9c}{slice}} (R \&\&range, intptr\+\_\+t begin\+\_\+idx, intptr\+\_\+t end\+\_\+idx)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}{slice}} (R \&\&range, intptr\+\_\+t begin\+\_\+idx, intptr\+\_\+t end\+\_\+idx)
 \begin{DoxyCompactList}\small\item\em Create a view that is a sub-\/range of a range. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_a68942bf66ff2c838d6ed12008bc275c5}{slice}} (intptr\+\_\+t \mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}, intptr\+\_\+t \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}})
+auto \mbox{\hyperlink{namespacerah_1_1view_af2baef5b0078f0768cbfee4aae4e9924}{slice}} (intptr\+\_\+t \mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}, intptr\+\_\+t \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}})
 \begin{DoxyCompactList}\small\item\em Create a view that is a sub-\/range of a range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}{stride}} (R \&\&range, size\+\_\+t step)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a112a1a8d31435c1070c4cd98cc02d96a}{stride}} (R \&\&range, size\+\_\+t step)
 \begin{DoxyCompactList}\small\item\em Create a view consisting of every Nth element, starting with the first. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}{stride}} (size\+\_\+t step)
+auto \mbox{\hyperlink{namespacerah_1_1view_a6b2ab3621be4004c35d77f06165fce78}{stride}} (size\+\_\+t step)
 \begin{DoxyCompactList}\small\item\em Create a view consisting of every Nth element, starting with the first. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}} (R \&\&range)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{retro}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Create a view that traverses the source range in reverse order. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}{retro}} ()
+auto \mbox{\hyperlink{namespacerah_1_1view_a6c6543c61f1fb119394952a72c564753}{retro}} ()
 \begin{DoxyCompactList}\small\item\em Create a view that traverses the source range in reverse order. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename ... R$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{zip}} (R \&\&... \+\_\+ranges)
+{\footnotesize template$<$typename ... R$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}{zip}} (R \&\&... \+\_\+ranges)
 \begin{DoxyCompactList}\small\item\em Given N ranges, return a new range where Mth element is the result of calling std\+::make\+\_\+tuple on the Mth elements of all N ranges. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{chunk}} (R \&\&range, size\+\_\+t step)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}{chunk}} (R \&\&range, size\+\_\+t step)
 \begin{DoxyCompactList}\small\item\em Create a view where each element is a range of N elements of the input range. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_a5b3a70ad1a0373e8fadbfa26a9676077}{chunk}} (size\+\_\+t step)
+auto \mbox{\hyperlink{namespacerah_1_1view_ab29a0945581f92240cbcc9f81811c08b}{chunk}} (size\+\_\+t step)
 \begin{DoxyCompactList}\small\item\em Create a view where each element is a range of N elements of the input range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{filter}} (R \&\&range, F \&\&func)
+{\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}{filter}} (R \&\&range, F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create a view with only elements which are filtered. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa52c6f5cff4e0a4f0ed48c66e1039e3d}{filter}} (F \&\&func)
+{\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a315ba2143c833b24d05481c68b6cf2da}{filter}} (F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create a view with only elements which are filtered. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R1 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a0ad4d41145f1becad813d2ed6d7da044}{join}} (R1 \&\&range1)
+{\footnotesize template$<$typename R1 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}{concat}} (R1 \&\&range1)
 \begin{DoxyCompactList}\small\item\em return the same range \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}{join}} (R1 \&\&range1, R2 \&\&range2)
+{\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a114597b820b9ca8f3c286f026f818399}{concat}} (R1 \&\&range1, R2 \&\&range2)
 \begin{DoxyCompactList}\small\item\em Create a view that is the concatenation of 2 ranges. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R1 , typename R2 , typename ... Ranges$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a71a85dacbeaee5eca22203b82142f485}{join}} (R1 \&\&range1, R2 \&\&range2, Ranges \&\&... ranges)
+{\footnotesize template$<$typename R1 , typename R2 , typename ... Ranges$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a830061cf022e907eefb65aba6a35573d}{concat}} (R1 \&\&range1, R2 \&\&range2, Ranges \&\&... ranges)
 \item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}{enumerate}} (R \&\&range)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a420160b047554df1bf986946050238ed}{enumerate}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Pair each element of a range with its index. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_a592731562abd27c9c71f744885322545}{enumerate}} ()
+auto \mbox{\hyperlink{namespacerah_1_1view_ac815f5494e5a7a182cafb70224b93a6a}{enumerate}} ()
 \begin{DoxyCompactList}\small\item\em Pair each element of a range with its index. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}{map\+\_\+value}} (R \&\&range)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a7896dcebf13a4294254ed87743ba3ad0}{map\+\_\+value}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the first element of the pair. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}{map\+\_\+value}} ()
+auto \mbox{\hyperlink{namespacerah_1_1view_ad11fcca5438e227541594a917a85f77c}{map\+\_\+value}} ()
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the first element of the pair. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}{map\+\_\+key}} (R \&\&range)
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a273917511589d75b32d28b56b7de2655}{map\+\_\+key}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}{map\+\_\+key}} ()
+auto \mbox{\hyperlink{namespacerah_1_1view_aac8d9437b8c96e0e8e972c4c10d584e5}{map\+\_\+key}} ()
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{sort}} (R \&\&range, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}{sort}} (P \&\&pred=\{\})
-\begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}{counted}} (R \&\&range, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\begin{DoxyCompactList}\small\item\em Create a view containing the {\bfseries{count}} next element of range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_af359927d911e400baa372a8cb7817aa2}{counted}} (size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\begin{DoxyCompactList}\small\item\em Create a view containing the {\bfseries{count}} next element of range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{namespacerah_1_1view_a08f246d1e3e728738c48741274f5e9d7}\label{namespacerah_1_1view_a08f246d1e3e728738c48741274f5e9d7}} 
+\mbox{\Hypertarget{namespacerah_1_1view_acc7f1420accc862d2ac433ba9c697e95}\label{namespacerah_1_1view_acc7f1420accc862d2ac433ba9c697e95}} 
 \index{rah::view@{rah::view}!all@{all}}
 \index{all@{all}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{all()}{all()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::all (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+auto rah\+::view\+::all (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
 
 
 
 Create a view on the whole range. 
 
-\mbox{\Hypertarget{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}\label{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}} 
+\mbox{\Hypertarget{namespacerah_1_1view_aeed660f7f6a4e0fbefffa4e42de7642a}\label{namespacerah_1_1view_aeed660f7f6a4e0fbefffa4e42de7642a}} 
 \index{rah::view@{rah::view}!all@{all}}
 \index{all@{all}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{all()}{all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -109,12 +119,12 @@ Create a view on the whole range.
 \begin{DoxyRemark}{Remarks}
 pipeable syntax 
 \end{DoxyRemark}
-\mbox{\Hypertarget{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}\label{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}} 
+\mbox{\Hypertarget{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}\label{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}} 
 \index{rah::view@{rah::view}!chunk@{chunk}}
 \index{chunk@{chunk}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{chunk()}{chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::chunk (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+auto rah\+::view\+::chunk (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
 
 
 
@@ -124,15 +134,15 @@ Create a view where each element is a range of N elements of the input range.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
 \DoxyCodeLine{        std::vector<std::vector<int>> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{rah::view::chunk}}(vec\_01234, 2))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : \mbox{\hyperlink{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}{rah::view::chunk}}(vec\_01234, 2))}
 \DoxyCodeLine{            result.push\_back(std::vector<int>(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(elts), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(elts)));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a5b3a70ad1a0373e8fadbfa26a9676077}\label{namespacerah_1_1view_a5b3a70ad1a0373e8fadbfa26a9676077}} 
+\mbox{\Hypertarget{namespacerah_1_1view_ab29a0945581f92240cbcc9f81811c08b}\label{namespacerah_1_1view_ab29a0945581f92240cbcc9f81811c08b}} 
 \index{rah::view@{rah::view}!chunk@{chunk}}
 \index{chunk@{chunk}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{chunk()}{chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
 
 
 
@@ -145,164 +155,27 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
 \DoxyCodeLine{        std::vector<std::vector<int>> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_a2859e5c6e21d7a2bf9e188539602daa7}{rah::view::chunk}}(2))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}{rah::view::chunk}}(2))}
 \DoxyCodeLine{            result.push\_back(std::vector<int>(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(elts), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(elts)));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}\label{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}} 
-\index{rah::view@{rah::view}!enumerate@{enumerate}}
-\index{enumerate@{enumerate}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::enumerate (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
-
-
-
-Pair each element of a range with its index. 
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        std::vector<int> input\{ 4, 5, 6, 7 \};}
-\DoxyCodeLine{        std::vector<std::tuple<size\_t, int>> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i\_value : \mbox{\hyperlink{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}{rah::view::enumerate}}(input))}
-\DoxyCodeLine{            result.push\_back(i\_value);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a592731562abd27c9c71f744885322545}\label{namespacerah_1_1view_a592731562abd27c9c71f744885322545}} 
-\index{rah::view@{rah::view}!enumerate@{enumerate}}
-\index{enumerate@{enumerate}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::enumerate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Pair each element of a range with its index. 
-
-\begin{DoxyRemark}{Remarks}
-pipeable syntax
-\end{DoxyRemark}
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        std::vector<int> input\{ 4, 5, 6, 7 \};}
-\DoxyCodeLine{        std::vector<std::tuple<size\_t, int>> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i\_value : input | \mbox{\hyperlink{namespacerah_1_1view_a3400a50c2b0e90330850128c2b7605d0}{rah::view::enumerate}}())}
-\DoxyCodeLine{            result.push\_back(i\_value);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}\label{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}} 
-\index{rah::view@{rah::view}!filter@{filter}}
-\index{filter@{filter}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{filter()}{filter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename R , typename F $>$ \\
-rah\+::view\+::filter (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{F \&\&}]{func }\end{DoxyParamCaption})}
-
-
-
-Create a view with only elements which are filtered. 
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
-\DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah::view::filter}}(vec\_01234, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a \% 2 == 0; \}))}
-\DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_aa52c6f5cff4e0a4f0ed48c66e1039e3d}\label{namespacerah_1_1view_aa52c6f5cff4e0a4f0ed48c66e1039e3d}} 
-\index{rah::view@{rah::view}!filter@{filter}}
-\index{filter@{filter}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{filter()}{filter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename F $>$ \\
-rah\+::view\+::filter (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
-
-
-
-Create a view with only elements which are filtered. 
-
-\begin{DoxyRemark}{Remarks}
-pipeable syntax
-\end{DoxyRemark}
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
-\DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah::view::filter}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a \% 2 == 0; \}))}
-\DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}\label{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}} 
-\index{rah::view@{rah::view}!generate@{generate}}
-\index{generate@{generate}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{generate()}{generate()}}
-{\footnotesize\ttfamily template$<$typename F $>$ \\
-rah\+::view\+::generate (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
-
-
-
-Create an infinite range, repetitively calling func. 
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        \textcolor{keywordtype}{int} y = 1;}
-\DoxyCodeLine{        \textcolor{keyword}{auto} gen = \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah::view::generate}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \});}
-\DoxyCodeLine{        std::vector<int> gen\_copy;}
-\DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(gen), 4, \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(gen\_copy));}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(gen\_copy == std::vector<int>(\{ 1, 2, 4, 8 \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}\label{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}} 
-\index{rah::view@{rah::view}!generate\_n@{generate\_n}}
-\index{generate\_n@{generate\_n}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{generate\_n()}{generate\_n()}}
-{\footnotesize\ttfamily template$<$typename F $>$ \\
-rah\+::view\+::generate\+\_\+n (\begin{DoxyParamCaption}\item[{F \&\&}]{func,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
-
-
-
-Create a range of N elemnts, repetitively calling func. 
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordtype}{int} y = 1;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}{rah::view::generate\_n}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \}, 4))}
-\DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 4, 8 \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}\label{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}} 
-\index{rah::view@{rah::view}!iota@{iota}}
-\index{iota@{iota}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{iota()}{iota()}}
-{\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
-rah\+::view\+::iota (\begin{DoxyParamCaption}\item[{T}]{b,  }\item[{T}]{e,  }\item[{T}]{step = {\ttfamily 1} }\end{DoxyParamCaption})}
-
-
-
-Generate a range of sequentially increasing integers. 
-
-
-\begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah::view::iota}}(10, 20, 2))}
-\DoxyCodeLine{            result.push\_back(i);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 10, 12, 14, 16, 18 \}));}
-\end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a0ad4d41145f1becad813d2ed6d7da044}\label{namespacerah_1_1view_a0ad4d41145f1becad813d2ed6d7da044}} 
-\index{rah::view@{rah::view}!join@{join}}
-\index{join@{join}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\mbox{\Hypertarget{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}\label{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}} 
+\index{rah::view@{rah::view}!concat@{concat}}
+\index{concat@{concat}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{concat()}{concat()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily template$<$typename R1 $>$ \\
-auto rah\+::view\+::join (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1 }\end{DoxyParamCaption})}
+auto rah\+::view\+::concat (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1 }\end{DoxyParamCaption})}
 
 
 
 return the same range 
 
-\mbox{\Hypertarget{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}\label{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}} 
-\index{rah::view@{rah::view}!join@{join}}
-\index{join@{join}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\mbox{\Hypertarget{namespacerah_1_1view_a114597b820b9ca8f3c286f026f818399}\label{namespacerah_1_1view_a114597b820b9ca8f3c286f026f818399}} 
+\index{rah::view@{rah::view}!concat@{concat}}
+\index{concat@{concat}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{concat()}{concat()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$typename R1 , typename R2 $>$ \\
-rah\+::view\+::join (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1,  }\item[{R2 \&\&}]{range2 }\end{DoxyParamCaption})}
+auto rah\+::view\+::concat (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1,  }\item[{R2 \&\&}]{range2 }\end{DoxyParamCaption})}
 
 
 
@@ -315,39 +188,216 @@ Create a view that is the concatenation of 2 ranges.
 \DoxyCodeLine{        std::vector<int> inputC\{ 7, 8, 9, 10, 11 \};}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{            std::vector<int> result;}
-\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a0ad4d41145f1becad813d2ed6d7da044}{rah::view::join}}(inputA))}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}{rah::view::concat}}(inputA))}
 \DoxyCodeLine{                result.push\_back(i);}
 \DoxyCodeLine{            \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3 \}));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{            std::vector<int> result;}
-\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a0ad4d41145f1becad813d2ed6d7da044}{rah::view::join}}(inputA, inputB))}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}{rah::view::concat}}(inputA, inputB))}
 \DoxyCodeLine{                result.push\_back(i);}
 \DoxyCodeLine{            \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6 \}));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{            std::vector<int> result;}
-\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a0ad4d41145f1becad813d2ed6d7da044}{rah::view::join}}(inputA, inputB, inputC))}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}{rah::view::concat}}(inputA, inputB, inputC))}
 \DoxyCodeLine{                result.push\_back(i);}
 \DoxyCodeLine{            \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 \}));}
 \DoxyCodeLine{        \}}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a71a85dacbeaee5eca22203b82142f485}\label{namespacerah_1_1view_a71a85dacbeaee5eca22203b82142f485}} 
-\index{rah::view@{rah::view}!join@{join}}
-\index{join@{join}!rah::view@{rah::view}}
-\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\mbox{\Hypertarget{namespacerah_1_1view_a830061cf022e907eefb65aba6a35573d}\label{namespacerah_1_1view_a830061cf022e907eefb65aba6a35573d}} 
+\index{rah::view@{rah::view}!concat@{concat}}
+\index{concat@{concat}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{concat()}{concat()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$typename R1 , typename R2 , typename ... Ranges$>$ \\
-auto rah\+::view\+::join (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1,  }\item[{R2 \&\&}]{range2,  }\item[{Ranges \&\&...}]{ranges }\end{DoxyParamCaption})}
+auto rah\+::view\+::concat (\begin{DoxyParamCaption}\item[{R1 \&\&}]{range1,  }\item[{R2 \&\&}]{range2,  }\item[{Ranges \&\&...}]{ranges }\end{DoxyParamCaption})}
 
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{namespacerah_1_1view_af66edb5fcde9f79ebd69fce81df0e883}{rah\+::view\+::join(\+R1\&\& range1, R2\&\& range2)}} 
+\mbox{\hyperlink{namespacerah_1_1view_a114597b820b9ca8f3c286f026f818399}{rah\+::view\+::concat(\+R1\&\& range1, R2\&\& range2)}} 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}\label{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}\label{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}} 
+\index{rah::view@{rah::view}!counted@{counted}}
+\index{counted@{counted}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{counted()}{counted()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+rah\+::view\+::counted (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Create a view containing the {\bfseries{count}} next element of range. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}{rah::view::counted}}(in, 5);}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 0, 1, 2, 3, 4 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_af359927d911e400baa372a8cb7817aa2}\label{namespacerah_1_1view_af359927d911e400baa372a8cb7817aa2}} 
+\index{rah::view@{rah::view}!counted@{counted}}
+\index{counted@{counted}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{counted()}{counted()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily rah\+::view\+::counted (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Create a view containing the {\bfseries{count}} next element of range. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = in | \mbox{\hyperlink{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}{rah::view::counted}}(5);}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 0, 1, 2, 3, 4 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a420160b047554df1bf986946050238ed}\label{namespacerah_1_1view_a420160b047554df1bf986946050238ed}} 
+\index{rah::view@{rah::view}!enumerate@{enumerate}}
+\index{enumerate@{enumerate}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto rah\+::view\+::enumerate (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+
+
+Pair each element of a range with its index. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> input\{ 4, 5, 6, 7 \};}
+\DoxyCodeLine{        std::vector<std::tuple<size\_t, int>> result;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i\_value : \mbox{\hyperlink{namespacerah_1_1view_a420160b047554df1bf986946050238ed}{rah::view::enumerate}}(input))}
+\DoxyCodeLine{            result.push\_back(i\_value);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_ac815f5494e5a7a182cafb70224b93a6a}\label{namespacerah_1_1view_ac815f5494e5a7a182cafb70224b93a6a}} 
+\index{rah::view@{rah::view}!enumerate@{enumerate}}
+\index{enumerate@{enumerate}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto rah\+::view\+::enumerate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pair each element of a range with its index. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> input\{ 4, 5, 6, 7 \};}
+\DoxyCodeLine{        std::vector<std::tuple<size\_t, int>> result;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i\_value : input | \mbox{\hyperlink{namespacerah_1_1view_a420160b047554df1bf986946050238ed}{rah::view::enumerate}}())}
+\DoxyCodeLine{            result.push\_back(i\_value);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<size\_t, int>>\{ \{ 0, 4 \}, \{ 1, 5 \}, \{ 2, 6 \}, \{ 3, 7 \} \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}\label{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}} 
+\index{rah::view@{rah::view}!filter@{filter}}
+\index{filter@{filter}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{filter()}{filter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename F $>$ \\
+auto rah\+::view\+::filter (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+
+
+Create a view with only elements which are filtered. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}{rah::view::filter}}(vec\_01234, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a \% 2 == 0; \}))}
+\DoxyCodeLine{            result.push\_back(i);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a315ba2143c833b24d05481c68b6cf2da}\label{namespacerah_1_1view_a315ba2143c833b24d05481c68b6cf2da}} 
+\index{rah::view@{rah::view}!filter@{filter}}
+\index{filter@{filter}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{filter()}{filter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto rah\+::view\+::filter (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+
+
+Create a view with only elements which are filtered. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> vec\_01234\{ 0, 1, 2, 3, 4 \};}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}{rah::view::filter}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a \% 2 == 0; \}))}
+\DoxyCodeLine{            result.push\_back(i);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}\label{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}} 
+\index{rah::view@{rah::view}!generate@{generate}}
+\index{generate@{generate}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto rah\+::view\+::generate (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+
+
+
+Create an infinite range, repetitively calling func. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} y = 1;}
+\DoxyCodeLine{        \textcolor{keyword}{auto} gen = \mbox{\hyperlink{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}{rah::view::generate}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \});}
+\DoxyCodeLine{        std::vector<int> gen\_copy;}
+\DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(gen), 4, \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(gen\_copy));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(gen\_copy == std::vector<int>(\{ 1, 2, 4, 8 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a2be56bf9b855cf33b152868326d78958}\label{namespacerah_1_1view_a2be56bf9b855cf33b152868326d78958}} 
+\index{rah::view@{rah::view}!generate\_n@{generate\_n}}
+\index{generate\_n@{generate\_n}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{generate\_n()}{generate\_n()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+auto rah\+::view\+::generate\+\_\+n (\begin{DoxyParamCaption}\item[{F \&\&}]{func,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Create a range of N elemnts, repetitively calling func. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \textcolor{keywordtype}{int} y = 1;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a2be56bf9b855cf33b152868326d78958}{rah::view::generate\_n}}([\&y]() \textcolor{keyword}{mutable} \{ \textcolor{keyword}{auto} prev = y; y *= 2; \textcolor{keywordflow}{return} prev; \}, 4))}
+\DoxyCodeLine{            result.push\_back(i);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 4, 8 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_ae66c3be408888c58118b1974cdece592}\label{namespacerah_1_1view_ae66c3be408888c58118b1974cdece592}} 
+\index{rah::view@{rah::view}!iota@{iota}}
+\index{iota@{iota}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{iota()}{iota()}}
+{\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
+auto rah\+::view\+::iota (\begin{DoxyParamCaption}\item[{T}]{b,  }\item[{T}]{e,  }\item[{T}]{step = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Generate a range of sequentially increasing integers. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ae66c3be408888c58118b1974cdece592}{rah::view::iota}}(10, 20, 2))}
+\DoxyCodeLine{            result.push\_back(i);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 10, 12, 14, 16, 18 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a273917511589d75b32d28b56b7de2655}\label{namespacerah_1_1view_a273917511589d75b32d28b56b7de2655}} 
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
 \index{map\_key@{map\_key}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{map\_key()}{map\_key()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+auto rah\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
 
 
 
@@ -357,15 +407,15 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::map<int, double> input\{ \{1, 1.5\}, \{ 2, 2.5 \}, \{ 3, 3.5 \}, \{ 4, 4.5 \} \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} key : \mbox{\hyperlink{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}{rah::view::map\_key}}(input))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} key : \mbox{\hyperlink{namespacerah_1_1view_a273917511589d75b32d28b56b7de2655}{rah::view::map\_key}}(input))}
 \DoxyCodeLine{            result.push\_back(key);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}\label{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}} 
+\mbox{\Hypertarget{namespacerah_1_1view_aac8d9437b8c96e0e8e972c4c10d584e5}\label{namespacerah_1_1view_aac8d9437b8c96e0e8e972c4c10d584e5}} 
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
 \index{map\_key@{map\_key}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{map\_key()}{map\_key()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -378,16 +428,16 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::map<int, double> input\{ \{1, 1.5\}, \{ 2, 2.5 \}, \{ 3, 3.5 \}, \{ 4, 4.5 \} \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} key : input | \mbox{\hyperlink{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}{rah::view::map\_key}}())}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} key : input | \mbox{\hyperlink{namespacerah_1_1view_a273917511589d75b32d28b56b7de2655}{rah::view::map\_key}}())}
 \DoxyCodeLine{            result.push\_back(key);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<int>\{ 1, 2, 3, 4 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}\label{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a7896dcebf13a4294254ed87743ba3ad0}\label{namespacerah_1_1view_a7896dcebf13a4294254ed87743ba3ad0}} 
 \index{rah::view@{rah::view}!map\_value@{map\_value}}
 \index{map\_value@{map\_value}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{map\_value()}{map\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+auto rah\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
 
 
 
@@ -397,15 +447,15 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::map<int, double> input\{ \{1, 1.5\}, \{ 2, 2.5 \}, \{ 3, 3.5 \}, \{ 4, 4.5 \} \};}
 \DoxyCodeLine{        std::vector<double> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} value : \mbox{\hyperlink{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}{rah::view::map\_value}}(input))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} value : \mbox{\hyperlink{namespacerah_1_1view_a7896dcebf13a4294254ed87743ba3ad0}{rah::view::map\_value}}(input))}
 \DoxyCodeLine{            result.push\_back(value);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}\label{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}} 
+\mbox{\Hypertarget{namespacerah_1_1view_ad11fcca5438e227541594a917a85f77c}\label{namespacerah_1_1view_ad11fcca5438e227541594a917a85f77c}} 
 \index{rah::view@{rah::view}!map\_value@{map\_value}}
 \index{map\_value@{map\_value}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{map\_value()}{map\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -418,16 +468,34 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::map<int, double> input\{ \{1, 1.5\}, \{ 2, 2.5 \}, \{ 3, 3.5 \}, \{ 4, 4.5 \} \};}
 \DoxyCodeLine{        std::vector<double> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} value : input | \mbox{\hyperlink{namespacerah_1_1view_abde9f999ff37f8b31f7a25598f2b4a25}{rah::view::map\_value}}())}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} value : input | \mbox{\hyperlink{namespacerah_1_1view_a7896dcebf13a4294254ed87743ba3ad0}{rah::view::map\_value}}())}
 \DoxyCodeLine{            result.push\_back(value);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<double>\{ 1.5, 2.5, 3.5, 4.5 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}\label{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}} 
+\mbox{\Hypertarget{namespacerah_1_1view_abd22c411fe9e0bea622ba7f829743362}\label{namespacerah_1_1view_abd22c411fe9e0bea622ba7f829743362}} 
+\index{rah::view@{rah::view}!repeat@{repeat}}
+\index{repeat@{repeat}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{repeat()}{repeat()}}
+{\footnotesize\ttfamily template$<$typename V $>$ \\
+auto rah\+::view\+::repeat (\begin{DoxyParamCaption}\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Generate an infinite range of the given value. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_abd22c411fe9e0bea622ba7f829743362}{rah::view::repeat}}(42);}
+\DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), 5, \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 42, 42, 42, 42, 42 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}\label{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}} 
 \index{rah::view@{rah::view}!retro@{retro}}
 \index{retro@{retro}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{retro()}{retro()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::retro (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+auto rah\+::view\+::retro (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
 
 
 
@@ -437,15 +505,15 @@ Create a view that traverses the source range in reverse order.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{rah::view::retro}}(vec))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{rah::view::retro}}(vec))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}\label{namespacerah_1_1view_a8cafe11e62b8f98833a9172cc803f116}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a6c6543c61f1fb119394952a72c564753}\label{namespacerah_1_1view_a6c6543c61f1fb119394952a72c564753}} 
 \index{rah::view@{rah::view}!retro@{retro}}
 \index{retro@{retro}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{retro()}{retro()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::retro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::retro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -458,16 +526,16 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{rah::view::retro}}())}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{rah::view::retro}}())}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 3, 2, 1, 0 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a582017379aa588d2c1c7bac58f4856af}\label{namespacerah_1_1view_a582017379aa588d2c1c7bac58f4856af}} 
+\mbox{\Hypertarget{namespacerah_1_1view_ad37c24275c6eb4642a20466545a9baa3}\label{namespacerah_1_1view_ad37c24275c6eb4642a20466545a9baa3}} 
 \index{rah::view@{rah::view}!single@{single}}
 \index{single@{single}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{single()}{single()}}
 {\footnotesize\ttfamily template$<$typename V $>$ \\
-rah\+::view\+::single (\begin{DoxyParamCaption}\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+auto rah\+::view\+::single (\begin{DoxyParamCaption}\item[{V \&\&}]{value }\end{DoxyParamCaption})}
 
 
 
@@ -476,16 +544,16 @@ Given value, create a view containing one element.
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a582017379aa588d2c1c7bac58f4856af}{rah::view::single}}(20))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad37c24275c6eb4642a20466545a9baa3}{rah::view::single}}(20))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 20 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a26e48a024bda08769061de4ad6addd9c}\label{namespacerah_1_1view_a26e48a024bda08769061de4ad6addd9c}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}\label{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}} 
 \index{rah::view@{rah::view}!slice@{slice}}
 \index{slice@{slice}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{slice()}{slice()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::slice (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{intptr\+\_\+t}]{begin,  }\item[{intptr\+\_\+t}]{end }\end{DoxyParamCaption})}
+auto rah\+::view\+::slice (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{intptr\+\_\+t}]{begin,  }\item[{intptr\+\_\+t}]{end }\end{DoxyParamCaption})}
 
 
 
@@ -495,19 +563,19 @@ Create a view that is a sub-\/range of a range.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3, 4, 5, 6, 7 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a26e48a024bda08769061de4ad6addd9c}{rah::view::slice}}(vec, 2, 6))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}{rah::view::slice}}(vec, 2, 6))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
 \DoxyCodeLine{        std::vector<int> result2;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a26e48a024bda08769061de4ad6addd9c}{rah::view::slice}}(vec, \mbox{\hyperlink{namespacerah_a5af06eebbd592c36368022990839b982}{rah::End}} - 6, \mbox{\hyperlink{namespacerah_a5af06eebbd592c36368022990839b982}{rah::End}} - 2))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}{rah::view::slice}}(vec, \mbox{\hyperlink{namespacerah_a5af06eebbd592c36368022990839b982}{rah::End}} - 6, \mbox{\hyperlink{namespacerah_a5af06eebbd592c36368022990839b982}{rah::End}} - 2))}
 \DoxyCodeLine{            result2.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result2 == std::vector<int>(\{ 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a68942bf66ff2c838d6ed12008bc275c5}\label{namespacerah_1_1view_a68942bf66ff2c838d6ed12008bc275c5}} 
+\mbox{\Hypertarget{namespacerah_1_1view_af2baef5b0078f0768cbfee4aae4e9924}\label{namespacerah_1_1view_af2baef5b0078f0768cbfee4aae4e9924}} 
 \index{rah::view@{rah::view}!slice@{slice}}
 \index{slice@{slice}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{slice()}{slice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::slice (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{begin,  }\item[{intptr\+\_\+t}]{end }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::slice (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{begin,  }\item[{intptr\+\_\+t}]{end }\end{DoxyParamCaption})}
 
 
 
@@ -520,7 +588,7 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3, 4, 5, 6, 7 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a26e48a024bda08769061de4ad6addd9c}{rah::view::slice}}(2, 6))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}{rah::view::slice}}(2, 6))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
@@ -588,12 +656,12 @@ pipeable syntax
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}\label{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a112a1a8d31435c1070c4cd98cc02d96a}\label{namespacerah_1_1view_a112a1a8d31435c1070c4cd98cc02d96a}} 
 \index{rah::view@{rah::view}!stride@{stride}}
 \index{stride@{stride}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{stride()}{stride()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-rah\+::view\+::stride (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+auto rah\+::view\+::stride (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
 
 
 
@@ -603,15 +671,15 @@ Create a view consisting of every Nth element, starting with the first.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3, 4, 5, 6, 7 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}{rah::view::stride}}(vec, 2))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a112a1a8d31435c1070c4cd98cc02d96a}{rah::view::stride}}(vec, 2))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}\label{namespacerah_1_1view_abed0df62d7146e5d0905725efab0e40e}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a6b2ab3621be4004c35d77f06165fce78}\label{namespacerah_1_1view_a6b2ab3621be4004c35d77f06165fce78}} 
 \index{rah::view@{rah::view}!stride@{stride}}
 \index{stride@{stride}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{stride()}{stride()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::stride (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::view\+::stride (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
 
 
 
@@ -624,16 +692,16 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3, 4, 5, 6, 7 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_ad71e78df55f6f9416e2869a8c14f6779}{rah::view::stride}}(2))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a112a1a8d31435c1070c4cd98cc02d96a}{rah::view::stride}}(2))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}\label{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}} 
+\mbox{\Hypertarget{namespacerah_1_1view_ad8750f5c95edcf4f26b0a1c1eec3d676}\label{namespacerah_1_1view_ad8750f5c95edcf4f26b0a1c1eec3d676}} 
 \index{rah::view@{rah::view}!transform@{transform}}
 \index{transform@{transform}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R , typename F $>$ \\
-rah\+::view\+::transform (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+auto rah\+::view\+::transform (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{F \&\&}]{func }\end{DoxyParamCaption})}
 
 
 
@@ -643,16 +711,16 @@ Create a view applying a transformation to each element of the input range.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah::view::transform}}(vec, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a * 2; \}))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_ad8750f5c95edcf4f26b0a1c1eec3d676}{rah::view::transform}}(vec, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a * 2; \}))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}\label{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a7c981c90e5ad03eca3ec738176feaf7d}\label{namespacerah_1_1view_a7c981c90e5ad03eca3ec738176feaf7d}} 
 \index{rah::view@{rah::view}!transform@{transform}}
 \index{transform@{transform}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename F $>$ \\
-rah\+::view\+::transform (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
+auto rah\+::view\+::transform (\begin{DoxyParamCaption}\item[{F \&\&}]{func }\end{DoxyParamCaption})}
 
 
 
@@ -665,16 +733,16 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah::view::transform}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a * 2; \}))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_ad8750f5c95edcf4f26b0a1c1eec3d676}{rah::view::transform}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a * 2; \}))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 2, 4, 6 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}\label{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}} 
+\mbox{\Hypertarget{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}\label{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}} 
 \index{rah::view@{rah::view}!zip@{zip}}
 \index{zip@{zip}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{zip()}{zip()}}
 {\footnotesize\ttfamily template$<$typename ... R$>$ \\
-rah\+::view\+::zip (\begin{DoxyParamCaption}\item[{R \&\&...}]{\+\_\+ranges }\end{DoxyParamCaption})}
+auto rah\+::view\+::zip (\begin{DoxyParamCaption}\item[{R \&\&...}]{\+\_\+ranges }\end{DoxyParamCaption})}
 
 
 
@@ -686,7 +754,7 @@ Given N ranges, return a new range where Mth element is the result of calling st
 \DoxyCodeLine{        std::vector<double> inputB\{ 2.5, 4.5, 6.5, 8.5 \};}
 \DoxyCodeLine{        std::vector<char> inputC\{ \textcolor{charliteral}{'a'}, \textcolor{charliteral}{'b'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'d'} \};}
 \DoxyCodeLine{        std::vector<std::tuple<int, double, char>> result;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} a\_b\_c : \mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(inputA, inputB, inputC))}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} a\_b\_c : \mbox{\hyperlink{namespacerah_1_1view_a26c5da9052b94179d6ad8614ea2b9fda}{rah::view::zip}}(inputA, inputB, inputC))}
 \DoxyCodeLine{            result.push\_back(a\_b\_c);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == (std::vector<std::tuple<int, double, char>>\{}
 \DoxyCodeLine{            \{ 1, 2.5, \textcolor{charliteral}{'a'} \},}

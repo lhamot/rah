@@ -2,12 +2,12 @@
 \label{structrah_1_1view_1_1stride__iterator}\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
 
 
-{\ttfamily \#include $<$rah.\+hpp$>$}
+{\ttfamily \#include $<$rah -\/ Copie.\+hpp$>$}
 
 Inheritance diagram for rah\+::view\+::stride\+\_\+iterator$<$ R $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{structrah_1_1view_1_1stride__iterator}
+\includegraphics[height=1.018182cm]{structrah_1_1view_1_1stride__iterator}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -26,13 +26,27 @@ auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_af8bc6022711a953e2b8
 bool \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a34c24e935ee7beebcd7269ee314e245a}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}} other) const
 \item 
 auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_ad30be3983aec3fab52efb32a1a461056}{distance\+\_\+to}} (\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}} other) const
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a47ddd2ce0f295fa825919f04431d64a9}{stride\+\_\+iterator}} (\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ const \&iter, \mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$ R $>$ const \&\mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}, size\+\_\+t step)
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_ae98465362884b064db4184a406221154}{increment}} ()
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a8104aed5699a5f26626c8a010a97f5f4}{decrement}} ()
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_aede4ba99f4ede1afdad678bd0dba4f7b}{advance}} (intptr\+\_\+t value)
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_af8bc6022711a953e2b8dce5b7e7553dd}{dereference}} () const
+\item 
+bool \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a34c24e935ee7beebcd7269ee314e245a}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}} other) const
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_ad30be3983aec3fab52efb32a1a461056}{distance\+\_\+to}} (\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}} other) const
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a65e7fa92e8026ce48e3c132e808e9ffc}{iter\+\_\+}}
+\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_ab6d43c096bd4561c737cb7f2b983afb3}{iter\+\_\+}}
 \item 
-\mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_abd80314a0e4408629e33f43b5272f74e}{end\+\_\+}}
+\mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_afa089e27a8e95e132f848a5854d2eced}{end\+\_\+}}
 \item 
 size\+\_\+t \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a1b2e6cfb0631cde24284f56b17a4452c}{step\+\_\+}}
 \end{DoxyCompactItemize}
@@ -42,7 +56,14 @@ size\+\_\+t \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a1b2e6cfb0631
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a47ddd2ce0f295fa825919f04431d64a9}\label{structrah_1_1view_1_1stride__iterator_a47ddd2ce0f295fa825919f04431d64a9}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!stride\_iterator@{stride\_iterator}}
 \index{stride\_iterator@{stride\_iterator}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{stride\_iterator()}{stride\_iterator()}}
+\subsubsection{\texorpdfstring{stride\_iterator()}{stride\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ const \&}]{iter,  }\item[{\mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$ R $>$ const \&}]{end,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a47ddd2ce0f295fa825919f04431d64a9}\label{structrah_1_1view_1_1stride__iterator_a47ddd2ce0f295fa825919f04431d64a9}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!stride\_iterator@{stride\_iterator}}
+\index{stride\_iterator@{stride\_iterator}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{stride\_iterator()}{stride\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ const \&}]{iter,  }\item[{\mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$ R $>$ const \&}]{end,  }\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -52,61 +73,103 @@ size\+\_\+t \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator_a1b2e6cfb0631
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_aede4ba99f4ede1afdad678bd0dba4f7b}\label{structrah_1_1view_1_1stride__iterator_aede4ba99f4ede1afdad678bd0dba4f7b}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!advance@{advance}}
 \index{advance@{advance}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{advance()}{advance()}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_aede4ba99f4ede1afdad678bd0dba4f7b}\label{structrah_1_1view_1_1stride__iterator_aede4ba99f4ede1afdad678bd0dba4f7b}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!advance@{advance}}
+\index{advance@{advance}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a8104aed5699a5f26626c8a010a97f5f4}\label{structrah_1_1view_1_1stride__iterator_a8104aed5699a5f26626c8a010a97f5f4}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!decrement@{decrement}}
 \index{decrement@{decrement}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{decrement()}{decrement()}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a8104aed5699a5f26626c8a010a97f5f4}\label{structrah_1_1view_1_1stride__iterator_a8104aed5699a5f26626c8a010a97f5f4}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!decrement@{decrement}}
+\index{decrement@{decrement}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_af8bc6022711a953e2b8dce5b7e7553dd}\label{structrah_1_1view_1_1stride__iterator_af8bc6022711a953e2b8dce5b7e7553dd}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!dereference@{dereference}}
 \index{dereference@{dereference}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{dereference()}{dereference()}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_af8bc6022711a953e2b8dce5b7e7553dd}\label{structrah_1_1view_1_1stride__iterator_af8bc6022711a953e2b8dce5b7e7553dd}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!dereference@{dereference}}
+\index{dereference@{dereference}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_ad30be3983aec3fab52efb32a1a461056}\label{structrah_1_1view_1_1stride__iterator_ad30be3983aec3fab52efb32a1a461056}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!distance\_to@{distance\_to}}
 \index{distance\_to@{distance\_to}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}$<$ R $>$}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_ad30be3983aec3fab52efb32a1a461056}\label{structrah_1_1view_1_1stride__iterator_ad30be3983aec3fab52efb32a1a461056}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!distance\_to@{distance\_to}}
+\index{distance\_to@{distance\_to}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}$<$ R $>$}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a34c24e935ee7beebcd7269ee314e245a}\label{structrah_1_1view_1_1stride__iterator_a34c24e935ee7beebcd7269ee314e245a}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!equal@{equal}}
 \index{equal@{equal}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{equal()}{equal()}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+bool \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}$<$ R $>$}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a34c24e935ee7beebcd7269ee314e245a}\label{structrah_1_1view_1_1stride__iterator_a34c24e935ee7beebcd7269ee314e245a}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!equal@{equal}}
+\index{equal@{equal}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 bool \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}$<$ R $>$}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_ae98465362884b064db4184a406221154}\label{structrah_1_1view_1_1stride__iterator_ae98465362884b064db4184a406221154}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!increment@{increment}}
 \index{increment@{increment}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{increment()}{increment()}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_ae98465362884b064db4184a406221154}\label{structrah_1_1view_1_1stride__iterator_ae98465362884b064db4184a406221154}} 
+\index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!increment@{increment}}
+\index{increment@{increment}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \subsection{Member Data Documentation}
-\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_abd80314a0e4408629e33f43b5272f74e}\label{structrah_1_1view_1_1stride__iterator_abd80314a0e4408629e33f43b5272f74e}} 
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_afa089e27a8e95e132f848a5854d2eced}\label{structrah_1_1view_1_1stride__iterator_afa089e27a8e95e132f848a5854d2eced}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!end\_@{end\_}}
 \index{end\_@{end\_}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
 \subsubsection{\texorpdfstring{end\_}{end\_}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-\mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$R$>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::end\+\_\+}
+\mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{range\+\_\+end\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::end\+\_\+}
 
-\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a65e7fa92e8026ce48e3c132e808e9ffc}\label{structrah_1_1view_1_1stride__iterator_a65e7fa92e8026ce48e3c132e808e9ffc}} 
+\mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_ab6d43c096bd4561c737cb7f2b983afb3}\label{structrah_1_1view_1_1stride__iterator_ab6d43c096bd4561c737cb7f2b983afb3}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!iter\_@{iter\_}}
 \index{iter\_@{iter\_}!rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}}
 \subsubsection{\texorpdfstring{iter\_}{iter\_}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$R$>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::iter\+\_\+}
+\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\+::stride\+\_\+iterator}}$<$ R $>$\+::iter\+\_\+}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1stride__iterator_a1b2e6cfb0631cde24284f56b17a4452c}\label{structrah_1_1view_1_1stride__iterator_a1b2e6cfb0631cde24284f56b17a4452c}} 
 \index{rah::view::stride\_iterator$<$ R $>$@{rah::view::stride\_iterator$<$ R $>$}!step\_@{step\_}}
@@ -117,6 +180,7 @@ size\+\_\+t \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{rah\+::view\
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+rah/\mbox{\hyperlink{rah_01-_01_copie_8hpp}{rah -\/ Copie.\+hpp}}\item 
 rah/\mbox{\hyperlink{rah_8hpp}{rah.\+hpp}}\end{DoxyCompactItemize}

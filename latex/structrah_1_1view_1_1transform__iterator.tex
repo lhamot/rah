@@ -2,12 +2,12 @@
 \label{structrah_1_1view_1_1transform__iterator}\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
 
 
-{\ttfamily \#include $<$rah.\+hpp$>$}
+{\ttfamily \#include $<$rah -\/ Copie.\+hpp$>$}
 
 Inheritance diagram for rah\+::view\+::transform\+\_\+iterator$<$ R, F $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.458333cm]{structrah_1_1view_1_1transform__iterator}
+\includegraphics[height=0.729167cm]{structrah_1_1view_1_1transform__iterator}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -28,11 +28,27 @@ auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_ae0919c95985ebca4
 auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_af72f5246736a89feca39293123a999e2}{dereference}} () const
 \item 
 bool \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a68105373ae5ce99863589e17605f3833}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} r) const
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_ae8f127be961b14896c87d94e710a9a1a}{transform\+\_\+iterator}} (\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ const \&iter, F const \&func)
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} \& \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a4589b5fff7d8505b8a569c9d1f863929}{operator=}} (\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} const \&ot)
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a1ee5c30f733b63b1cd26baa121389dd1}{increment}} ()
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a56c602664659b11bfca3da418c6977be}{advance}} (intptr\+\_\+t off)
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a05c99213d071102e793d57b967f7880d}{decrement}} ()
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_ae0919c95985ebca42017346da790c981}{distance\+\_\+to}} (\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} r) const
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_af72f5246736a89feca39293123a999e2}{dereference}} () const
+\item 
+bool \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a68105373ae5ce99863589e17605f3833}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} r) const
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_ac3c20401254ca24682913ba0e9c56284}{iter\+\_\+}}
+\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a349798fe3a741068fd28e50387f39e80}{iter\+\_\+}}
 \item 
 F \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a02ac2e8035d0b7917ee44967069def0d}{func\+\_\+}}
 \end{DoxyCompactItemize}
@@ -42,7 +58,14 @@ F \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a02ac2e8035d0b7917ee
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_ae8f127be961b14896c87d94e710a9a1a}\label{structrah_1_1view_1_1transform__iterator_ae8f127be961b14896c87d94e710a9a1a}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!transform\_iterator@{transform\_iterator}}
 \index{transform\_iterator@{transform\_iterator}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{transform\_iterator()}{transform\_iterator()}}
+\subsubsection{\texorpdfstring{transform\_iterator()}{transform\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ const \&}]{iter,  }\item[{F const \&}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_ae8f127be961b14896c87d94e710a9a1a}\label{structrah_1_1view_1_1transform__iterator_ae8f127be961b14896c87d94e710a9a1a}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!transform\_iterator@{transform\_iterator}}
+\index{transform\_iterator@{transform\_iterator}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{transform\_iterator()}{transform\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ const \&}]{iter,  }\item[{F const \&}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -52,49 +75,98 @@ F \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator_a02ac2e8035d0b7917ee
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a56c602664659b11bfca3da418c6977be}\label{structrah_1_1view_1_1transform__iterator_a56c602664659b11bfca3da418c6977be}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!advance@{advance}}
 \index{advance@{advance}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{advance()}{advance()}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a56c602664659b11bfca3da418c6977be}\label{structrah_1_1view_1_1transform__iterator_a56c602664659b11bfca3da418c6977be}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!advance@{advance}}
+\index{advance@{advance}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a05c99213d071102e793d57b967f7880d}\label{structrah_1_1view_1_1transform__iterator_a05c99213d071102e793d57b967f7880d}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!decrement@{decrement}}
 \index{decrement@{decrement}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{decrement()}{decrement()}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a05c99213d071102e793d57b967f7880d}\label{structrah_1_1view_1_1transform__iterator_a05c99213d071102e793d57b967f7880d}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!decrement@{decrement}}
+\index{decrement@{decrement}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_af72f5246736a89feca39293123a999e2}\label{structrah_1_1view_1_1transform__iterator_af72f5246736a89feca39293123a999e2}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!dereference@{dereference}}
 \index{dereference@{dereference}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{dereference()}{dereference()}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_af72f5246736a89feca39293123a999e2}\label{structrah_1_1view_1_1transform__iterator_af72f5246736a89feca39293123a999e2}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!dereference@{dereference}}
+\index{dereference@{dereference}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_ae0919c95985ebca42017346da790c981}\label{structrah_1_1view_1_1transform__iterator_ae0919c95985ebca42017346da790c981}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!distance\_to@{distance\_to}}
 \index{distance\_to@{distance\_to}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}$<$ R, F $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_ae0919c95985ebca42017346da790c981}\label{structrah_1_1view_1_1transform__iterator_ae0919c95985ebca42017346da790c981}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!distance\_to@{distance\_to}}
+\index{distance\_to@{distance\_to}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}$<$ R, F $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a68105373ae5ce99863589e17605f3833}\label{structrah_1_1view_1_1transform__iterator_a68105373ae5ce99863589e17605f3833}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!equal@{equal}}
 \index{equal@{equal}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{equal()}{equal()}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+bool \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}$<$ R, F $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a68105373ae5ce99863589e17605f3833}\label{structrah_1_1view_1_1transform__iterator_a68105373ae5ce99863589e17605f3833}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!equal@{equal}}
+\index{equal@{equal}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 bool \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}$<$ R, F $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a1ee5c30f733b63b1cd26baa121389dd1}\label{structrah_1_1view_1_1transform__iterator_a1ee5c30f733b63b1cd26baa121389dd1}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!increment@{increment}}
 \index{increment@{increment}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{increment()}{increment()}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a1ee5c30f733b63b1cd26baa121389dd1}\label{structrah_1_1view_1_1transform__iterator_a1ee5c30f733b63b1cd26baa121389dd1}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!increment@{increment}}
+\index{increment@{increment}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a4589b5fff7d8505b8a569c9d1f863929}\label{structrah_1_1view_1_1transform__iterator_a4589b5fff7d8505b8a569c9d1f863929}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
-\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}\& \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}$<$ R, F $>$ const \&}]{ot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a4589b5fff7d8505b8a569c9d1f863929}\label{structrah_1_1view_1_1transform__iterator_a4589b5fff7d8505b8a569c9d1f863929}} 
+\index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}\& \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{transform\+\_\+iterator}}$<$ R, F $>$ const \&}]{ot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -108,15 +180,16 @@ void \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::t
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
 F \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::func\+\_\+}
 
-\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_ac3c20401254ca24682913ba0e9c56284}\label{structrah_1_1view_1_1transform__iterator_ac3c20401254ca24682913ba0e9c56284}} 
+\mbox{\Hypertarget{structrah_1_1view_1_1transform__iterator_a349798fe3a741068fd28e50387f39e80}\label{structrah_1_1view_1_1transform__iterator_a349798fe3a741068fd28e50387f39e80}} 
 \index{rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}!iter\_@{iter\_}}
 \index{iter\_@{iter\_}!rah::view::transform\_iterator$<$ R, F $>$@{rah::view::transform\_iterator$<$ R, F $>$}}
 \subsubsection{\texorpdfstring{iter\_}{iter\_}}
 {\footnotesize\ttfamily template$<$typename R, typename F$>$ \\
-\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$R$>$ \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::iter\+\_\+}
+\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ \mbox{\hyperlink{structrah_1_1view_1_1transform__iterator}{rah\+::view\+::transform\+\_\+iterator}}$<$ R, F $>$\+::iter\+\_\+}
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+rah/\mbox{\hyperlink{rah_01-_01_copie_8hpp}{rah -\/ Copie.\+hpp}}\item 
 rah/\mbox{\hyperlink{rah_8hpp}{rah.\+hpp}}\end{DoxyCompactItemize}

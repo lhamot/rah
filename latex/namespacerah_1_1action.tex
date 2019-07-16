@@ -3,33 +3,33 @@
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename C , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{unique}} (C \&\&container, P \&\&pred=\{\})
+{\footnotesize template$<$typename C , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}{unique}} (C \&\&container, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Remove all but first successive values which are equals. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a2b3773f4b775a1e64307307556af24cd}{unique}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Remove all but first successuve values which are equals. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename C , typename P $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}{remove\+\_\+if}} (C \&\&container, P \&\&pred)
+{\footnotesize template$<$typename C , typename P $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}{remove\+\_\+if}} (C \&\&container, P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a708ce68c6ed2b20ef9c0cdb6b697c980}{remove\+\_\+if}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename C , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{sort}} (C \&\&container, P \&\&pred=\{\})
+{\footnotesize template$<$typename C , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}{sort}} (C \&\&container, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_ac1603fdf8fc87e84c277c216a5176674}{sort}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename C , typename U\+R\+BG $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{shuffle}} (C \&\&container, U\+R\+BG \&\&g)
+{\footnotesize template$<$typename C , typename U\+R\+BG $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ae775b99f4520e9cb7ef61acb3fccb1ca}{shuffle}} (C \&\&container, U\+R\+BG \&\&g)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename U\+R\+BG $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_add6b8e704a8e603302290792a45a5c06}{shuffle}} (U\+R\+BG \&\&g)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}\label{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}} 
+\mbox{\Hypertarget{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}\label{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}} 
 \index{rah::action@{rah::action}!remove\_if@{remove\_if}}
 \index{remove\_if@{remove\_if}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{remove\_if()}{remove\_if()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename C , typename P $>$ \\
-auto\&\& rah\+::action\+::remove\+\_\+if (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+auto \&\& rah\+::action\+::remove\+\_\+if (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
 
 
 
@@ -42,7 +42,7 @@ reference to the container
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}{rah::action::remove\_if}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a < 4; \});}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}{rah::action::remove\_if}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a < 4; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5 \}));}
 \end{DoxyCodeInclude}
@@ -67,16 +67,16 @@ pipeable syntax
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}{rah::action::remove\_if}}([](\textcolor{keywordtype}{int} a) \{\textcolor{keywordflow}{return} a < 4; \});}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}{rah::action::remove\_if}}([](\textcolor{keywordtype}{int} a) \{\textcolor{keywordflow}{return} a < 4; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}\label{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}} 
+\mbox{\Hypertarget{namespacerah_1_1action_ae775b99f4520e9cb7ef61acb3fccb1ca}\label{namespacerah_1_1action_ae775b99f4520e9cb7ef61acb3fccb1ca}} 
 \index{rah::action@{rah::action}!shuffle@{shuffle}}
 \index{shuffle@{shuffle}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{shuffle()}{shuffle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename C , typename U\+R\+BG $>$ \\
-auto\&\& rah\+::action\+::shuffle (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{U\+R\+BG \&\&}]{g }\end{DoxyParamCaption})}
+auto \&\& rah\+::action\+::shuffle (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{U\+R\+BG \&\&}]{g }\end{DoxyParamCaption})}
 
 
 
@@ -90,7 +90,7 @@ reference to container
 \DoxyCodeLine{        std::random\_device rd;}
 \DoxyCodeLine{        std::mt19937 g(rd());}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5, 6 \};}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&\mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{rah::action::shuffle}}(in, g) == \&in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&\mbox{\hyperlink{namespacerah_1_1action_ae775b99f4520e9cb7ef61acb3fccb1ca}{rah::action::shuffle}}(in, g) == \&in);}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1action_add6b8e704a8e603302290792a45a5c06}\label{namespacerah_1_1action_add6b8e704a8e603302290792a45a5c06}} 
 \index{rah::action@{rah::action}!shuffle@{shuffle}}
@@ -114,14 +114,14 @@ pipeable syntax
 \DoxyCodeLine{        std::random\_device rd;}
 \DoxyCodeLine{        std::mt19937 g(rd());}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5, 6 \};}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&(in | \mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{rah::action::shuffle}}(g)) == \&in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&(in | \mbox{\hyperlink{namespacerah_1_1action_ae775b99f4520e9cb7ef61acb3fccb1ca}{rah::action::shuffle}}(g)) == \&in);}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}\label{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}} 
+\mbox{\Hypertarget{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}\label{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}} 
 \index{rah::action@{rah::action}!sort@{sort}}
 \index{sort@{sort}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename C , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ \\
-auto\&\& rah\+::action\+::sort (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+auto \&\& rah\+::action\+::sort (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
 
@@ -133,14 +133,14 @@ reference to container
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{rah::action::sort}}(in);}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}{rah::action::sort}}(in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{rah::action::sort}}(in, [](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}{rah::action::sort}}(in, [](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
@@ -164,23 +164,23 @@ pipeable syntax
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{rah::action::sort}}();}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}{rah::action::sort}}();}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{rah::action::sort}}([](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}{rah::action::sort}}([](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}\label{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}} 
+\mbox{\Hypertarget{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}\label{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}} 
 \index{rah::action@{rah::action}!unique@{unique}}
 \index{unique@{unique}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{unique()}{unique()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename C , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ \\
-auto\&\& rah\+::action\+::unique (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+auto \&\& rah\+::action\+::unique (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
 
@@ -192,14 +192,14 @@ Reference to container
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 1, 1, 5, 3, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{rah::action::unique}}(in);}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}{rah::action::unique}}(in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
 \end{DoxyCodeInclude}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 1, 1, 5, 3, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{rah::action::unique}}(in, [](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a == b; \});}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}{rah::action::unique}}(in, [](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a == b; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
 \end{DoxyCodeInclude}
@@ -223,14 +223,14 @@ pipeable syntax
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 1, 1, 5, 3, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{rah::action::unique}}();}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}{rah::action::unique}}();}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
 \end{DoxyCodeInclude}
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 1, 1, 5, 3, 3, 4 \};}
-\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{rah::action::unique}}([](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a == b; \});}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_a77387ae50600982d52d0d41623747b84}{rah::action::unique}}([](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a == b; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 1, 5, 3, 4 \}));}
 \end{DoxyCodeInclude}

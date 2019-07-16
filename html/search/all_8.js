@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['join',['join',['../namespacerah_1_1view.html#a0ad4d41145f1becad813d2ed6d7da044',1,'rah::view::join(R1 &amp;&amp;range1)'],['../namespacerah_1_1view.html#af66edb5fcde9f79ebd69fce81df0e883',1,'rah::view::join(R1 &amp;&amp;range1, R2 &amp;&amp;range2)'],['../namespacerah_1_1view.html#a71a85dacbeaee5eca22203b82142f485',1,'rah::view::join(R1 &amp;&amp;range1, R2 &amp;&amp;range2, Ranges &amp;&amp;... ranges)']]],
-  ['join_5fiterator',['join_iterator',['../structrah_1_1view_1_1join__iterator.html',1,'rah::view::join_iterator&lt; IterPair, V &gt;'],['../structrah_1_1view_1_1join__iterator.html#aba8a1b69394f3be6cf7fa1425ab67c48',1,'rah::view::join_iterator::join_iterator()']]]
+  ['m_5fref',['m_ref',['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4_1_1pointer__type_1_1proxy.html#a5312ff831890ba9940f5aac7f84ecbae',1,'rah::iterator_facade&lt; I, R, std::forward_iterator_tag &gt;::pointer_type::proxy']]],
+  ['main',['main',['../test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'test.cpp']]],
+  ['make_5fiterator_5frange',['make_iterator_range',['../namespacerah.html#a0a3dd43bb465c99137bfdebb2292b102',1,'rah']]],
+  ['make_5fpipeable',['make_pipeable',['../namespacerah.html#a9beb2a94a054fd0caefd5a20b1c0f0d9',1,'rah']]],
+  ['map_5fkey',['map_key',['../namespacerah_1_1view.html#a273917511589d75b32d28b56b7de2655',1,'rah::view::map_key(R &amp;&amp;range)'],['../namespacerah_1_1view.html#aac8d9437b8c96e0e8e972c4c10d584e5',1,'rah::view::map_key()']]],
+  ['map_5fvalue',['map_value',['../namespacerah_1_1view.html#a7896dcebf13a4294254ed87743ba3ad0',1,'rah::view::map_value(R &amp;&amp;range)'],['../namespacerah_1_1view.html#ad11fcca5438e227541594a917a85f77c',1,'rah::view::map_value()']]],
+  ['mismatch',['mismatch',['../namespacerah.html#a5ce2d92c6f0b3dd5eb6d70600e949a97',1,'rah']]]
 ];
