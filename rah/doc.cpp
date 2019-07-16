@@ -79,6 +79,11 @@
 ///
 /// @snippet test.cpp iota
 
+/// @fn rah::view::repeat(V&&)
+/// @brief Generate an infinite range of the given value
+///
+/// @snippet test.cpp repeat
+
 /// @fn rah::view::generate(F&& func)
 /// @brief Create an infinite range, repetitively calling func
 ///

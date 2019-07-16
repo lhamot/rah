@@ -157,6 +157,15 @@ int main()
 		/// [generate_n]
 	}
 
+	{
+		/// [repeat]
+		std::vector<int> out;
+		auto range = rah::view::repeat(42);
+		std::copy_n(begin(range), 5, std::back_inserter(out));
+		assert(out == std::vector<int>({ 42, 42, 42, 42, 42 }));
+		/// [repeat]
+	}
+
 	// Test all
 	EQUAL_RANGE((il<int>{0, 1, 2, 3} | rah::view::all()), (il<int>{ 0, 1, 2, 3 }));
 

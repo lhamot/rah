@@ -302,6 +302,29 @@ template<typename T = size_t> auto iota(T b, T e, T step = 1)
 	return iterator_range<iota_iterator<T>>{ { b, step}, { e, step }};
 }
 
+// ********************************** repeat ******************************************************
+
+/// @see rah::repeat
+template<typename V>
+struct repeat_iterator : iterator_facade<repeat_iterator<V>, V const&, std::forward_iterator_tag>
+{
+	V val_;
+
+	template<typename U>
+	repeat_iterator(U val) : val_(std::forward<U>(val)) {}
+
+	void increment() { }
+	void advance(intptr_t value) { }
+	void decrement() { }
+	auto dereference() const { return val_; }
+	bool equal(repeat_iterator) const { return true; }
+};
+
+template<typename V> auto repeat(V&& value)
+{
+	return iterator_range<repeat_iterator<std::remove_reference_t<V>>>{ { value}, { value }};
+}
+
 // ********************************** generate ****************************************************
 
 /// @see rah::generate
