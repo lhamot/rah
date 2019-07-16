@@ -192,9 +192,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a26c5da9052b94179d6ad8614ea2b9fda">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a>(<a class="code" href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="test_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> test.cpp:36</div></div>
-<div class="ttc" id="namespacerah_html_aaf7abb6066c8adfe6959691c3a3ea4e2"><div class="ttname"><a href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a></div><div class="ttdeci">bool all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah - Copie.hpp:962</div></div>
-<div class="ttc" id="namespacerah_1_1view_html_a26c5da9052b94179d6ad8614ea2b9fda"><div class="ttname"><a href="namespacerah_1_1view.html#a26c5da9052b94179d6ad8614ea2b9fda">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah - Copie.hpp:583</div></div>
+<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a>(<a class="code" href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="test_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> test.cpp:36</div></div>
+<div class="ttc" id="namespacerah_html_aaf7abb6066c8adfe6959691c3a3ea4e2"><div class="ttname"><a href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a></div><div class="ttdeci">bool all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah.hpp:972</div></div>
+<div class="ttc" id="namespacerah_1_1view_html_a5b9cacbf101962d95221b591d7f11026"><div class="ttname"><a href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah.hpp:593</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -264,8 +264,8 @@ template&lt;typename T &gt; </div>
 <p>[counted]</p>
 <p>[counted_pipeable]</p>
 <p>[counted_pipeable]</p>
-<p>[<a class="el" href="namespacerah_1_1view.html#ad8750f5c95edcf4f26b0a1c1eec3d676" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1view.html#ad8750f5c95edcf4f26b0a1c1eec3d676" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a>]</p>
 <p>[rah::view::transform_pipeable]</p>
 <p>[rah::view::transform_pipeable]</p>
 <p>[slice]</p>
@@ -428,28 +428,28 @@ template&lt;typename T &gt; </div>
 <p>[<a class="el" href="namespacerah.html#aca8dbcc943f7c503acea5f58f231a5af" title="Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the rang...">rah::set_difference</a>]</p>
 <p>[<a class="el" href="namespacerah.html#a41cb09a0285e2a6814b8aa99f90ba987" title="Copies the elements from the sorted range in1 which are also found in the sorted range in2 to the ran...">rah::set_intersection</a>]</p>
 <p>[<a class="el" href="namespacerah.html#a41cb09a0285e2a6814b8aa99f90ba987" title="Copies the elements from the sorted range in1 which are also found in the sorted range in2 to the ran...">rah::set_intersection</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#a77387ae50600982d52d0d41623747b84" title="Remove all but first successive values which are equals.">rah::action::unique</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#a77387ae50600982d52d0d41623747b84" title="Remove all but first successive values which are equals.">rah::action::unique</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6" title="Remove all but first successive values which are equals.">rah::action::unique</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#aea663eead5f5aa262ef890d7393daad6" title="Remove all but first successive values which are equals.">rah::action::unique</a>]</p>
 <p>[rah::action::unique_pipeable]</p>
 <p>[rah::action::unique_pipeable]</p>
 <p>[rah::action::unique_pred]</p>
 <p>[rah::action::unique_pred]</p>
 <p>[rah::action::unique_pred_pipeable]</p>
 <p>[rah::action::unique_pred_pipeable]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#ab774cddf0da3ae6a4b505d8a2e05b0c7" title="Keep only elements for which pred(elt) is false .">rah::action::remove_if</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#ab774cddf0da3ae6a4b505d8a2e05b0c7" title="Keep only elements for which pred(elt) is false .">rah::action::remove_if</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#a759ca023dec90e65e7d0e0327ae11af7" title="Keep only elements for which pred(elt) is false .">rah::action::remove_if</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#a759ca023dec90e65e7d0e0327ae11af7" title="Keep only elements for which pred(elt) is false .">rah::action::remove_if</a>]</p>
 <p>[rah::action::remove_if_pipeable]</p>
 <p>[rah::action::remove_if_pipeable]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#a2bddee3b65a2ecf86d2c3ac49bb41183" title="Sort a range in place, using the given predicate.">rah::action::sort</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#a2bddee3b65a2ecf86d2c3ac49bb41183" title="Sort a range in place, using the given predicate.">rah::action::sort</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#ae8518431f6e5e7415a6739c65e874ab8" title="Sort a range in place, using the given predicate.">rah::action::sort</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#ae8518431f6e5e7415a6739c65e874ab8" title="Sort a range in place, using the given predicate.">rah::action::sort</a>]</p>
 <p>[rah::action::sort_pipeable]</p>
 <p>[rah::action::sort_pipeable]</p>
 <p>[rah::action::sort_pred]</p>
 <p>[rah::action::sort_pred]</p>
 <p>[rah::action::sort_pred_pipeable]</p>
 <p>[rah::action::sort_pred_pipeable]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#ae775b99f4520e9cb7ef61acb3fccb1ca" title="Reorders the elements in the given range such that each possible permutation of those elements has eq...">rah::action::shuffle</a>]</p>
-<p>[<a class="el" href="namespacerah_1_1action.html#ae775b99f4520e9cb7ef61acb3fccb1ca" title="Reorders the elements in the given range such that each possible permutation of those elements has eq...">rah::action::shuffle</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#ab9352bcbc01fd4fa9eeba64766fa32b3" title="Reorders the elements in the given range such that each possible permutation of those elements has eq...">rah::action::shuffle</a>]</p>
+<p>[<a class="el" href="namespacerah_1_1action.html#ab9352bcbc01fd4fa9eeba64766fa32b3" title="Reorders the elements in the given range such that each possible permutation of those elements has eq...">rah::action::shuffle</a>]</p>
 <p>[rah::action::shuffle_pipeable]</p>
 <p>[rah::action::shuffle_pipeable]</p>
 <p>[<a class="el" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9" title="Make a sorted view of a range.">rah::view::sort</a>]</p>
