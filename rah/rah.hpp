@@ -281,6 +281,18 @@ auto single(V&& value)
 	return std::array<std::remove_reference_t<V>, 1>{std::forward<V>(value)};
 }
 
+// ********************************** all *********************************************************
+
+template<typename R> auto all(R&& range)
+{
+	return iterator_range<range_begin_type_t<R>>{begin(range), end(range)};
+}
+
+auto all()
+{
+	return make_pipeable([=](auto&& range) {return all(range); });
+}
+
 // ******************************************* counted ********************************************
 
 template<typename I>
@@ -362,7 +374,7 @@ struct repeat_iterator : iterator_facade<repeat_iterator<V>, V const&, std::forw
 
 template<typename V> auto repeat(V&& value)
 {
-	return iterator_range<repeat_iterator<std::remove_reference_t<V>>>{ { value}, { value }};
+	return iterator_range<repeat_iterator<std::remove_const_t<std::remove_reference_t<V>>>>{ { value}, { value }};
 }
 
 // ********************************** join ********************************************************
@@ -459,18 +471,6 @@ template<typename F> auto generate(F&& func)
 template<typename F> auto generate_n(F&& func, size_t count)
 {
 	return generate(std::forward<F>(func)) | counted(count);
-}
-
-// ********************************** all *********************************************************
-
-template<typename R> auto all(R&& range)
-{
-	return iterator_range<range_begin_type_t<R>>{begin(range), end(range)};
-}
-
-auto all()
-{
-	return make_pipeable([=](auto&& range) {return all(range); });
 }
 
 // ******************************************* transform ******************************************
