@@ -148,7 +148,11 @@ struct iterator_facade<I, R, std::forward_iterator_tag>
 		return *this;
 	}
 
-	auto operator*() const { return self().dereference(); }
+	reference operator*() const 
+	{ 
+		static_assert(std::is_same<decltype(self().dereference()), reference>::value, "");
+		return self().dereference(); 
+	}
 	auto operator->() const { return pointer{ self().dereference() }; }
 	bool operator!=(I other) const { return self().equal(other) == false; }
 	bool operator==(I other) const { return self().equal(other); }
@@ -258,7 +262,7 @@ template<typename C> auto back_inserter(C&& container)
 	using Container = std::remove_reference_t<C>;
 	auto begin = back_insert_iterator<Container>(container);
 	auto end = back_insert_iterator<Container>(container);
-	return rah::make_iterator_range(begin, end);
+	return RAH_NAMESPACE::make_iterator_range(begin, end);
 }
 
 /// Apply the '<' operator on two values of any type
@@ -295,7 +299,7 @@ struct counted_iterator : iterator_facade<
 	void advance(intptr_t off) { iter_ += off; count_ += off; }
 	void decrement() { --iter_; --count_; }
 	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
-	auto dereference() const { return *iter_; }
+	auto dereference() const -> decltype(*iter_) { return *iter_; }
 	bool equal(counted_iterator r) const { return count_ == r.count_; }
 };
 
@@ -345,19 +349,91 @@ struct repeat_iterator : iterator_facade<repeat_iterator<V>, V const&, std::forw
 {
 	V val_;
 
+	repeat_iterator() = default;
 	template<typename U>
 	repeat_iterator(U val) : val_(std::forward<U>(val)) {}
 
 	void increment() { }
 	void advance(intptr_t value) { }
 	void decrement() { }
-	auto dereference() const { return val_; }
+	V const& dereference() const { return val_; }
 	bool equal(repeat_iterator) const { return true; }
 };
 
 template<typename V> auto repeat(V&& value)
 {
 	return iterator_range<repeat_iterator<std::remove_reference_t<V>>>{ { value}, { value }};
+}
+
+// ********************************** join ********************************************************
+
+template<typename R>
+struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_ref_type_t<R>>, std::forward_iterator_tag>
+{
+	R range_;
+	using Iterator1 = range_begin_type_t<R>;
+	using Iterator2 = range_begin_type_t<decltype(*fake<Iterator1>())>;
+	Iterator1 rangeIter_;
+	Iterator2 subRangeIter_;
+	Iterator2 subRangeEnd_;
+
+	template<typename U>
+	join_iterator(U&& range, Iterator1 rangeIter, Iterator2 subRangeIter = Iterator2(), Iterator2 subRangeEnd = Iterator2())
+		: range_(std::forward<U>(range))
+		, rangeIter_(rangeIter)
+		, subRangeIter_(subRangeIter)
+		, subRangeEnd_(subRangeEnd)
+	{
+	}
+
+	void increment()
+	{
+		++subRangeIter_;
+		while (subRangeIter_ == subRangeEnd_)
+		{
+			++rangeIter_;
+			if (rangeIter_ == end(range_))
+				return;
+			else
+			{
+				subRangeIter_ = begin(*rangeIter_);
+				subRangeEnd_ = end(*rangeIter_);
+			}
+		}
+	}
+	auto dereference() const ->decltype(*subRangeIter_) { return *subRangeIter_; }
+	bool equal(join_iterator other) const
+	{
+		if (rangeIter_ == end(range_))
+			return rangeIter_ == other.rangeIter_;
+		else
+			return rangeIter_ == other.rangeIter_ && subRangeIter_ == other.subRangeIter_;
+	}
+};
+
+template<typename R> auto join(R&& range_of_ranges)
+{
+	auto rangeRef = range_of_ranges | RAH_NAMESPACE::view::all();
+	using join_iterator_type = join_iterator<decltype(rangeRef)>;
+	auto rangeBegin = begin(rangeRef);
+	auto rangeEnd = end(rangeRef);
+	if (empty(rangeRef))
+	{
+		join_iterator_type b = { rangeRef, rangeBegin };
+		join_iterator_type e = { rangeRef, rangeEnd };
+		return make_iterator_range(b, e);
+	}
+	else
+	{
+		join_iterator_type b(rangeRef, rangeBegin, begin(*rangeBegin), end(*rangeBegin));
+		join_iterator_type e = { rangeRef, rangeEnd };
+		return make_iterator_range(b, e);
+	}
+}
+
+auto join()
+{
+	return make_pipeable([](auto&& range) {return join(range); });
 }
 
 // ********************************** generate ****************************************************
@@ -422,7 +498,7 @@ struct transform_iterator : iterator_facade<
 	void advance(intptr_t off) { iter_ += off; }
 	void decrement() { --iter_; }
 	auto distance_to(transform_iterator r) const { return iter_ - r.iter_; }
-	auto dereference() const { return func_(*iter_); }
+	auto dereference() const -> decltype(func_(*iter_)) { return func_(*iter_); }
 	bool equal(transform_iterator r) const { return iter_ == r.iter_; }
 };
 
@@ -494,7 +570,7 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 	}
 
 	void advance(intptr_t value) { iter_ += step_ * value; }
-	auto dereference() const { return *iter_; }
+	auto dereference() const -> decltype(*iter_) { return *iter_; }
 	bool equal(stride_iterator other) const { return iter_ == other.iter_; }
 	auto distance_to(stride_iterator other) const { return (iter_ - other.iter_) / step_; }
 };
@@ -561,13 +637,25 @@ auto transform_each(const std::tuple<Args...>& t, F&& f) {
 		t, std::forward<F>(f), std::make_index_sequence<sizeof...(Args)>{});
 }
 
+template <typename... Args, size_t... Is>
+auto deref_impl(const std::tuple<Args...>& t, std::index_sequence<Is...>) {
+	return std::tuple<typename std::iterator_traits<Args>::reference...>(
+		(*std::get<Is>(t))...
+	);
+}
+
+template <typename... Args>
+auto deref(const std::tuple<Args...>& t) {
+	return deref_impl(t, std::make_index_sequence<sizeof...(Args)>{});
+}
+
 struct get_iter_value
 {
-	template<typename I>
-	auto operator()(I&& iter)
-	{
-		return *std::forward<I>(iter);
-	};
+template<typename I>
+auto operator()(I&& iter) -> decltype(*std::forward<I>(iter))
+{
+	return *std::forward<I>(iter);
+};
 };
 
 } // namespace details
@@ -576,16 +664,17 @@ struct get_iter_value
 template<typename IterTuple>
 struct zip_iterator : iterator_facade<
 	zip_iterator<IterTuple>,
-	decltype(transform_each(fake<IterTuple>(), details::get_iter_value())),
+	decltype(details::deref(fake<IterTuple>())),
 	std::bidirectional_iterator_tag
 >
 {
 	IterTuple iters_;
+	zip_iterator() = default;
 	zip_iterator(IterTuple const& iters) : iters_(iters) {}
 	void increment() { details::for_each(iters_, [](auto& iter) { ++iter; }); }
 	void advance(intptr_t val) { for_each(iters_, [val](auto& iter) { iter += val; }); }
 	void decrement() { details::for_each(iters_, [](auto& iter) { --iter; }); }
-	auto dereference() const { return details::transform_each(iters_, details::get_iter_value()); }
+	auto dereference() const { return details::deref(iters_); }
 	auto distance_to(zip_iterator other) const { return std::get<0>(iters_) - std::get<0>(other.iters_); }
 	bool equal(zip_iterator other) const { return iters_ == other.iters_; }
 };
@@ -677,7 +766,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 		} while (not func_(*iter_) && iter_ != begin_);
 	}
 
-	auto dereference() const { return *iter_; }
+	auto dereference() const -> decltype(*iter_) { return *iter_; }
 	bool equal(filter_iterator other) const { return iter_ == other.iter_; }
 };
 
@@ -723,7 +812,7 @@ struct concat_iterator : iterator_facade<concat_iterator<IterPair, V>, V, std::f
 			++std::get<1>(iter_);
 	}
 
-	auto dereference() const
+	auto dereference() const -> decltype(*std::get<0>(iter_))
 	{
 		if (range_index_ == 0)
 			return *std::get<0>(iter_);
@@ -1157,7 +1246,7 @@ template<typename R1, typename R2> auto copy(R1&& in, R2&& out)
 /// @snippet test.cpp rah::copy_pipeable
 template<typename R2> auto copy(R2&& out)
 {
-	auto all_out = out | rah::view::all();
+	auto all_out = out | RAH_NAMESPACE::view::all();
 	return make_pipeable([=](auto&& in) {return copy(in, all_out); });
 }
 
@@ -1198,7 +1287,7 @@ template<typename R1, typename R2, typename P> auto copy_if(R1&& in, R2&& out, P
 /// @snippet test.cpp rah::copy_if_pipeable
 template<typename R2, typename P> auto copy_if(R2&& out, P&& pred)
 {
-	auto all_out = out | rah::view::all();
+	auto all_out = out | RAH_NAMESPACE::view::all();
 	return make_pipeable([=](auto&& in) {return copy_if(in, all_out, pred); });
 }
 
@@ -1237,7 +1326,7 @@ template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 /// @snippet test.cpp rah::equal_pipeable
 template<typename R1> auto equal(R1&& range2)
 {
-	auto all_range2 = range2 | rah::view::all();
+	auto all_range2 = range2 | RAH_NAMESPACE::view::all();
 	return make_pipeable([=](auto&& range1) { return equal(std::forward<decltype(range1)>(range1), all_range2); });
 }
 
@@ -1259,7 +1348,7 @@ template<typename S> auto stream_inserter(S&& stream)
 	using Stream = std::remove_reference_t<S>;
 	auto begin = stream_inserter_iterator<Stream>(stream);
 	auto end = stream_inserter_iterator<Stream>(stream);
-	return rah::make_iterator_range(begin, end);
+	return RAH_NAMESPACE::make_iterator_range(begin, end);
 }
 
 // *********************************** remove_if **************************************************
@@ -1292,7 +1381,7 @@ template<typename P> auto remove_if(P&& pred)
 template<typename C, typename R> auto erase(C&& container, R&& subrange)
 {
 	container.erase(begin(subrange), end(subrange));
-	return container | rah::view::all();
+	return container | RAH_NAMESPACE::view::all();
 }
 
 /// @brief Erase a sub-range of a given container
@@ -1302,8 +1391,8 @@ template<typename C, typename R> auto erase(C&& container, R&& subrange)
 /// @snippet test.cpp rah::erase_pipeable
 template<typename R> auto erase(R&& range)
 {
-	auto all_range = range | rah::view::all();
-	return make_pipeable([=](auto&& cont) { return rah::erase(cont, all_range); });
+	auto all_range = range | RAH_NAMESPACE::view::all();
+	return make_pipeable([=](auto&& cont) { return RAH_NAMESPACE::erase(cont, all_range); });
 }
 
 // *********************************** sort *******************************************************

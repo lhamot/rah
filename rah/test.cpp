@@ -139,6 +139,22 @@ int main()
 	}
 
 	{
+		/// [join]
+		std::vector<std::vector<int>> in = {
+			{0, 1},
+			{ },
+			{2, 3, 4},
+			{ 5},
+			{},
+		};
+		auto range = rah::view::join(in);
+		std::vector<int> result;
+		std::copy(begin(range), end(range), std::back_inserter(result));
+		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
+		/// [join]
+	}
+
+	{
 		/// [generate]
 		int y = 1;
 		auto gen = rah::view::generate([&y]() mutable { auto prev = y; y *= 2; return prev; });
@@ -1138,6 +1154,12 @@ int main()
 			elt.member = 78; // Check for mutability
 		}
 		EQUAL_RANGE(r, (il<Elt>({ {78}, { 78 }, { 78 }, { 78 }, { 78 } })));
+	}
+	{
+		std::vector<int> vec(5);
+		for (int& i : vec | rah::view::transform([](int& i) ->int& {return i;}))
+			i = 42; // Check for mutability
+		EQUAL_RANGE(vec, (il<int>({ 42, 42, 42, 42, 42 })));
 	}
 
 	// Test return non-reference
