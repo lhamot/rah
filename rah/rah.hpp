@@ -26,6 +26,10 @@
 #define RAH_NAMESPACE rah
 #endif
 
+#ifndef RAH_STD
+#define RAH_STD std
+#endif
+
 namespace RAH_NAMESPACE
 {
 
@@ -606,46 +610,46 @@ auto retro()
 /// \cond PRIVATE 
 namespace details
 {
-template <typename Tuple, typename F, std::size_t ...Indices>
+template <typename Tuple, typename F, size_t ...Indices>
 void for_each_impl(Tuple&& tuple, F&& f, std::index_sequence<Indices...>)
 {
 	using swallow = int[];
 	(void)swallow {
 		1,
-			(f(std::get<Indices>(std::forward<Tuple>(tuple))), void(), int{})...
+			(f(RAH_STD::get<Indices>(std::forward<Tuple>(tuple))), void(), int{})...
 	};
 }
 
 template <typename Tuple, typename F>
 void for_each(Tuple&& tuple, F&& f)
 {
-	constexpr std::size_t N = std::tuple_size<std::remove_reference_t<Tuple>>::value;
+	constexpr size_t N = RAH_STD::tuple_size<std::remove_reference_t<Tuple>>::value;
 	for_each_impl(std::forward<Tuple>(tuple), std::forward<F>(f),
 		std::make_index_sequence<N>{});
 }
 
 template <class F, typename... Args, size_t... Is>
-auto transform_each_impl(const std::tuple<Args...>& t, F&& f, std::index_sequence<Is...>) {
-	return std::make_tuple(
-		f(std::get<Is>(t))...
+auto transform_each_impl(const RAH_STD::tuple<Args...>& t, F&& f, std::index_sequence<Is...>) {
+	return RAH_STD::make_tuple(
+		f(RAH_STD::get<Is>(t))...
 	);
 }
 
 template <class F, typename... Args>
-auto transform_each(const std::tuple<Args...>& t, F&& f) {
+auto transform_each(const RAH_STD::tuple<Args...>& t, F&& f) {
 	return transform_each_impl(
 		t, std::forward<F>(f), std::make_index_sequence<sizeof...(Args)>{});
 }
 
 template <typename... Args, size_t... Is>
-auto deref_impl(const std::tuple<Args...>& t, std::index_sequence<Is...>) {
-	return std::tuple<typename std::iterator_traits<Args>::reference...>(
-		(*std::get<Is>(t))...
+auto deref_impl(const RAH_STD::tuple<Args...>& t, std::index_sequence<Is...>) {
+	return RAH_STD::tuple<typename std::iterator_traits<Args>::reference...>(
+		(*RAH_STD::get<Is>(t))...
 	);
 }
 
 template <typename... Args>
-auto deref(const std::tuple<Args...>& t) {
+auto deref(const RAH_STD::tuple<Args...>& t) {
 	return deref_impl(t, std::make_index_sequence<sizeof...(Args)>{});
 }
 
@@ -675,14 +679,14 @@ struct zip_iterator : iterator_facade<
 	void advance(intptr_t val) { for_each(iters_, [val](auto& iter) { iter += val; }); }
 	void decrement() { details::for_each(iters_, [](auto& iter) { --iter; }); }
 	auto dereference() const { return details::deref(iters_); }
-	auto distance_to(zip_iterator other) const { return std::get<0>(iters_) - std::get<0>(other.iters_); }
+	auto distance_to(zip_iterator other) const { return RAH_STD::get<0>(iters_) - RAH_STD::get<0>(other.iters_); }
 	bool equal(zip_iterator other) const { return iters_ == other.iters_; }
 };
 
 template<typename ...R> auto zip(R&&... _ranges)
 {
-	auto iterTup = std::make_tuple(begin(std::forward<R>(_ranges))...);
-	auto endTup = std::make_tuple(end(std::forward<R>(_ranges))...);
+	auto iterTup = RAH_STD::make_tuple(begin(std::forward<R>(_ranges))...);
+	auto endTup = RAH_STD::make_tuple(end(std::forward<R>(_ranges))...);
 	return iterator_range<zip_iterator<decltype(iterTup)>>{ { iterTup }, { endTup }};
 }
 
