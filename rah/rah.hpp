@@ -301,7 +301,7 @@ template<typename R> auto all(R&& range)
 	return iterator_range<range_begin_type_t<R>>{begin(range), end(range)};
 }
 
-auto all()
+inline auto all()
 {
 	return make_pipeable([=](auto&& range) {return all(range); });
 }
@@ -336,7 +336,7 @@ template<typename R> auto counted(R&& range, size_t count)
 	return make_iterator_range(iter1, iter2);
 }
 
-auto counted(size_t count)
+inline auto counted(size_t count)
 {
 	return make_pipeable([=](auto&& range) {return counted(range, count); });
 }
@@ -456,7 +456,7 @@ template<typename R> auto join(R&& range_of_ranges)
 	}
 }
 
-auto join()
+inline auto join()
 {
 	return make_pipeable([](auto&& range) {return join(range); });
 }
@@ -553,7 +553,7 @@ template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)
 	return iterator_range<decltype(b_out)>{ {b_out}, { e_out } };
 }
 
-auto slice(intptr_t begin, intptr_t end)
+inline auto slice(intptr_t begin, intptr_t end)
 {
 	return make_pipeable([=](auto&& range) {return slice(range, begin, end); });
 }
@@ -597,7 +597,7 @@ template<typename R> auto stride(R&& range, size_t step)
 		{ iter, endIter, step}, { endIter, endIter, step }};
 }
 
-auto stride(size_t step)
+inline auto stride(size_t step)
 {
 	return make_pipeable([=](auto&& range) {return stride(range, step); });
 }
@@ -610,7 +610,7 @@ template<typename R> auto retro(R&& range)
 		RAH_STD::make_reverse_iterator(end(range)), RAH_STD::make_reverse_iterator(begin(range)));
 }
 
-auto retro()
+inline auto retro()
 {
 	return make_pipeable([=](auto&& range) {return retro(range); });
 }
@@ -739,7 +739,7 @@ template<typename R> auto chunk(R&& range, size_t step)
 	return iterator_range<iterator>{ { begin }, { endIter, endIter, endIter, step }};
 }
 
-auto chunk(size_t step)
+inline auto chunk(size_t step)
 {
 	return make_pipeable([=](auto&& range) {return chunk(range, step); });
 }
@@ -881,7 +881,7 @@ template<typename R> auto enumerate(R&& range)
 	return zip(iota(size_t(0), dist), RAH_STD::forward<R>(range));
 }
 
-auto enumerate()
+inline auto enumerate()
 {
 	return make_pipeable([=](auto&& range) {return enumerate(range); });
 }
@@ -893,7 +893,7 @@ template<typename R> auto map_value(R&& range)
 	return transform(RAH_STD::forward<R>(range), [](auto nvp) {return RAH_STD::get<1>(nvp); });
 }
 
-auto map_value()
+inline auto map_value()
 {
 	return make_pipeable([=](auto&& range) {return map_value(range); });
 }
@@ -905,7 +905,7 @@ template<typename R> auto map_key(R&& range)
 	return RAH_NAMESPACE::view::transform(RAH_STD::forward<R>(range), [](auto nvp) {return RAH_STD::get<0>(nvp); });
 }
 
-auto map_key()
+inline auto map_key()
 {
 	return make_pipeable([=](auto&& range) {return map_key(range); });
 }
@@ -959,7 +959,7 @@ template<typename R> bool empty(R&& range)
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::empty_pipeable
-auto empty()
+inline auto empty()
 {
 	return make_pipeable([](auto&& range) {return empty(range); });
 }
@@ -1318,7 +1318,7 @@ template<typename R> auto size(R&& range)
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::size_pipeable
-auto size()
+inline auto size()
 {
 	return make_pipeable([=](auto&& range) { return size(range); });
 }
