@@ -81,7 +81,7 @@ Inheritance diagram for rah::view::concat_iterator&lt; IterPair, V &gt;:</div>
  <div class="center">
   <img src="structrah_1_1view_1_1concat__iterator.png" usemap="#rah::view::concat_5Fiterator_3C_20IterPair_2C_20V_20_3E_map" alt=""/>
   <map id="rah::view::concat_5Fiterator_3C_20IterPair_2C_20V_20_3E_map" name="rah::view::concat_5Fiterator_3C_20IterPair_2C_20V_20_3E_map">
-<area href="structrah_1_1iterator__facade.html" alt="rah::iterator_facade&lt; concat_iterator&lt; IterPair, V &gt;, V, std::forward_iterator_tag &gt;" shape="rect" coords="0,0,479,24"/>
+<area href="structrah_1_1iterator__facade.html" alt="rah::iterator_facade&lt; concat_iterator&lt; IterPair, V &gt;, V, std ::forward_iterator_tag &gt;" shape="rect" coords="0,0,484,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -91,8 +91,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a45e7ea9b72e7df5390a2ae09a6923d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6301909457da06a9894f4681353442b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1concat__iterator.html#a6301909457da06a9894f4681353442b4">increment</a> ()</td></tr>
 <tr class="separator:a6301909457da06a9894f4681353442b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af36beb1e5fbf0614bf42483c582a0e64"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1concat__iterator.html#af36beb1e5fbf0614bf42483c582a0e64">dereference</a> () const</td></tr>
-<tr class="separator:af36beb1e5fbf0614bf42483c582a0e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8449f70baf374fb27f6cf7dbb80e2d17"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1concat__iterator.html#a8449f70baf374fb27f6cf7dbb80e2d17">dereference</a> () const -&gt; decltype(*std ::get&lt; 0 &gt;(<a class="el" href="structrah_1_1view_1_1concat__iterator.html#affb17b45b66a04b01962c8b84dc20c43">iter_</a>))</td></tr>
+<tr class="separator:a8449f70baf374fb27f6cf7dbb80e2d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8021ecde205f2ceba2c167a6954d05"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1concat__iterator.html#a6e8021ecde205f2ceba2c167a6954d05">equal</a> (<a class="el" href="structrah_1_1view_1_1concat__iterator.html">concat_iterator</a> other) const</td></tr>
 <tr class="separator:a6e8021ecde205f2ceba2c167a6954d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -151,8 +151,8 @@ template&lt;typename IterPair , typename V &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af36beb1e5fbf0614bf42483c582a0e64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af36beb1e5fbf0614bf42483c582a0e64">&#9670;&nbsp;</a></span>dereference()</h2>
+<a id="a8449f70baf374fb27f6cf7dbb80e2d17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8449f70baf374fb27f6cf7dbb80e2d17">&#9670;&nbsp;</a></span>dereference()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,8 @@ template&lt;typename IterPair , typename V &gt; </div>
           <td class="memname">auto <a class="el" href="structrah_1_1view_1_1concat__iterator.html">rah::view::concat_iterator</a>&lt; IterPair, V &gt;::dereference </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td> const -&gt; decltype(* std ::get&lt;0&gt;(<a class="el" href="structrah_1_1view_1_1concat__iterator.html#affb17b45b66a04b01962c8b84dc20c43">iter_</a>))
+	</td>
         </tr>
       </table>
   </td>

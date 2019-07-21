@@ -22,6 +22,14 @@ struct \mbox{\hyperlink{structrah_1_1is__range_3_01_r_00_01decltype_07begin_07fa
 \item 
 struct \mbox{\hyperlink{structrah_1_1iterator__facade}{iterator\+\_\+facade}}
 \begin{DoxyCompactList}\small\item\em Inerit to make an iterator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1bidirectional__iterator__tag_01_4}{iterator\+\_\+facade$<$ I, R, std \+::bidirectional\+\_\+iterator\+\_\+tag $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4}{iterator\+\_\+facade$<$ I, R, std \+::forward\+\_\+iterator\+\_\+tag $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1output__iterator__tag_01_4}{iterator\+\_\+facade$<$ I, R, std \+::output\+\_\+iterator\+\_\+tag $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1random__access__iterator__tag_01_4}{iterator\+\_\+facade$<$ I, R, std \+::random\+\_\+access\+\_\+iterator\+\_\+tag $>$}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1bidirectional__iterator__tag_01_4}{iterator\+\_\+facade$<$ I, R, std\+::bidirectional\+\_\+iterator\+\_\+tag $>$}}
 \begin{DoxyCompactList}\small\item\em Inerit to make a bidirectional iterator. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4}{iterator\+\_\+facade$<$ I, R, std\+::forward\+\_\+iterator\+\_\+tag $>$}}
@@ -45,9 +53,9 @@ struct \mbox{\hyperlink{structrah_1_1stream__inserter__iterator}{stream\+\_\+ins
 \item 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_a6622426bea22e9509614fe4c574ebeca}{range\+\_\+ref\+\_\+type\+\_\+t}} = decltype($\ast$\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(\mbox{\hyperlink{namespacerah_a11785bbdf970efa1bc57fc14993b77bf}{fake}}$<$ T $>$()))
 \item 
-{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_a4b32e39fb106af7036b20a39c4f024c1}{range\+\_\+value\+\_\+type\+\_\+t}} = std\+::remove\+\_\+reference\+\_\+t$<$ \mbox{\hyperlink{namespacerah_a6622426bea22e9509614fe4c574ebeca}{range\+\_\+ref\+\_\+type\+\_\+t}}$<$ T $>$ $>$
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacerah_a0c0c45ea6e732dc2668edfd0e4f8fccf}{range\+\_\+value\+\_\+type\+\_\+t}} = std \+::remove\+\_\+reference\+\_\+t$<$ \mbox{\hyperlink{namespacerah_a6622426bea22e9509614fe4c574ebeca}{range\+\_\+ref\+\_\+type\+\_\+t}}$<$ T $>$ $>$
 \item 
-{\footnotesize template$<$typename R $>$ }\\using \mbox{\hyperlink{namespacerah_aff9b9a5748e293f6a1726308c1ac1a01}{range\+\_\+iter\+\_\+categ\+\_\+t}} = typename std\+::iterator\+\_\+traits$<$ \mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ $>$\+::iterator\+\_\+category
+{\footnotesize template$<$typename R $>$ }\\using \mbox{\hyperlink{namespacerah_a7cdcceefd4c7ad3abffb96560d24517d}{range\+\_\+iter\+\_\+categ\+\_\+t}} = typename std \+::iterator\+\_\+traits$<$ \mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$ R $>$ $>$\+::iterator\+\_\+category
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -66,7 +74,7 @@ struct \mbox{\hyperlink{structrah_1_1stream__inserter__iterator}{stream\+\_\+ins
 \begin{DoxyCompactList}\small\item\em Get the \char`\"{}past the\char`\"{} end iterator of the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{make\+\_\+pipeable}} (Make\+Range \&\&make\+\_\+range)
 \begin{DoxyCompactList}\small\item\em Call to create a \char`\"{}pipeable\char`\"{} function (U\+F\+CS style in c++) \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_a5ebb23bb276c853ef14a86bed84b6df9}{operator$\vert$}} (R \&\&range, \mbox{\hyperlink{structrah_1_1pipeable}{pipeable}}$<$ Make\+Range $>$ const \&adapter) -\/$>$ decltype(adapter.\+func(std\+::forward$<$ R $>$(range)))
+{\footnotesize template$<$typename R , typename Make\+Range $>$ }\\auto \mbox{\hyperlink{namespacerah_ab1ae71c44092414b8a22379bc0d3cd34}{operator$\vert$}} (R \&\&range, \mbox{\hyperlink{structrah_1_1pipeable}{pipeable}}$<$ Make\+Range $>$ const \&adapter) -\/$>$ decltype(adapter.\+func(std \+::forward$<$ R $>$(range)))
 \item 
 {\footnotesize template$<$typename C $>$ }\\auto \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{back\+\_\+inserter}} (C \&\&container)
 \begin{DoxyCompactList}\small\item\em Make a range which insert into the back of the a container. \end{DoxyCompactList}\item 
@@ -164,21 +172,21 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{size}} ()
 \begin{DoxyCompactList}\small\item\em Erase a sub-\/range of a given container. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a80ea7a94642c23e9f3db6f6b890f2987}{erase}} (R \&\&range)
 \begin{DoxyCompactList}\small\item\em Erase a sub-\/range of a given container. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\void \mbox{\hyperlink{namespacerah_a02bc4f7618438272f7ec9f3c819d5990}{sort}} (R \&range, P \&\&pred=\{\})
+{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\void \mbox{\hyperlink{namespacerah_a02bc4f7618438272f7ec9f3c819d5990}{sort}} (R \&range, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_a3a938d529ef4564281a5dca2ce49b538}{sort}} (P \&\&pred=\{\})
+{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_a3a938d529ef4564281a5dca2ce49b538}{sort}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\void \mbox{\hyperlink{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}{stable\+\_\+sort}} (R \&range, P \&\&pred=\{\})
+{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\void \mbox{\hyperlink{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}{stable\+\_\+sort}} (R \&range, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sorts the elements in the range in ascending order. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_aa45a27d7e9403b82624632e1ee3daf6f}{stable\+\_\+sort}} (P \&\&pred=\{\})
+{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_aa45a27d7e9403b82624632e1ee3daf6f}{stable\+\_\+sort}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sorts the elements in the range in ascending order. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename U\+R\+BG $>$ }\\void \mbox{\hyperlink{namespacerah_ab1d00692710a6ee8e5b3110a56bbd59c}{shuffle}} (R \&range, U\+R\+BG \&\&g)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename U\+R\+BG $>$ }\\auto \mbox{\hyperlink{namespacerah_a93f2ab22986c011ca40816c52638e0ad}{shuffle}} (U\+R\+BG \&\&g)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_a7c4f0afb068c908600b357e111148df7}{unique}} (R \&\&range, P \&\&pred=\{\})
+{\footnotesize template$<$typename R , typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_a7c4f0afb068c908600b357e111148df7}{unique}} (R \&\&range, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Remove all but first successuve values which are equals. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_aafbbb6f9bd014675985d33d93221acca}{unique}} (P \&\&pred=\{\})
+{\footnotesize template$<$typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_aafbbb6f9bd014675985d33d93221acca}{unique}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Remove all but first successuve values which are equals. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I\+N1 , typename I\+N2 , typename O\+UT $>$ }\\void \mbox{\hyperlink{namespacerah_aca8dbcc943f7c503acea5f58f231a5af}{set\+\_\+difference}} (I\+N1 \&\&in1, I\+N2 \&\&in2, O\+UT \&\&out)
 \begin{DoxyCompactList}\small\item\em Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out The resulting range is also sorted. \end{DoxyCompactList}\item 
@@ -206,12 +214,12 @@ using \mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{rah\+::ra
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 using \mbox{\hyperlink{namespacerah_a9657e24ae477f4482225b133fe286b65}{rah\+::range\+\_\+end\+\_\+type\+\_\+t}} = typedef decltype(\mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(\mbox{\hyperlink{namespacerah_a11785bbdf970efa1bc57fc14993b77bf}{fake}}$<$T$>$()))}
 
-\mbox{\Hypertarget{namespacerah_aff9b9a5748e293f6a1726308c1ac1a01}\label{namespacerah_aff9b9a5748e293f6a1726308c1ac1a01}} 
+\mbox{\Hypertarget{namespacerah_a7cdcceefd4c7ad3abffb96560d24517d}\label{namespacerah_a7cdcceefd4c7ad3abffb96560d24517d}} 
 \index{rah@{rah}!range\_iter\_categ\_t@{range\_iter\_categ\_t}}
 \index{range\_iter\_categ\_t@{range\_iter\_categ\_t}!rah@{rah}}
 \subsubsection{\texorpdfstring{range\_iter\_categ\_t}{range\_iter\_categ\_t}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-using \mbox{\hyperlink{namespacerah_aff9b9a5748e293f6a1726308c1ac1a01}{rah\+::range\+\_\+iter\+\_\+categ\+\_\+t}} = typedef typename std\+::iterator\+\_\+traits$<$\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$R$>$ $>$\+::iterator\+\_\+category}
+using \mbox{\hyperlink{namespacerah_a7cdcceefd4c7ad3abffb96560d24517d}{rah\+::range\+\_\+iter\+\_\+categ\+\_\+t}} = typedef typename std \+::iterator\+\_\+traits$<$\mbox{\hyperlink{namespacerah_a28aff4eeddcece6be65ff0b956d32d4a}{range\+\_\+begin\+\_\+type\+\_\+t}}$<$R$>$ $>$\+::iterator\+\_\+category}
 
 \mbox{\Hypertarget{namespacerah_a6622426bea22e9509614fe4c574ebeca}\label{namespacerah_a6622426bea22e9509614fe4c574ebeca}} 
 \index{rah@{rah}!range\_ref\_type\_t@{range\_ref\_type\_t}}
@@ -220,12 +228,12 @@ using \mbox{\hyperlink{namespacerah_aff9b9a5748e293f6a1726308c1ac1a01}{rah\+::ra
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 using \mbox{\hyperlink{namespacerah_a6622426bea22e9509614fe4c574ebeca}{rah\+::range\+\_\+ref\+\_\+type\+\_\+t}} = typedef decltype($\ast$\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(\mbox{\hyperlink{namespacerah_a11785bbdf970efa1bc57fc14993b77bf}{fake}}$<$T$>$()))}
 
-\mbox{\Hypertarget{namespacerah_a4b32e39fb106af7036b20a39c4f024c1}\label{namespacerah_a4b32e39fb106af7036b20a39c4f024c1}} 
+\mbox{\Hypertarget{namespacerah_a0c0c45ea6e732dc2668edfd0e4f8fccf}\label{namespacerah_a0c0c45ea6e732dc2668edfd0e4f8fccf}} 
 \index{rah@{rah}!range\_value\_type\_t@{range\_value\_type\_t}}
 \index{range\_value\_type\_t@{range\_value\_type\_t}!rah@{rah}}
 \subsubsection{\texorpdfstring{range\_value\_type\_t}{range\_value\_type\_t}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-using \mbox{\hyperlink{namespacerah_a4b32e39fb106af7036b20a39c4f024c1}{rah\+::range\+\_\+value\+\_\+type\+\_\+t}} = typedef std\+::remove\+\_\+reference\+\_\+t$<$\mbox{\hyperlink{namespacerah_a6622426bea22e9509614fe4c574ebeca}{range\+\_\+ref\+\_\+type\+\_\+t}}$<$T$>$ $>$}
+using \mbox{\hyperlink{namespacerah_a0c0c45ea6e732dc2668edfd0e4f8fccf}{rah\+::range\+\_\+value\+\_\+type\+\_\+t}} = typedef std \+::remove\+\_\+reference\+\_\+t$<$\mbox{\hyperlink{namespacerah_a6622426bea22e9509614fe4c574ebeca}{range\+\_\+ref\+\_\+type\+\_\+t}}$<$T$>$ $>$}
 
 
 
@@ -604,7 +612,7 @@ Check if the range if empty.
 \index{rah@{rah}!empty@{empty}}
 \index{empty@{empty}!rah@{rah}}
 \subsubsection{\texorpdfstring{empty()}{empty()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily auto rah\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1058,12 +1066,12 @@ pipeable syntax
 \DoxyCodeLine{    | \mbox{\hyperlink{namespacerah_a2a3ff8b7f73d480ac0827f9a41a3c92a}{rah::none\_of}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a == 11; \})}
 \DoxyCodeLine{        ) == \textcolor{keyword}{false});}
 \end{DoxyCodeInclude}
-\mbox{\Hypertarget{namespacerah_a5ebb23bb276c853ef14a86bed84b6df9}\label{namespacerah_a5ebb23bb276c853ef14a86bed84b6df9}} 
+\mbox{\Hypertarget{namespacerah_ab1ae71c44092414b8a22379bc0d3cd34}\label{namespacerah_ab1ae71c44092414b8a22379bc0d3cd34}} 
 \index{rah@{rah}!operator\texttt{"|}@{operator\texttt{"|}}}
 \index{operator\texttt{"|}@{operator\texttt{"|}}!rah@{rah}}
 \subsubsection{\texorpdfstring{operator\texttt{"|}()}{operator|()}}
 {\footnotesize\ttfamily template$<$typename R , typename Make\+Range $>$ \\
-auto rah\+::operator$\vert$ (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{\mbox{\hyperlink{structrah_1_1pipeable}{pipeable}}$<$ Make\+Range $>$ const \&}]{adapter }\end{DoxyParamCaption}) -\/$>$ decltype(adapter.\+func(std\+::forward$<$R$>$(range)))
+auto rah\+::operator$\vert$ (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{\mbox{\hyperlink{structrah_1_1pipeable}{pipeable}}$<$ Make\+Range $>$ const \&}]{adapter }\end{DoxyParamCaption}) -\/$>$ decltype(adapter.\+func( std \+::forward$<$R$>$(range)))
 }
 
 \mbox{\Hypertarget{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}\label{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}} 
@@ -1245,7 +1253,7 @@ Get the size of range.
 \index{rah@{rah}!size@{size}}
 \index{size@{size}!rah@{rah}}
 \subsubsection{\texorpdfstring{size()}{size()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily auto rah\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily auto rah\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1263,7 +1271,7 @@ pipeable syntax
 \index{rah@{rah}!sort@{sort}}
 \index{sort@{sort}!rah@{rah}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
 void rah\+::sort (\begin{DoxyParamCaption}\item[{R \&}]{range,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -1286,7 +1294,7 @@ Sort a range in place, using the given predicate.
 \index{rah@{rah}!sort@{sort}}
 \index{sort@{sort}!rah@{rah}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
 auto rah\+::sort (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -1312,7 +1320,7 @@ pipeable syntax
 \index{rah@{rah}!stable\_sort@{stable\_sort}}
 \index{stable\_sort@{stable\_sort}!rah@{rah}}
 \subsubsection{\texorpdfstring{stable\_sort()}{stable\_sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
 void rah\+::stable\+\_\+sort (\begin{DoxyParamCaption}\item[{R \&}]{range,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -1352,7 +1360,7 @@ The order of equivalent elements is guaranteed to be preserved.
 \index{rah@{rah}!stable\_sort@{stable\_sort}}
 \index{stable\_sort@{stable\_sort}!rah@{rah}}
 \subsubsection{\texorpdfstring{stable\_sort()}{stable\_sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
 auto rah\+::stable\+\_\+sort (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -1481,7 +1489,7 @@ The binary operation binary\+\_\+op is applied to pairs of elements from two ran
 \index{rah@{rah}!unique@{unique}}
 \index{unique@{unique}!rah@{rah}}
 \subsubsection{\texorpdfstring{unique()}{unique()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
 auto rah\+::unique (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -1507,7 +1515,7 @@ The end part of the range, which have to be remove.
 \index{rah@{rah}!unique@{unique}}
 \index{unique@{unique}!rah@{rah}}
 \subsubsection{\texorpdfstring{unique()}{unique()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
 auto rah\+::unique (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 

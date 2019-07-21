@@ -3,9 +3,9 @@
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename C , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{unique}} (C \&\&container, P \&\&pred=\{\})
+{\footnotesize template$<$typename C , typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_aea663eead5f5aa262ef890d7393daad6}{unique}} (C \&\&container, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Remove all but first successive values which are equals. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a2b3773f4b775a1e64307307556af24cd}{unique}} (P \&\&pred=\{\})
+{\footnotesize template$<$typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a2b3773f4b775a1e64307307556af24cd}{unique}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Remove all but first successuve values which are equals. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename C , typename P $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}{remove\+\_\+if}} (C \&\&container, P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep only elements for which pred(elt) is false~\newline
@@ -13,9 +13,9 @@
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a708ce68c6ed2b20ef9c0cdb6b697c980}{remove\+\_\+if}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename C , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{sort}} (C \&\&container, P \&\&pred=\{\})
+{\footnotesize template$<$typename C , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ae8518431f6e5e7415a6739c65e874ab8}{sort}} (C \&\&container, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_ac1603fdf8fc87e84c277c216a5176674}{sort}} (P \&\&pred=\{\})
+{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_ac1603fdf8fc87e84c277c216a5176674}{sort}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename C , typename U\+R\+BG $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{shuffle}} (C \&\&container, U\+R\+BG \&\&g)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\item 
@@ -120,7 +120,7 @@ pipeable syntax
 \index{rah::action@{rah::action}!sort@{sort}}
 \index{sort@{sort}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename C , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename C , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ \\
 auto\&\& rah\+::action\+::sort (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -148,7 +148,7 @@ reference to container
 \index{rah::action@{rah::action}!sort@{sort}}
 \index{sort@{sort}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
 auto rah\+::action\+::sort (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -179,7 +179,7 @@ pipeable syntax
 \index{rah::action@{rah::action}!unique@{unique}}
 \index{unique@{unique}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{unique()}{unique()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename C , typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename C , typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ \\
 auto\&\& rah\+::action\+::unique (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -207,7 +207,7 @@ Reference to container
 \index{rah::action@{rah::action}!unique@{unique}}
 \index{unique@{unique}!rah::action@{rah::action}}
 \subsubsection{\texorpdfstring{unique()}{unique()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename P  = is\+\_\+equal, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+equal, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
 auto rah\+::action\+::unique (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 

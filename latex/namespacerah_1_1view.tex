@@ -15,6 +15,8 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1generate__iterator}{generate\+\_\+i
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{iota\+\_\+iterator}}
 \item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{join\+\_\+iterator}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1repeat__iterator}{repeat\+\_\+iterator}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}
@@ -28,6 +30,10 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1zip__iterator}{zip\+\_\+iterator}}
 \item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a582017379aa588d2c1c7bac58f4856af}{single}} (V \&\&value)
 \begin{DoxyCompactList}\small\item\em Given value, create a view containing one element. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a08f246d1e3e728738c48741274f5e9d7}{all}} (R \&\&range)
+\begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}{all}} ()
+\begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}{counted}} (R \&\&range, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
 \begin{DoxyCompactList}\small\item\em Create a view containing the {\bfseries{count}} next element of range. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_af359927d911e400baa372a8cb7817aa2}{counted}} (size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
@@ -36,14 +42,14 @@ auto \mbox{\hyperlink{namespacerah_1_1view_af359927d911e400baa372a8cb7817aa2}{co
 \begin{DoxyCompactList}\small\item\em Generate a range of sequentially increasing integers. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a89f73d7f0e180d9aea27a9d56ac4a1b3}{repeat}} (V \&\&value)
 \begin{DoxyCompactList}\small\item\em Generate an infinite range of the given value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa7c2a315fe63cbd431f2e59c75f3be08}{join}} (R \&\&range\+\_\+of\+\_\+ranges)
+\begin{DoxyCompactList}\small\item\em Given a range of ranges, join them into a flattened sequence of elements. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a329ee692640cfffb055b1eb3d49d3d79}{join}} ()
+\begin{DoxyCompactList}\small\item\em Given a range of ranges, join them into a flattened sequence of elements. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{generate}} (F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create an infinite range, repetitively calling func. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_af179430e133efcf7d352b9446365e279}{generate\+\_\+n}} (F \&\&func, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
 \begin{DoxyCompactList}\small\item\em Create a range of N elemnts, repetitively calling func. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a08f246d1e3e728738c48741274f5e9d7}{all}} (R \&\&range)
-\begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}{all}} ()
-\begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{transform}} (R \&\&range, F \&\&func)
 \begin{DoxyCompactList}\small\item\em Create a view applying a transformation to each element of the input range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename F $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a814771afc1cfedc6418915550bcd5bbd}{transform}} (F \&\&func)
@@ -88,9 +94,9 @@ auto \mbox{\hyperlink{namespacerah_1_1view_ae022a4f4c20c2d288b5fa1c68441fb8f}{ma
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}{map\+\_\+key}} ()
 \begin{DoxyCompactList}\small\item\em Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just the second element of the pair. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{sort}} (R \&\&range, P \&\&pred=\{\})
+{\footnotesize template$<$typename R , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{sort}} (R \&\&range, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}{sort}} (P \&\&pred=\{\})
+{\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}{sort}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -110,7 +116,7 @@ Create a view on the whole range.
 \index{rah::view@{rah::view}!all@{all}}
 \index{all@{all}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{all()}{all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -142,7 +148,7 @@ Create a view where each element is a range of N elements of the input range.
 \index{rah::view@{rah::view}!chunk@{chunk}}
 \index{chunk@{chunk}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{chunk()}{chunk()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::chunk (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -238,7 +244,7 @@ Create a view containing the {\bfseries{count}} next element of range.
 \index{rah::view@{rah::view}!counted@{counted}}
 \index{counted@{counted}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{counted()}{counted()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::counted (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::counted (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -278,7 +284,7 @@ Pair each element of a range with its index.
 \index{rah::view@{rah::view}!enumerate@{enumerate}}
 \index{enumerate@{enumerate}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{enumerate()}{enumerate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::enumerate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::enumerate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -392,6 +398,58 @@ Generate a range of sequentially increasing integers.
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 10, 12, 14, 16, 18 \}));}
 \end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_aa7c2a315fe63cbd431f2e59c75f3be08}\label{namespacerah_1_1view_aa7c2a315fe63cbd431f2e59c75f3be08}} 
+\index{rah::view@{rah::view}!join@{join}}
+\index{join@{join}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+rah\+::view\+::join (\begin{DoxyParamCaption}\item[{R \&\&}]{range\+\_\+of\+\_\+ranges }\end{DoxyParamCaption})}
+
+
+
+Given a range of ranges, join them into a flattened sequence of elements. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<std::vector<int>> in = \{}
+\DoxyCodeLine{            \{0, 1\},}
+\DoxyCodeLine{            \{ \},}
+\DoxyCodeLine{            \{2, 3, 4\},}
+\DoxyCodeLine{            \{ 5\},}
+\DoxyCodeLine{            \{\},}
+\DoxyCodeLine{        \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_aa7c2a315fe63cbd431f2e59c75f3be08}{rah::view::join}}(in);}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(result));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a329ee692640cfffb055b1eb3d49d3d79}\label{namespacerah_1_1view_a329ee692640cfffb055b1eb3d49d3d79}} 
+\index{rah::view@{rah::view}!join@{join}}
+\index{join@{join}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily rah\+::view\+::join (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Given a range of ranges, join them into a flattened sequence of elements. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<std::vector<int>> in = \{}
+\DoxyCodeLine{            \{0, 1\},}
+\DoxyCodeLine{            \{ \},}
+\DoxyCodeLine{            \{2, 3, 4\},}
+\DoxyCodeLine{            \{ 5\},}
+\DoxyCodeLine{            \{\},}
+\DoxyCodeLine{        \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = in | \mbox{\hyperlink{namespacerah_1_1view_aa7c2a315fe63cbd431f2e59c75f3be08}{rah::view::join}}();}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(result));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 0, 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}\label{namespacerah_1_1view_a30b890451bfedbb15ed2114ed62beebc}} 
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
 \index{map\_key@{map\_key}!rah::view@{rah::view}}
@@ -415,7 +473,7 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \index{rah::view@{rah::view}!map\_key@{map\_key}}
 \index{map\_key@{map\_key}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{map\_key()}{map\_key()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::map\+\_\+key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -455,7 +513,7 @@ Given a range of std\+::pair-\/std\+::tuple, create a view consisting of just th
 \index{rah::view@{rah::view}!map\_value@{map\_value}}
 \index{map\_value@{map\_value}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{map\_value()}{map\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::map\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -513,7 +571,7 @@ Create a view that traverses the source range in reverse order.
 \index{rah::view@{rah::view}!retro@{retro}}
 \index{retro@{retro}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{retro()}{retro()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::retro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::retro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -575,7 +633,7 @@ Create a view that is a sub-\/range of a range.
 \index{rah::view@{rah::view}!slice@{slice}}
 \index{slice@{slice}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{slice()}{slice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::slice (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{begin,  }\item[{intptr\+\_\+t}]{end }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::slice (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{begin,  }\item[{intptr\+\_\+t}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -596,7 +654,7 @@ pipeable syntax
 \index{rah::view@{rah::view}!sort@{sort}}
 \index{sort@{sort}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename R , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+R$>$\+::value$>$$>$ \\
 auto rah\+::view\+::sort (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -627,7 +685,7 @@ This view is not lasy. The sorting is computed immediately.
 \index{rah::view@{rah::view}!sort@{sort}}
 \index{sort@{sort}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std\+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
+{\footnotesize\ttfamily template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ \\
 auto rah\+::view\+::sort (\begin{DoxyParamCaption}\item[{P \&\&}]{pred = {\ttfamily \{\}} }\end{DoxyParamCaption})}
 
 
@@ -679,7 +737,7 @@ Create a view consisting of every Nth element, starting with the first.
 \index{rah::view@{rah::view}!stride@{stride}}
 \index{stride@{stride}!rah::view@{rah::view}}
 \subsubsection{\texorpdfstring{stride()}{stride()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily rah\+::view\+::stride (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily rah\+::view\+::stride (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -748,11 +806,13 @@ rah\+::view\+::zip (\begin{DoxyParamCaption}\item[{R \&\&...}]{\+\_\+ranges }\en
 
 Given N ranges, return a new range where Mth element is the result of calling std\+::make\+\_\+tuple on the Mth elements of all N ranges. 
 
+The resulting range has the size of the smaller of the sub-\/ranges
+
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> inputA\{ 1, 2, 3, 4 \};}
 \DoxyCodeLine{        std::vector<double> inputB\{ 2.5, 4.5, 6.5, 8.5 \};}
-\DoxyCodeLine{        std::vector<char> inputC\{ \textcolor{charliteral}{'a'}, \textcolor{charliteral}{'b'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'d'} \};}
+\DoxyCodeLine{        std::vector<char> inputC\{ \textcolor{charliteral}{'a'}, \textcolor{charliteral}{'b'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'d'}, \textcolor{charliteral}{'e'}, \textcolor{charliteral}{'f'}, \textcolor{charliteral}{'g'} \};}
 \DoxyCodeLine{        std::vector<std::tuple<int, double, char>> result;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} a\_b\_c : \mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(inputA, inputB, inputC))}
 \DoxyCodeLine{            result.push\_back(a\_b\_c);}
