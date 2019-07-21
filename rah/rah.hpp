@@ -662,14 +662,31 @@ auto deref(const RAH_STD::tuple<Args...>& t) {
 	return deref_impl(t, RAH_STD::make_index_sequence<sizeof...(Args)>{});
 }
 
-struct get_iter_value
+template <size_t Index>
+struct Equal
 {
-template<typename I>
-auto operator()(I&& iter) -> decltype(*RAH_STD::forward<I>(iter))
+	template <typename... Args>
+	bool operator()(RAH_STD::tuple<Args...> const& a, RAH_STD::tuple<Args...> const& b) const
+	{
+		return (RAH_STD::get<Index - 1>(a) == RAH_STD::get<Index - 1>(b)) || Equal<Index - 1>{}(a, b);
+	}
+};
+
+template<>
+struct Equal<0>
 {
-	return *RAH_STD::forward<I>(iter);
+	template <typename... Args>
+	bool operator()(RAH_STD::tuple<Args...> const&, RAH_STD::tuple<Args...> const&) const
+	{
+		return false;
+	}
 };
-};
+
+template <typename... Args>
+auto equal(RAH_STD::tuple<Args...> const& a, RAH_STD::tuple<Args...> const& b)
+{
+	return Equal<sizeof...(Args)>{}(a, b);
+}
 
 } // namespace details
 /// \endcond
@@ -689,7 +706,7 @@ struct zip_iterator : iterator_facade<
 	void decrement() { details::for_each(iters_, [](auto& iter) { --iter; }); }
 	auto dereference() const { return details::deref(iters_); }
 	auto distance_to(zip_iterator other) const { return RAH_STD::get<0>(iters_) - RAH_STD::get<0>(other.iters_); }
-	bool equal(zip_iterator other) const { return iters_ == other.iters_; }
+	bool equal(zip_iterator other) const { return details::equal(iters_, other.iters_); }
 };
 
 template<typename ...R> auto zip(R&&... _ranges)

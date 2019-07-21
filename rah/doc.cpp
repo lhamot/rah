@@ -158,6 +158,8 @@
 
 /// @fn rah::view::zip(R&&... _ranges)
 /// @brief Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the Mth elements of all N ranges. 
+/// 
+/// The resulting range has the size of the smaller of the sub-ranges
 ///
 /// @snippet test.cpp zip
 
@@ -231,6 +233,17 @@
 /// @brief Given value, create a view containing one element
 ///
 /// @snippet test.cpp single
+
+/// @fn rah::view::join(R&& range_of_ranges)
+/// @brief Given a range of ranges, join them into a flattened sequence of elements.
+///
+/// @snippet test.cpp join
+
+/// @fn rah::view::join()
+/// @brief Given a range of ranges, join them into a flattened sequence of elements.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp join_pipeable
 
 /*! \mainpage rah - A range (header only) library for C++
  *

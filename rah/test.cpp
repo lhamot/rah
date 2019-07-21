@@ -155,6 +155,22 @@ int main()
 	}
 
 	{
+		/// [join_pipeable]
+		std::vector<std::vector<int>> in = {
+			{0, 1},
+			{ },
+			{2, 3, 4},
+			{ 5},
+			{},
+		};
+		auto range = in | rah::view::join();
+		std::vector<int> result;
+		std::copy(begin(range), end(range), std::back_inserter(result));
+		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
+		/// [join_pipeable]
+	}
+
+	{
 		/// [generate]
 		int y = 1;
 		auto gen = rah::view::generate([&y]() mutable { auto prev = y; y *= 2; return prev; });
@@ -290,7 +306,7 @@ int main()
 		/// [zip]
 		std::vector<int> inputA{ 1, 2, 3, 4 };
 		std::vector<double> inputB{ 2.5, 4.5, 6.5, 8.5 };
-		std::vector<char> inputC{ 'a', 'b', 'c', 'd' };
+		std::vector<char> inputC{ 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
 		std::vector<std::tuple<int, double, char>> result;
 		for (auto a_b_c : rah::view::zip(inputA, inputB, inputC))
 			result.push_back(a_b_c);
