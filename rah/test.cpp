@@ -210,6 +210,15 @@ int main()
 	}
 
 	{
+		std::vector<int> in{ 0, 1, 2 };
+		auto cy = rah::view::cycle(in) | rah::view::counted(8);
+		std::vector<int> out;
+		std::copy(begin(cy), end(cy), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 0, 1, 2, 0, 1 }));
+	}
+
+
+	{
 		/// [repeat]
 		std::vector<int> out;
 		auto range = rah::view::repeat(42);

@@ -473,11 +473,11 @@ struct cycle_iterator : iterator_facade<cycle_iterator<R>, range_ref_type_t<R>, 
 	Iterator iter_;
 
 	template<typename U>
-	explicit cycle_iterator(U&& range)
+	explicit cycle_iterator(U&& range, Iterator iter)
 		: range_(RAH_STD::forward<U>(range))
-		, beginIter_(begin(range))
-		, endIter_(end(range))
-		, iter_(beginIter_)
+		, beginIter_(begin(range_))
+		, endIter_(end(range_))
+		, iter_(iter)
 	{
 	}
 
@@ -499,8 +499,8 @@ template<typename R> auto cycle(R&& range)
 	auto rangeRef = range | RAH_NAMESPACE::view::all();
 	using iterator_type = cycle_iterator<std::remove_reference_t<decltype(rangeRef)>>;
 
-	iterator_type b(rangeRef);
-	iterator_type e(rangeRef);
+	iterator_type b(rangeRef, begin(rangeRef));
+	iterator_type e(rangeRef, begin(rangeRef));
 	return make_iterator_range(b, e);
 }
 
