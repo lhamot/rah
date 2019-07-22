@@ -342,7 +342,7 @@ int main()
 		std::vector<char> inputC{ 'a', 'b', 'c', 'd', 'e', 'f', 'g' };
 		std::vector<std::tuple<int, double, char>> result;
 		for (auto a_b_c : rah::view::zip(inputA, inputB, inputC))
-			result.push_back(a_b_c);
+			result.emplace_back(a_b_c);
 		assert(result == (std::vector<std::tuple<int, double, char>>{
 			{ 1, 2.5, 'a' },
 			{ 2, 4.5, 'b' },
@@ -357,7 +357,7 @@ int main()
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<std::vector<int>> result;
 		for (auto elts : rah::view::chunk(vec_01234, 2))
-			result.push_back(std::vector<int>(begin(elts), end(elts)));
+			result.emplace_back(begin(elts), end(elts));
 		assert(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
 		/// [chunk]
 	}
@@ -366,7 +366,7 @@ int main()
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<std::vector<int>> result;
 		for (auto elts : vec_01234 | rah::view::chunk(2))
-			result.push_back(std::vector<int>(begin(elts), end(elts)));
+			result.emplace_back(begin(elts), end(elts));
 		assert(result == std::vector<std::vector<int>>({ {0, 1}, { 2, 3 }, { 4 } }));
 		/// [chunk_pipeable]
 	}
@@ -427,7 +427,7 @@ int main()
 		std::vector<int> input{ 4, 5, 6, 7 };
 		std::vector<std::tuple<size_t, int>> result;
 		for (auto i_value : rah::view::enumerate(input))
-			result.push_back(i_value);
+			result.emplace_back(i_value);
 		assert(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
 		/// [enumerate]
 	}
@@ -436,7 +436,7 @@ int main()
 		std::vector<int> input{ 4, 5, 6, 7 };
 		std::vector<std::tuple<size_t, int>> result;
 		for (auto i_value : input | rah::view::enumerate())
-			result.push_back(i_value);
+			result.emplace_back(i_value);
 		assert(result == (std::vector<std::tuple<size_t, int>>{ { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 } }));
 		/// [enumerate_pipeable]
 	}
@@ -1226,14 +1226,14 @@ int main()
 			assert(iter->member == 2); // Check for mutability
 			assert((*iter).member == 2); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(*iter)> ||
-				(test::is_reference_v<decltype(*iter)> == false),
+				(not test::is_reference_v<decltype(*iter)>),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_copy)
 		{
 			assert(elt.member == 2); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(elt)> ||
-				(test::is_reference_v<decltype(elt)> == false),
+				(not test::is_reference_v<decltype(elt)>),
 				"elt is not expected to be a reference");
 		}
 		auto r_ref = vec | transform([](auto a) {return a.member; });
@@ -1241,14 +1241,14 @@ int main()
 		{
 			assert(*iter == 1); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(*iter)> ||
-				(test::is_reference_v<decltype(*iter)> == false),
+				(not test::is_reference_v<decltype(*iter)>),
 				"*iter is not expected to be a reference");
 		}
 		for (auto&& elt : r_ref)
 		{
 			assert(elt == 1); // Check for mutability
 			static_assert(test::is_rvalue_reference_v<decltype(elt)> ||
-				(test::is_reference_v<decltype(elt)> == false),
+				(not test::is_reference_v<decltype(elt)>),
 				"elt is not expected to be a reference");
 		}
 	}

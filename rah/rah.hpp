@@ -135,7 +135,7 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 			Reference const* operator->() { return &m_ref; }
 			operator Reference const*() { return &m_ref; }
 		};
-		typedef proxy type;
+		using type = proxy;
 	};
 
 	template <class T>
@@ -147,10 +147,10 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 	using iterator_category = RAH_STD::forward_iterator_tag;
 	using value_type = RAH_STD::remove_reference_t<R>;
 	using difference_type = intptr_t;
-	typedef typename pointer_type<R>::type pointer;
+	using pointer = typename pointer_type<R>::type;
 	using reference = R;
 
-	static_assert(RAH_STD::is_reference<value_type>::value == false, "value_type can't be a reference");
+	static_assert(not RAH_STD::is_reference<value_type>::value, "value_type can't be a reference");
 
 	I& self() { return *static_cast<I*>(this); }
 	I const& self() const { return *static_cast<I const*>(this); }
@@ -167,7 +167,7 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 		return self().dereference(); 
 	}
 	auto operator->() const { return pointer{ self().dereference() }; }
-	bool operator!=(I other) const { return self().equal(other) == false; }
+	bool operator!=(I other) const { return not self().equal(other); }
 	bool operator==(I other) const { return self().equal(other); }
 };
 
@@ -180,7 +180,7 @@ struct iterator_facade<I, R, RAH_STD::output_iterator_tag>
 	using pointer = value_type*;
 	using reference = R;
 
-	static_assert(RAH_STD::is_reference<value_type>::value == false, "value_type can't be a reference");
+	static_assert(not RAH_STD::is_reference<value_type>::value, "value_type can't be a reference");
 
 	I& self() { return *static_cast<I*>(this); }
 	I const& self() const { return *static_cast<I const*>(this); }
@@ -1705,6 +1705,6 @@ auto shuffle(URBG&& g)
 	return make_pipeable([&](auto&& range) -> auto&& { return action::shuffle(RAH_STD::forward<decltype(range)>(range), g); });
 }
 
-}
+}  // namespace action
 
-}
+}  // namespace rah
