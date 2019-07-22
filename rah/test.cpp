@@ -37,18 +37,22 @@ auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
 
 #undef assert
 #define assert(CONDITION) \
-std::cout << "assert : " << #CONDITION << std::endl; \
-if(CONDITION) \
-	std::cout << "OK" << std::endl; \
-else \
-	{std::cout << "NOT OK" << std::endl; abort();}
+{ \
+	std::cout << "assert : " << #CONDITION << std::endl; \
+	if (CONDITION) \
+		std::cout << "OK" << std::endl; \
+	else \
+		{std::cout << "NOT OK" << std::endl; abort(); } \
+}
 
 #define EQUAL_RANGE(RANGE, IL) \
-std::cout << "assert : " << #RANGE << " = " << #IL << std::endl; \
-if(rah::view::zip(RANGE, IL) | rah::all_of(PairEqual)) \
-	std::cout << "OK" << std::endl; \
-else \
-	{std::cout << "NOT OK" << std::endl; abort();}
+{ \
+	std::cout << "assert : " << #RANGE << " = " << #IL << std::endl; \
+	if (rah::view::zip(RANGE, IL) | rah::all_of(PairEqual)) \
+		std::cout << "OK" << std::endl; \
+	else \
+		{std::cout << "NOT OK" << std::endl; abort(); } \
+}
 
 template<typename T>
 using il = std::initializer_list<T>;
@@ -1250,6 +1254,21 @@ int main()
 	}
 
 	// **************************** divers compination test ***************************************
+
+	{
+		auto genRange = [](size_t i) {return rah::view::zip(rah::view::repeat(i), rah::view::iota<size_t>(0, 3)); };
+		auto globalRange =
+			rah::view::iota<size_t>(0, 4)
+			| rah::view::transform(genRange)
+			| rah::view::join();
+
+		EQUAL_RANGE(globalRange, (il<std::pair<size_t, size_t>>{ 
+			{0, 0}, { 0, 1 }, { 0, 2 },
+			{1, 0}, { 1, 1 }, { 1, 2 },
+			{2, 0}, { 2, 1 }, { 2, 2 },
+			{3, 0}, { 3, 1 }, { 3, 2 }
+		}));
+	}
 
 	EQUAL_RANGE(
 		(iota(0, 3) | transform([](auto i) {return i * 2; }) | enumerate()),

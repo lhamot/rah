@@ -245,6 +245,17 @@
 ///
 /// @snippet test.cpp join_pipeable
 
+/// @fn rah::view::cycle(R&& range)
+/// @brief Returns an infinite range that endlessly repeats the source range. 
+///
+/// @snippet test.cpp cycle
+
+/// @fn rah::view::cycle()
+/// @brief Returns an infinite range that endlessly repeats the source range. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp cycle_pipeable
+
 /*! \mainpage rah - A range (header only) library for C++
  *
  * # What is a range

@@ -316,8 +316,9 @@ struct counted_iterator : iterator_facade<
 >
 {
 	I iter_;
-	size_t count_;
+	size_t count_ = size_t();
 
+	counted_iterator() = default;
 	counted_iterator(I iter, size_t count) : iter_(iter), count_(count) {}
 
 	void increment() { ++iter_; ++count_; }
@@ -347,9 +348,10 @@ inline auto counted(size_t count)
 template<typename T = size_t>
 struct iota_iterator : iterator_facade<iota_iterator<T>, T, RAH_STD::random_access_iterator_tag>
 {
-	T val_;
-	T step_;
+	T val_ = T();
+	T step_ = T(1);
 
+	iota_iterator() = default;
 	iota_iterator(T val, T step) : val_(val), step_(step) {}
 
 	void increment() { val_ += step_; }
@@ -372,7 +374,7 @@ template<typename T = size_t> auto iota(T b, T e, T step = 1)
 template<typename V>
 struct repeat_iterator : iterator_facade<repeat_iterator<V>, V const&, RAH_STD::forward_iterator_tag>
 {
-	V val_;
+	V val_ = V();
 
 	repeat_iterator() = default;
 	template<typename U>
@@ -382,7 +384,7 @@ struct repeat_iterator : iterator_facade<repeat_iterator<V>, V const&, RAH_STD::
 	void advance(intptr_t value) { }
 	void decrement() { }
 	V const& dereference() const { return val_; }
-	bool equal(repeat_iterator) const { return true; }
+	bool equal(repeat_iterator) const { return false; }
 };
 
 template<typename V> auto repeat(V&& value)
@@ -521,7 +523,7 @@ struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F
 
 	void increment() { }
 	auto dereference() const { return func_(); }
-	bool equal(generate_iterator other) const { return true; }
+	bool equal(generate_iterator other) const { return false; }
 };
 
 template<typename F> auto generate(F&& func)
