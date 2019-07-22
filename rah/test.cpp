@@ -243,11 +243,15 @@ int main()
 
 	{
 		/// [counted_pipeable]
-		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		auto range = in | rah::view::counted(5);
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5 };
+		auto range = in | rah::view::counted(9);
 		std::vector<int> out;
+		auto a = begin(range);
+		auto b = end(range);
+		volatile auto dist = std::distance(a, b);
+		(void)dist;
 		std::copy(begin(range), end(range), std::back_inserter(out));
-		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
 		/// [counted_pipeable]
 	}
 

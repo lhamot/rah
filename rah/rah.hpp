@@ -324,16 +324,16 @@ struct counted_iterator : iterator_facade<
 	void increment() { ++iter_; ++count_; }
 	void advance(intptr_t off) { iter_ += off; count_ += off; }
 	void decrement() { --iter_; --count_; }
-	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
+	auto distance_to(counted_iterator r) const { return RAH_STD::min<intptr_t>(iter_ - r.iter_, count_ - r.count_); }
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
-	bool equal(counted_iterator r) const { return count_ == r.count_; }
+	bool equal(counted_iterator r) const { return count_ == r.count_ || iter_ == r.iter_; }
 };
 
 template<typename R> auto counted(R&& range, size_t count)
 {
 	using iterator = counted_iterator<range_begin_type_t<R>>;
 	iterator iter1(begin(range), 0);
-	iterator iter2(begin(range), count);
+	iterator iter2(end(range), count);
 	return make_iterator_range(iter1, iter2);
 }
 
@@ -490,7 +490,7 @@ struct cycle_iterator : iterator_facade<cycle_iterator<R>, range_ref_type_t<R>, 
 			iter_ = begin(range_);
 	}
 	auto dereference() const ->decltype(*iter_) { return *iter_; }
-	bool equal(cycle_iterator other) const
+	bool equal(cycle_iterator) const
 	{
 			return false;
 	}
@@ -523,7 +523,7 @@ struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F
 
 	void increment() { }
 	auto dereference() const { return func_(); }
-	bool equal(generate_iterator other) const { return false; }
+	bool equal(generate_iterator) const { return false; }
 };
 
 template<typename F> auto generate(F&& func)
