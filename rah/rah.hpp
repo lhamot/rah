@@ -461,6 +461,54 @@ inline auto join()
 	return make_pipeable([](auto&& range) {return join(range); });
 }
 
+// ********************************** cycle ********************************************************
+
+template<typename R>
+struct cycle_iterator : iterator_facade<cycle_iterator<R>, range_ref_type_t<R>, RAH_STD::forward_iterator_tag>
+{
+	R range_;
+	using Iterator = range_begin_type_t<R>;
+	Iterator beginIter_;
+	Iterator endIter_;
+	Iterator iter_;
+
+	template<typename U>
+	explicit cycle_iterator(U&& range)
+		: range_(RAH_STD::forward<U>(range))
+		, beginIter_(begin(range))
+		, endIter_(end(range))
+		, iter_(beginIter_)
+	{
+	}
+
+	void increment()
+	{
+		++iter_;
+		while (iter_ == endIter_)
+			iter_ = begin(range_);
+	}
+	auto dereference() const ->decltype(*iter_) { return *iter_; }
+	bool equal(cycle_iterator other) const
+	{
+			return false;
+	}
+};
+
+template<typename R> auto cycle(R&& range)
+{
+	auto rangeRef = range | RAH_NAMESPACE::view::all();
+	using iterator_type = cycle_iterator<std::remove_reference_t<decltype(rangeRef)>>;
+
+	iterator_type b(rangeRef);
+	iterator_type e(rangeRef);
+	return make_iterator_range(b, e);
+}
+
+inline auto cycle()
+{
+	return make_pipeable([](auto&& range) {return cycle(range); });
+}
+
 // ********************************** generate ****************************************************
 
 /// @see rah::generate

@@ -190,6 +190,26 @@ int main()
 	}
 
 	{
+		/// [cycle]
+		std::vector<int> in{ 0, 1, 2 };
+		auto cy = rah::view::cycle(in);
+		std::vector<int> out;
+		std::copy_n(begin(cy), 8, std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 0, 1, 2, 0, 1 }));
+		/// [cycle]
+	}
+
+	{
+		/// [cycle_pipeable]
+		std::vector<int> in{ 0, 1, 2 };
+		auto cy = in | rah::view::cycle();
+		std::vector<int> out;
+		std::copy_n(begin(cy), 8, std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 0, 1, 2, 0, 1 }));
+		/// [cycle_pipeable]
+	}
+
+	{
 		/// [repeat]
 		std::vector<int> out;
 		auto range = rah::view::repeat(42);
