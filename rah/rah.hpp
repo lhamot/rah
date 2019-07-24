@@ -411,11 +411,13 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		, subRangeIter_(subRangeIter)
 		, subRangeEnd_(subRangeEnd)
 	{
+		if (rangeIter_ == end(range_))
+			return;
+		next_valid();
 	}
 
-	void increment()
+	void next_valid()
 	{
-		++subRangeIter_;
 		while (subRangeIter_ == subRangeEnd_)
 		{
 			++rangeIter_;
@@ -427,6 +429,12 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 				subRangeEnd_ = end(*rangeIter_);
 			}
 		}
+	}
+
+	void increment()
+	{
+		++subRangeIter_;
+		next_valid();
 	}
 	auto dereference() const ->decltype(*subRangeIter_) { return *subRangeIter_; }
 	bool equal(join_iterator other) const
@@ -461,6 +469,91 @@ template<typename R> auto join(R&& range_of_ranges)
 inline auto join()
 {
 	return make_pipeable([](auto&& range) {return join(range); });
+}
+
+// ********************************** for_each ****************************************************
+
+template<typename R, typename F, typename SubRangeType = decltype(fake<F>()(*begin(fake<R>())))>
+struct for_each_iterator : iterator_facade<for_each_iterator<R, F>, range_ref_type_t<SubRangeType>, RAH_STD::forward_iterator_tag>
+{
+	R range_;
+	F func_;
+	using Iterator1 = range_begin_type_t<R>;
+	using SubRange = SubRangeType;
+	using Iterator2 = range_begin_type_t<SubRange>;
+	Iterator1 rangeIter_;
+	Iterator2 subRangeIter_;
+	Iterator2 subRangeEnd_;
+
+	template<typename U, typename F2>
+	for_each_iterator(U&& range, F2&& func, Iterator1 rangeIter, Iterator2 subRangeIter = Iterator2(), Iterator2 subRangeEnd = Iterator2())
+		: range_(RAH_STD::forward<U>(range))
+		, func_(RAH_STD::forward<F2>(func))
+		, rangeIter_(rangeIter)
+		, subRangeIter_(subRangeIter)
+		, subRangeEnd_(subRangeEnd)
+	{
+		if (rangeIter_ == end(range_))
+			return;
+		next_valid();
+	}
+
+	void next_valid()
+	{
+		while (subRangeIter_ == subRangeEnd_)
+		{
+			++rangeIter_;
+			if (rangeIter_ == end(range_))
+				return;
+			else
+			{
+				auto subRange = func_(*rangeIter_);
+				subRangeIter_ = begin(subRange);
+				subRangeEnd_ = end(subRange);
+			}
+		}
+	}
+
+	void increment()
+	{
+		++subRangeIter_;
+		next_valid();
+	}
+	auto dereference() const ->decltype(*subRangeIter_) { return *subRangeIter_; }
+	bool equal(for_each_iterator other) const
+	{
+		if (rangeIter_ == end(range_))
+			return rangeIter_ == other.rangeIter_;
+		else
+			return rangeIter_ == other.rangeIter_ && subRangeIter_ == other.subRangeIter_;
+	}
+};
+
+template<typename R, typename F> auto for_each(R&& range, F&& func)
+{
+	auto rangeRef = range | RAH_NAMESPACE::view::all();
+	using iterator_type = for_each_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>, RAH_STD::remove_reference_t<F>>;
+	auto rangeBegin = begin(rangeRef);
+	auto rangeEnd = end(rangeRef);
+	if (rangeBegin == rangeEnd)
+	{
+		iterator_type b(rangeRef, func, rangeBegin);
+		iterator_type e(rangeRef, func, rangeEnd);
+		return make_iterator_range(b, e);
+	}
+	else
+	{
+		auto subRange = func(*rangeBegin);
+		iterator_type b(rangeRef, func, rangeBegin, begin(subRange), end(subRange));
+		iterator_type e(rangeRef, func, rangeEnd);
+		return make_iterator_range(b, e);
+	}
+}
+
+template<typename F>
+inline auto for_each(F&& func)
+{
+	return make_pipeable([=](auto&& range) {return rah::view::for_each(range, func); });
 }
 
 // ********************************** cycle ********************************************************
