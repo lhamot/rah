@@ -546,7 +546,7 @@ private:
 	T const* getPtr() const { return (T const*)&value_; }
 	void destruct_value() { get().~T(); }
 
-	std::aligned_storage_t<sizeof(T), std::alignment_of_v<T>> value_;
+	std::aligned_storage_t<sizeof(T), std::alignment_of<T>::value> value_;
 	bool is_allocated_ = false;
 };
 }
