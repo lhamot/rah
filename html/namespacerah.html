@@ -310,6 +310,14 @@ Functions</h2></td></tr>
 <tr class="memitem:ab3873d79b7f878223f24062ba562eba9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ab3873d79b7f878223f24062ba562eba9">copy</a> (R2 &amp;&amp;out)</td></tr>
 <tr class="memdesc:ab3873d79b7f878223f24062ba562eba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy in range into an other.  <a href="#ab3873d79b7f878223f24062ba562eba9">More...</a><br /></td></tr>
 <tr class="separator:ab3873d79b7f878223f24062ba562eba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6edf0b665289e26018fa3457e25cd6c"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename V &gt; </td></tr>
+<tr class="memitem:ad6edf0b665289e26018fa3457e25cd6c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ad6edf0b665289e26018fa3457e25cd6c">fill</a> (R1 &amp;&amp;in, V &amp;&amp;value)</td></tr>
+<tr class="memdesc:ad6edf0b665289e26018fa3457e25cd6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the given value to the elements in the range [first, last)  <a href="#ad6edf0b665289e26018fa3457e25cd6c">More...</a><br /></td></tr>
+<tr class="separator:ad6edf0b665289e26018fa3457e25cd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc470cd5701a27ad3388c1b1d07d705"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a4dc470cd5701a27ad3388c1b1d07d705"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a4dc470cd5701a27ad3388c1b1d07d705">fill</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a4dc470cd5701a27ad3388c1b1d07d705"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the given value to the elements in the range [first, last)  <a href="#a4dc470cd5701a27ad3388c1b1d07d705">More...</a><br /></td></tr>
+<tr class="separator:a4dc470cd5701a27ad3388c1b1d07d705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2734b7f57efb773c6df8ac55b9d040cd"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename R2 &gt; </td></tr>
 <tr class="memitem:a2734b7f57efb773c6df8ac55b9d040cd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a2734b7f57efb773c6df8ac55b9d040cd">back_insert</a> (R1 &amp;&amp;in, R2 &amp;&amp;out)</td></tr>
 <tr class="memdesc:a2734b7f57efb773c6df8ac55b9d040cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert <em>in</em> in back of <em>front</em>  <a href="#a2734b7f57efb773c6df8ac55b9d040cd">More...</a><br /></td></tr>
@@ -1298,6 +1306,61 @@ template&lt;typename T &gt; </div>
 
 <p>Used in decltype to get an instance of a type. </p>
 
+</div>
+</div>
+<a id="ad6edf0b665289e26018fa3457e25cd6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6edf0b665289e26018fa3457e25cd6c">&#9670;&nbsp;</a></span>fill() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R1 , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::fill </td>
+          <td>(</td>
+          <td class="paramtype">R1 &amp;&amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns the given value to the elements in the range [first, last) </p>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; out{ 0, 0, 0, 4, 5 };</div><div class="line">        <span class="comment">// std::vector&lt;int&gt; out{ 0, 0 }; // Trigger an assert</span></div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(<a class="code" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">rah::make_iterator_range</a>(<a class="code" href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">rah::copy</a>(in, out), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(out)) | <a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(std::initializer_list&lt;int&gt;({ 4, 5 })));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(out == (std::vector&lt;int&gt;{ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a4dc470cd5701a27ad3388c1b1d07d705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc470cd5701a27ad3388c1b1d07d705">&#9670;&nbsp;</a></span>fill() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::fill </td>
+          <td>(</td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns the given value to the elements in the range [first, last) </p>
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; out{ 0, 0, 0, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> iter = in | <a class="code" href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">rah::copy</a>(out);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>((<a class="code" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">rah::make_iterator_range</a>(iter, <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(out)) | <a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(std::initializer_list&lt;int&gt;{ 4, 5 })));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(out == (std::vector&lt;int&gt;{ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a7c7d4f08068e85923f475a069c3daeb7"></a>

@@ -20,10 +20,55 @@
 {\footnotesize template$<$typename C , typename U\+R\+BG $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_ab9352bcbc01fd4fa9eeba64766fa32b3}{shuffle}} (C \&\&container, U\+R\+BG \&\&g)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename U\+R\+BG $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_add6b8e704a8e603302290792a45a5c06}{shuffle}} (U\+R\+BG \&\&g)
-\begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R1 , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_afee3c0ce8604f13a4e8a6f1975d335f6}{fill}} (R1 \&\&in, V \&\&value)
+\begin{DoxyCompactList}\small\item\em Assigns the given value to the elements in the range \mbox{[}first, last) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a551824ac5386f3feb4c54ca097b76b92}{fill}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Assigns the given value to the elements in the range \mbox{[}first, last) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{namespacerah_1_1action_afee3c0ce8604f13a4e8a6f1975d335f6}\label{namespacerah_1_1action_afee3c0ce8604f13a4e8a6f1975d335f6}} 
+\index{rah::action@{rah::action}!fill@{fill}}
+\index{fill@{fill}!rah::action@{rah::action}}
+\subsubsection{\texorpdfstring{fill()}{fill()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R1 , typename V $>$ \\
+auto rah\+::action\+::fill (\begin{DoxyParamCaption}\item[{R1 \&\&}]{in,  }\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Assigns the given value to the elements in the range \mbox{[}first, last) 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3 \};}
+\DoxyCodeLine{        std::vector<int> out\{ 0, 0, 0, 4, 5 \};}
+\DoxyCodeLine{        \textcolor{comment}{// std::vector<int> out\{ 0, 0 \}; // Trigger an assert}}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah::make\_iterator\_range}}(\mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah::copy}}(in, out), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>(\{ 4, 5 \})));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<int>\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1action_a551824ac5386f3feb4c54ca097b76b92}\label{namespacerah_1_1action_a551824ac5386f3feb4c54ca097b76b92}} 
+\index{rah::action@{rah::action}!fill@{fill}}
+\index{fill@{fill}!rah::action@{rah::action}}
+\subsubsection{\texorpdfstring{fill()}{fill()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename V $>$ \\
+auto rah\+::action\+::fill (\begin{DoxyParamCaption}\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Assigns the given value to the elements in the range \mbox{[}first, last) 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3 \};}
+\DoxyCodeLine{        std::vector<int> out\{ 0, 0, 0, 4, 5 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah::copy}}(out);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((\mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah::make\_iterator\_range}}(iter, \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>\{ 4, 5 \})));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<int>\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}\label{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}} 
 \index{rah::action@{rah::action}!remove\_if@{remove\_if}}
 \index{remove\_if@{remove\_if}!rah::action@{rah::action}}

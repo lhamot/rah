@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type',['type',['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4_1_1pointer__type.html#a6dfc5e7e50df83f855dd5e3478f122a5',1,'rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;::pointer_type::type()'],['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4_1_1pointer__type_3_01_t_01_6_01_4.html#ab3c8d96b3dedfcf07cab8889136ca353',1,'rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;::pointer_type&lt; T &amp; &gt;::type()']]]
+  ['subrange',['SubRange',['../structrah_1_1view_1_1for__each__iterator.html#a468008aa3006424aa1a71f7ca6a5d8bd',1,'rah::view::for_each_iterator']]]
 ];

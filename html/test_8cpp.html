@@ -90,6 +90,8 @@ $(function() {
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_what_is_it.html">WhatIsIt&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_what_is.html">WhatIs&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -164,7 +166,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #CONDITION &lt;&lt; std::endl; \</div><div class="line">if(CONDITION) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div></div><!-- fragment -->
+<b>Value:</b><div class="fragment"><div class="line">{ \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #CONDITION &lt;&lt; std::endl; \</div><div class="line">    if (CONDITION) \</div><div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">    else \</div><div class="line">        {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort(); } \</div><div class="line">}</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a6dfa1ab8c6c66d07f06143ad32241d72"></a>
@@ -192,9 +194,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">if(<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a>(<a class="code" href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">else \</div><div class="line">    {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort();}</div><div class="ttc" id="test_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> test.cpp:36</div></div>
-<div class="ttc" id="namespacerah_html_aaf7abb6066c8adfe6959691c3a3ea4e2"><div class="ttname"><a href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a></div><div class="ttdeci">bool all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah.hpp:1091</div></div>
-<div class="ttc" id="namespacerah_1_1view_html_a5b9cacbf101962d95221b591d7f11026"><div class="ttname"><a href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah.hpp:712</div></div>
+<b>Value:</b><div class="fragment"><div class="line">{ \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; = &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">    if (<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a>(<a class="code" href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">    else \</div><div class="line">        {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort(); } \</div><div class="line">}</div><div class="ttc" id="test_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> test.cpp:36</div></div>
+<div class="ttc" id="namespacerah_html_aaf7abb6066c8adfe6959691c3a3ea4e2"><div class="ttname"><a href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a></div><div class="ttdeci">bool all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah.hpp:1322</div></div>
+<div class="ttc" id="namespacerah_1_1view_html_a5b9cacbf101962d95221b591d7f11026"><div class="ttname"><a href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah.hpp:943</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -258,10 +260,18 @@ template&lt;typename T &gt; </div>
 <p>[join]</p>
 <p>[join_pipeable]</p>
 <p>[join_pipeable]</p>
+<p>[for_each]</p>
+<p>[for_each]</p>
+<p>[for_each_pipeable]</p>
+<p>[for_each_pipeable]</p>
 <p>[generate]</p>
 <p>[generate]</p>
 <p>[generate_n]</p>
 <p>[generate_n]</p>
+<p>[cycle]</p>
+<p>[cycle]</p>
+<p>[cycle_pipeable]</p>
+<p>[cycle_pipeable]</p>
 <p>[repeat]</p>
 <p>[repeat]</p>
 <p>[counted]</p>
@@ -382,6 +392,10 @@ template&lt;typename T &gt; </div>
 <p>[<a class="el" href="namespacerah.html#a550a133fe8c6de600a83959c82a0c592" title="Copies the elements for which the predicate pred returns true.">rah::copy_if</a>]</p>
 <p>[rah::copy_if_pipeable]</p>
 <p>[rah::copy_if_pipeable]</p>
+<p>[<a class="el" href="namespacerah.html#ad6edf0b665289e26018fa3457e25cd6c" title="Assigns the given value to the elements in the range [first, last)">rah::fill</a>]</p>
+<p>[<a class="el" href="namespacerah.html#ad6edf0b665289e26018fa3457e25cd6c" title="Assigns the given value to the elements in the range [first, last)">rah::fill</a>]</p>
+<p>[rah::fill_pipeable]</p>
+<p>[rah::fill_pipeable]</p>
 <p>[<a class="el" href="namespacerah.html#a0698f952bc3c4f1961929bbddb5812fe" title="Make a range which insert into the back of the a container.">rah::back_inserter</a>]</p>
 <p>[<a class="el" href="namespacerah.html#a0698f952bc3c4f1961929bbddb5812fe" title="Make a range which insert into the back of the a container.">rah::back_inserter</a>]</p>
 <p>[<a class="el" href="namespacerah.html#a2734b7f57efb773c6df8ac55b9d040cd" title="Insert in in back of front">rah::back_insert</a>]</p>
@@ -463,7 +477,9 @@ template&lt;typename T &gt; </div>
 <p>[rah::view::sort_pred]</p>
 <p>[rah::view::sort_pred]</p>
 <p>[rah::view::sort_pred_pipeable]</p>
-<p>[rah::view::sort_pred_pipeable] </p>
+<p>[rah::view::sort_pred_pipeable]</p>
+<p>[rah::actions::fill]</p>
+<p>[rah::actions::fill] </p>
 
 </div>
 </div>

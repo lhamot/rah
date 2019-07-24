@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zip_5fiterator',['zip_iterator',['../structrah_1_1view_1_1zip__iterator.html',1,'rah::view']]]
+  ['whatis',['WhatIs',['../struct_what_is.html',1,'']]],
+  ['whatisit',['WhatIsIt',['../struct_what_is_it.html',1,'']]]
 ];

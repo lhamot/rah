@@ -80,7 +80,7 @@ $(function() {
 : <a class="el" href="structrah_1_1back__insert__iterator.html#a7c208b6bee5af4ca1f87a0a52df8069c">rah::back_insert_iterator&lt; C &gt;</a>
 </li>
 <li>begin()
-: <a class="el" href="structrah_1_1iterator__range.html#a1281848b740db43274f5be412c1a83f4">rah::iterator_range&lt; I &gt;</a>
+: <a class="el" href="structrah_1_1iterator__range.html#a8e9c129ae0443c763ec87748add1b8fa">rah::iterator_range&lt; I &gt;</a>
 </li>
 </ul>
 
@@ -93,7 +93,10 @@ $(function() {
 : <a class="el" href="structrah_1_1view_1_1concat__iterator.html#a45e7ea9b72e7df5390a2ae09a6923d11">rah::view::concat_iterator&lt; IterPair, V &gt;</a>
 </li>
 <li>counted_iterator()
-: <a class="el" href="structrah_1_1view_1_1counted__iterator.html#aa26e9c047e175303c296758316634890">rah::view::counted_iterator&lt; I &gt;</a>
+: <a class="el" href="structrah_1_1view_1_1counted__iterator.html#a73f275166ac5f41bd93d96ccab15eab0">rah::view::counted_iterator&lt; I &gt;</a>
+</li>
+<li>cycle_iterator()
+: <a class="el" href="structrah_1_1view_1_1cycle__iterator.html#a69b737bdbd97194bb5cfc0470fd60e58">rah::view::cycle_iterator&lt; R &gt;</a>
 </li>
 </ul>
 
@@ -112,7 +115,9 @@ $(function() {
 : <a class="el" href="structrah_1_1view_1_1chunk__iterator.html#ad552c568bb914a6107bdcb19a5b9aa88">rah::view::chunk_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1concat__iterator.html#a8449f70baf374fb27f6cf7dbb80e2d17">rah::view::concat_iterator&lt; IterPair, V &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1counted__iterator.html#aa0478a9f3d2083f2cd9c42d32e8e4dd5">rah::view::counted_iterator&lt; I &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1cycle__iterator.html#a06349419766f9078983fa3db221a3bd8">rah::view::cycle_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1filter__iterator.html#a14c5ce038b3e25230cb8e837705f56db">rah::view::filter_iterator&lt; R, F &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1for__each__iterator.html#a9204ed8495c7cb031758e53e4b451f4f">rah::view::for_each_iterator&lt; R, F, SubRangeType &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1generate__iterator.html#ab7b0cf4a8f45cfd67278935bd9a39c13">rah::view::generate_iterator&lt; F &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1iota__iterator.html#ae31c733c52f77c7c199802db6638541d">rah::view::iota_iterator&lt; T &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1join__iterator.html#af0786d44ba77073702b8d3c856232ffa">rah::view::join_iterator&lt; R &gt;</a>
@@ -139,8 +144,10 @@ $(function() {
 : <a class="el" href="structrah_1_1view_1_1chunk__iterator.html#a30a848e24020b169cf18626b2034adaf">rah::view::chunk_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1concat__iterator.html#a6e8021ecde205f2ceba2c167a6954d05">rah::view::concat_iterator&lt; IterPair, V &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1counted__iterator.html#a71ee9eea167eec16b04373885dbff741">rah::view::counted_iterator&lt; I &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1cycle__iterator.html#a9e2138807dd1c35fbc202b05fa0dd933">rah::view::cycle_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1filter__iterator.html#a4ab0c322842146d3011ae7c88deb82f7">rah::view::filter_iterator&lt; R, F &gt;</a>
-, <a class="el" href="structrah_1_1view_1_1generate__iterator.html#a8cd374b2e2f6f9e9d3fc841140000f57">rah::view::generate_iterator&lt; F &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1for__each__iterator.html#a233240f479d09d32295d6a244895485c">rah::view::for_each_iterator&lt; R, F, SubRangeType &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1generate__iterator.html#acd6b1f8f7d75f1106a6046b3baee4796">rah::view::generate_iterator&lt; F &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1iota__iterator.html#ada1691e363efa9b5c945a302296e63d5">rah::view::iota_iterator&lt; T &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1join__iterator.html#a76c4e51e7c191e189e01d15eff2b7055">rah::view::join_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1repeat__iterator.html#ab42103684163bf38275999ff908d3113">rah::view::repeat_iterator&lt; V &gt;</a>
@@ -155,12 +162,25 @@ $(function() {
 <li>filter_iterator()
 : <a class="el" href="structrah_1_1view_1_1filter__iterator.html#a31543c024a816c4f3e8fc8937b2a9214">rah::view::filter_iterator&lt; R, F &gt;</a>
 </li>
+<li>for_each_iterator()
+: <a class="el" href="structrah_1_1view_1_1for__each__iterator.html#a99d35e874f60eb4765142153ade5f261">rah::view::for_each_iterator&lt; R, F, SubRangeType &gt;</a>
+</li>
 </ul>
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>generate_iterator()
 : <a class="el" href="structrah_1_1view_1_1generate__iterator.html#a407696209d96fe38234970a91d23e35f">rah::view::generate_iterator&lt; F &gt;</a>
+</li>
+<li>get()
+: <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#aec59d2702d103ac361def945f46b626b">rah::view::details::optional&lt; T &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_h"></a>- h -</h3><ul>
+<li>has_value()
+: <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#a0d9e2223f4ef142e49b25d6553b306f3">rah::view::details::optional&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -170,7 +190,9 @@ $(function() {
 : <a class="el" href="structrah_1_1view_1_1chunk__iterator.html#a5159787ea568a933e219a9218daf3e61">rah::view::chunk_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1concat__iterator.html#a6301909457da06a9894f4681353442b4">rah::view::concat_iterator&lt; IterPair, V &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1counted__iterator.html#a8113f67743f49650c0b4c872bcfd560e">rah::view::counted_iterator&lt; I &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1cycle__iterator.html#afa27786b512afe924d063245d7bdc3ea">rah::view::cycle_iterator&lt; R &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1filter__iterator.html#a63278a452be5e546e6fb3aa0b1a90bfb">rah::view::filter_iterator&lt; R, F &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1for__each__iterator.html#aff4bef7aa6d6e667d2b364bb4e0108f7">rah::view::for_each_iterator&lt; R, F, SubRangeType &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1generate__iterator.html#aeb0fc0db74bda811fe5d7cb8c6efe1e0">rah::view::generate_iterator&lt; F &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1iota__iterator.html#a52be6587654c9783137bf31d800f315d">rah::view::iota_iterator&lt; T &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1join__iterator.html#a4f81464b6ff2707bb21d2bbd409c4f4d">rah::view::join_iterator&lt; R &gt;</a>
@@ -180,7 +202,7 @@ $(function() {
 , <a class="el" href="structrah_1_1view_1_1zip__iterator.html#a156b181d725c31af3c34180806d6428e">rah::view::zip_iterator&lt; IterTuple &gt;</a>
 </li>
 <li>iota_iterator()
-: <a class="el" href="structrah_1_1view_1_1iota__iterator.html#a7807733a9a9609f8b9652e270551dc9b">rah::view::iota_iterator&lt; T &gt;</a>
+: <a class="el" href="structrah_1_1view_1_1iota__iterator.html#ac6bb0b67f8d778854c3cb25aec3e9160">rah::view::iota_iterator&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -192,10 +214,19 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>next_valid()
+: <a class="el" href="structrah_1_1view_1_1for__each__iterator.html#a7651c890dd6d935f617c8f0565f8c6f3">rah::view::for_each_iterator&lt; R, F, SubRangeType &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1join__iterator.html#a6b3ef13305f87d011e2fecdb28b5dec6">rah::view::join_iterator&lt; R &gt;</a>
+</li>
+</ul>
+
+
 <h3><a id="index_o"></a>- o -</h3><ul>
 <li>operator *()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4.html#afa0ea1baac6413bf9ef210515e0bf14b">rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;</a>
 , <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1output__iterator__tag_01_4.html#a7131cdd8b9cd56660a11021e4f9708b0">rah::iterator_facade&lt; I, R, std ::output_iterator_tag &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#a551608196fdf9f460b841a41402c827a">rah::view::details::optional&lt; T &gt;</a>
 </li>
 <li>operator Reference const *()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4_1_1pointer__type_1_1proxy.html#abea40ea5825dd18cff0bead252b80889">rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;::pointer_type&lt; Reference &gt;::proxy</a>
@@ -230,6 +261,7 @@ $(function() {
 <li>operator-&gt;()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4.html#a3475cf08817d983a6ca49694e08ce600">rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;</a>
 , <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4_1_1pointer__type_1_1proxy.html#af516164141d8633cadcd5be307a07794">rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;::pointer_type&lt; Reference &gt;::proxy</a>
+, <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#ab8f628f4039e5f3a86262d710b4a885c">rah::view::details::optional&lt; T &gt;</a>
 </li>
 <li>operator&lt;()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1random__access__iterator__tag_01_4.html#a87b6e1c4e4791b8e092923798d075a1e">rah::iterator_facade&lt; I, R, std ::random_access_iterator_tag &gt;</a>
@@ -239,6 +271,7 @@ $(function() {
 </li>
 <li>operator=()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1output__iterator__tag_01_4.html#a0f85444e5a2d769ccffae7a6dce9a70d">rah::iterator_facade&lt; I, R, std ::output_iterator_tag &gt;</a>
+, <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#a0caa7da5df6580090a3ea0ea25887dfa">rah::view::details::optional&lt; T &gt;</a>
 , <a class="el" href="structrah_1_1view_1_1transform__iterator.html#a4589b5fff7d8505b8a569c9d1f863929">rah::view::transform_iterator&lt; R, F &gt;</a>
 </li>
 <li>operator==()
@@ -253,6 +286,9 @@ $(function() {
 </li>
 <li>operator[]()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1random__access__iterator__tag_01_4.html#a1d3b1a0f2ed941c21df33d21ee5789fc">rah::iterator_facade&lt; I, R, std ::random_access_iterator_tag &gt;</a>
+</li>
+<li>optional()
+: <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#a70b8727b22b0d88c9cc823f818286c71">rah::view::details::optional&lt; T &gt;</a>
 </li>
 </ul>
 
@@ -269,13 +305,16 @@ $(function() {
 <li>repeat_iterator()
 : <a class="el" href="structrah_1_1view_1_1repeat__iterator.html#a627f63a3a1ecf8a5dbcc88fb47d4a494">rah::view::repeat_iterator&lt; V &gt;</a>
 </li>
+<li>reset()
+: <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#a3df63c25ba76b31c003c2faa70554ae7">rah::view::details::optional&lt; T &gt;</a>
+</li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>self()
 : <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1bidirectional__iterator__tag_01_4.html#a37ec81c2ce7b850cce5f99fd9341e7e4">rah::iterator_facade&lt; I, R, std ::bidirectional_iterator_tag &gt;</a>
-, <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4.html#a33b9b1880a99615f59a9c9ab653b083e">rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;</a>
+, <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4.html#addc54ad790aa07a1467e3e4a50d60864">rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;</a>
 , <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1output__iterator__tag_01_4.html#a7241639571b436388ac1ccf4131b4ae2">rah::iterator_facade&lt; I, R, std ::output_iterator_tag &gt;</a>
 , <a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1random__access__iterator__tag_01_4.html#a9890aae591eb465ddb7cbc3db9fc6218">rah::iterator_facade&lt; I, R, std ::random_access_iterator_tag &gt;</a>
 </li>
@@ -298,6 +337,13 @@ $(function() {
 <h3><a id="index_z"></a>- z -</h3><ul>
 <li>zip_iterator()
 : <a class="el" href="structrah_1_1view_1_1zip__iterator.html#a8ba7af8259dc507b57d1e3371c7f40a2">rah::view::zip_iterator&lt; IterTuple &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index__7E"></a>- ~ -</h3><ul>
+<li>~optional()
+: <a class="el" href="structrah_1_1view_1_1details_1_1optional.html#ad6f6daea081b390c0348f2907aabcc0b">rah::view::details::optional&lt; T &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

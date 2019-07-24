@@ -87,6 +87,8 @@ Inheritance diagram for rah::view::iota_iterator&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac6bb0b67f8d778854c3cb25aec3e9160"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#ac6bb0b67f8d778854c3cb25aec3e9160">iota_iterator</a> ()=default</td></tr>
+<tr class="separator:ac6bb0b67f8d778854c3cb25aec3e9160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7807733a9a9609f8b9652e270551dc9b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#a7807733a9a9609f8b9652e270551dc9b">iota_iterator</a> (T val, T step)</td></tr>
 <tr class="separator:a7807733a9a9609f8b9652e270551dc9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52be6587654c9783137bf31d800f315d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#a52be6587654c9783137bf31d800f315d">increment</a> ()</td></tr>
@@ -104,9 +106,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7a2ef77dc1a09b2eea42804c2297d057"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#a7a2ef77dc1a09b2eea42804c2297d057">val_</a></td></tr>
+<tr class="memitem:a7a2ef77dc1a09b2eea42804c2297d057"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#a7a2ef77dc1a09b2eea42804c2297d057">val_</a> = T()</td></tr>
 <tr class="separator:a7a2ef77dc1a09b2eea42804c2297d057"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac30abc689d8d82810bf78ceec3893bd2"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#ac30abc689d8d82810bf78ceec3893bd2">step_</a></td></tr>
+<tr class="memitem:ac30abc689d8d82810bf78ceec3893bd2"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html#ac30abc689d8d82810bf78ceec3893bd2">step_</a> = T(1)</td></tr>
 <tr class="separator:ac30abc689d8d82810bf78ceec3893bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -115,8 +117,35 @@ struct rah::view::iota_iterator&lt; T &gt;</h3>
 
 <dl class="section see"><dt>See also</dt><dd>rah::iota </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac6bb0b67f8d778854c3cb25aec3e9160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6bb0b67f8d778854c3cb25aec3e9160">&#9670;&nbsp;</a></span>iota_iterator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = size_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator</a>&lt; T &gt;::<a class="el" href="structrah_1_1view_1_1iota__iterator.html">iota_iterator</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7807733a9a9609f8b9652e270551dc9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7807733a9a9609f8b9652e270551dc9b">&#9670;&nbsp;</a></span>iota_iterator()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7807733a9a9609f8b9652e270551dc9b">&#9670;&nbsp;</a></span>iota_iterator() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,7 +358,7 @@ template&lt;typename T  = size_t&gt; </div>
 template&lt;typename T  = size_t&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">T <a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator</a>&lt; T &gt;::step_</td>
+          <td class="memname">T <a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator</a>&lt; T &gt;::step_ = T(1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -345,7 +374,7 @@ template&lt;typename T  = size_t&gt; </div>
 template&lt;typename T  = size_t&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">T <a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator</a>&lt; T &gt;::val_</td>
+          <td class="memname">T <a class="el" href="structrah_1_1view_1_1iota__iterator.html">rah::view::iota_iterator</a>&lt; T &gt;::val_ = T()</td>
         </tr>
       </table>
 </div><div class="memdoc">

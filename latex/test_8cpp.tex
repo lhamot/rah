@@ -13,6 +13,8 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_what_is_it}{What\+Is\+It$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{struct_what_is}{What\+Is$<$ T $>$}}
 \end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
@@ -72,11 +74,13 @@ auto \mbox{\hyperlink{test_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+el
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"assert : "} << \#CONDITION << std::endl; \(\backslash\)}
-\DoxyCodeLine{if(CONDITION) \(\backslash\)}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
-\DoxyCodeLine{else \(\backslash\)}
-\DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
+\DoxyCodeLine{\{ \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"assert : "} << \#CONDITION << std::endl; \(\backslash\)}
+\DoxyCodeLine{    if (CONDITION) \(\backslash\)}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
+\DoxyCodeLine{    else \(\backslash\)}
+\DoxyCodeLine{        \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort(); \} \(\backslash\)}
+\DoxyCodeLine{\}}
 
 \end{DoxyCode}
 \mbox{\Hypertarget{test_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}\label{test_8cpp_a6dfa1ab8c6c66d07f06143ad32241d72}} 
@@ -87,11 +91,13 @@ auto \mbox{\hyperlink{test_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+el
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"assert : "} << \#RANGE << \textcolor{stringliteral}{" = "} << \#IL << std::endl; \(\backslash\)}
-\DoxyCodeLine{if(\mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_aaf7abb6066c8adfe6959691c3a3ea4e2}{rah::all\_of}}(\mbox{\hyperlink{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
-\DoxyCodeLine{else \(\backslash\)}
-\DoxyCodeLine{    \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort();\}}
+\DoxyCodeLine{\{ \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"assert : "} << \#RANGE << \textcolor{stringliteral}{" = "} << \#IL << std::endl; \(\backslash\)}
+\DoxyCodeLine{    if (\mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_aaf7abb6066c8adfe6959691c3a3ea4e2}{rah::all\_of}}(\mbox{\hyperlink{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
+\DoxyCodeLine{    else \(\backslash\)}
+\DoxyCodeLine{        \{std::cout << \textcolor{stringliteral}{"NOT OK"} << std::endl; abort(); \} \(\backslash\)}
+\DoxyCodeLine{\}}
 
 \end{DoxyCode}
 
@@ -139,6 +145,14 @@ using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\
 
 \mbox{[}join\+\_\+pipeable\mbox{]}
 
+\mbox{[}for\+\_\+each\mbox{]}
+
+\mbox{[}for\+\_\+each\mbox{]}
+
+\mbox{[}for\+\_\+each\+\_\+pipeable\mbox{]}
+
+\mbox{[}for\+\_\+each\+\_\+pipeable\mbox{]}
+
 \mbox{[}generate\mbox{]}
 
 \mbox{[}generate\mbox{]}
@@ -146,6 +160,14 @@ using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\
 \mbox{[}generate\+\_\+n\mbox{]}
 
 \mbox{[}generate\+\_\+n\mbox{]}
+
+\mbox{[}cycle\mbox{]}
+
+\mbox{[}cycle\mbox{]}
+
+\mbox{[}cycle\+\_\+pipeable\mbox{]}
+
+\mbox{[}cycle\+\_\+pipeable\mbox{]}
 
 \mbox{[}repeat\mbox{]}
 
@@ -387,6 +409,14 @@ using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\
 
 \mbox{[}rah\+::copy\+\_\+if\+\_\+pipeable\mbox{]}
 
+\mbox{[}\mbox{\hyperlink{namespacerah_ad6edf0b665289e26018fa3457e25cd6c}{rah\+::fill}}\mbox{]}
+
+\mbox{[}\mbox{\hyperlink{namespacerah_ad6edf0b665289e26018fa3457e25cd6c}{rah\+::fill}}\mbox{]}
+
+\mbox{[}rah\+::fill\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::fill\+\_\+pipeable\mbox{]}
+
 \mbox{[}\mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{rah\+::back\+\_\+inserter}}\mbox{]}
 
 \mbox{[}\mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{rah\+::back\+\_\+inserter}}\mbox{]}
@@ -549,7 +579,11 @@ using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\
 
 \mbox{[}rah\+::view\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
 
-\mbox{[}rah\+::view\+::sort\+\_\+pred\+\_\+pipeable\mbox{]} \mbox{\Hypertarget{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}\label{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}} 
+\mbox{[}rah\+::view\+::sort\+\_\+pred\+\_\+pipeable\mbox{]}
+
+\mbox{[}rah\+::actions\+::fill\mbox{]}
+
+\mbox{[}rah\+::actions\+::fill\mbox{]} \mbox{\Hypertarget{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}\label{test_8cpp_a21b2e8f84ce8ce788faf2ee67adbe83a}} 
 \index{test.cpp@{test.cpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!test.cpp@{test.cpp}}
 \subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}

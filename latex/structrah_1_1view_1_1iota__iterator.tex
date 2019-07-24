@@ -13,6 +13,8 @@ Inheritance diagram for rah\+::view\+::iota\+\_\+iterator$<$ T $>$\+:\begin{figu
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_ac6bb0b67f8d778854c3cb25aec3e9160}{iota\+\_\+iterator}} ()=default
+\item 
 \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_a7807733a9a9609f8b9652e270551dc9b}{iota\+\_\+iterator}} (T val, T step)
 \item 
 void \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_a52be6587654c9783137bf31d800f315d}{increment}} ()
@@ -30,9 +32,9 @@ bool \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_ada1691e363efa9b5c945a
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_a7a2ef77dc1a09b2eea42804c2297d057}{val\+\_\+}}
+T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_a7a2ef77dc1a09b2eea42804c2297d057}{val\+\_\+}} = T()
 \item 
-T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_ac30abc689d8d82810bf78ceec3893bd2}{step\+\_\+}}
+T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator_ac30abc689d8d82810bf78ceec3893bd2}{step\+\_\+}} = T(1)
 \end{DoxyCompactItemize}
 
 
@@ -46,10 +48,17 @@ rah\+::iota
 
 
 \subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structrah_1_1view_1_1iota__iterator_ac6bb0b67f8d778854c3cb25aec3e9160}\label{structrah_1_1view_1_1iota__iterator_ac6bb0b67f8d778854c3cb25aec3e9160}} 
+\index{rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}!iota\_iterator@{iota\_iterator}}
+\index{iota\_iterator@{iota\_iterator}!rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}}
+\subsubsection{\texorpdfstring{iota\_iterator()}{iota\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}$<$ T $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{iota\+\_\+iterator}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
 \mbox{\Hypertarget{structrah_1_1view_1_1iota__iterator_a7807733a9a9609f8b9652e270551dc9b}\label{structrah_1_1view_1_1iota__iterator_a7807733a9a9609f8b9652e270551dc9b}} 
 \index{rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}!iota\_iterator@{iota\_iterator}}
 \index{iota\_iterator@{iota\_iterator}!rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}}
-\subsubsection{\texorpdfstring{iota\_iterator()}{iota\_iterator()}}
+\subsubsection{\texorpdfstring{iota\_iterator()}{iota\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}$<$ T $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{iota\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{T}]{val,  }\item[{T}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -106,14 +115,14 @@ void \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+
 \index{step\_@{step\_}!rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}}
 \subsubsection{\texorpdfstring{step\_}{step\_}}
 {\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
-T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}$<$ T $>$\+::step\+\_\+}
+T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}$<$ T $>$\+::step\+\_\+ = T(1)}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1iota__iterator_a7a2ef77dc1a09b2eea42804c2297d057}\label{structrah_1_1view_1_1iota__iterator_a7a2ef77dc1a09b2eea42804c2297d057}} 
 \index{rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}!val\_@{val\_}}
 \index{val\_@{val\_}!rah::view::iota\_iterator$<$ T $>$@{rah::view::iota\_iterator$<$ T $>$}}
 \subsubsection{\texorpdfstring{val\_}{val\_}}
 {\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
-T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}$<$ T $>$\+::val\+\_\+}
+T \mbox{\hyperlink{structrah_1_1view_1_1iota__iterator}{rah\+::view\+::iota\+\_\+iterator}}$<$ T $>$\+::val\+\_\+ = T()}
 
 
 

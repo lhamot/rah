@@ -9,5 +9,7 @@ var searchData=
   ['count',['count',['../namespacerah.html#aa528865cc4a45d4eb276329554f16b4b',1,'rah::count(R &amp;&amp;range, V &amp;&amp;value)'],['../namespacerah.html#ae8400202fc4005dbade0f479dd556ec3',1,'rah::count(V &amp;&amp;value)']]],
   ['count_5fif',['count_if',['../namespacerah.html#a8e6a379c05d482a52137f5647783fe27',1,'rah::count_if(R &amp;&amp;range, P &amp;&amp;pred)'],['../namespacerah.html#a9e22b56a1f28a353659fed572f33f5a9',1,'rah::count_if(P &amp;&amp;pred)']]],
   ['counted',['counted',['../namespacerah_1_1view.html#a3ef591f1a04b16220fb967ddea5bc1e9',1,'rah::view::counted(R &amp;&amp;range, size_t count)'],['../namespacerah_1_1view.html#af359927d911e400baa372a8cb7817aa2',1,'rah::view::counted(size_t count)']]],
-  ['counted_5fiterator',['counted_iterator',['../structrah_1_1view_1_1counted__iterator.html#aa26e9c047e175303c296758316634890',1,'rah::view::counted_iterator']]]
+  ['counted_5fiterator',['counted_iterator',['../structrah_1_1view_1_1counted__iterator.html#a73f275166ac5f41bd93d96ccab15eab0',1,'rah::view::counted_iterator::counted_iterator()=default'],['../structrah_1_1view_1_1counted__iterator.html#aa26e9c047e175303c296758316634890',1,'rah::view::counted_iterator::counted_iterator(I iter, size_t count)']]],
+  ['cycle',['cycle',['../namespacerah_1_1view.html#a134677bff73afaef4178d2176fac9207',1,'rah::view::cycle(R &amp;&amp;range)'],['../namespacerah_1_1view.html#a01aa6e11262fc655b92631820cba4048',1,'rah::view::cycle()']]],
+  ['cycle_5fiterator',['cycle_iterator',['../structrah_1_1view_1_1cycle__iterator.html#a69b737bdbd97194bb5cfc0470fd60e58',1,'rah::view::cycle_iterator']]]
 ];

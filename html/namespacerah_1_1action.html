@@ -108,8 +108,71 @@ Functions</h2></td></tr>
 <tr class="memitem:add6b8e704a8e603302290792a45a5c06"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#add6b8e704a8e603302290792a45a5c06">shuffle</a> (URBG &amp;&amp;g)</td></tr>
 <tr class="memdesc:add6b8e704a8e603302290792a45a5c06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.  <a href="#add6b8e704a8e603302290792a45a5c06">More...</a><br /></td></tr>
 <tr class="separator:add6b8e704a8e603302290792a45a5c06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee3c0ce8604f13a4e8a6f1975d335f6"><td class="memTemplParams" colspan="2">template&lt;typename R1 , typename V &gt; </td></tr>
+<tr class="memitem:afee3c0ce8604f13a4e8a6f1975d335f6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#afee3c0ce8604f13a4e8a6f1975d335f6">fill</a> (R1 &amp;&amp;in, V &amp;&amp;value)</td></tr>
+<tr class="memdesc:afee3c0ce8604f13a4e8a6f1975d335f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the given value to the elements in the range [first, last)  <a href="#afee3c0ce8604f13a4e8a6f1975d335f6">More...</a><br /></td></tr>
+<tr class="separator:afee3c0ce8604f13a4e8a6f1975d335f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551824ac5386f3feb4c54ca097b76b92"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a551824ac5386f3feb4c54ca097b76b92"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#a551824ac5386f3feb4c54ca097b76b92">fill</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a551824ac5386f3feb4c54ca097b76b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the given value to the elements in the range [first, last)  <a href="#a551824ac5386f3feb4c54ca097b76b92">More...</a><br /></td></tr>
+<tr class="separator:a551824ac5386f3feb4c54ca097b76b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="afee3c0ce8604f13a4e8a6f1975d335f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afee3c0ce8604f13a4e8a6f1975d335f6">&#9670;&nbsp;</a></span>fill() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R1 , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::action::fill </td>
+          <td>(</td>
+          <td class="paramtype">R1 &amp;&amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns the given value to the elements in the range [first, last) </p>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; out{ 0, 0, 0, 4, 5 };</div><div class="line">        <span class="comment">// std::vector&lt;int&gt; out{ 0, 0 }; // Trigger an assert</span></div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(<a class="code" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">rah::make_iterator_range</a>(<a class="code" href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">rah::copy</a>(in, out), <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(out)) | <a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(std::initializer_list&lt;int&gt;({ 4, 5 })));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(out == (std::vector&lt;int&gt;{ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a551824ac5386f3feb4c54ca097b76b92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551824ac5386f3feb4c54ca097b76b92">&#9670;&nbsp;</a></span>fill() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::action::fill </td>
+          <td>(</td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns the given value to the elements in the range [first, last) </p>
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; out{ 0, 0, 0, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> iter = in | <a class="code" href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">rah::copy</a>(out);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>((<a class="code" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">rah::make_iterator_range</a>(iter, <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(out)) | <a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(std::initializer_list&lt;int&gt;{ 4, 5 })));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(out == (std::vector&lt;int&gt;{ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
 <a id="a759ca023dec90e65e7d0e0327ae11af7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a759ca023dec90e65e7d0e0327ae11af7">&#9670;&nbsp;</a></span>remove_if() <span class="overload">[1/2]</span></h2>
 
