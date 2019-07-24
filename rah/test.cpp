@@ -101,6 +101,9 @@ bool is_odd(int val)
 	return val % 2 == 0;
 }
 
+template<typename T>
+struct WhatIs;
+
 int main()
 {
 	{
@@ -145,6 +148,7 @@ int main()
 	{
 		/// [join]
 		std::vector<std::vector<int>> in = {
+			{ },
 			{0, 1},
 			{ },
 			{2, 3, 4},
@@ -172,6 +176,19 @@ int main()
 		std::copy(begin(range), end(range), std::back_inserter(result));
 		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
 		/// [join_pipeable]
+	}
+
+	{
+		/// [for_each]
+		auto createRange = [](int i)
+		{
+			return rah::view::repeat(char('a' + i)) | rah::view::counted(i);
+		};
+		auto range = rah::view::iota(0, 5) | rah::view::for_each(createRange);
+		std::string result;
+		std::copy(begin(range), end(range), std::back_inserter(result));
+		assert(result == "bccdddeeee");
+		/// [for_each]
 	}
 
 	{
