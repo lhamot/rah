@@ -184,7 +184,7 @@ int main()
 		{
 			return rah::view::repeat(char('a' + i)) | rah::view::counted(i);
 		};
-		auto range = rah::view::iota(0, 5) | rah::view::for_each(createRange);
+		auto range = rah::view::for_each(rah::view::iota(0, 5), createRange);
 		std::string result;
 		std::copy(begin(range), end(range), std::back_inserter(result));
 		assert(result == "bccdddeeee");
@@ -192,6 +192,7 @@ int main()
 	}
 
 	{
+		/// [for_each_pipeable]
 		size_t xSize = 2;
 		size_t ySize = 3;
 		auto xyIndexes = [=](size_t y)
@@ -204,12 +205,49 @@ int main()
 		auto range = rah::view::iota<size_t>(0, ySize) | rah::view::for_each(xyIndexes);
 		std::vector<std::tuple<size_t, size_t>> result;
 		std::copy(begin(range), end(range), std::back_inserter(result));
-		//std::vector<std::tuple<size_t, size_t>> reference = 
 		assert(result == (std::vector<std::tuple<size_t, size_t>>{
 				{ 0, 0 }, { 0, 1 },
 				{ 1, 0 }, { 1, 1 },
 				{ 2, 0 }, { 2, 1 }
 		}));
+
+		size_t zSize = 4;
+		auto xyzIndexes = [=](size_t z)
+		{
+			return rah::view::zip(
+				rah::view::repeat(z),
+				rah::view::iota<size_t>(0, ySize) | rah::view::for_each(xyIndexes)
+			);
+		};
+		auto flattenTuple = [](auto&& z_yx)
+		{
+			using namespace std;
+			return std::make_tuple(
+				get<0>(z_yx), 
+				get<0>(get<1>(z_yx)),
+				get<1>(get<1>(z_yx))
+			);
+		};
+		auto rangeZYX = rah::view::iota<size_t>(0, zSize) 
+			| rah::view::for_each(xyzIndexes) 
+			| rah::view::transform(flattenTuple);
+		std::vector<std::tuple<size_t, size_t, size_t>> resultZYX;
+		std::copy(begin(rangeZYX), end(rangeZYX), std::back_inserter(resultZYX));
+		assert(resultZYX == (std::vector<std::tuple<size_t, size_t, size_t>>{
+			{ 0, 0, 0 }, { 0, 0, 1 },
+			{ 0, 1, 0 }, { 0, 1, 1 },
+			{ 0, 2, 0 }, { 0, 2, 1 },
+			{ 1, 0, 0 }, { 1, 0, 1 },
+			{ 1, 1, 0 }, { 1, 1, 1 },
+			{ 1, 2, 0 }, { 1, 2, 1 },
+			{ 2, 0, 0 }, { 2, 0, 1 },
+			{ 2, 1, 0 }, { 2, 1, 1 },
+			{ 2, 2, 0 }, { 2, 2, 1 },
+			{ 3, 0, 0 }, { 3, 0, 1 },
+			{ 3, 1, 0 }, { 3, 1, 1 },
+			{ 3, 2, 0 }, { 3, 2, 1 }
+		}));
+		/// [for_each_pipeable]
 	}
 
 	{

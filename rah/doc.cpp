@@ -256,6 +256,20 @@
 ///
 /// @snippet test.cpp cycle_pipeable
 
+/// @fn rah::view::for_each(R&& range, F&& func)
+/// @brief Lazily applies an unary function to each element in the source range 
+///        that returns another range (possibly empty), flattening the result. 
+///
+/// @snippet test.cpp for_each
+
+/// @fn rah::view::for_each(F&& func)
+/// @brief Lazily applies an unary function to each element in the source range 
+///        that returns another range (possibly empty), flattening the result. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp for_each_pipeable
+
+
 /*! \mainpage rah - A range (header only) library for C++
  *
  * # What is a range
