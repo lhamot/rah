@@ -1330,6 +1330,25 @@ template<typename R2> auto copy(R2&& out)
 	return make_pipeable([=](auto&& in) {return copy(in, all_out); });
 }
 
+// *************************************** fill ***************************************************
+
+/// @brief Assigns the given value to the elements in the range [first, last)
+///
+/// @snippet test.cpp rah::copy
+template<typename R1, typename V> auto fill(R1&& in, V&& value)
+{
+	return RAH_STD::fill(begin(in), end(in), value);
+}
+
+/// @brief Assigns the given value to the elements in the range [first, last)
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::copy_pipeable
+template<typename V> auto fill(V&& value)
+{
+	return make_pipeable([=](auto&& out) {return fill(out, value); });
+}
+
 // *************************************** back_insert ***************************************************
 
 /// @brief Insert *in* in back of *front*
@@ -1703,6 +1722,26 @@ template<typename URBG>
 auto shuffle(URBG&& g)
 {
 	return make_pipeable([&](auto&& range) -> auto&& { return action::shuffle(RAH_STD::forward<decltype(range)>(range), g); });
+}
+
+// *************************************** fill ***************************************************
+
+/// @brief Assigns the given value to the elements in the range [first, last)
+///
+/// @snippet test.cpp rah::copy
+template<typename R1, typename V> auto fill(R1&& in, V&& value)
+{
+	RAH_STD::fill(begin(in), end(in), value);
+	return RAH_STD::forward<R1>(in);
+}
+
+/// @brief Assigns the given value to the elements in the range [first, last)
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::copy_pipeable
+template<typename V> auto fill(V&& value)
+{
+	return make_pipeable([=](auto&& out) {return rah::action::fill(out, value); });
 }
 
 }  // namespace action

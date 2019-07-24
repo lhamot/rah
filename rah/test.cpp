@@ -825,6 +825,29 @@ int main()
 		assert(out == (std::vector<int>{ 2, 4, 5, 6 }));
 		/// [rah::copy_if_pipeable]
 	}
+
+	{
+		/// [rah::fill]
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		rah::fill(out, 42);
+		assert(out == (std::vector<int>{ 42, 42, 42, 42, 42 }));
+		/// [rah::fill]
+	}
+
+	{
+		/// [rah::fill_pipeable]
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		out | rah::fill(42);
+		assert(out == (std::vector<int>{ 42, 42, 42, 42, 42 }));
+		/// [rah::fill_pipeable]
+	}
+
+	{
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		out | rah::view::counted(3) | rah::fill(42);
+		assert(out == (std::vector<int>{ 42, 42, 42, 4, 5 }));
+	}
+
 	{
 		/// [rah::back_inserter]
 		std::vector<int> in{ 1, 2, 3 };
@@ -1175,6 +1198,14 @@ int main()
 			| rah::to_container<std::vector<int>>();
 		assert(result == std::vector<int>({ -2, -4, -6, -8, -10 }));
 	}
+
+	{
+		/// [rah::actions::fill]
+		std::vector<int> out{ 0, 0, 0, 4, 5 };
+		assert(rah::action::fill(out, 42) == (std::vector<int>{ 42, 42, 42, 42, 42 }));
+		/// [rah::actions::fill]
+	}
+
 
 	// ********************************* test return ref and non-ref ******************************
 
