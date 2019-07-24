@@ -472,6 +472,84 @@ inline auto join()
 }
 
 // ********************************** for_each ****************************************************
+namespace details
+{
+template<typename T>
+struct optional
+{
+	optional() = default;
+	optional(optional const& other)
+	{
+		if (other.has_value())
+		{
+			new(getPtr()) T(other.get());
+			is_allocated_ = true;
+		}
+	}
+	optional& operator = (optional const& other)
+	{
+		if (has_value())
+		{
+			if (other.has_value())
+				get() = other().get();
+			else
+				reset();
+		}
+		else
+		{
+			if (other.has_value())
+			{
+				new(getPtr()) T(other.get());
+				is_allocated_ = true;
+			}
+		}
+		return *this;
+	}
+	optional(T const& other)
+	{
+		new(getPtr()) T(other);
+		is_allocated_ = true;
+	}
+	optional& operator=(T const& other)
+	{
+		new(getPtr()) T(other);
+		is_allocated_ = true;
+		return *this;
+	}
+	~optional()
+	{
+		reset();
+	}
+
+	bool has_value() const { return is_allocated_; }
+
+	void reset()
+	{
+		if (is_allocated_)
+		{
+			destruct_value();
+			is_allocated_ = false;
+		}
+	}
+
+	T& get() { assert(is_allocated_); return *getPtr(); }
+
+	T const& get() const { assert(is_allocated_); return *getPtr(); }
+
+	T& operator*() { return get(); }
+	T const& operator*() const { return get(); }
+	T* operator->() { assert(is_allocated_);  return getPtr(); }
+	T const* operator->() const { assert(is_allocated_);  return getPtr(); }
+
+private:
+	T* getPtr() { return (T*)&value_; }
+	T const* getPtr() const { return (T const*)&value_; }
+	void destruct_value() { get().~T(); }
+
+	std::aligned_storage_t<sizeof(T), std::alignment_of_v<T>> value_;
+	bool is_allocated_ = false;
+};
+}
 
 template<typename R, typename F, typename SubRangeType = decltype(fake<F>()(*begin(fake<R>())))>
 struct for_each_iterator : iterator_facade<for_each_iterator<R, F>, range_ref_type_t<SubRangeType>, RAH_STD::forward_iterator_tag>
@@ -482,25 +560,36 @@ struct for_each_iterator : iterator_facade<for_each_iterator<R, F>, range_ref_ty
 	using SubRange = SubRangeType;
 	using Iterator2 = range_begin_type_t<SubRange>;
 	Iterator1 rangeIter_;
-	Iterator2 subRangeIter_;
-	Iterator2 subRangeEnd_;
+	struct SubRangeIterators
+	{
+		Iterator2 subRangeIter_;
+		Iterator2 subRangeEnd_;
+	};
+	details::optional<SubRangeIterators> subRange_;
 
 	template<typename U, typename F2>
-	for_each_iterator(U&& range, F2&& func, Iterator1 rangeIter, Iterator2 subRangeIter = Iterator2(), Iterator2 subRangeEnd = Iterator2())
+	for_each_iterator(U&& range, F2&& func, Iterator1 rangeIter, Iterator2 subRangeIter, Iterator2 subRangeEnd)
 		: range_(RAH_STD::forward<U>(range))
 		, func_(RAH_STD::forward<F2>(func))
 		, rangeIter_(rangeIter)
-		, subRangeIter_(subRangeIter)
-		, subRangeEnd_(subRangeEnd)
+		, subRange_(SubRangeIterators{ subRangeIter , subRangeEnd })
 	{
 		if (rangeIter_ == end(range_))
 			return;
 		next_valid();
 	}
 
+	template<typename U, typename F2>
+	for_each_iterator(U&& range, F2&& func, Iterator1 rangeIter)
+		: range_(RAH_STD::forward<U>(range))
+		, func_(RAH_STD::forward<F2>(func))
+		, rangeIter_(rangeIter)
+	{
+	}
+
 	void next_valid()
 	{
-		while (subRangeIter_ == subRangeEnd_)
+		while (subRange_->subRangeIter_ == subRange_->subRangeEnd_)
 		{
 			++rangeIter_;
 			if (rangeIter_ == end(range_))
@@ -508,24 +597,23 @@ struct for_each_iterator : iterator_facade<for_each_iterator<R, F>, range_ref_ty
 			else
 			{
 				auto subRange = func_(*rangeIter_);
-				subRangeIter_ = begin(subRange);
-				subRangeEnd_ = end(subRange);
+				subRange_ = SubRangeIterators{ begin(subRange) , end(subRange) };
 			}
 		}
 	}
 
 	void increment()
 	{
-		++subRangeIter_;
+		++subRange_->subRangeIter_;
 		next_valid();
 	}
-	auto dereference() const ->decltype(*subRangeIter_) { return *subRangeIter_; }
+	auto dereference() const ->decltype(*subRange_->subRangeIter_) { return *subRange_->subRangeIter_; }
 	bool equal(for_each_iterator other) const
 	{
 		if (rangeIter_ == end(range_))
 			return rangeIter_ == other.rangeIter_;
 		else
-			return rangeIter_ == other.rangeIter_ && subRangeIter_ == other.subRangeIter_;
+			return rangeIter_ == other.rangeIter_ && subRange_->subRangeIter_ == other.subRange_->subRangeIter_;
 	}
 };
 
