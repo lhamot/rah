@@ -192,6 +192,27 @@ int main()
 	}
 
 	{
+		size_t xSize = 2;
+		size_t ySize = 3;
+		auto xyIndexes = [=](size_t y)
+		{
+			return rah::view::zip(
+				rah::view::repeat(y),
+				rah::view::iota<size_t>(0, xSize)
+			);
+		};
+		auto range = rah::view::iota<size_t>(0, ySize) | rah::view::for_each(xyIndexes);
+		std::vector<std::tuple<size_t, size_t>> result;
+		std::copy(begin(range), end(range), std::back_inserter(result));
+		//std::vector<std::tuple<size_t, size_t>> reference = 
+		assert(result == (std::vector<std::tuple<size_t, size_t>>{
+				{ 0, 0 }, { 0, 1 },
+				{ 1, 0 }, { 1, 1 },
+				{ 2, 0 }, { 2, 1 }
+		}));
+	}
+
+	{
 		/// [generate]
 		int y = 1;
 		auto gen = rah::view::generate([&y]() mutable { auto prev = y; y *= 2; return prev; });
