@@ -286,6 +286,109 @@ struct is_lesser
 
 namespace view
 {
+
+namespace details
+{
+
+// Small optional impl for C++14 compilers
+template<typename T> struct optional
+{
+	optional() = default;
+	optional(optional const& other)
+	{
+		if (other.has_value())
+		{
+			new(getPtr()) T(other.get());
+			is_allocated_ = true;
+		}
+	}
+	optional& operator = (optional const& other)
+	{
+		if (has_value())
+		{
+			if (other.has_value())
+				get() = other.get();
+			else
+				reset();
+		}
+		else
+		{
+			if (other.has_value())
+			{
+				new(getPtr()) T(other.get());
+				is_allocated_ = true;
+			}
+		}
+		return *this;
+	}
+	optional& operator = (optional&& other)
+	{
+		if (has_value())
+		{
+			if (other.has_value())
+				get() = RAH_STD::move(other.get());
+			else
+				reset();
+		}
+		else
+		{
+			if (other.has_value())
+			{
+				new(getPtr()) T(RAH_STD::move(other.get()));
+				is_allocated_ = true;
+			}
+		}
+		return *this;
+	}
+	optional(T const& other)
+	{
+		new(getPtr()) T(other);
+		is_allocated_ = true;
+	}
+	optional& operator=(T const& other)
+	{
+		new(getPtr()) T(other);
+		is_allocated_ = true;
+		return *this;
+	}
+	optional& operator=(T&& other)
+	{
+		new(getPtr()) T(RAH_STD::move(other));
+		is_allocated_ = true;
+		return *this;
+	}
+	~optional() { reset(); }
+
+	bool has_value() const { return is_allocated_; }
+
+	void reset()
+	{
+		if (is_allocated_)
+		{
+			destruct_value();
+			is_allocated_ = false;
+		}
+	}
+
+	T& get() { assert(is_allocated_); return *getPtr(); }
+
+	T const& get() const { assert(is_allocated_); return *getPtr(); }
+
+	T& operator*() { return get(); }
+	T const& operator*() const { return get(); }
+	T* operator->() { assert(is_allocated_);  return getPtr(); }
+	T const* operator->() const { assert(is_allocated_);  return getPtr(); }
+
+private:
+	T* getPtr() { return (T*)&value_; }
+	T const* getPtr() const { return (T const*)&value_; }
+	void destruct_value() { get().~T(); }
+
+	std::aligned_storage_t<sizeof(T), std::alignment_of<T>::value> value_;
+	bool is_allocated_ = false;
+};
+}
+
 // ********************************** single ******************************************************
 
 template<typename V>
@@ -401,48 +504,58 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 	using Iterator1 = range_begin_type_t<R>;
 	using Iterator2 = range_begin_type_t<decltype(*fake<Iterator1>())>;
 	Iterator1 rangeIter_;
-	Iterator2 subRangeIter_;
-	Iterator2 subRangeEnd_;
+	struct SubRange
+	{
+		Iterator2 subRangeIter;
+		Iterator2 subRangeEnd;
+	};
+	details::optional<SubRange> subRange_;
 
 	template<typename U>
-	join_iterator(U&& range, Iterator1 rangeIter, Iterator2 subRangeIter = Iterator2(), Iterator2 subRangeEnd = Iterator2())
+	join_iterator(U&& range, Iterator1 rangeIter, Iterator2 subRangeIter, Iterator2 subRangeEnd)
 		: range_(RAH_STD::forward<U>(range))
 		, rangeIter_(rangeIter)
-		, subRangeIter_(subRangeIter)
-		, subRangeEnd_(subRangeEnd)
+		, subRange_(SubRange{ subRangeIter, subRangeEnd })
 	{
 		if (rangeIter_ == end(range_))
 			return;
 		next_valid();
 	}
 
+	template<typename U>
+	join_iterator(U&& range, Iterator1 rangeIter)
+		: range_(RAH_STD::forward<U>(range))
+		, rangeIter_(rangeIter)
+	{
+	}
+
 	void next_valid()
 	{
-		while (subRangeIter_ == subRangeEnd_)
+		while (subRange_->subRangeIter == subRange_->subRangeEnd)
 		{
 			++rangeIter_;
 			if (rangeIter_ == end(range_))
 				return;
 			else
 			{
-				subRangeIter_ = begin(*rangeIter_);
-				subRangeEnd_ = end(*rangeIter_);
+				subRange_->subRangeIter = begin(*rangeIter_);
+				subRange_->subRangeEnd = end(*rangeIter_);
 			}
 		}
 	}
 
 	void increment()
 	{
-		++subRangeIter_;
+		++subRange_->subRangeIter;
 		next_valid();
 	}
-	auto dereference() const ->decltype(*subRangeIter_) { return *subRangeIter_; }
+	auto dereference() const ->decltype(*subRange_->subRangeIter) { return *subRange_->subRangeIter; }
 	bool equal(join_iterator other) const
 	{
 		if (rangeIter_ == end(range_))
 			return rangeIter_ == other.rangeIter_;
 		else
-			return rangeIter_ == other.rangeIter_ && subRangeIter_ == other.subRangeIter_;
+			return rangeIter_ == other.rangeIter_ && subRange_->subRangeIter == other.subRange_->subRangeIter;
 	}
 };
 
@@ -454,14 +567,14 @@ template<typename R> auto join(R&& range_of_ranges)
 	auto rangeEnd = end(rangeRef);
 	if (empty(rangeRef))
 	{
-		join_iterator_type b = { rangeRef, rangeBegin };
-		join_iterator_type e = { rangeRef, rangeEnd };
+		join_iterator_type b(rangeRef, rangeBegin);
+		join_iterator_type e(rangeRef, rangeEnd);
 		return make_iterator_range(b, e);
 	}
 	else
 	{
 		join_iterator_type b(rangeRef, rangeBegin, begin(*rangeBegin), end(*rangeBegin));
-		join_iterator_type e = { rangeRef, rangeEnd };
+		join_iterator_type e(rangeRef, rangeEnd);
 		return make_iterator_range(b, e);
 	}
 }
@@ -469,179 +582,6 @@ template<typename R> auto join(R&& range_of_ranges)
 inline auto join()
 {
 	return make_pipeable([](auto&& range) {return join(range); });
-}
-
-// ********************************** for_each ****************************************************
-namespace details
-{
-template<typename T>
-struct optional
-{
-	optional() = default;
-	optional(optional const& other)
-	{
-		if (other.has_value())
-		{
-			new(getPtr()) T(other.get());
-			is_allocated_ = true;
-		}
-	}
-	optional& operator = (optional const& other)
-	{
-		if (has_value())
-		{
-			if (other.has_value())
-				get() = other().get();
-			else
-				reset();
-		}
-		else
-		{
-			if (other.has_value())
-			{
-				new(getPtr()) T(other.get());
-				is_allocated_ = true;
-			}
-		}
-		return *this;
-	}
-	optional(T const& other)
-	{
-		new(getPtr()) T(other);
-		is_allocated_ = true;
-	}
-	optional& operator=(T const& other)
-	{
-		new(getPtr()) T(other);
-		is_allocated_ = true;
-		return *this;
-	}
-	~optional()
-	{
-		reset();
-	}
-
-	bool has_value() const { return is_allocated_; }
-
-	void reset()
-	{
-		if (is_allocated_)
-		{
-			destruct_value();
-			is_allocated_ = false;
-		}
-	}
-
-	T& get() { assert(is_allocated_); return *getPtr(); }
-
-	T const& get() const { assert(is_allocated_); return *getPtr(); }
-
-	T& operator*() { return get(); }
-	T const& operator*() const { return get(); }
-	T* operator->() { assert(is_allocated_);  return getPtr(); }
-	T const* operator->() const { assert(is_allocated_);  return getPtr(); }
-
-private:
-	T* getPtr() { return (T*)&value_; }
-	T const* getPtr() const { return (T const*)&value_; }
-	void destruct_value() { get().~T(); }
-
-	std::aligned_storage_t<sizeof(T), std::alignment_of<T>::value> value_;
-	bool is_allocated_ = false;
-};
-}
-
-template<typename R, typename F, typename SubRangeType = decltype(fake<F>()(*begin(fake<R>())))>
-struct for_each_iterator : iterator_facade<for_each_iterator<R, F>, range_ref_type_t<SubRangeType>, RAH_STD::forward_iterator_tag>
-{
-	R range_;
-	F func_;
-	using Iterator1 = range_begin_type_t<R>;
-	using SubRange = SubRangeType;
-	using Iterator2 = range_begin_type_t<SubRange>;
-	Iterator1 rangeIter_;
-	struct SubRangeIterators
-	{
-		Iterator2 subRangeIter_;
-		Iterator2 subRangeEnd_;
-	};
-	details::optional<SubRangeIterators> subRange_;
-
-	template<typename U, typename F2>
-	for_each_iterator(U&& range, F2&& func, Iterator1 rangeIter, Iterator2 subRangeIter, Iterator2 subRangeEnd)
-		: range_(RAH_STD::forward<U>(range))
-		, func_(RAH_STD::forward<F2>(func))
-		, rangeIter_(rangeIter)
-		, subRange_(SubRangeIterators{ subRangeIter , subRangeEnd })
-	{
-		if (rangeIter_ == end(range_))
-			return;
-		next_valid();
-	}
-
-	template<typename U, typename F2>
-	for_each_iterator(U&& range, F2&& func, Iterator1 rangeIter)
-		: range_(RAH_STD::forward<U>(range))
-		, func_(RAH_STD::forward<F2>(func))
-		, rangeIter_(rangeIter)
-	{
-	}
-
-	void next_valid()
-	{
-		while (subRange_->subRangeIter_ == subRange_->subRangeEnd_)
-		{
-			++rangeIter_;
-			if (rangeIter_ == end(range_))
-				return;
-			else
-			{
-				auto subRange = func_(*rangeIter_);
-				subRange_ = SubRangeIterators{ begin(subRange) , end(subRange) };
-			}
-		}
-	}
-
-	void increment()
-	{
-		++subRange_->subRangeIter_;
-		next_valid();
-	}
-	auto dereference() const ->decltype(*subRange_->subRangeIter_) { return *subRange_->subRangeIter_; }
-	bool equal(for_each_iterator other) const
-	{
-		if (rangeIter_ == end(range_))
-			return rangeIter_ == other.rangeIter_;
-		else
-			return rangeIter_ == other.rangeIter_ && subRange_->subRangeIter_ == other.subRange_->subRangeIter_;
-	}
-};
-
-template<typename R, typename F> auto for_each(R&& range, F&& func)
-{
-	auto rangeRef = range | RAH_NAMESPACE::view::all();
-	using iterator_type = for_each_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>, RAH_STD::remove_reference_t<F>>;
-	auto rangeBegin = begin(rangeRef);
-	auto rangeEnd = end(rangeRef);
-	if (rangeBegin == rangeEnd)
-	{
-		iterator_type b(rangeRef, func, rangeBegin);
-		iterator_type e(rangeRef, func, rangeEnd);
-		return make_iterator_range(b, e);
-	}
-	else
-	{
-		auto subRange = func(*rangeBegin);
-		iterator_type b(rangeRef, func, rangeBegin, begin(subRange), end(subRange));
-		iterator_type e(rangeRef, func, rangeEnd);
-		return make_iterator_range(b, e);
-	}
-}
-
-template<typename F>
-inline auto for_each(F&& func)
-{
-	return make_pipeable([=](auto&& range) {return rah::view::for_each(range, func); });
 }
 
 // ********************************** cycle ********************************************************
@@ -757,6 +697,19 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 template<typename F> auto transform(F&& func)
 {
 	return make_pipeable([=](auto&& range) {return transform(range, func); });
+}
+
+// ********************************** for_each ****************************************************
+
+template<typename R, typename F> auto for_each(R&& range, F&& func)
+{
+	return range | RAH_NAMESPACE::view::transform(func) | RAH_NAMESPACE::view::join();
+}
+
+template<typename F>
+inline auto for_each(F&& func)
+{
+	return make_pipeable([=](auto&& range) {return RAH_NAMESPACE::view::for_each(range, func); });
 }
 
 // ***************************************** slice ************************************************
