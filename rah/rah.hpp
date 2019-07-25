@@ -6,6 +6,10 @@
 //
 #pragma once
 
+#if __has_include("rah_setup.hpp")
+# include "rah_setup.hpp"
+#endif
+
 #include <cassert>
 #include <ciso646>
 
@@ -28,10 +32,6 @@
 #ifndef RAH_STD
 #define RAH_STD std
 #endif
-
-#else
-
-#include "rah_custom_std.hpp"
 
 #endif
 
