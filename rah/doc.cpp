@@ -74,8 +74,13 @@
 /// @endcode
 /// @see rah::view::iota_iterator
 
-/// @fn rah::view::iota(T, T, T)
+/// @fn rah::view::ints(T, T)
 /// @brief Generate a range of sequentially increasing integers
+///
+/// @snippet test.cpp ints
+
+/// @fn rah::view::iota(T, T, T)
+/// @brief Generate a range of sequential integers, increasing by a defined step
 ///
 /// @snippet test.cpp iota
 

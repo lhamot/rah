@@ -445,6 +445,30 @@ inline auto counted(size_t count)
 	return make_pipeable([=](auto&& range) {return counted(range, count); });
 }
 
+// ********************************** ints ********************************************************
+
+/// @see rah::ints
+template<typename T = size_t>
+struct ints_iterator : iterator_facade<ints_iterator<T>, T, RAH_STD::random_access_iterator_tag>
+{
+	T val_ = T();
+
+	ints_iterator() = default;
+	ints_iterator(T val) : val_(val) {}
+
+	void increment() { ++val_; }
+	void advance(intptr_t value) { val_ += T(value); }
+	void decrement() { --val_; }
+	auto distance_to(ints_iterator other) const { return (val_ - other.val_); }
+	auto dereference() const { return val_; }
+	bool equal(ints_iterator other) const { return val_ == other.val_; }
+};
+
+template<typename T = size_t> auto ints(T b = 0, T e = std::numeric_limits<T>::max())
+{
+	return iterator_range<ints_iterator<T>>{ { b }, { e }};
+}
+
 // ********************************** iota ********************************************************
 
 /// @see rah::iota
@@ -468,7 +492,9 @@ struct iota_iterator : iterator_facade<iota_iterator<T>, T, RAH_STD::random_acce
 template<typename T = size_t> auto iota(T b, T e, T step = 1)
 {
 	assert(step != 0);
-	return iterator_range<iota_iterator<T>>{ { b, step}, { e, step }};
+	auto diff = (e - b);
+	diff = ((diff + (step - 1)) / step) * step;
+	return iterator_range<iota_iterator<T>>{ { b, step}, { b + diff, step }};
 }
 
 // ********************************** repeat ******************************************************

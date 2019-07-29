@@ -17,6 +17,7 @@
 #include <ciso646>
 #include <sstream>
 #include <random>
+#include <atomic>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -137,12 +138,49 @@ int main()
 	}
 
 	{
+		/// [ints]
+		std::vector<int> result;
+		for (int i : rah::view::ints(10, 15))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 10, 11, 12, 13, 14 }));
+		/// [ints]
+	}
+
+	{
+		std::vector<int> result;
+		for (int i : rah::view::ints(10) | rah::view::slice(2, 5))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 12, 13, 14 }));
+	}
+
+	{
+		std::vector<size_t> result;
+		for (size_t i : rah::view::ints() | rah::view::slice(2, 5))
+			result.push_back(i);
+		assert(result == std::vector<size_t>({ 2, 3, 4 }));
+	}
+
+	{
 		/// [iota]
 		std::vector<int> result;
-		for (int i : rah::view::iota(10, 20, 2))
+		for (int i : rah::view::iota(10, 19, 2))
 			result.push_back(i);
 		assert(result == std::vector<int>({ 10, 12, 14, 16, 18 }));
 		/// [iota]
+	}
+
+	{
+		std::vector<int> result;
+		for (int i : rah::view::iota(-5, 5, 2))
+			result.push_back(i);
+		assert(result == std::vector<int>({ -5, -3, -1, 1, 3 }));
+	}
+
+	{
+		std::vector<int> result;
+		for (int i : rah::view::iota(-15, -6, 2))
+			result.push_back(i);
+		assert(result == std::vector<int>({ -15, -13, -11, -9, -7 }));
 	}
 
 	{
@@ -1431,6 +1469,49 @@ int main()
 		(iota(0, 100) | enumerate() | slice(10, 15) | retro()),
 		(il<std::tuple<size_t, int>>{ {14, 14}, { 13, 13 }, { 12, 12 }, { 11, 11 }, { 10, 10 } })
 	);
+
+	{
+		using namespace rah;
+		using namespace rah::view;
+		int const width = 5;
+		int const height = 6;
+		int const start = 8;
+		int startX = start % width;
+		int startY = start / width;
+		int const end = 22;
+		int endX = end % width;
+		int endY = end / width;
+		auto getRangeX = [=](int y)
+		{
+			if (y == startY)
+				return std::make_tuple(y, ints(startX, width));
+			else if (y == endY)
+				return std::make_tuple(y, ints(0, endX));
+			else
+				return std::make_tuple(y, ints(0, width));
+		};
+
+		std::vector<std::atomic<int>> test(width * height);
+
+		auto updateRaw = [&](auto&& y_xRange)
+		{
+			auto y = std::get<0>(y_xRange);
+			auto xRange = std::get<1>(y_xRange);
+
+			for (int x : xRange)
+				++test[x + y * width];
+		};
+
+		for (int ySelector : ints(0, 3))
+		{
+			auto range = iota(startY + ySelector, endY + 1, 3) | transform(getRangeX);
+			rah::for_each(range, updateRaw);
+		}
+
+		assert(all_of(test | slice(0, start), [](auto&& val) {return val == 0; }));
+		assert(all_of(test | slice(start, end), [](auto&& val) {return val == 1; }));
+		assert(all_of(test | slice(end, rah::End), [](auto&& val) {return val == 0; }));
+	}
 
 	std::cout << "ALL TEST OK" << std::endl;
 
