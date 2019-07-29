@@ -91,9 +91,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1filter__iterator.html">filter_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1for__each__iterator.html">for_each_iterator</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1generate__iterator.html">generate_iterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1ints__iterator.html">ints_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1iota__iterator.html">iota_iterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,9 +128,13 @@ Functions</h2></td></tr>
 <tr class="memitem:af359927d911e400baa372a8cb7817aa2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#af359927d911e400baa372a8cb7817aa2">counted</a> (size_t <a class="el" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">count</a>)</td></tr>
 <tr class="memdesc:af359927d911e400baa372a8cb7817aa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view containing the <b>count</b> next element of range.  <a href="#af359927d911e400baa372a8cb7817aa2">More...</a><br /></td></tr>
 <tr class="separator:af359927d911e400baa372a8cb7817aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef39fe94e2314d4c61caa5785d6788d5"><td class="memTemplParams" colspan="2">template&lt;typename T  = size_t&gt; </td></tr>
+<tr class="memitem:aef39fe94e2314d4c61caa5785d6788d5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aef39fe94e2314d4c61caa5785d6788d5">ints</a> (T b=0, T e=std::numeric_limits&lt; T &gt;::max())</td></tr>
+<tr class="memdesc:aef39fe94e2314d4c61caa5785d6788d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequentially increasing integers.  <a href="#aef39fe94e2314d4c61caa5785d6788d5">More...</a><br /></td></tr>
+<tr class="separator:aef39fe94e2314d4c61caa5785d6788d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplParams" colspan="2">template&lt;typename T  = size_t&gt; </td></tr>
 <tr class="memitem:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">iota</a> (T b, T e, T step=1)</td></tr>
-<tr class="memdesc:aa5f05009b0c914331b0e5dbe62656b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequentially increasing integers.  <a href="#aa5f05009b0c914331b0e5dbe62656b5a">More...</a><br /></td></tr>
+<tr class="memdesc:aa5f05009b0c914331b0e5dbe62656b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequential integers, increasing by a defined step.  <a href="#aa5f05009b0c914331b0e5dbe62656b5a">More...</a><br /></td></tr>
 <tr class="separator:aa5f05009b0c914331b0e5dbe62656b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89f73d7f0e180d9aea27a9d56ac4a1b3"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
 <tr class="memitem:a89f73d7f0e180d9aea27a9d56ac4a1b3"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a89f73d7f0e180d9aea27a9d56ac4a1b3">repeat</a> (V &amp;&amp;value)</td></tr>
@@ -143,14 +147,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a329ee692640cfffb055b1eb3d49d3d79"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a329ee692640cfffb055b1eb3d49d3d79">join</a> ()</td></tr>
 <tr class="memdesc:a329ee692640cfffb055b1eb3d49d3d79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a range of ranges, join them into a flattened sequence of elements.  <a href="#a329ee692640cfffb055b1eb3d49d3d79">More...</a><br /></td></tr>
 <tr class="separator:a329ee692640cfffb055b1eb3d49d3d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accd387203f5739adf02e728dfe2700e7"><td class="memTemplParams" colspan="2">template&lt;typename R , typename F &gt; </td></tr>
-<tr class="memitem:accd387203f5739adf02e728dfe2700e7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#accd387203f5739adf02e728dfe2700e7">for_each</a> (R &amp;&amp;range, F &amp;&amp;func)</td></tr>
-<tr class="memdesc:accd387203f5739adf02e728dfe2700e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lazily applies an unary function to each element in the source range that returns another range (possibly empty), flattening the result.  <a href="#accd387203f5739adf02e728dfe2700e7">More...</a><br /></td></tr>
-<tr class="separator:accd387203f5739adf02e728dfe2700e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaf43e8d0b5870fccc0ece227c620525"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:abaf43e8d0b5870fccc0ece227c620525"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#abaf43e8d0b5870fccc0ece227c620525">for_each</a> (F &amp;&amp;func)</td></tr>
-<tr class="memdesc:abaf43e8d0b5870fccc0ece227c620525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lazily applies an unary function to each element in the source range that returns another range (possibly empty), flattening the result.  <a href="#abaf43e8d0b5870fccc0ece227c620525">More...</a><br /></td></tr>
-<tr class="separator:abaf43e8d0b5870fccc0ece227c620525"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a134677bff73afaef4178d2176fac9207"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a134677bff73afaef4178d2176fac9207"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a134677bff73afaef4178d2176fac9207">cycle</a> (R &amp;&amp;range)</td></tr>
 <tr class="memdesc:a134677bff73afaef4178d2176fac9207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an infinite range that endlessly repeats the source range.  <a href="#a134677bff73afaef4178d2176fac9207">More...</a><br /></td></tr>
@@ -174,6 +170,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a814771afc1cfedc6418915550bcd5bbd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a814771afc1cfedc6418915550bcd5bbd">transform</a> (F &amp;&amp;func)</td></tr>
 <tr class="memdesc:a814771afc1cfedc6418915550bcd5bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view applying a transformation to each element of the input range.  <a href="#a814771afc1cfedc6418915550bcd5bbd">More...</a><br /></td></tr>
 <tr class="separator:a814771afc1cfedc6418915550bcd5bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accd387203f5739adf02e728dfe2700e7"><td class="memTemplParams" colspan="2">template&lt;typename R , typename F &gt; </td></tr>
+<tr class="memitem:accd387203f5739adf02e728dfe2700e7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#accd387203f5739adf02e728dfe2700e7">for_each</a> (R &amp;&amp;range, F &amp;&amp;func)</td></tr>
+<tr class="memdesc:accd387203f5739adf02e728dfe2700e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lazily applies an unary function to each element in the source range that returns another range (possibly empty), flattening the result.  <a href="#accd387203f5739adf02e728dfe2700e7">More...</a><br /></td></tr>
+<tr class="separator:accd387203f5739adf02e728dfe2700e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaf43e8d0b5870fccc0ece227c620525"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:abaf43e8d0b5870fccc0ece227c620525"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#abaf43e8d0b5870fccc0ece227c620525">for_each</a> (F &amp;&amp;func)</td></tr>
+<tr class="memdesc:abaf43e8d0b5870fccc0ece227c620525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lazily applies an unary function to each element in the source range that returns another range (possibly empty), flattening the result.  <a href="#abaf43e8d0b5870fccc0ece227c620525">More...</a><br /></td></tr>
+<tr class="separator:abaf43e8d0b5870fccc0ece227c620525"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26e48a024bda08769061de4ad6addd9c"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
 <tr class="memitem:a26e48a024bda08769061de4ad6addd9c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a26e48a024bda08769061de4ad6addd9c">slice</a> (R &amp;&amp;range, intptr_t begin_idx, intptr_t end_idx)</td></tr>
 <tr class="memdesc:a26e48a024bda08769061de4ad6addd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view that is a sub-range of a range.  <a href="#a26e48a024bda08769061de4ad6addd9c">More...</a><br /></td></tr>
@@ -791,6 +795,38 @@ template&lt;typename F &gt; </div>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordtype">int</span> y = 1;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#af179430e133efcf7d352b9446365e279">rah::view::generate_n</a>([&amp;y]() <span class="keyword">mutable</span> { <span class="keyword">auto</span> prev = y; y *= 2; <span class="keywordflow">return</span> prev; }, 4))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 1, 2, 4, 8 }));</div></div><!-- fragment -->
 </div>
 </div>
+<a id="aef39fe94e2314d4c61caa5785d6788d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef39fe94e2314d4c61caa5785d6788d5">&#9670;&nbsp;</a></span>ints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T  = size_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">rah::view::ints </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>b</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>e</em> = <code>std::numeric_limits&lt;T&gt;::max()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generate a range of sequentially increasing integers. </p>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#aef39fe94e2314d4c61caa5785d6788d5">rah::view::ints</a>(10, 15))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 10, 11, 12, 13, 14 }));</div></div><!-- fragment -->
+</div>
+</div>
 <a id="aa5f05009b0c914331b0e5dbe62656b5a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5f05009b0c914331b0e5dbe62656b5a">&#9670;&nbsp;</a></span>iota()</h2>
 
@@ -825,8 +861,8 @@ template&lt;typename T  = size_t&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Generate a range of sequentially increasing integers. </p>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">rah::view::iota</a>(10, 20, 2))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 10, 12, 14, 16, 18 }));</div></div><!-- fragment -->
+<p>Generate a range of sequential integers, increasing by a defined step. </p>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; result;</div><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i : <a class="code" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a">rah::view::iota</a>(10, 19, 2))</div><div class="line">            result.push_back(i);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(result == std::vector&lt;int&gt;({ 10, 12, 14, 16, 18 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aa7c2a315fe63cbd431f2e59c75f3be08"></a>

@@ -6,7 +6,7 @@ var indexSectionsWithContent =
   3: "drt",
   4: "abcdefghijmnoprstuz~",
   5: "bcefimprsv",
-  6: "diprstv",
+  6: "diprtv",
   7: "aer",
   8: "r"
 };

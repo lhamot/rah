@@ -10,6 +10,11 @@ Inheritance diagram for rah\+::view\+::join\+\_\+iterator$<$ R $>$\+:\begin{figu
 \includegraphics[height=1.686747cm]{structrah_1_1view_1_1join__iterator}
 \end{center}
 \end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_1_1_sub_range}{Sub\+Range}}
+\end{DoxyCompactItemize}
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,13 +25,15 @@ using \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename U $>$ }\\\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a3413f5a25f3c86b1d85ad9335e6e8e39}{join\+\_\+iterator}} (U \&\&range, \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}} range\+Iter, \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} sub\+Range\+Iter=\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}(), \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} sub\+Range\+End=\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}())
+{\footnotesize template$<$typename U $>$ }\\\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a5a30ddd6e3809e32be7d6dc723c4afe5}{join\+\_\+iterator}} (U \&\&range, \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}} range\+Iter, \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} sub\+Range\+Iter, \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} sub\+Range\+End)
+\item 
+{\footnotesize template$<$typename U $>$ }\\\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a2ba7e5d1fd1ea1e786ca894fe96ffeb4}{join\+\_\+iterator}} (U \&\&range, \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}} range\+Iter)
 \item 
 void \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a6b3ef13305f87d011e2fecdb28b5dec6}{next\+\_\+valid}} ()
 \item 
 void \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a4f81464b6ff2707bb21d2bbd409c4f4d}{increment}} ()
 \item 
-auto \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_af0786d44ba77073702b8d3c856232ffa}{dereference}} () const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a49b089a83af39b5f6893f57ad4a1d81c}{sub\+Range\+Iter\+\_\+}})
+auto \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ac7bc0fcd91d164f86d5813421a08d38a}{dereference}} () const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae9351284af0f64c368606315da0b56a5}{sub\+Range\+\_\+}}-\/$>$sub\+Range\+Iter)
 \item 
 bool \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a76c4e51e7c191e189e01d15eff2b7055}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{join\+\_\+iterator}} other) const
 \end{DoxyCompactItemize}
@@ -37,9 +44,7 @@ R \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ad167fb9c44c21ad59d5acfa9
 \item 
 \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}} \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a754b7bdee5ca2b23868a402c2c3cfcc2}{range\+Iter\+\_\+}}
 \item 
-\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a49b089a83af39b5f6893f57ad4a1d81c}{sub\+Range\+Iter\+\_\+}}
-\item 
-\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a70b890cac5aaa7c6f65f8c8efe369f0d}{sub\+Range\+End\+\_\+}}
+\mbox{\hyperlink{structrah_1_1view_1_1details_1_1optional}{details\+::optional}}$<$ \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_1_1_sub_range}{Sub\+Range}} $>$ \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae9351284af0f64c368606315da0b56a5}{sub\+Range\+\_\+}}
 \end{DoxyCompactItemize}
 
 
@@ -61,23 +66,31 @@ using \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\
 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_a3413f5a25f3c86b1d85ad9335e6e8e39}\label{structrah_1_1view_1_1join__iterator_a3413f5a25f3c86b1d85ad9335e6e8e39}} 
+\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_a5a30ddd6e3809e32be7d6dc723c4afe5}\label{structrah_1_1view_1_1join__iterator_a5a30ddd6e3809e32be7d6dc723c4afe5}} 
 \index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!join\_iterator@{join\_iterator}}
 \index{join\_iterator@{join\_iterator}!rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{join\_iterator()}{join\_iterator()}}
+\subsubsection{\texorpdfstring{join\_iterator()}{join\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 template$<$typename U $>$ \\
-\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{join\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{U \&\&}]{range,  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}}}]{range\+Iter,  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}}]{sub\+Range\+Iter = {\ttfamily \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}()},  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}}]{sub\+Range\+End = {\ttfamily \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{join\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{U \&\&}]{range,  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}}}]{range\+Iter,  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}}]{sub\+Range\+Iter,  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}}}]{sub\+Range\+End }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_a2ba7e5d1fd1ea1e786ca894fe96ffeb4}\label{structrah_1_1view_1_1join__iterator_a2ba7e5d1fd1ea1e786ca894fe96ffeb4}} 
+\index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!join\_iterator@{join\_iterator}}
+\index{join\_iterator@{join\_iterator}!rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{join\_iterator()}{join\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+template$<$typename U $>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{join\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{U \&\&}]{range,  }\item[{\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}}}]{range\+Iter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_af0786d44ba77073702b8d3c856232ffa}\label{structrah_1_1view_1_1join__iterator_af0786d44ba77073702b8d3c856232ffa}} 
+\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_ac7bc0fcd91d164f86d5813421a08d38a}\label{structrah_1_1view_1_1join__iterator_ac7bc0fcd91d164f86d5813421a08d38a}} 
 \index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!dereference@{dereference}}
 \index{dereference@{dereference}!rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}}
 \subsubsection{\texorpdfstring{dereference()}{dereference()}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-auto \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a49b089a83af39b5f6893f57ad4a1d81c}{sub\+Range\+Iter\+\_\+}}) \hspace{0.3cm}{\ttfamily [inline]}}
+auto \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae9351284af0f64c368606315da0b56a5}{sub\+Range\+\_\+}}-\/$>$sub\+Range\+Iter) \hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_a76c4e51e7c191e189e01d15eff2b7055}\label{structrah_1_1view_1_1join__iterator_a76c4e51e7c191e189e01d15eff2b7055}} 
 \index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!equal@{equal}}
@@ -117,19 +130,12 @@ R \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\
 {\footnotesize\ttfamily template$<$typename R $>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1join__iterator_a8b71c6f25eee2915e2a8afc6e024196d}{Iterator1}} \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::range\+Iter\+\_\+}
 
-\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_a70b890cac5aaa7c6f65f8c8efe369f0d}\label{structrah_1_1view_1_1join__iterator_a70b890cac5aaa7c6f65f8c8efe369f0d}} 
-\index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!subRangeEnd\_@{subRangeEnd\_}}
-\index{subRangeEnd\_@{subRangeEnd\_}!rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{subRangeEnd\_}{subRangeEnd\_}}
+\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_ae9351284af0f64c368606315da0b56a5}\label{structrah_1_1view_1_1join__iterator_ae9351284af0f64c368606315da0b56a5}} 
+\index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!subRange\_@{subRange\_}}
+\index{subRange\_@{subRange\_}!rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}}
+\subsubsection{\texorpdfstring{subRange\_}{subRange\_}}
 {\footnotesize\ttfamily template$<$typename R $>$ \\
-\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::sub\+Range\+End\+\_\+}
-
-\mbox{\Hypertarget{structrah_1_1view_1_1join__iterator_a49b089a83af39b5f6893f57ad4a1d81c}\label{structrah_1_1view_1_1join__iterator_a49b089a83af39b5f6893f57ad4a1d81c}} 
-\index{rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}!subRangeIter\_@{subRangeIter\_}}
-\index{subRangeIter\_@{subRangeIter\_}!rah::view::join\_iterator$<$ R $>$@{rah::view::join\_iterator$<$ R $>$}}
-\subsubsection{\texorpdfstring{subRangeIter\_}{subRangeIter\_}}
-{\footnotesize\ttfamily template$<$typename R $>$ \\
-\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_ae03a066174f3422c70d0e3c22e68d9f7}{Iterator2}} \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::sub\+Range\+Iter\+\_\+}
+\mbox{\hyperlink{structrah_1_1view_1_1details_1_1optional}{details\+::optional}}$<$\mbox{\hyperlink{structrah_1_1view_1_1join__iterator_1_1_sub_range}{Sub\+Range}}$>$ \mbox{\hyperlink{structrah_1_1view_1_1join__iterator}{rah\+::view\+::join\+\_\+iterator}}$<$ R $>$\+::sub\+Range\+\_\+}
 
 
 

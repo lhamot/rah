@@ -15,9 +15,8 @@ var searchData=
   ['stream_5finserter_5fiterator',['stream_inserter_iterator',['../structrah_1_1stream__inserter__iterator.html',1,'rah::stream_inserter_iterator&lt; S &gt;'],['../structrah_1_1stream__inserter__iterator.html#a0b096d8edfc691c1fdadd919252ce87d',1,'rah::stream_inserter_iterator::stream_inserter_iterator()']]],
   ['stride',['stride',['../namespacerah_1_1view.html#ad71e78df55f6f9416e2869a8c14f6779',1,'rah::view::stride(R &amp;&amp;range, size_t step)'],['../namespacerah_1_1view.html#abed0df62d7146e5d0905725efab0e40e',1,'rah::view::stride(size_t step)']]],
   ['stride_5fiterator',['stride_iterator',['../structrah_1_1view_1_1stride__iterator.html',1,'rah::view::stride_iterator&lt; R &gt;'],['../structrah_1_1view_1_1stride__iterator.html#a47ddd2ce0f295fa825919f04431d64a9',1,'rah::view::stride_iterator::stride_iterator()']]],
-  ['subrange',['SubRange',['../structrah_1_1view_1_1for__each__iterator.html#a468008aa3006424aa1a71f7ca6a5d8bd',1,'rah::view::for_each_iterator']]],
-  ['subrange_5f',['subRange_',['../structrah_1_1view_1_1for__each__iterator.html#a51f880dad745bc5fc0f5de78353ceb90',1,'rah::view::for_each_iterator']]],
-  ['subrangeend_5f',['subRangeEnd_',['../structrah_1_1view_1_1join__iterator.html#a70b890cac5aaa7c6f65f8c8efe369f0d',1,'rah::view::join_iterator::subRangeEnd_()'],['../structrah_1_1view_1_1for__each__iterator_1_1_sub_range_iterators.html#abf8ca1d5f1f1249de9dd5068f6a41e9f',1,'rah::view::for_each_iterator::SubRangeIterators::subRangeEnd_()']]],
-  ['subrangeiter_5f',['subRangeIter_',['../structrah_1_1view_1_1join__iterator.html#a49b089a83af39b5f6893f57ad4a1d81c',1,'rah::view::join_iterator::subRangeIter_()'],['../structrah_1_1view_1_1for__each__iterator_1_1_sub_range_iterators.html#a0f76c77cd0217895523efc6e30ad08f4',1,'rah::view::for_each_iterator::SubRangeIterators::subRangeIter_()']]],
-  ['subrangeiterators',['SubRangeIterators',['../structrah_1_1view_1_1for__each__iterator_1_1_sub_range_iterators.html',1,'rah::view::for_each_iterator']]]
+  ['subrange',['SubRange',['../structrah_1_1view_1_1join__iterator_1_1_sub_range.html',1,'rah::view::join_iterator']]],
+  ['subrange_5f',['subRange_',['../structrah_1_1view_1_1join__iterator.html#ae9351284af0f64c368606315da0b56a5',1,'rah::view::join_iterator']]],
+  ['subrangeend',['subRangeEnd',['../structrah_1_1view_1_1join__iterator_1_1_sub_range.html#a59768b4f12beb31f228a01dad4618c8c',1,'rah::view::join_iterator::SubRange']]],
+  ['subrangeiter',['subRangeIter',['../structrah_1_1view_1_1join__iterator_1_1_sub_range.html#a4073148b86fc958e754b23af1befce93',1,'rah::view::join_iterator::SubRange']]]
 ];
