@@ -300,6 +300,14 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{rah\+::siz
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_af598cf91c554f6d6938c320578e6bb02}{rah\+::remove\+\_\+if}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah\+::partition}} (R \&\&range, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns {\ttfamily false}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_afeced5adb7a17c0c8f34b64559ddc60c}{rah\+::partition}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{rah\+::stable\+\_\+partition}} (R \&\&range, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns false. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_ae51c8e542493089f60675db2d0018329}{rah\+::stable\+\_\+partition}} (P \&\&pred)
+\item 
 {\footnotesize template$<$typename C , typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a3b055c0e04f784b9abc89a27ef4534dd}{rah\+::erase}} (C \&\&container, R \&\&subrange)
 \begin{DoxyCompactList}\small\item\em Erase a sub-\/range of a given container. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a80ea7a94642c23e9f3db6f6b890f2987}{rah\+::erase}} (R \&\&range)

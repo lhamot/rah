@@ -363,6 +363,20 @@ Functions</h2></td></tr>
 <tr class="memdesc:af598cf91c554f6d6938c320578e6bb02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep at the begining of the range only elements for which pred(elt) is false<br />
 .  <a href="#af598cf91c554f6d6938c320578e6bb02">More...</a><br /></td></tr>
 <tr class="separator:af598cf91c554f6d6938c320578e6bb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97ae3ed90fe486c2dd3a90fee811bcd7"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P &gt; </td></tr>
+<tr class="memitem:a97ae3ed90fe486c2dd3a90fee811bcd7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a97ae3ed90fe486c2dd3a90fee811bcd7">partition</a> (R &amp;&amp;range, P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:a97ae3ed90fe486c2dd3a90fee811bcd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the <b>range</b> in such a way that all elements for which the predicate <b>pred</b> returns <code>true</code> precede the elements for which predicate <b>pred</b> returns <code>false</code>.  <a href="#a97ae3ed90fe486c2dd3a90fee811bcd7">More...</a><br /></td></tr>
+<tr class="separator:a97ae3ed90fe486c2dd3a90fee811bcd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeced5adb7a17c0c8f34b64559ddc60c"><td class="memTemplParams" colspan="2">template&lt;typename P &gt; </td></tr>
+<tr class="memitem:afeced5adb7a17c0c8f34b64559ddc60c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#afeced5adb7a17c0c8f34b64559ddc60c">partition</a> (P &amp;&amp;pred)</td></tr>
+<tr class="separator:afeced5adb7a17c0c8f34b64559ddc60c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac184b21a98515705f9b4845875fb689b"><td class="memTemplParams" colspan="2">template&lt;typename R , typename P &gt; </td></tr>
+<tr class="memitem:ac184b21a98515705f9b4845875fb689b"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ac184b21a98515705f9b4845875fb689b">stable_partition</a> (R &amp;&amp;range, P &amp;&amp;pred)</td></tr>
+<tr class="memdesc:ac184b21a98515705f9b4845875fb689b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorders the elements in the <b>range</b> in such a way that all elements for which the predicate <b>pred</b> returns <code>true</code> precede the elements for which predicate <b>pred</b> returns false.  <a href="#ac184b21a98515705f9b4845875fb689b">More...</a><br /></td></tr>
+<tr class="separator:ac184b21a98515705f9b4845875fb689b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae51c8e542493089f60675db2d0018329"><td class="memTemplParams" colspan="2">template&lt;typename P &gt; </td></tr>
+<tr class="memitem:ae51c8e542493089f60675db2d0018329"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#ae51c8e542493089f60675db2d0018329">stable_partition</a> (P &amp;&amp;pred)</td></tr>
+<tr class="separator:ae51c8e542493089f60675db2d0018329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b055c0e04f784b9abc89a27ef4534dd"><td class="memTemplParams" colspan="2">template&lt;typename C , typename R &gt; </td></tr>
 <tr class="memitem:a3b055c0e04f784b9abc89a27ef4534dd"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a3b055c0e04f784b9abc89a27ef4534dd">erase</a> (C &amp;&amp;container, R &amp;&amp;subrange)</td></tr>
 <tr class="memdesc:a3b055c0e04f784b9abc89a27ef4534dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase a sub-range of a given container.  <a href="#a3b055c0e04f784b9abc89a27ef4534dd">More...</a><br /></td></tr>
@@ -1759,6 +1773,61 @@ template&lt;typename R , typename MakeRange &gt; </div>
 
 </div>
 </div>
+<a id="a97ae3ed90fe486c2dd3a90fee811bcd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97ae3ed90fe486c2dd3a90fee811bcd7">&#9670;&nbsp;</a></span>partition() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R , typename P &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::partition </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">P &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pred</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reorders the elements in the <b>range</b> in such a way that all elements for which the predicate <b>pred</b> returns <code>true</code> precede the elements for which predicate <b>pred</b> returns <code>false</code>. </p>
+<p>Relative order of the elements is not preserved. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the first element of the second group.</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> boundary = <a class="code" href="namespacerah.html#a97ae3ed90fe486c2dd3a90fee811bcd7">rah::partition</a>(in, [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a &gt;= 4; });</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(in.begin(), boundary);</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(boundary, in.end());</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 4, 5, 1, 2, 3 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="afeced5adb7a17c0c8f34b64559ddc60c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeced5adb7a17c0c8f34b64559ddc60c">&#9670;&nbsp;</a></span>partition() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename P &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::partition </td>
+          <td>(</td>
+          <td class="paramtype">P &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pred</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacerah.html#a97ae3ed90fe486c2dd3a90fee811bcd7" title="Reorders the elements in the range in such a way that all elements for which the predicate pred retur...">rah::partition(R&amp;&amp;, P&amp;&amp;)</a> </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> boundary = in | <a class="code" href="namespacerah.html#a97ae3ed90fe486c2dd3a90fee811bcd7">rah::partition</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a &gt;= 4; });</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(in.begin(), boundary);</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(boundary, in.end());</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 4, 5, 1, 2, 3 }));</div></div><!-- fragment -->
+</div>
+</div>
 <a id="a407b50a4f029e3f2a3cd0ba9142aea84"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a407b50a4f029e3f2a3cd0ba9142aea84">&#9670;&nbsp;</a></span>reduce() <span class="overload">[1/2]</span></h2>
 
@@ -1861,7 +1930,7 @@ template&lt;typename R , typename P &gt; </div>
 <p>Keep at the begining of the range only elements for which pred(elt) is false<br />
 . </p>
 <dl class="section return"><dt>Returns</dt><dd>Return the (end) part of the range to erase.</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> range_to_erase_begin = <a class="code" href="namespacerah.html#afba9495316f20f6caee735c15feb349c">rah::remove_if</a>(in, [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a &lt; 4; });</div><div class="line">        in.erase(range_to_erase_begin, <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(in));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({4, 5}));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> range_to_erase_begin = <a class="code" href="namespacerah.html#afba9495316f20f6caee735c15feb349c">rah::remove_if</a>(in, [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a &lt; 4; });</div><div class="line">        in.erase(range_to_erase_begin, <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(in));</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(in.begin(), in.end());</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({4, 5}));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="af598cf91c554f6d6938c320578e6bb02"></a>
@@ -1886,7 +1955,7 @@ template&lt;typename P &gt; </div>
 . </p>
 <dl class="section return"><dt>Returns</dt><dd>The (end) part of the range to erase. </dd></dl>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
-<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> range_to_erase_begin = in | <a class="code" href="namespacerah.html#afba9495316f20f6caee735c15feb349c">rah::remove_if</a>([](<span class="keywordtype">int</span> a) {<span class="keywordflow">return</span> a &lt; 4; });</div><div class="line">        in.erase(range_to_erase_begin, <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(in));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 4, 5 }));</div></div><!-- fragment -->
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> range_to_erase_begin = in | <a class="code" href="namespacerah.html#afba9495316f20f6caee735c15feb349c">rah::remove_if</a>([](<span class="keywordtype">int</span> a) {<span class="keywordflow">return</span> a &lt; 4; });</div><div class="line">        in.erase(range_to_erase_begin, <a class="code" href="namespacerah.html#aaddd1442cd76b96876e692cdefe7261d">end</a>(in));</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(in.begin(), in.end());</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 4, 5 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="aca8dbcc943f7c503acea5f58f231a5af"></a>
@@ -2123,6 +2192,61 @@ template&lt;typename P  = is_lesser, typename  = std ::enable_if_t&lt;not is_ran
 <p>Sort a range in place, using the given predicate. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 2, 1, 5, 3, 4 };</div><div class="line">        in | <a class="code" href="namespacerah.html#a02bc4f7618438272f7ec9f3c819d5990">rah::sort</a>();</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 1, 2, 3, 4, 5 }));</div></div><!-- fragment --><div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 2, 1, 5, 3, 4 };</div><div class="line">        in | <a class="code" href="namespacerah.html#a02bc4f7618438272f7ec9f3c819d5990">rah::sort</a>([](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a &lt; b; });</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="ac184b21a98515705f9b4845875fb689b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac184b21a98515705f9b4845875fb689b">&#9670;&nbsp;</a></span>stable_partition() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R , typename P &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::stable_partition </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">P &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pred</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reorders the elements in the <b>range</b> in such a way that all elements for which the predicate <b>pred</b> returns <code>true</code> precede the elements for which predicate <b>pred</b> returns false. </p>
+<p>Relative order of the elements is preserved. </p><dl class="section return"><dt>Returns</dt><dd>Iterator to the first element of the second group.</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> boundary = <a class="code" href="namespacerah.html#ac184b21a98515705f9b4845875fb689b">rah::stable_partition</a>(in, [](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a &gt;= 4; });</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 4, 5, 1, 2, 3 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="ae51c8e542493089f60675db2d0018329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae51c8e542493089f60675db2d0018329">&#9670;&nbsp;</a></span>stable_partition() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename P &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::stable_partition </td>
+          <td>(</td>
+          <td class="paramtype">P &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pred</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacerah.html#ac184b21a98515705f9b4845875fb689b" title="Reorders the elements in the range in such a way that all elements for which the predicate pred retur...">rah::stable_partition(R&amp;&amp;, P&amp;&amp;)</a> </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> boundary = in | <a class="code" href="namespacerah.html#ac184b21a98515705f9b4845875fb689b">rah::stable_partition</a>([](<span class="keyword">auto</span> a) {<span class="keywordflow">return</span> a &gt;= 4; });</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 4, 5, 1, 2, 3 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="a215c9f80364af9121e2be42d1ebacdbf"></a>

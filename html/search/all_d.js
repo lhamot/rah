@@ -1,6 +1,7 @@
 var searchData=
 [
   ['pairequal',['PairEqual',['../test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78',1,'test.cpp']]],
+  ['partition',['partition',['../namespacerah.html#a97ae3ed90fe486c2dd3a90fee811bcd7',1,'rah::partition(R &amp;&amp;range, P &amp;&amp;pred)'],['../namespacerah.html#afeced5adb7a17c0c8f34b64559ddc60c',1,'rah::partition(P &amp;&amp;pred)']]],
   ['pipeable',['pipeable',['../structrah_1_1pipeable.html',1,'rah']]],
   ['pointer',['pointer',['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4.html#a341d48f3cb5b1df5da4ee7b7bc77a4c2',1,'rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;::pointer()'],['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1output__iterator__tag_01_4.html#aaa99676a12d594e70c36d9c6fc3deb52',1,'rah::iterator_facade&lt; I, R, std ::output_iterator_tag &gt;::pointer()']]],
   ['pointer_5ftype',['pointer_type',['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4_1_1pointer__type.html',1,'rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;']]],

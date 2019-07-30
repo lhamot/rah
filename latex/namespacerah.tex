@@ -172,6 +172,14 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{size}} ()
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_af598cf91c554f6d6938c320578e6bb02}{remove\+\_\+if}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{partition}} (R \&\&range, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns {\ttfamily false}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_afeced5adb7a17c0c8f34b64559ddc60c}{partition}} (P \&\&pred)
+\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{stable\+\_\+partition}} (R \&\&range, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns false. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_ae51c8e542493089f60675db2d0018329}{stable\+\_\+partition}} (P \&\&pred)
+\item 
 {\footnotesize template$<$typename C , typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a3b055c0e04f784b9abc89a27ef4534dd}{erase}} (C \&\&container, R \&\&subrange)
 \begin{DoxyCompactList}\small\item\em Erase a sub-\/range of a given container. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_a80ea7a94642c23e9f3db6f6b890f2987}{erase}} (R \&\&range)
@@ -1119,6 +1127,49 @@ pipeable syntax
 auto rah\+::operator$\vert$ (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{\mbox{\hyperlink{structrah_1_1pipeable}{pipeable}}$<$ Make\+Range $>$ const \&}]{adapter }\end{DoxyParamCaption}) -\/$>$ decltype(adapter.\+func( std \+::forward$<$R$>$(range)))
 }
 
+\mbox{\Hypertarget{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}\label{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}} 
+\index{rah@{rah}!partition@{partition}}
+\index{partition@{partition}!rah@{rah}}
+\subsubsection{\texorpdfstring{partition()}{partition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename P $>$ \\
+auto rah\+::partition (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns {\ttfamily false}. 
+
+Relative order of the elements is not preserved. \begin{DoxyReturn}{Returns}
+Iterator to the first element of the second group.
+\end{DoxyReturn}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boundary = \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah::partition}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), boundary);}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(boundary, in.end());}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_afeced5adb7a17c0c8f34b64559ddc60c}\label{namespacerah_afeced5adb7a17c0c8f34b64559ddc60c}} 
+\index{rah@{rah}!partition@{partition}}
+\index{partition@{partition}!rah@{rah}}
+\subsubsection{\texorpdfstring{partition()}{partition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename P $>$ \\
+auto rah\+::partition (\begin{DoxyParamCaption}\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah\+::partition(\+R\&\&, P\&\&)}} 
+\end{DoxySeeAlso}
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boundary = in | \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah::partition}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), boundary);}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(boundary, in.end());}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
+\end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}\label{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}} 
 \index{rah@{rah}!reduce@{reduce}}
 \index{reduce@{reduce}!rah@{rah}}
@@ -1174,6 +1225,7 @@ Return the (end) part of the range to erase.
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} range\_to\_erase\_begin = \mbox{\hyperlink{namespacerah_afba9495316f20f6caee735c15feb349c}{rah::remove\_if}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a < 4; \});}
 \DoxyCodeLine{        in.erase(range\_to\_erase\_begin, \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(in));}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), in.end());}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{4, 5\}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_af598cf91c554f6d6938c320578e6bb02}\label{namespacerah_af598cf91c554f6d6938c320578e6bb02}} 
@@ -1199,6 +1251,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} range\_to\_erase\_begin = in | \mbox{\hyperlink{namespacerah_afba9495316f20f6caee735c15feb349c}{rah::remove\_if}}([](\textcolor{keywordtype}{int} a) \{\textcolor{keywordflow}{return} a < 4; \});}
 \DoxyCodeLine{        in.erase(range\_to\_erase\_begin, \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(in));}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), in.end());}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_aca8dbcc943f7c503acea5f58f231a5af}\label{namespacerah_aca8dbcc943f7c503acea5f58f231a5af}} 
@@ -1360,6 +1413,45 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> in\{ 2, 1, 5, 3, 4 \};}
 \DoxyCodeLine{        in | \mbox{\hyperlink{namespacerah_a02bc4f7618438272f7ec9f3c819d5990}{rah::sort}}([](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a < b; \});}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_ac184b21a98515705f9b4845875fb689b}\label{namespacerah_ac184b21a98515705f9b4845875fb689b}} 
+\index{rah@{rah}!stable\_partition@{stable\_partition}}
+\index{stable\_partition@{stable\_partition}!rah@{rah}}
+\subsubsection{\texorpdfstring{stable\_partition()}{stable\_partition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename P $>$ \\
+auto rah\+::stable\+\_\+partition (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns false. 
+
+Relative order of the elements is preserved. \begin{DoxyReturn}{Returns}
+Iterator to the first element of the second group.
+\end{DoxyReturn}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boundary = \mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{rah::stable\_partition}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_ae51c8e542493089f60675db2d0018329}\label{namespacerah_ae51c8e542493089f60675db2d0018329}} 
+\index{rah@{rah}!stable\_partition@{stable\_partition}}
+\index{stable\_partition@{stable\_partition}!rah@{rah}}
+\subsubsection{\texorpdfstring{stable\_partition()}{stable\_partition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename P $>$ \\
+auto rah\+::stable\+\_\+partition (\begin{DoxyParamCaption}\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{rah\+::stable\+\_\+partition(\+R\&\&, P\&\&)}} 
+\end{DoxySeeAlso}
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} boundary = in | \mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{rah::stable\_partition}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}\label{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}} 
 \index{rah@{rah}!stable\_sort@{stable\_sort}}
