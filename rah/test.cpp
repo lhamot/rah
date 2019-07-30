@@ -1006,6 +1006,7 @@ int main()
 		std::vector<int> in{ 1, 2, 3, 4, 5 };
 		auto range_to_erase_begin = rah::remove_if(in, [](auto a) {return a < 4; });
 		in.erase(range_to_erase_begin, end(in));
+		std::sort(in.begin(), in.end());
 		assert(in == std::vector<int>({4, 5}));
 		/// [rah::remove_if]
 	}
@@ -1014,8 +1015,47 @@ int main()
 		std::vector<int> in{ 1, 2, 3, 4, 5 };
 		auto range_to_erase_begin = in | rah::remove_if([](int a) {return a < 4; });
 		in.erase(range_to_erase_begin, end(in));
+		std::sort(in.begin(), in.end());
 		assert(in == std::vector<int>({ 4, 5 }));
 		/// [rah::remove_if_pipeable]
+	}
+
+	{
+		/// [rah::partition]
+		std::vector<int> in{ 1, 2, 3, 4, 5 };
+		auto boundary = rah::partition(in, [](auto a) {return a >= 4; });
+		assert(boundary == in.begin() + 2);
+		std::sort(in.begin(), boundary);
+		std::sort(boundary, in.end());
+		assert(in == std::vector<int>({ 4, 5, 1, 2, 3 }));
+		/// [rah::partition]
+	}
+	{
+		/// [rah::partition_pipeable]
+		std::vector<int> in{ 1, 2, 3, 4, 5 };
+		auto boundary = in | rah::partition([](auto a) {return a >= 4; });
+		assert(boundary == in.begin() + 2);
+		std::sort(in.begin(), boundary);
+		std::sort(boundary, in.end());
+		assert(in == std::vector<int>({ 4, 5, 1, 2, 3 }));
+		/// [rah::partition_pipeable]
+	}
+
+	{
+		/// [rah::stable_partition]
+		std::vector<int> in{ 1, 2, 3, 4, 5 };
+		auto boundary = rah::stable_partition(in, [](auto a) {return a >= 4; });
+		assert(boundary == in.begin() + 2);
+		assert(in == std::vector<int>({ 4, 5, 1, 2, 3 }));
+		/// [rah::stable_partition]
+	}
+	{
+		/// [rah::stable_partition_pipeable]
+		std::vector<int> in{ 1, 2, 3, 4, 5 };
+		auto boundary = in | rah::stable_partition([](auto a) {return a >= 4; });
+		assert(boundary == in.begin() + 2);
+		assert(in == std::vector<int>({ 4, 5, 1, 2, 3 }));
+		/// [rah::stable_partition_pipeable]
 	}
 
 	{

@@ -1631,6 +1631,50 @@ template<typename P> auto remove_if(P&& pred)
 	return make_pipeable([=](auto&& range) { return remove_if(range, pred); });
 }
 
+// *********************************** partition **************************************************
+
+/// @brief Reorders the elements in the @b range in such a way that all elements for which the 
+/// predicate @b pred returns `true` precede the elements for which predicate @b pred returns `false`. 
+/// Relative order of the elements is not preserved. 
+/// @return Iterator to the first element of the second group. 
+///
+/// @snippet test.cpp rah::partition
+template<typename R, typename P> auto partition(R&& range, P&& pred)
+{
+	return RAH_STD::partition(begin(range), end(range), RAH_STD::forward<P>(pred));
+}
+
+/// @see rah::partition(R&&, P&&)
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::partition_pipeable
+template<typename P> auto partition(P&& pred)
+{
+	return make_pipeable([=](auto&& range) { return partition(range, pred); });
+}
+
+// *********************************** stable_partition *******************************************
+
+/// @brief Reorders the elements in the @b range in such a way that all elements for which 
+/// the predicate @b pred returns `true` precede the elements for which predicate @b pred returns false. 
+/// Relative order of the elements is preserved. 
+/// @return Iterator to the first element of the second group. 
+///
+/// @snippet test.cpp rah::stable_partition
+template<typename R, typename P> auto stable_partition(R&& range, P&& pred)
+{
+	return RAH_STD::stable_partition(begin(range), end(range), RAH_STD::forward<P>(pred));
+}
+
+/// @see rah::stable_partition(R&&, P&&)
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::stable_partition_pipeable
+template<typename P> auto stable_partition(P&& pred)
+{
+	return make_pipeable([=](auto&& range) { return stable_partition(range, pred); });
+}
+
 // *********************************** erase ******************************************************
 
 /// @brief Erase a sub-range of a given container
