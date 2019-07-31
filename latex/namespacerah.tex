@@ -1145,6 +1145,7 @@ Iterator to the first element of the second group.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} boundary = \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah::partition}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(boundary == in.begin() + 2);}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), boundary);}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(boundary, in.end());}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
@@ -1166,6 +1167,7 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} boundary = in | \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah::partition}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(boundary == in.begin() + 2);}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), boundary);}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(boundary, in.end());}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
@@ -1432,6 +1434,7 @@ Iterator to the first element of the second group.
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} boundary = \mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{rah::stable\_partition}}(in, [](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(boundary == in.begin() + 2);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_ae51c8e542493089f60675db2d0018329}\label{namespacerah_ae51c8e542493089f60675db2d0018329}} 
@@ -1451,6 +1454,7 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} boundary = in | \mbox{\hyperlink{namespacerah_ac184b21a98515705f9b4845875fb689b}{rah::stable\_partition}}([](\textcolor{keyword}{auto} a) \{\textcolor{keywordflow}{return} a >= 4; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(boundary == in.begin() + 2);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 4, 5, 1, 2, 3 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}\label{namespacerah_a215c9f80364af9121e2be42d1ebacdbf}} 

@@ -42,7 +42,11 @@ struct \mbox{\hyperlink{structrah_1_1is__lesser}{rah\+::is\+\_\+lesser}}
 \begin{DoxyCompactList}\small\item\em Apply the \textquotesingle{}$<$\textquotesingle{} operator on two values of any type. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1details_1_1optional}{rah\+::view\+::details\+::optional$<$ T $>$}}
 \item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1take__iterator}{rah\+::view\+::take\+\_\+iterator$<$ I $>$}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator$<$ I $>$}}
+\item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator$<$ I $>$}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1ints__iterator}{rah\+::view\+::ints\+\_\+iterator$<$ T $>$}}
 \item 
@@ -132,10 +136,14 @@ struct \mbox{\hyperlink{structrah_1_1is__equal}{rah\+::is\+\_\+equal}}
 \begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_addec9cf697ca9378bb7b68ad732d9a0d}{rah\+::view\+::all}} ()
 \begin{DoxyCompactList}\small\item\em Create a view on the whole range. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a3ef591f1a04b16220fb967ddea5bc1e9}{rah\+::view\+::counted}} (R \&\&range, size\+\_\+t count)
-\begin{DoxyCompactList}\small\item\em Create a view containing the {\bfseries{count}} next element of range. \end{DoxyCompactList}\item 
-auto \mbox{\hyperlink{namespacerah_1_1view_af359927d911e400baa372a8cb7817aa2}{rah\+::view\+::counted}} (size\+\_\+t count)
-\begin{DoxyCompactList}\small\item\em Create a view containing the {\bfseries{count}} next element of range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1451274b13dc0866a7c6cfc7b9a157af}{rah\+::view\+::take}} (R \&\&range, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Given a source {\bfseries{range}} and an integral {\bfseries{count}}, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a0dd9235dff3a8e7c4335a25425d8653a}{rah\+::view\+::take}} (size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Given a source {\bfseries{range}} and an integral {\bfseries{count}}, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ac50371f20559b47e9f3f0e4f745637ed}{rah\+::view\+::counted}} (I \&\&it, size\+\_\+t n, decltype(++it, 0)=0)
+\begin{DoxyCompactList}\small\item\em Given an iterator {\bfseries{it}} and a count {\bfseries{n}}, create a range that starts at {\bfseries{it}} and includes the next {\bfseries{n}} elements. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_acce547bccce36aca0f082ff3d5346b07}{rah\+::view\+::unbounded}} (I \&\&it)
+\begin{DoxyCompactList}\small\item\em Given an iterator, return an infinite range that begins at that position. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aef39fe94e2314d4c61caa5785d6788d5}{rah\+::view\+::ints}} (T b=0, T e=std\+::numeric\+\_\+limits$<$ T $>$\+::max())
 \begin{DoxyCompactList}\small\item\em Generate a range of sequentially increasing integers. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah\+::view\+::iota}} (T b, T e, T step=1)

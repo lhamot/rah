@@ -123,7 +123,11 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1details_1_1optional.html">rah::view::details::optional&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1take__iterator.html">rah::view::take_iterator&lt; I &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1counted__iterator.html">rah::view::counted_iterator&lt; I &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator&lt; I &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1ints__iterator.html">rah::view::ints_iterator&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,13 +245,21 @@ Functions</h2></td></tr>
 <tr class="memitem:addec9cf697ca9378bb7b68ad732d9a0d"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#addec9cf697ca9378bb7b68ad732d9a0d">rah::view::all</a> ()</td></tr>
 <tr class="memdesc:addec9cf697ca9378bb7b68ad732d9a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view on the whole range.  <a href="namespacerah_1_1view.html#addec9cf697ca9378bb7b68ad732d9a0d">More...</a><br /></td></tr>
 <tr class="separator:addec9cf697ca9378bb7b68ad732d9a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ef591f1a04b16220fb967ddea5bc1e9"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
-<tr class="memitem:a3ef591f1a04b16220fb967ddea5bc1e9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a3ef591f1a04b16220fb967ddea5bc1e9">rah::view::counted</a> (R &amp;&amp;range, size_t count)</td></tr>
-<tr class="memdesc:a3ef591f1a04b16220fb967ddea5bc1e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view containing the <b>count</b> next element of range.  <a href="namespacerah_1_1view.html#a3ef591f1a04b16220fb967ddea5bc1e9">More...</a><br /></td></tr>
-<tr class="separator:a3ef591f1a04b16220fb967ddea5bc1e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af359927d911e400baa372a8cb7817aa2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#af359927d911e400baa372a8cb7817aa2">rah::view::counted</a> (size_t count)</td></tr>
-<tr class="memdesc:af359927d911e400baa372a8cb7817aa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a view containing the <b>count</b> next element of range.  <a href="namespacerah_1_1view.html#af359927d911e400baa372a8cb7817aa2">More...</a><br /></td></tr>
-<tr class="separator:af359927d911e400baa372a8cb7817aa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1451274b13dc0866a7c6cfc7b9a157af"><td class="memTemplParams" colspan="2">template&lt;typename R &gt; </td></tr>
+<tr class="memitem:a1451274b13dc0866a7c6cfc7b9a157af"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a1451274b13dc0866a7c6cfc7b9a157af">rah::view::take</a> (R &amp;&amp;range, size_t count)</td></tr>
+<tr class="memdesc:a1451274b13dc0866a7c6cfc7b9a157af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a source <b>range</b> and an integral <b>count</b>, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements.  <a href="namespacerah_1_1view.html#a1451274b13dc0866a7c6cfc7b9a157af">More...</a><br /></td></tr>
+<tr class="separator:a1451274b13dc0866a7c6cfc7b9a157af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dd9235dff3a8e7c4335a25425d8653a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#a0dd9235dff3a8e7c4335a25425d8653a">rah::view::take</a> (size_t count)</td></tr>
+<tr class="memdesc:a0dd9235dff3a8e7c4335a25425d8653a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given a source <b>range</b> and an integral <b>count</b>, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements.  <a href="namespacerah_1_1view.html#a0dd9235dff3a8e7c4335a25425d8653a">More...</a><br /></td></tr>
+<tr class="separator:a0dd9235dff3a8e7c4335a25425d8653a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50371f20559b47e9f3f0e4f745637ed"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
+<tr class="memitem:ac50371f20559b47e9f3f0e4f745637ed"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#ac50371f20559b47e9f3f0e4f745637ed">rah::view::counted</a> (I &amp;&amp;it, size_t n, decltype(++it, 0)=0)</td></tr>
+<tr class="memdesc:ac50371f20559b47e9f3f0e4f745637ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an iterator <b>it</b> and a count <b>n</b>, create a range that starts at <b>it</b> and includes the next <b>n</b> elements.  <a href="namespacerah_1_1view.html#ac50371f20559b47e9f3f0e4f745637ed">More...</a><br /></td></tr>
+<tr class="separator:ac50371f20559b47e9f3f0e4f745637ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acce547bccce36aca0f082ff3d5346b07"><td class="memTemplParams" colspan="2">template&lt;typename I &gt; </td></tr>
+<tr class="memitem:acce547bccce36aca0f082ff3d5346b07"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#acce547bccce36aca0f082ff3d5346b07">rah::view::unbounded</a> (I &amp;&amp;it)</td></tr>
+<tr class="memdesc:acce547bccce36aca0f082ff3d5346b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an iterator, return an infinite range that begins at that position.  <a href="namespacerah_1_1view.html#acce547bccce36aca0f082ff3d5346b07">More...</a><br /></td></tr>
+<tr class="separator:acce547bccce36aca0f082ff3d5346b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef39fe94e2314d4c61caa5785d6788d5"><td class="memTemplParams" colspan="2">template&lt;typename T  = size_t&gt; </td></tr>
 <tr class="memitem:aef39fe94e2314d4c61caa5785d6788d5"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1view.html#aef39fe94e2314d4c61caa5785d6788d5">rah::view::ints</a> (T b=0, T e=std::numeric_limits&lt; T &gt;::max())</td></tr>
 <tr class="memdesc:aef39fe94e2314d4c61caa5785d6788d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a range of sequentially increasing integers.  <a href="namespacerah_1_1view.html#aef39fe94e2314d4c61caa5785d6788d5">More...</a><br /></td></tr>

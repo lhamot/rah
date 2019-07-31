@@ -76,7 +76,7 @@ auto \mbox{\hyperlink{test_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+el
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\{ \(\backslash\)}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"assert : "} << \#CONDITION << std::endl; \(\backslash\)}
+\DoxyCodeLine{    std::cout << \_\_LINE\_\_ << \textcolor{stringliteral}{" assert : "} << \#CONDITION << std::endl; \(\backslash\)}
 \DoxyCodeLine{    if (CONDITION) \(\backslash\)}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
 \DoxyCodeLine{    else \(\backslash\)}
@@ -93,7 +93,7 @@ auto \mbox{\hyperlink{test_8cpp_adf099222cf7b566c1025750fb0949c9a}{print\+\_\+el
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\{ \(\backslash\)}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"assert : "} << \#RANGE << \textcolor{stringliteral}{" = "} << \#IL << std::endl; \(\backslash\)}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"assert : "} << \#RANGE << \textcolor{stringliteral}{" == "} << \#IL << std::endl; \(\backslash\)}
 \DoxyCodeLine{    if (\mbox{\hyperlink{namespacerah_1_1view_a5b9cacbf101962d95221b591d7f11026}{rah::view::zip}}(RANGE, IL) | \mbox{\hyperlink{namespacerah_aaf7abb6066c8adfe6959691c3a3ea4e2}{rah::all\_of}}(\mbox{\hyperlink{test_8cpp_a8a1a9235e13917b31774c24fcc1a6a78}{PairEqual}})) \(\backslash\)}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"OK"} << std::endl; \(\backslash\)}
 \DoxyCodeLine{    else \(\backslash\)}
@@ -178,13 +178,29 @@ using \mbox{\hyperlink{test_8cpp_a547e08f1a8e6f3d9de6a469e2d9fae64}{il}} =  std\
 
 \mbox{[}repeat\mbox{]}
 
+\mbox{[}take\mbox{]}
+
+\mbox{[}take\mbox{]}
+
+\mbox{[}take\+\_\+pipeable\mbox{]}
+
+\mbox{[}take\+\_\+pipeable\mbox{]}
+
 \mbox{[}counted\mbox{]}
 
 \mbox{[}counted\mbox{]}
+
+\mbox{[}unbounded\mbox{]}
+
+\mbox{[}unbounded\mbox{]}
 
 \mbox{[}counted\+\_\+pipeable\mbox{]}
 
 \mbox{[}counted\+\_\+pipeable\mbox{]}
+
+\mbox{[}counted\+\_\+iterator\mbox{]}
+
+\mbox{[}counted\+\_\+iterator\mbox{]}
 
 \mbox{[}\mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}\mbox{]}
 
