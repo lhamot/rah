@@ -117,16 +117,32 @@
 ///
 /// @snippet test.cpp rah::view::transform_pipeable
 
-/// @fn rah::view::counted(R&& range, size_t count)
-/// @brief Create a view containing the @b count next element of range
+/// @fn rah::view::take(R&& range, size_t count)
+/// @brief Given a source @b range and an integral @b count, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements.
+///
+/// @snippet test.cpp take
+
+/// @fn rah::view::take(size_t count)
+/// @brief Given a source @b range and an integral @b count, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp take_pipeable
+
+/// @fn rah::view::counted(I&& it, size_t n, decltype(++it, 0) = 0)
+/// @brief Given an iterator @b it and a count @b n, create a range that starts at @b it and includes the next @b n elements. 
 ///
 /// @snippet test.cpp counted
 
 /// @fn rah::view::counted(size_t count)
-/// @brief Create a view containing the @b count next element of range
+/// @brief Given an iterator @b it and a count @b n, create a range that starts at @b it and includes the next @b n elements. 
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp counted_pipeable
+
+/// @fn rah::view::unbounded(I&& it)
+/// @brief Given an iterator, return an infinite range that begins at that position. 
+///
+/// @snippet test.cpp unbounded
 
 /// @fn rah::view::slice(R&& range, intptr_t begin, intptr_t end)
 /// @brief Create a view that is a sub-range of a range

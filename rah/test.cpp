@@ -39,7 +39,7 @@ auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
 #undef assert
 #define assert(CONDITION) \
 { \
-	std::cout << "assert : " << #CONDITION << std::endl; \
+	std::cout << __LINE__ << " assert : " << #CONDITION << std::endl; \
 	if (CONDITION) \
 		std::cout << "OK" << std::endl; \
 	else \
@@ -48,7 +48,7 @@ auto PairEqual = [](auto ab) {return std::get<0>(ab) == std::get<1>(ab); };
 
 #define EQUAL_RANGE(RANGE, IL) \
 { \
-	std::cout << "assert : " << #RANGE << " = " << #IL << std::endl; \
+	std::cout << "assert : " << #RANGE << " == " << #IL << std::endl; \
 	if (rah::view::zip(RANGE, IL) | rah::all_of(PairEqual)) \
 		std::cout << "OK" << std::endl; \
 	else \
@@ -346,13 +346,59 @@ int main()
 	}
 
 	{
+		/// [take]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::take(in, 5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		auto range2 = rah::view::take(in, 1000);
+		std::vector<int> out2;
+		std::copy(begin(range2), end(range2), std::back_inserter(out2));
+		assert(out2 == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+		/// [take]
+	}
+
+	{
+		/// [take_pipeable]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = in | rah::view::take(5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		auto range2 = in | rah::view::take(1000);
+		std::vector<int> out2;
+		std::copy(begin(range2), end(range2), std::back_inserter(out2));
+		assert(out2 == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+		/// [take_pipeable]
+	}
+
+	{
 		/// [counted]
 		std::vector<int> in{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-		auto range = rah::view::counted(in, 5);
+		auto range = rah::view::counted(in.begin(), 5);
 		std::vector<int> out;
 		std::copy(begin(range), end(range), std::back_inserter(out));
 		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
 		/// [counted]
+	}
+
+	{
+		/// [unbounded]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::unbounded(in.begin());
+		std::vector<int> out;
+		std::copy_n(begin(range), 5, std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		/// [unbounded]
+	}
+
+	{
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::unbounded(in.begin()) | rah::view::slice(0, 5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
 	}
 
 	{
@@ -367,6 +413,16 @@ int main()
 		std::copy(begin(range), end(range), std::back_inserter(out));
 		assert(out == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
 		/// [counted_pipeable]
+	}
+
+	{
+		/// [counted_iterator]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::counted(in.begin(), 5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		/// [counted_iterator]
 	}
 
 	// Test all

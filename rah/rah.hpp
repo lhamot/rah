@@ -409,6 +409,42 @@ inline auto all()
 	return make_pipeable([=](auto&& range) {return all(range); });
 }
 
+// ******************************************* take ***********************************************
+
+template<typename I>
+struct take_iterator : iterator_facade<
+	take_iterator<I>,
+	decltype(*fake<I>()),
+	typename RAH_STD::iterator_traits<I>::iterator_category
+>
+{
+	I iter_;
+	size_t count_ = size_t();
+
+	take_iterator() = default;
+	take_iterator(I iter, size_t count) : iter_(iter), count_(count) {}
+
+	void increment() { ++iter_; ++count_; }
+	void advance(intptr_t off) { iter_ += off; count_ += off; }
+	void decrement() { --iter_; --count_; }
+	auto distance_to(take_iterator r) const { return RAH_STD::min<intptr_t>(iter_ - r.iter_, count_ - r.count_); }
+	auto dereference() const -> decltype(*iter_) { return *iter_; }
+	bool equal(take_iterator r) const { return count_ == r.count_ || iter_ == r.iter_; }
+};
+
+template<typename R> auto take(R&& range, size_t count)
+{
+	using iterator = take_iterator<range_begin_type_t<R>>;
+	iterator iter1(begin(range), 0);
+	iterator iter2(end(range), count);
+	return make_iterator_range(iter1, iter2);
+}
+
+inline auto take(size_t count)
+{
+	return make_pipeable([=](auto&& range) {return take(range, count); });
+}
+
 // ******************************************* counted ********************************************
 
 template<typename I>
@@ -427,22 +463,63 @@ struct counted_iterator : iterator_facade<
 	void increment() { ++iter_; ++count_; }
 	void advance(intptr_t off) { iter_ += off; count_ += off; }
 	void decrement() { --iter_; --count_; }
-	auto distance_to(counted_iterator r) const { return RAH_STD::min<intptr_t>(iter_ - r.iter_, count_ - r.count_); }
+	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
-	bool equal(counted_iterator r) const { return count_ == r.count_ || iter_ == r.iter_; }
+	bool equal(counted_iterator r) const { return count_ == r.count_; }
 };
 
-template<typename R> auto counted(R&& range, size_t count)
+template<typename I> auto counted(I&& it, size_t n, decltype(++it, 0) = 0)
 {
-	using iterator = counted_iterator<range_begin_type_t<R>>;
-	iterator iter1(begin(range), 0);
-	iterator iter2(end(range), count);
+	using iterator = counted_iterator<RAH_STD::remove_reference_t<I>>;
+	iterator iter1(it, 0);
+	iterator iter2(it, n);
 	return make_iterator_range(iter1, iter2);
 }
 
-inline auto counted(size_t count)
+/// @cond
+// Obsolete
+template<typename R> auto counted(R&& range, size_t n, decltype(begin(range), 0) = 0)
 {
-	return make_pipeable([=](auto&& range) {return counted(range, count); });
+	return take(range, n);
+}
+
+inline auto counted(size_t n)
+{
+	return make_pipeable([=](auto&& range) {return take(range, n); });
+}
+/// @endcond
+
+// ******************************************* unbounded ******************************************
+
+template<typename I>
+struct unbounded_iterator : iterator_facade<
+	unbounded_iterator<I>,
+	decltype(*fake<I>()),
+	std::forward_iterator_tag
+>
+{
+	I iter_;
+	bool end_;
+
+	unbounded_iterator() = default;
+	unbounded_iterator(I iter, bool end) : iter_(iter), end_(end) {}
+
+	void increment() { ++iter_; }
+	auto dereference() const -> decltype(*iter_) { return *iter_; }
+	bool equal(unbounded_iterator r) const 
+	{ 
+		return end_? 
+			r.end_:
+			(r.end_? false: r.iter_ == iter_);
+	}
+};
+
+template<typename I> auto unbounded(I&& it)
+{
+	using iterator = unbounded_iterator<RAH_STD::remove_reference_t<I>>;
+	iterator iter1(it, false);
+	iterator iter2(it, true);
+	return make_iterator_range(iter1, iter2);
 }
 
 // ********************************** ints ********************************************************
@@ -680,7 +757,7 @@ template<typename F> auto generate(F&& func)
 
 template<typename F> auto generate_n(F&& func, size_t count)
 {
-	return generate(RAH_STD::forward<F>(func)) | counted(count);
+	return generate(RAH_STD::forward<F>(func)) | take(count);
 }
 
 // ******************************************* transform ******************************************
