@@ -42,7 +42,7 @@ A view is a range returned by a function an which doesn\textquotesingle{}t modif
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename} R> \textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}(R\&\& range)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{make\_iterator\_range}}(}
-\DoxyCodeLine{        std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range)), std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range)));}
+\DoxyCodeLine{        std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}}(range)), std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_ad248c9fcef327fc3e31ef8bf6ea70f6f}{begin}}(range)));}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -85,7 +85,7 @@ Use the \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah\+::
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{test_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(\textcolor{keywordtype}{int} i)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{std::count}}(\mbox{\hyperlink{namespacerah_a2c4a19e57cc4e0753e93830f247def6d}{begin}}(range), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(range), i); \});}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{std::count}}(\mbox{\hyperlink{namespacerah_ad248c9fcef327fc3e31ef8bf6ea70f6f}{begin}}(range), \mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}}(range), i); \});}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
 \subsection*{How to use a pipeable \+:}

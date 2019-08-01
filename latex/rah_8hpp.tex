@@ -112,6 +112,10 @@ struct \mbox{\hyperlink{structrah_1_1is__equal}{rah\+::is\+\_\+equal}}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+{\footnotesize template$<$class T , size\+\_\+t N$>$ }\\T $\ast$ \mbox{\hyperlink{namespacerah_ad248c9fcef327fc3e31ef8bf6ea70f6f}{rah\+::begin}} (T(\&array)\mbox{[}N\mbox{]})
+\item 
+{\footnotesize template$<$class T , size\+\_\+t N$>$ }\\T $\ast$ \mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{rah\+::end}} (T(\&array)\mbox{[}N\mbox{]}) noexcept
+\item 
 {\footnotesize template$<$typename T $>$ }\\T \& \mbox{\hyperlink{namespacerah_a11785bbdf970efa1bc57fc14993b77bf}{rah\+::fake}} ()
 \begin{DoxyCompactList}\small\item\em Used in decltype to get an instance of a type. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah\+::make\+\_\+iterator\+\_\+range}} (I b, I e)
@@ -145,7 +149,7 @@ auto \mbox{\hyperlink{namespacerah_1_1view_a0dd9235dff3a8e7c4335a25425d8653a}{ra
 {\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_acce547bccce36aca0f082ff3d5346b07}{rah\+::view\+::unbounded}} (I \&\&it)
 \begin{DoxyCompactList}\small\item\em Given an iterator, return an infinite range that begins at that position. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aef39fe94e2314d4c61caa5785d6788d5}{rah\+::view\+::ints}} (T b=0, T e=std\+::numeric\+\_\+limits$<$ T $>$\+::max())
-\begin{DoxyCompactList}\small\item\em Generate a range of sequentially increasing integers. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generate a range of monotonically increasing ints. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah\+::view\+::iota}} (T b, T e, T step=1)
 \begin{DoxyCompactList}\small\item\em Generate a range of sequential integers, increasing by a defined step. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a89f73d7f0e180d9aea27a9d56ac4a1b3}{rah\+::view\+::repeat}} (V \&\&value)

@@ -44,7 +44,7 @@ Assigns the given value to the elements in the range \mbox{[}first, last)
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> out\{ 0, 0, 0, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{comment}{// std::vector<int> out\{ 0, 0 \}; // Trigger an assert}}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah::make\_iterator\_range}}(\mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah::copy}}(in, out), \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>(\{ 4, 5 \})));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah::make\_iterator\_range}}(\mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah::copy}}(in, out), \mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>(\{ 4, 5 \})));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<int>\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1action_a551824ac5386f3feb4c54ca097b76b92}\label{namespacerah_1_1action_a551824ac5386f3feb4c54ca097b76b92}} 
@@ -66,7 +66,7 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> in\{ 1, 2, 3 \};}
 \DoxyCodeLine{        std::vector<int> out\{ 0, 0, 0, 4, 5 \};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah::copy}}(out);}
-\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((\mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah::make\_iterator\_range}}(iter, \mbox{\hyperlink{namespacerah_aaddd1442cd76b96876e692cdefe7261d}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>\{ 4, 5 \})));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((\mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah::make\_iterator\_range}}(iter, \mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>\{ 4, 5 \})));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<int>\{ 1, 2, 3, 4, 5 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}\label{namespacerah_1_1action_a759ca023dec90e65e7d0e0327ae11af7}} 
