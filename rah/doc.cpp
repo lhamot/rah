@@ -75,7 +75,7 @@
 /// @see rah::view::iota_iterator
 
 /// @fn rah::view::ints(T, T)
-/// @brief Generate a range of sequentially increasing integers
+/// @brief Generate a range of monotonically increasing ints. When used without arguments, it generates the quasi-infinite range [0,1,2,3...]. It can also be called with a lower bound, or with a lower and upper bound (exclusive).
 ///
 /// @snippet test.cpp ints
 
