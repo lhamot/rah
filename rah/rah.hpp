@@ -46,6 +46,10 @@ constexpr intptr_t End = -1; ///< Used with rah::view::slice to point to the end
 
 // **************************** range traits ******************************************************
 
+template<class T, size_t N> T* begin(T(&array)[N]) { return (T*)array; }
+
+template<class T, size_t N> T* end(T(&array)[N]) noexcept { return array + N; }
+
 /// Used in decltype to get an instance of a type
 template<typename T> T& fake() { return *((RAH_STD::remove_reference_t<T>*)nullptr); }
 

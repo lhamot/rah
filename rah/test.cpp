@@ -427,6 +427,8 @@ int main()
 
 	// Test all
 	EQUAL_RANGE((il<int>{0, 1, 2, 3} | rah::view::all()), (il<int>{ 0, 1, 2, 3 }));
+	int intTab[] = { 0, 1, 2, 3 };
+	EQUAL_RANGE((intTab | rah::view::all()), (il<int>{ 0, 1, 2, 3 }));
 
 	// Test transform
 	{
