@@ -2026,7 +2026,7 @@ template<typename R1, typename V> auto fill(R1&& in, V&& value)
 /// @snippet test.cpp rah::copy_pipeable
 template<typename V> auto fill(V&& value)
 {
-	return make_pipeable([=](auto&& out) {return rah::action::fill(out, value); });
+	return make_pipeable([=](auto&& out) {return RAH_NAMESPACE::action::fill(out, value); });
 }
 
 }  // namespace action
