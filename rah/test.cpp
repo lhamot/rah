@@ -627,6 +627,13 @@ int main()
 		/// [map_value]
 	}
 	{
+		std::map<int, double> input{ { 1, 1.5 },{ 2, 2.5 },{ 3, 3.5 },{ 4, 4.5 } };
+		std::vector<double> result;
+		for (double& value : rah::view::map_value(input))
+			value += 0.25f;
+		assert(input == (std::map<int, double>({ { 1, 1.75 },{ 2, 2.75 },{ 3, 3.75 },{ 4, 4.75 } })));
+	}
+	{
 		/// [map_value_pipeable]
 		std::map<int, double> input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };
 		std::vector<double> result;

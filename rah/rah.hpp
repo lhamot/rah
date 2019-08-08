@@ -1198,7 +1198,10 @@ inline auto enumerate()
 
 template<typename R> auto map_value(R&& range)
 {
-	return transform(RAH_STD::forward<R>(range), [](auto nvp) {return RAH_STD::get<1>(nvp); });
+	return transform(RAH_STD::forward<R>(range), [](auto&& nvp) -> decltype(nvp)
+	{
+		return RAH_STD::get<1>(RAH_STD::forward<decltype(nvp)>(nvp)); 
+	});
 }
 
 inline auto map_value()
@@ -1210,7 +1213,10 @@ inline auto map_value()
 
 template<typename R> auto map_key(R&& range)
 {
-	return RAH_NAMESPACE::view::transform(RAH_STD::forward<R>(range), [](auto nvp) {return RAH_STD::get<0>(nvp); });
+	return RAH_NAMESPACE::view::transform(RAH_STD::forward<R>(range), [](auto&& nvp) -> decltype(nvp)
+	{
+		return RAH_STD::get<0>(RAH_STD::forward<decltype(nvp)>(nvp)); 
+	});
 }
 
 inline auto map_key()
