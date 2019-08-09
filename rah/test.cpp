@@ -564,6 +564,15 @@ int main()
 		assert(result == std::vector<int>({ 0, 2, 4 }));
 	}
 	{
+		enum class Tutu { a, b, c, d, e };
+		std::vector<Tutu> vec_01234{ Tutu::a, Tutu::b, Tutu::c, Tutu::d, Tutu::e };
+		std::vector<Tutu> result;
+		for (Tutu i : rah::view::filter(vec_01234, [](Tutu a) {return a != Tutu::c; }))
+			result.push_back(i);
+		assert(result == std::vector<Tutu>({ Tutu::a, Tutu::b, Tutu::d, Tutu::e }));
+	}
+
+	{
 		/// [filter_pipeable]
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<int> result;
@@ -710,6 +719,71 @@ int main()
 		}
 		/// [rah::equal_range_pipeable]
 	}
+	{
+		/// [rah::equal_range_pred_0]
+		struct S
+		{
+			int value;
+			char test;
+			bool operator==(S rhs) const
+			{
+				return value == rhs.value && test == rhs.test;
+			}
+		};
+		struct FindS
+		{
+			bool operator()(S s, int val) const { return s.value < val; }
+			bool operator()(int val, S s) const { return val < s.value; }
+		};
+		/// [rah::equal_range_pred_0]
+		{
+			/// [rah::equal_range_pred]
+			std::vector<S> vecIn1{ {1, 'a'}, {2, 'b'}, {2, 'c'}, {3, 'd'}, {4, 'e'} };
+			{
+				std::vector<S> out;
+				for (S i : rah::equal_range(vecIn1, 0, FindS{}))
+					out.push_back(i);
+				assert(out == std::vector<S>({ }));
+			}
+			{
+				std::vector<S> out;
+				for (S i : rah::equal_range(vecIn1, 1, FindS{}))
+					out.push_back(i);
+				assert(out == std::vector<S>({ {1, 'a'} }));
+			}
+			{
+				std::vector<S> out;
+				for (S i : rah::equal_range(vecIn1, 2, FindS{}))
+					out.push_back(i);
+				assert(out == std::vector<S>({ {2, 'b'}, {2, 'c'} }));
+			}
+			/// [rah::equal_range_pred]
+		}
+		{
+			/// [rah::equal_range_pred_pipeable]
+			std::vector<S> vecIn1{ {1, 'a'}, {2, 'b'}, {2, 'c'}, {3, 'd'}, {4, 'e'} };
+			{
+				std::vector<S> out;
+				for (S i : vecIn1 | rah::equal_range(0, FindS{}))
+					out.push_back(i);
+				assert(out == std::vector<S>({ }));
+			}
+			{
+				std::vector<S> out;
+				for (S i : vecIn1 | rah::equal_range(1, FindS{}))
+					out.push_back(i);
+				assert(out == std::vector<S>({ {1, 'a'} }));
+			}
+			{
+				std::vector<S> out;
+				for (S i : vecIn1 | rah::equal_range(2, FindS{}))
+					out.push_back(i);
+				assert(out == std::vector<S>({ {2, 'b'}, {2, 'c'} }));
+			}
+			/// [rah::equal_range_pred_pipeable]
+		}
+	}
+
 	{
 		/// [rah::binary_search]
 		std::vector<int> vecIn1{ 1, 2, 2, 3, 4 };

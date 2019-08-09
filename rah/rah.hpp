@@ -1283,7 +1283,8 @@ inline auto empty()
 /// @brief Returns a range containing all elements equivalent to value in the range
 ///
 /// @snippet test.cpp rah::equal_range
-template<typename R, typename V> auto equal_range(R&& range, V&& value)
+template<typename R, typename V>
+auto equal_range(R&& range, V&& value, RAH_STD::enable_if_t<is_range<R>::value, int> = 0)
 {
 	auto pair = RAH_STD::equal_range(begin(range), end(range), RAH_STD::forward<V>(value));
 	return make_iterator_range(RAH_STD::get<0>(pair), RAH_STD::get<1>(pair));
@@ -1296,6 +1297,28 @@ template<typename R, typename V> auto equal_range(R&& range, V&& value)
 template<typename V> auto equal_range(V&& value)
 {
 	return make_pipeable([=](auto&& range) {return equal_range(RAH_STD::forward<decltype(range)>(range), value); });
+}
+
+/// @brief Returns a range containing all elements equivalent to value in the range
+///
+/// @snippet test.cpp rah::equal_range_pred_0
+/// @snippet test.cpp rah::equal_range_pred
+template<typename R, typename V, typename P>
+auto equal_range(R&& range, V&& value, P&& pred)
+{
+	auto pair = RAH_STD::equal_range(begin(range), end(range), RAH_STD::forward<V>(value), RAH_STD::forward<P>(pred));
+	return make_iterator_range(RAH_STD::get<0>(pair), RAH_STD::get<1>(pair));
+}
+
+/// @brief Returns a range containing all elements equivalent to value in the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::equal_range_pred_0
+/// @snippet test.cpp rah::equal_range_pred_pipeable
+template<typename V, typename P>
+auto equal_range(V&& value, P&& pred, RAH_STD::enable_if_t<!is_range<V>::value, int> = 0)
+{
+	return make_pipeable([=](auto&& range) {return equal_range(RAH_STD::forward<decltype(range)>(range), value, pred); });
 }
 
 // ****************************************** binary_search ***********************************************
