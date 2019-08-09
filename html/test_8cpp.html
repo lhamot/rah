@@ -196,7 +196,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">{ \</div><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;assert : &quot;</span> &lt;&lt; #RANGE &lt;&lt; <span class="stringliteral">&quot; == &quot;</span> &lt;&lt; #IL &lt;&lt; std::endl; \</div><div class="line">    if (<a class="code" href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a>(RANGE, IL) | <a class="code" href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a>(<a class="code" href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a>)) \</div><div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;OK&quot;</span> &lt;&lt; std::endl; \</div><div class="line">    else \</div><div class="line">        {std::cout &lt;&lt; <span class="stringliteral">&quot;NOT OK&quot;</span> &lt;&lt; std::endl; abort(); } \</div><div class="line">}</div><div class="ttc" id="test_8cpp_html_a8a1a9235e13917b31774c24fcc1a6a78"><div class="ttname"><a href="test_8cpp.html#a8a1a9235e13917b31774c24fcc1a6a78">PairEqual</a></div><div class="ttdeci">auto PairEqual</div><div class="ttdef"><b>Definition:</b> test.cpp:37</div></div>
-<div class="ttc" id="namespacerah_html_aaf7abb6066c8adfe6959691c3a3ea4e2"><div class="ttname"><a href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a></div><div class="ttdeci">bool all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah.hpp:1382</div></div>
+<div class="ttc" id="namespacerah_html_aaf7abb6066c8adfe6959691c3a3ea4e2"><div class="ttname"><a href="namespacerah.html#aaf7abb6066c8adfe6959691c3a3ea4e2">rah::all_of</a></div><div class="ttdeci">bool all_of(R &amp;&amp;range, P &amp;&amp;pred)</div><div class="ttdoc">Checks if unary predicate pred returns true for all elements in the range.</div><div class="ttdef"><b>Definition:</b> rah.hpp:1406</div></div>
 <div class="ttc" id="namespacerah_1_1view_html_a5b9cacbf101962d95221b591d7f11026"><div class="ttname"><a href="namespacerah_1_1view.html#a5b9cacbf101962d95221b591d7f11026">rah::view::zip</a></div><div class="ttdeci">auto zip(R &amp;&amp;... _ranges)</div><div class="ttdoc">Given N ranges, return a new range where Mth element is the result of calling std::make_tuple on the ...</div><div class="ttdef"><b>Definition:</b> rah.hpp:1003</div></div>
 </div><!-- fragment -->
 </div>
@@ -329,10 +329,16 @@ template&lt;typename T &gt; </div>
 <p>[map_key]</p>
 <p>[map_key_pipeable]</p>
 <p>[map_key_pipeable]</p>
-<p>[<a class="el" href="namespacerah.html#a095c61033422b8ebe6dc2cc214867aca" title="Returns a range containing all elements equivalent to value in the range.">rah::equal_range</a>]</p>
-<p>[<a class="el" href="namespacerah.html#a095c61033422b8ebe6dc2cc214867aca" title="Returns a range containing all elements equivalent to value in the range.">rah::equal_range</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a984a8f5d104b54913aefe80077c2026f" title="Returns a range containing all elements equivalent to value in the range.">rah::equal_range</a>]</p>
+<p>[<a class="el" href="namespacerah.html#a984a8f5d104b54913aefe80077c2026f" title="Returns a range containing all elements equivalent to value in the range.">rah::equal_range</a>]</p>
 <p>[rah::equal_range_pipeable]</p>
 <p>[rah::equal_range_pipeable]</p>
+<p>[rah::equal_range_pred_0]</p>
+<p>[rah::equal_range_pred_0]</p>
+<p>[rah::equal_range_pred]</p>
+<p>[rah::equal_range_pred]</p>
+<p>[rah::equal_range_pred_pipeable]</p>
+<p>[rah::equal_range_pred_pipeable]</p>
 <p>[<a class="el" href="namespacerah.html#a5eef379d9f3039fd12f43d5220434976" title="Checks if an element equivalent to value appears within the range.">rah::binary_search</a>]</p>
 <p>[<a class="el" href="namespacerah.html#a5eef379d9f3039fd12f43d5220434976" title="Checks if an element equivalent to value appears within the range.">rah::binary_search</a>]</p>
 <p>[rah::binary_search_pipeable]</p>

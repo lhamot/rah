@@ -222,9 +222,13 @@ auto \mbox{\hyperlink{namespacerah_1_1view_aa42d84e34eaf06e2d04d650d1483ac68}{ra
 \begin{DoxyCompactList}\small\item\em Check if the range if empty. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_a6ceb90c934b1c4927ab4e08b985ef6c5}{rah\+::empty}} ()
 \begin{DoxyCompactList}\small\item\em Check if the range if empty. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a095c61033422b8ebe6dc2cc214867aca}{rah\+::equal\+\_\+range}} (R \&\&range, V \&\&value)
+{\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a984a8f5d104b54913aefe80077c2026f}{rah\+::equal\+\_\+range}} (R \&\&range, V \&\&value, std \+::enable\+\_\+if\+\_\+t$<$ is\+\_\+range$<$ R $>$\+::value, int $>$=0)
 \begin{DoxyCompactList}\small\item\em Returns a range containing all elements equivalent to value in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_afa191bbe5b7dbb9b2e7a21a87dbb9a8a}{rah\+::equal\+\_\+range}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Returns a range containing all elements equivalent to value in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename V , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a8e598fa8efba31247802621369eb7c55}{rah\+::equal\+\_\+range}} (R \&\&range, V \&\&value, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Returns a range containing all elements equivalent to value in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a4669ef1ede981eaa73e76449c0fa138b}{rah\+::equal\+\_\+range}} (V \&\&value, P \&\&pred, std \+::enable\+\_\+if\+\_\+t$<$!is\+\_\+range$<$ V $>$\+::value, int $>$=0)
 \begin{DoxyCompactList}\small\item\em Returns a range containing all elements equivalent to value in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a5eef379d9f3039fd12f43d5220434976}{rah\+::binary\+\_\+search}} (R \&\&range, V \&\&value)
 \begin{DoxyCompactList}\small\item\em Checks if an element equivalent to value appears within the range. \end{DoxyCompactList}\item 
