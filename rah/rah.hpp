@@ -759,7 +759,7 @@ template<typename F> auto generate(F&& func)
 	return iterator_range<generate_iterator<F>>{ { func}, { func }};
 }
 
-template<typename F> auto generate_n(F&& func, size_t count)
+template<typename F> auto generate_n(size_t count, F&& func)
 {
 	return generate(RAH_STD::forward<F>(func)) | take(count);
 }

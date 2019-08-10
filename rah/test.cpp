@@ -301,7 +301,7 @@ int main()
 		/// [generate_n]
 		std::vector<int> result;
 		int y = 1;
-		for (int i : rah::view::generate_n([&y]() mutable { auto prev = y; y *= 2; return prev; }, 4))
+		for (int i : rah::view::generate_n(4, [&y]() mutable { auto prev = y; y *= 2; return prev; }))
 			result.push_back(i);
 		assert(result == std::vector<int>({ 1, 2, 4, 8 }));
 		/// [generate_n]
