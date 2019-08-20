@@ -1686,7 +1686,11 @@ inline auto size()
 /// @snippet test.cpp rah::equal
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 {
+#ifdef EASTL_VERSION
+	return RAH_STD::identical(begin(range1), end(range1), begin(range2), end(range2));
+#else
 	return RAH_STD::equal(begin(range1), end(range1), begin(range2), end(range2));
+#endif
 }
 
 /// @brief Determines if two sets of elements are the same 
