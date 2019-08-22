@@ -228,9 +228,26 @@ int main()
 		assert(result == "bccdddeeee");
 		/// [for_each]
 	}
-
+		
 	{
 		/// [for_each_pipeable]
+		auto range = rah::view::ints(0, 3) | rah::view::for_each([](int z)
+		{
+			return rah::view::ints(3, 6) | rah::view::for_each([z](int y)
+			{
+				return rah::view::ints(6, 9) | rah::view::for_each([z, y](int x)
+				{
+					return rah::view::single(x + y * 3 + z * 9);
+				});
+			});
+		});
+
+		assert(equal(range, rah::view::ints(15, 42)));
+		/// [for_each_pipeable]
+	}
+
+
+	{
 		size_t xSize = 2;
 		size_t ySize = 3;
 		auto xyIndexes = [=](size_t y)
@@ -285,7 +302,6 @@ int main()
 			{ 3, 1, 0 }, { 3, 1, 1 },
 			{ 3, 2, 0 }, { 3, 2, 1 }
 		}));
-		/// [for_each_pipeable]
 	}
 
 	{
@@ -1648,6 +1664,20 @@ int main()
 		(iota(0, 100) | enumerate() | slice(10, 15) | retro()),
 		(il<std::tuple<size_t, int>>{ {14, 14}, { 13, 13 }, { 12, 12 }, { 11, 11 }, { 10, 10 } })
 	);
+
+	EQUAL_RANGE( // test slice in bidirectional iterator
+		(iota(0, 10) | filter([](int i) {return i % 2 == 0; }) | slice(1, End - 1)),
+		(il<int>{ 2, 4, 6 })
+	);
+
+	{
+		// Can't compile because generate_n create a forward iterator range
+		// int y = 1;
+		// EQUAL_RANGE( // test slice in forward iterator
+		// 	(rah::view::generate_n(4, [&y]() mutable { auto prev = y; y *= 2; return prev; }) | slice(1, End - 1)),
+		// 	(il<int>{ 2, 4 })
+		// );
+	}
 
 	{
 		using namespace rah;

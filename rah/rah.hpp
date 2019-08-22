@@ -311,7 +311,12 @@ template<typename T> struct optional
 		if (has_value())
 		{
 			if (other.has_value())
-				get() = other.get();
+			{
+				// Handle the case where T is not copy assignable
+				reset();
+				new(getPtr()) T(other.get());
+				is_allocated_ = true;
+			}
 			else
 				reset();
 		}
@@ -388,17 +393,9 @@ private:
 	T const* getPtr() const { return (T const*)&value_; }
 	void destruct_value() { get().~T(); }
 
-	std::aligned_storage_t<sizeof(T), std::alignment_of<T>::value> value_;
+	RAH_STD::aligned_storage_t<sizeof(T), RAH_STD::alignment_of<T>::value> value_;
 	bool is_allocated_ = false;
 };
-}
-
-// ********************************** single ******************************************************
-
-template<typename V>
-auto single(V&& value)
-{
-	return RAH_STD::array<RAH_STD::remove_reference_t<V>, 1>{RAH_STD::forward<V>(value)};
 }
 
 // ********************************** all *********************************************************
@@ -499,7 +496,7 @@ template<typename I>
 struct unbounded_iterator : iterator_facade<
 	unbounded_iterator<I>,
 	decltype(*fake<I>()),
-	std::forward_iterator_tag
+	typename RAH_STD::iterator_traits<I>::iterator_category
 >
 {
 	I iter_;
@@ -509,6 +506,27 @@ struct unbounded_iterator : iterator_facade<
 	unbounded_iterator(I iter, bool end) : iter_(iter), end_(end) {}
 
 	void increment() { ++iter_; }
+
+	void advance(intptr_t off) { iter_ += off; }
+	void decrement() { --iter_; }
+	auto distance_to(unbounded_iterator r) const
+	{ 
+		if (end_)
+		{
+			if (r.end_)
+				return intptr_t{};
+			else
+				return RAH_STD::numeric_limits<intptr_t>::min();
+		}
+		else
+		{
+			if (r.end_)
+				return RAH_STD::numeric_limits<intptr_t>::max();
+			else
+				return iter_ - r.iter_;
+		}
+	}
+
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
 	bool equal(unbounded_iterator r) const 
 	{ 
@@ -545,7 +563,7 @@ struct ints_iterator : iterator_facade<ints_iterator<T>, T, RAH_STD::random_acce
 	bool equal(ints_iterator other) const { return val_ == other.val_; }
 };
 
-template<typename T = size_t> auto ints(T b = 0, T e = std::numeric_limits<T>::max())
+template<typename T = size_t> auto ints(T b = 0, T e = RAH_STD::numeric_limits<T>::max())
 {
 	return iterator_range<ints_iterator<T>>{ { b }, { e }};
 }
@@ -727,7 +745,7 @@ struct cycle_iterator : iterator_facade<cycle_iterator<R>, range_ref_type_t<R>, 
 template<typename R> auto cycle(R&& range)
 {
 	auto rangeRef = range | RAH_NAMESPACE::view::all();
-	using iterator_type = cycle_iterator<std::remove_reference_t<decltype(rangeRef)>>;
+	using iterator_type = cycle_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>>;
 
 	iterator_type b(rangeRef, begin(rangeRef));
 	iterator_type e(rangeRef, begin(rangeRef));
@@ -774,14 +792,14 @@ struct transform_iterator : iterator_facade<
 >
 {
 	range_begin_type_t<R> iter_;
-	F func_;
+	details::optional<F> func_;
 
 	transform_iterator(range_begin_type_t<R> const& iter, F const& func) : iter_(iter), func_(func) {}
 
 	transform_iterator& operator=(transform_iterator const& ot)
 	{
 		iter_ = ot.iter_;
-		//func_ = ot.func_;
+		func_ = ot.func_;
 		return *this;
 	}
 
@@ -789,13 +807,13 @@ struct transform_iterator : iterator_facade<
 	void advance(intptr_t off) { iter_ += off; }
 	void decrement() { --iter_; }
 	auto distance_to(transform_iterator r) const { return iter_ - r.iter_; }
-	auto dereference() const -> decltype(func_(*iter_)) { return func_(*iter_); }
+	auto dereference() const -> decltype((*func_)(*iter_)) { return (*func_)(*iter_); }
 	bool equal(transform_iterator r) const { return iter_ == r.iter_; }
 };
 
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
-	using iterator = transform_iterator<RAH_STD::remove_reference_t<R>, RAH_STD::remove_reference_t<F>>;
+	using iterator = transform_iterator<RAH_STD::remove_reference_t<R>, RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>>;
 	auto iter1 = begin(range);
 	auto iter2 = end(range);
 	return iterator_range<iterator>{ { iter1, func }, { iter2, func } };
@@ -823,6 +841,8 @@ inline auto for_each(F&& func)
 
 template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)
 {
+	static_assert(not RAH_STD::is_same<range_iter_categ_t<R>, RAH_STD::forward_iterator_tag>::value, 
+		"Can't use slice on non-bidirectional iterators. Try to use view::drop and view::take");
 	auto findIter = [](auto b, auto e, intptr_t idx)
 	{
 		if (idx < 0)
@@ -904,6 +924,14 @@ template<typename R> auto retro(R&& range)
 inline auto retro()
 {
 	return make_pipeable([=](auto&& range) {return retro(range); });
+}
+
+// ********************************** single ******************************************************
+
+template<typename V>
+auto single(V&& value)
+{
+	return repeat(value) | take(1);
 }
 
 // *************************** zip ****************************************************************
@@ -1055,7 +1083,7 @@ inline auto chunk(size_t step)
 // ***************************************** filter ***********************************************
 
 template<typename R, typename F>
-struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t<R>, range_iter_categ_t<R>>
+struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t<R>, RAH_STD::bidirectional_iterator_tag>
 {
 	range_begin_type_t<R> begin_;
 	range_begin_type_t<R> iter_;
