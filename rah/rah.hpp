@@ -133,13 +133,12 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 	template <class Reference>
 	struct pointer_type
 	{
-		struct proxy
+		struct type
 		{
 			Reference m_ref;
-			Reference const* operator->() { return &m_ref; }
-			operator Reference const*() { return &m_ref; }
+			Reference const* operator->() const { return &m_ref; }
+			operator Reference const*() const { return &m_ref; }
 		};
-		using type = proxy;
 	};
 
 	template <class T>
@@ -1096,6 +1095,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	range_begin_type_t<R> iter_;
 	range_end_type_t<R> end_;
 	details::optional<F> func_;
+	decltype(iter_.operator->()) value_pointer_;
 
 	filter_iterator(
 		range_begin_type_t<R> const& begin,
@@ -1109,7 +1109,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 
 	void next_value()
 	{
-		while (iter_ != end_ && not (*func_)(*iter_))
+		while (iter_ != end_ && not (*func_)(*(value_pointer_ = iter_.operator->())))
 		{
 			assert(iter_ != end_);
 			++iter_;
@@ -1130,7 +1130,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 		} while (not (*func_)(*iter_) && iter_ != begin_);
 	}
 
-	auto dereference() const -> decltype(*iter_) { return *iter_; }
+	auto dereference() const -> decltype(*iter_) { return *value_pointer_; }
 	bool equal(filter_iterator other) const { return iter_ == other.iter_; }
 };
 

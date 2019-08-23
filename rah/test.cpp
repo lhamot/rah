@@ -604,7 +604,6 @@ int main()
 		assert(rah::none_of(range1, [](auto v) { return (v % 2) == 1; }));
 
 		// test generate + filter
-		/*
 		auto range2 = rah::view::generate_n(100, []() {return rand(); })
 			| rah::view::filter([](auto&& val) { return val % 2 == 0; });
 
@@ -613,7 +612,6 @@ int main()
 			printf("Left value %d\n", v);
 			return (v % 2) == 1;
 		}));
-		*/
 
 		// Can create some compilation issue about lambda copy
 		/*auto range3 = rah::view::ints(0, 5) | rah::view::for_each([](auto)
