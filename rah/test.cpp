@@ -599,6 +599,40 @@ int main()
 	}
 
 	{
+		// test filter with the first elements filtered
+		auto range1 = rah::view::ints(1, 10) | rah::view::filter([](auto&& val) {return val % 2 == 0; });
+		assert(rah::none_of(range1, [](auto v) { return (v % 2) == 1; }));
+
+		// test generate + filter
+		/*
+		auto range2 = rah::view::generate_n(100, []() {return rand(); })
+			| rah::view::filter([](auto&& val) { return val % 2 == 0; });
+
+		assert(rah::none_of(range2, [](auto v)
+		{
+			printf("Left value %d\n", v);
+			return (v % 2) == 1;
+		}));
+		*/
+
+		// Can create some compilation issue about lambda copy
+		/*auto range3 = rah::view::ints(0, 5) | rah::view::for_each([](auto)
+		{
+			return rah::view::generate_n(5, []() {return rand(); }) 
+				| rah::view::filter([](auto&& val) 
+			{
+				printf("Found value %d\n", val);
+				return val % 2 == 0; 
+			});
+		});
+		assert(rah::none_of(range3, [](auto v)
+		{
+			printf("Left value %d\n", v);
+			return (v % 2) == 1; 
+		}));*/
+	}
+
+	{
 		/// [concat]
 		std::vector<int> inputA{ 0, 1, 2, 3 };
 		std::vector<int> inputB{ 4, 5, 6 };

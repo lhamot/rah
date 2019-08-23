@@ -335,7 +335,12 @@ template<typename T> struct optional
 		if (has_value())
 		{
 			if (other.has_value())
-				get() = RAH_STD::move(other.get());
+			{
+				// A lambda with const capture is not move assignable
+				reset();
+				new(getPtr()) T(RAH_STD::move(other.get()));
+				is_allocated_ = true;
+			}
 			else
 				reset();
 		}
@@ -763,18 +768,19 @@ inline auto cycle()
 template<typename F>
 struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F>()()), RAH_STD::forward_iterator_tag>
 {
-	mutable F func_;
+	mutable details::optional<F> func_;
 
 	generate_iterator(F const& func) : func_(func) {}
 
 	void increment() { }
-	auto dereference() const { return func_(); }
+	auto dereference() const { return (*func_)(); }
 	bool equal(generate_iterator) const { return false; }
 };
 
 template<typename F> auto generate(F&& func)
 {
-	return iterator_range<generate_iterator<F>>{ { func}, { func }};
+	using Functor = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>;
+	return iterator_range<generate_iterator<Functor>>{ { func}, { func }};
 }
 
 template<typename F> auto generate_n(size_t count, F&& func)
@@ -813,7 +819,8 @@ struct transform_iterator : iterator_facade<
 
 template<typename R, typename F> auto transform(R&& range, F&& func)
 {
-	using iterator = transform_iterator<RAH_STD::remove_reference_t<R>, RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>>;
+	using Functor = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>;
+	using iterator = transform_iterator<RAH_STD::remove_reference_t<R>, Functor>;
 	auto iter1 = begin(range);
 	auto iter2 = end(range);
 	return iterator_range<iterator>{ { iter1, func }, { iter2, func } };
@@ -1088,7 +1095,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	range_begin_type_t<R> begin_;
 	range_begin_type_t<R> iter_;
 	range_end_type_t<R> end_;
-	F func_;
+	details::optional<F> func_;
 
 	filter_iterator(
 		range_begin_type_t<R> const& begin,
@@ -1097,14 +1104,22 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 		F func)
 		: begin_(begin), iter_(iter), end_(end), func_(func)
 	{
+		next_value();
+	}
+
+	void next_value()
+	{
+		while (iter_ != end_ && not (*func_)(*iter_))
+		{
+			assert(iter_ != end_);
+			++iter_;
+		}
 	}
 
 	void increment()
 	{
-		do
-		{
-			++iter_;
-		} while (iter_ != end_ && not func_(*iter_));
+		++iter_;
+		next_value();
 	}
 
 	void decrement()
@@ -1112,7 +1127,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 		do
 		{
 			--iter_;
-		} while (not func_(*iter_) && iter_ != begin_);
+		} while (not (*func_)(*iter_) && iter_ != begin_);
 	}
 
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
@@ -1123,7 +1138,8 @@ template<typename R, typename F> auto filter(R&& range, F&& func)
 {
 	auto iter = begin(range);
 	auto endIter = end(range);
-	return iterator_range<filter_iterator<RAH_STD::remove_reference_t<R>, RAH_STD::remove_reference_t<F>>>{
+	using Predicate = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>;
+	return iterator_range<filter_iterator<RAH_STD::remove_reference_t<R>, Predicate>>{
 		{ iter, iter, endIter, func },
 		{ iter, endIter, endIter, func }
 	};
