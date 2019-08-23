@@ -545,6 +545,14 @@ int main()
 	}
 
 	{
+		std::vector<int> inputA{ 1, 2, 3, 4 };
+		std::vector<bool> inputB{ false, true, true, false };
+		auto range = 
+			rah::view::zip(inputA, inputB)
+			| rah::view::filter([](auto a_b) {return std::get<1>(a_b); });
+		assert(rah::equal(range, std::vector<std::tuple<int, bool>>({ {2, true}, { 3, true } })));
+	}
+	{
 		/// [chunk]
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };
 		std::vector<std::vector<int>> result;

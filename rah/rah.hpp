@@ -125,6 +125,118 @@ auto operator | (R&& range, pipeable<MakeRange> const& adapter) ->decltype(adapt
 
 // ************************************ iterator_facade *******************************************
 
+namespace details
+{
+
+// Small optional impl for C++14 compilers
+template<typename T> struct optional
+{
+	optional() = default;
+	optional(optional const& other)
+	{
+		if (other.has_value())
+		{
+			new(getPtr()) T(other.get());
+			is_allocated_ = true;
+		}
+	}
+	optional& operator = (optional const& other)
+	{
+		if (has_value())
+		{
+			if (other.has_value())
+			{
+				// Handle the case where T is not copy assignable
+				reset();
+				new(getPtr()) T(other.get());
+				is_allocated_ = true;
+			}
+			else
+				reset();
+		}
+		else
+		{
+			if (other.has_value())
+			{
+				new(getPtr()) T(other.get());
+				is_allocated_ = true;
+			}
+		}
+		return *this;
+	}
+	optional& operator = (optional&& other)
+	{
+		if (has_value())
+		{
+			if (other.has_value())
+			{
+				// A lambda with const capture is not move assignable
+				reset();
+				new(getPtr()) T(RAH_STD::move(other.get()));
+				is_allocated_ = true;
+			}
+			else
+				reset();
+		}
+		else
+		{
+			if (other.has_value())
+			{
+				new(getPtr()) T(RAH_STD::move(other.get()));
+				is_allocated_ = true;
+			}
+		}
+		return *this;
+	}
+	optional(T const& other)
+	{
+		new(getPtr()) T(other);
+		is_allocated_ = true;
+	}
+	optional& operator=(T const& other)
+	{
+		new(getPtr()) T(other);
+		is_allocated_ = true;
+		return *this;
+	}
+	optional& operator=(T&& other)
+	{
+		new(getPtr()) T(RAH_STD::move(other));
+		is_allocated_ = true;
+		return *this;
+	}
+	~optional() { reset(); }
+
+	bool has_value() const { return is_allocated_; }
+
+	void reset()
+	{
+		if (is_allocated_)
+		{
+			destruct_value();
+			is_allocated_ = false;
+		}
+	}
+
+	T& get() { assert(is_allocated_); return *getPtr(); }
+
+	T const& get() const { assert(is_allocated_); return *getPtr(); }
+
+	T& operator*() { return get(); }
+	T const& operator*() const { return get(); }
+	T* operator->() { assert(is_allocated_);  return getPtr(); }
+	T const* operator->() const { assert(is_allocated_);  return getPtr(); }
+
+private:
+	T* getPtr() { return (T*)&value_; }
+	T const* getPtr() const { return (T const*)&value_; }
+	void destruct_value() { get().~T(); }
+
+	RAH_STD::aligned_storage_t<sizeof(T), RAH_STD::alignment_of<T>::value> value_;
+	bool is_allocated_ = false;
+};
+}
+
 template<typename I, typename R, typename C> struct iterator_facade;
 
 template<typename I, typename R>
@@ -133,12 +245,7 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 	template <class Reference>
 	struct pointer_type
 	{
-		struct type
-		{
-			Reference m_ref;
-			Reference const* operator->() const { return &m_ref; }
-			operator Reference const*() const { return &m_ref; }
-		};
+		using type = details::optional<Reference>;
 	};
 
 	template <class T>
@@ -290,117 +397,6 @@ struct is_lesser
 namespace view
 {
 
-namespace details
-{
-
-// Small optional impl for C++14 compilers
-template<typename T> struct optional
-{
-	optional() = default;
-	optional(optional const& other)
-	{
-		if (other.has_value())
-		{
-			new(getPtr()) T(other.get());
-			is_allocated_ = true;
-		}
-	}
-	optional& operator = (optional const& other)
-	{
-		if (has_value())
-		{
-			if (other.has_value())
-			{
-				// Handle the case where T is not copy assignable
-				reset();
-				new(getPtr()) T(other.get());
-				is_allocated_ = true;
-			}
-			else
-				reset();
-		}
-		else
-		{
-			if (other.has_value())
-			{
-				new(getPtr()) T(other.get());
-				is_allocated_ = true;
-			}
-		}
-		return *this;
-	}
-	optional& operator = (optional&& other)
-	{
-		if (has_value())
-		{
-			if (other.has_value())
-			{
-				// A lambda with const capture is not move assignable
-				reset();
-				new(getPtr()) T(RAH_STD::move(other.get()));
-				is_allocated_ = true;
-			}
-			else
-				reset();
-		}
-		else
-		{
-			if (other.has_value())
-			{
-				new(getPtr()) T(RAH_STD::move(other.get()));
-				is_allocated_ = true;
-			}
-		}
-		return *this;
-	}
-	optional(T const& other)
-	{
-		new(getPtr()) T(other);
-		is_allocated_ = true;
-	}
-	optional& operator=(T const& other)
-	{
-		new(getPtr()) T(other);
-		is_allocated_ = true;
-		return *this;
-	}
-	optional& operator=(T&& other)
-	{
-		new(getPtr()) T(RAH_STD::move(other));
-		is_allocated_ = true;
-		return *this;
-	}
-	~optional() { reset(); }
-
-	bool has_value() const { return is_allocated_; }
-
-	void reset()
-	{
-		if (is_allocated_)
-		{
-			destruct_value();
-			is_allocated_ = false;
-		}
-	}
-
-	T& get() { assert(is_allocated_); return *getPtr(); }
-
-	T const& get() const { assert(is_allocated_); return *getPtr(); }
-
-	T& operator*() { return get(); }
-	T const& operator*() const { return get(); }
-	T* operator->() { assert(is_allocated_);  return getPtr(); }
-	T const* operator->() const { assert(is_allocated_);  return getPtr(); }
-
-private:
-	T* getPtr() { return (T*)&value_; }
-	T const* getPtr() const { return (T const*)&value_; }
-	void destruct_value() { get().~T(); }
-
-	RAH_STD::aligned_storage_t<sizeof(T), RAH_STD::alignment_of<T>::value> value_;
-	bool is_allocated_ = false;
-};
-}
 
 // ********************************** all *********************************************************
 
@@ -797,7 +793,7 @@ struct transform_iterator : iterator_facade<
 >
 {
 	range_begin_type_t<R> iter_;
-	details::optional<F> func_;
+	RAH_NAMESPACE::details::optional<F> func_;
 
 	transform_iterator(range_begin_type_t<R> const& iter, F const& func) : iter_(iter), func_(func) {}
 
@@ -1094,7 +1090,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	range_begin_type_t<R> begin_;
 	range_begin_type_t<R> iter_;
 	range_end_type_t<R> end_;
-	details::optional<F> func_;
+	RAH_NAMESPACE::details::optional<F> func_;
 	decltype(iter_.operator->()) value_pointer_;
 
 	filter_iterator(
