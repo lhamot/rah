@@ -245,13 +245,23 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 	template <class Reference>
 	struct pointer_type
 	{
-		using type = details::optional<Reference>;
+		using type = RAH_NAMESPACE::details::optional<Reference>;
+		template<typename Ref>
+		static type to_pointer(Ref&& ref)
+		{
+			return RAH_STD::forward<Ref>(ref);
+		}
 	};
 
 	template <class T>
 	struct pointer_type<T&> // "real" references
 	{
 		using type = T*;
+		template<typename Ref>
+		static type to_pointer(Ref&& ref)
+		{
+			return &ref;
+		}
 	};
 
 	using iterator_category = RAH_STD::forward_iterator_tag;
@@ -276,7 +286,7 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 		static_assert(RAH_STD::is_same<decltype(self().dereference()), reference>::value, "");
 		return self().dereference(); 
 	}
-	auto operator->() const { return pointer{ self().dereference() }; }
+	auto operator->() const { return pointer_type<R>::to_pointer(self().dereference()); }
 	bool operator!=(I other) const { return not self().equal(other); }
 	bool operator==(I other) const { return self().equal(other); }
 };
@@ -634,7 +644,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		Iterator2 subRangeIter;
 		Iterator2 subRangeEnd;
 	};
-	details::optional<SubRange> subRange_;
+	RAH_NAMESPACE::details::optional<SubRange> subRange_;
 
 	template<typename U>
 	join_iterator(U&& range, Iterator1 rangeIter, Iterator2 subRangeIter, Iterator2 subRangeEnd)
@@ -763,7 +773,7 @@ inline auto cycle()
 template<typename F>
 struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F>()()), RAH_STD::forward_iterator_tag>
 {
-	mutable details::optional<F> func_;
+	mutable RAH_NAMESPACE::details::optional<F> func_;
 
 	generate_iterator(F const& func) : func_(func) {}
 
