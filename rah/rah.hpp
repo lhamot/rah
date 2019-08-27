@@ -1966,8 +1966,8 @@ auto unique(P&& pred = {})
 /// The resulting range is also sorted.
 ///
 /// @snippet test.cpp rah::set_difference
-template<typename IN1, typename IN2, typename OUT>
-void set_difference(IN1&& in1, IN2&& in2, OUT&& out)
+template<typename IN1, typename IN2, typename OUT_>
+void set_difference(IN1&& in1, IN2&& in2, OUT_&& out)
 {
 	RAH_STD::set_difference(
 		begin(in1), end(in1),
@@ -1981,8 +1981,8 @@ void set_difference(IN1&& in1, IN2&& in2, OUT&& out)
 /// The resulting range is also sorted.
 ///
 /// @snippet test.cpp rah::set_intersection
-template<typename IN1, typename IN2, typename OUT>
-void set_intersection(IN1&& in1, IN2&& in2, OUT&& out)
+template<typename IN1, typename IN2, typename OUT_>
+void set_intersection(IN1&& in1, IN2&& in2, OUT_&& out)
 {
 	RAH_STD::set_intersection(
 		begin(in1), end(in1),
