@@ -595,7 +595,14 @@ int main()
 			result.push_back(i);
 		assert(result == std::vector<Tutu>({ Tutu::a, Tutu::b, Tutu::d, Tutu::e }));
 	}
-
+	
+	{
+		int vec_01234[] = { 0, 1, 2, 3, 4 };
+		std::vector<int> result;
+		for (int i : rah::view::filter(vec_01234, [](auto a) {return a % 2 == 0; }))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 0, 2, 4 }));
+	}
 	{
 		/// [filter_pipeable]
 		std::vector<int> vec_01234{ 0, 1, 2, 3, 4 };

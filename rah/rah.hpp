@@ -1158,11 +1158,23 @@ inline auto chunk(size_t step)
 template<typename R, typename F>
 struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t<R>, RAH_STD::bidirectional_iterator_tag>
 {
-	range_begin_type_t<R> begin_;
-	range_begin_type_t<R> iter_;
+	using Iterator = range_begin_type_t<R>;
+	Iterator begin_;
+	Iterator iter_;
 	range_end_type_t<R> end_;
 	RAH_NAMESPACE::details::optional<F> func_;
-	decltype(iter_.operator->()) value_pointer_;
+	typename RAH_STD::iterator_traits<range_begin_type_t<R>>::pointer value_pointer_;
+
+	// Get a pointer to the pointed value, 
+	//   OR a pointer to a copy of the pointed value (when not a reference iterator)
+	template <class I> struct get_pointer
+	{
+		static auto get(I const& iter) { return iter.operator->(); }
+	};
+	template <class V> struct get_pointer<V*>
+	{
+		static auto get(V* ptr) { return ptr; }
+	};
 
 	filter_iterator(
 		range_begin_type_t<R> const& begin,
@@ -1176,7 +1188,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 
 	void next_value()
 	{
-		while (iter_ != end_ && not (*func_)(*(value_pointer_ = iter_.operator->())))
+		while (iter_ != end_ && not (*func_)(*(value_pointer_ = get_pointer<Iterator>::get(iter_))))
 		{
 			assert(iter_ != end_);
 			++iter_;
