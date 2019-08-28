@@ -836,6 +836,67 @@ template<typename F> auto transform(F&& func)
 	return make_pipeable([=](auto&& range) {return transform(range, func); });
 }
 
+// ******************************************* set_difference *************************************
+
+template<typename InputIt1, typename InputIt2>
+struct set_difference_iterator : iterator_facade<
+	set_difference_iterator<InputIt1, InputIt2>,
+	typename RAH_STD::iterator_traits<InputIt1>::reference,
+	RAH_STD::forward_iterator_tag
+>
+{
+	InputIt1 first1_;
+	InputIt1 last1_;
+	InputIt2 first2_;
+	InputIt2 last2_;
+
+	set_difference_iterator(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2) 
+		: first1_(first1) , last1_(last1) , first2_(first2), last2_(last2)
+	{
+		next_value();
+	}
+
+	void next_value()
+	{
+		while (first2_ != last2_ and first1_ != last1_)
+		{
+			if (*first1_ < *first2_)
+				break;
+			else if (*first1_ == *first2_)
+			{
+				++first1_;
+				++first2_;
+			}
+			else
+				++first2_;
+		}
+	}
+
+	void increment() 
+	{ 
+		++first1_;
+		next_value();
+	}
+	auto dereference() const -> decltype(*first1_) { return *first1_; }
+	bool equal(set_difference_iterator r) const { return first1_ == r.first1_; }
+};
+
+template<typename R1, typename R2> auto set_difference(R1&& range1, R2&& range2)
+{
+	using Iter1 = range_begin_type_t<R1>;
+	using Iter2 = range_begin_type_t<R2>;
+	using Iterator = set_difference_iterator<Iter1, Iter2>;
+	return iterator_range<Iterator>{ 
+		{ Iterator(begin(range1), end(range1), begin(range2), end(range2)) },
+		{ Iterator(end(range1), end(range1), end(range2), end(range2)) },
+	};
+}
+
+template<typename R2> auto set_difference(R2&& range2)
+{
+	return make_pipeable([r2 = range2 | view::all()](auto&& range) {return set_difference(range, r2); });
+}
+
 // ********************************** for_each ****************************************************
 
 template<typename R, typename F> auto for_each(R&& range, F&& func)

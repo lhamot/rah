@@ -715,6 +715,55 @@ int main()
 		/// [map_key_pipeable]
 	}
 
+	{
+		/// [view::set_difference]
+		std::vector<int> in1 = {1, 2, 3, 4, 5, 6};
+		std::vector<int> in2 = { 2, 4, 6, 7, 8, 9, 10 };
+		std::vector<int> out;
+		for (int val : rah::view::set_difference(in1, in2))
+			out.push_back(val);
+		assert(out == std::vector<int>({1, 3, 5}));
+		/// [view::set_difference]
+	}
+
+	{
+		/// view::set_difference
+		auto test_set_difference = [](std::vector<int> const& in1, std::vector<int> const& in2, std::vector<int> const& expected)
+		{
+			std::vector<int> out;
+			for (int val : rah::view::set_difference(in1, in2))
+				out.push_back(val);
+			assert(out == expected);
+		};
+
+		test_set_difference({}, { 2, 4, 6, 7, 8, 9, 10 }, {});
+		test_set_difference({ 1, 2, 3, 4, 5, 6 }, { }, { 1, 2, 3, 4, 5, 6 });
+		test_set_difference({ 1, 2, 3, 4, 5, 6, 7 }, {2, 4, 6}, { 1, 3, 5, 7 });
+		test_set_difference({ 1, 2, 4, 6 }, {3, 5, 7}, { 1, 2, 4, 6 });
+		test_set_difference({ 1, 2, 4, 6 }, { 1, 2, 4, 6 }, {});
+		test_set_difference({ 1, 2, 4, 6, 7, 8, 9 }, { 1, 2, 4, 6 }, {7, 8, 9});
+
+		for (int x = 0; x < 100; ++x)
+		{
+			std::vector<int> in1;
+			std::vector<int> in2;
+			size_t const size1 = rand() % 100;
+			size_t const size2 = rand() % 100;
+			for (size_t i = 0; i < size1; ++i)
+				in1.push_back(rand() % 100);
+			for (size_t i = 0; i < size2; ++i)
+				in2.push_back(rand() % 100);
+			rah::sort(in1);
+			rah::sort(in2);
+			std::vector<int> outRef;
+			std::set_difference(begin(in1), end(in1), begin(in2), end(in2), std::back_inserter(outRef));
+			std::vector<int> out;
+			for (int val : in1 | rah::view::set_difference(in2))
+				out.push_back(val);
+			assert(out == outRef);
+		}
+	}
+
 	// *********************************** algos **************************************************
 
 	{
