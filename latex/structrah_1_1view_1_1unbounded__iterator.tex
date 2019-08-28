@@ -2,12 +2,12 @@
 \label{structrah_1_1view_1_1unbounded__iterator}\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
 
 
-{\ttfamily \#include $<$rah.\+hpp$>$}
+{\ttfamily \#include $<$rah -\/ Copie.\+hpp$>$}
 
 Inheritance diagram for rah\+::view\+::unbounded\+\_\+iterator$<$ I $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.968366cm]{structrah_1_1view_1_1unbounded__iterator}
+\includegraphics[height=0.844646cm]{structrah_1_1view_1_1unbounded__iterator}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -15,9 +15,31 @@ Inheritance diagram for rah\+::view\+::unbounded\+\_\+iterator$<$ I $>$\+:\begin
 \item 
 \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_aecc43db612ed5ad8e6002356feb92b48}{unbounded\+\_\+iterator}} ()=default
 \item 
-\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}{unbounded\+\_\+iterator}} (I iter, bool \mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}})
+\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}{unbounded\+\_\+iterator}} (I iter, bool \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}})
 \item 
 void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a903c96112b62831505ba8c7af80f6263}{increment}} ()
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_ac5605e2d9558a9569c0e24dcf7a78c10}{advance}} (intptr\+\_\+t off)
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_ab3f812c596c17777717ff92aad65e295}{decrement}} ()
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a3f5ca68b137f2fb1175a100a0839a71a}{distance\+\_\+to}} (\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} r) const
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a99189d6052f625642f8e00ff6e58a860}{dereference}} () const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a50affaae71d4122b92014b11763f6672}{iter\+\_\+}})
+\item 
+bool \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_ae9234860041ae72e3b2667d8121fa224}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} r) const
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_aecc43db612ed5ad8e6002356feb92b48}{unbounded\+\_\+iterator}} ()=default
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}{unbounded\+\_\+iterator}} (I iter, bool \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}})
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a903c96112b62831505ba8c7af80f6263}{increment}} ()
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_ac5605e2d9558a9569c0e24dcf7a78c10}{advance}} (intptr\+\_\+t off)
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_ab3f812c596c17777717ff92aad65e295}{decrement}} ()
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a3f5ca68b137f2fb1175a100a0839a71a}{distance\+\_\+to}} (\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} r) const
 \item 
 auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a99189d6052f625642f8e00ff6e58a860}{dereference}} () const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a50affaae71d4122b92014b11763f6672}{iter\+\_\+}})
 \item 
@@ -36,38 +58,115 @@ bool \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a5af8d60be5952969
 \mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_aecc43db612ed5ad8e6002356feb92b48}\label{structrah_1_1view_1_1unbounded__iterator_aecc43db612ed5ad8e6002356feb92b48}} 
 \index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!unbounded\_iterator@{unbounded\_iterator}}
 \index{unbounded\_iterator@{unbounded\_iterator}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{unbounded\_iterator()}{unbounded\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{unbounded\_iterator()}{unbounded\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}\label{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}} 
 \index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!unbounded\_iterator@{unbounded\_iterator}}
 \index{unbounded\_iterator@{unbounded\_iterator}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{unbounded\_iterator()}{unbounded\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{unbounded\_iterator()}{unbounded\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{I}]{iter,  }\item[{bool}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_aecc43db612ed5ad8e6002356feb92b48}\label{structrah_1_1view_1_1unbounded__iterator_aecc43db612ed5ad8e6002356feb92b48}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!unbounded\_iterator@{unbounded\_iterator}}
+\index{unbounded\_iterator@{unbounded\_iterator}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{unbounded\_iterator()}{unbounded\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}\label{structrah_1_1view_1_1unbounded__iterator_a6043d431a0b2db6691397dd8029287b4}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!unbounded\_iterator@{unbounded\_iterator}}
+\index{unbounded\_iterator@{unbounded\_iterator}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{unbounded\_iterator()}{unbounded\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{I}]{iter,  }\item[{bool}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_ac5605e2d9558a9569c0e24dcf7a78c10}\label{structrah_1_1view_1_1unbounded__iterator_ac5605e2d9558a9569c0e24dcf7a78c10}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!advance@{advance}}
+\index{advance@{advance}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_ac5605e2d9558a9569c0e24dcf7a78c10}\label{structrah_1_1view_1_1unbounded__iterator_ac5605e2d9558a9569c0e24dcf7a78c10}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!advance@{advance}}
+\index{advance@{advance}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_ab3f812c596c17777717ff92aad65e295}\label{structrah_1_1view_1_1unbounded__iterator_ab3f812c596c17777717ff92aad65e295}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!decrement@{decrement}}
+\index{decrement@{decrement}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_ab3f812c596c17777717ff92aad65e295}\label{structrah_1_1view_1_1unbounded__iterator_ab3f812c596c17777717ff92aad65e295}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!decrement@{decrement}}
+\index{decrement@{decrement}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a99189d6052f625642f8e00ff6e58a860}\label{structrah_1_1view_1_1unbounded__iterator_a99189d6052f625642f8e00ff6e58a860}} 
 \index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!dereference@{dereference}}
 \index{dereference@{dereference}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{dereference()}{dereference()}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a50affaae71d4122b92014b11763f6672}{iter\+\_\+}}) \hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a99189d6052f625642f8e00ff6e58a860}\label{structrah_1_1view_1_1unbounded__iterator_a99189d6052f625642f8e00ff6e58a860}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!dereference@{dereference}}
+\index{dereference@{dereference}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator_a50affaae71d4122b92014b11763f6672}{iter\+\_\+}}) \hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a3f5ca68b137f2fb1175a100a0839a71a}\label{structrah_1_1view_1_1unbounded__iterator_a3f5ca68b137f2fb1175a100a0839a71a}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!distance\_to@{distance\_to}}
+\index{distance\_to@{distance\_to}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a3f5ca68b137f2fb1175a100a0839a71a}\label{structrah_1_1view_1_1unbounded__iterator_a3f5ca68b137f2fb1175a100a0839a71a}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!distance\_to@{distance\_to}}
+\index{distance\_to@{distance\_to}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_ae9234860041ae72e3b2667d8121fa224}\label{structrah_1_1view_1_1unbounded__iterator_ae9234860041ae72e3b2667d8121fa224}} 
 \index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!equal@{equal}}
 \index{equal@{equal}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{equal()}{equal()}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+bool \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_ae9234860041ae72e3b2667d8121fa224}\label{structrah_1_1view_1_1unbounded__iterator_ae9234860041ae72e3b2667d8121fa224}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!equal@{equal}}
+\index{equal@{equal}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 bool \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{unbounded\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a903c96112b62831505ba8c7af80f6263}\label{structrah_1_1view_1_1unbounded__iterator_a903c96112b62831505ba8c7af80f6263}} 
 \index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!increment@{increment}}
 \index{increment@{increment}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{increment()}{increment()}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1unbounded__iterator_a903c96112b62831505ba8c7af80f6263}\label{structrah_1_1view_1_1unbounded__iterator_a903c96112b62831505ba8c7af80f6263}} 
+\index{rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}!increment@{increment}}
+\index{increment@{increment}!rah::view::unbounded\_iterator$<$ I $>$@{rah::view::unbounded\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator}}$<$ I $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -90,6 +189,7 @@ I \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbo
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+rah/\mbox{\hyperlink{rah_01-_01_copie_8hpp}{rah -\/ Copie.\+hpp}}\item 
 rah/\mbox{\hyperlink{rah_8hpp}{rah.\+hpp}}\end{DoxyCompactItemize}

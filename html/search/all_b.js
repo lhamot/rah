@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['next_5fvalid',['next_valid',['../structrah_1_1view_1_1join__iterator.html#a6b3ef13305f87d011e2fecdb28b5dec6',1,'rah::view::join_iterator']]],
-  ['none_5fof',['none_of',['../namespacerah.html#a2a3ff8b7f73d480ac0827f9a41a3c92a',1,'rah::none_of(R &amp;&amp;range, P &amp;&amp;pred)'],['../namespacerah.html#aa05e58774ee8e9e05cd3e6ed2a2fa372',1,'rah::none_of(P &amp;&amp;pred)']]]
+  ['m_5fref',['m_ref',['../structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_01_1_1forward__iterator__tag_01_4_1_1pointer__type_1_1type.html#a41af4fce18669376c37ebb84ca7de727',1,'rah::iterator_facade&lt; I, R, std ::forward_iterator_tag &gt;::pointer_type::type']]],
+  ['main',['main',['../test_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'test.cpp']]],
+  ['make_5fiterator_5frange',['make_iterator_range',['../namespacerah.html#a0a3dd43bb465c99137bfdebb2292b102',1,'rah']]],
+  ['make_5fpipeable',['make_pipeable',['../namespacerah.html#a9beb2a94a054fd0caefd5a20b1c0f0d9',1,'rah']]],
+  ['map_5fkey',['map_key',['../namespacerah_1_1view.html#a273917511589d75b32d28b56b7de2655',1,'rah::view::map_key(R &amp;&amp;range)'],['../namespacerah_1_1view.html#aac8d9437b8c96e0e8e972c4c10d584e5',1,'rah::view::map_key()']]],
+  ['map_5fvalue',['map_value',['../namespacerah_1_1view.html#a7896dcebf13a4294254ed87743ba3ad0',1,'rah::view::map_value(R &amp;&amp;range)'],['../namespacerah_1_1view.html#ad11fcca5438e227541594a917a85f77c',1,'rah::view::map_value()']]],
+  ['mismatch',['mismatch',['../namespacerah.html#a5ce2d92c6f0b3dd5eb6d70600e949a97',1,'rah']]]
 ];

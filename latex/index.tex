@@ -7,7 +7,7 @@ A range is anything that can be iterate. Typically in C++ something is a range i
 In {\bfseries{rah}} this is done by {\ttfamily \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}}}. Two way to create an iterator\+\_\+range\+:
 \begin{DoxyItemize}
 \item {\ttfamily \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}}$<$iterator\+\_\+type$>$(begin\+\_\+iter, end\+\_\+iter);}
-\item {\ttfamily \mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{rah\+::make\+\_\+iterator\+\_\+range}} (begin\+\_\+iter, end\+\_\+iter);}
+\item {\ttfamily \mbox{\hyperlink{namespacerah_a0a3dd43bb465c99137bfdebb2292b102}{rah\+::make\+\_\+iterator\+\_\+range}} (begin\+\_\+iter, end\+\_\+iter);}
 \end{DoxyItemize}
 
 \section*{What is a view}
@@ -18,11 +18,11 @@ A view is a range returned by a function an which doesn\textquotesingle{}t modif
 \begin{DoxyItemize}
 \item Views which take a range and give a modified view on it\+:
 \begin{DoxyItemize}
-\item Example\+: {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah\+::view\+::filter}}}, {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a73d98aff6def51242231b9ec440dd026}{rah\+::view\+::transform}}}
+\item Example\+: {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}{rah\+::view\+::filter}}}, {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_ad8750f5c95edcf4f26b0a1c1eec3d676}{rah\+::view\+::transform}}}
 \end{DoxyItemize}
 \item Generators
 \begin{DoxyItemize}
-\item Example\+: {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_aa5f05009b0c914331b0e5dbe62656b5a}{rah\+::view\+::iota}}}, {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a05a3de164c8d1fde6ca761119d90a789}{rah\+::view\+::generate}}}
+\item Example\+: {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_ae66c3be408888c58118b1974cdece592}{rah\+::view\+::iota}}}, {\ttfamily \mbox{\hyperlink{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}{rah\+::view\+::generate}}}
 \end{DoxyItemize}
 \end{DoxyItemize}
 
@@ -32,17 +32,17 @@ A view is a range returned by a function an which doesn\textquotesingle{}t modif
 \begin{DoxyItemize}
 \item To make a view you have to create an iterator.
 \begin{DoxyItemize}
-\item For example the \mbox{\hyperlink{namespacerah_1_1view_a69010369aadc2a36ee9517195f783e9a}{rah\+::view\+::filter}} view is an \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}} of \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{rah\+::view\+::filter\+\_\+iterator}}.
+\item For example the \mbox{\hyperlink{namespacerah_1_1view_a1eade9e2861e5bdae07b01ac9bf2c10c}{rah\+::view\+::filter}} view is an \mbox{\hyperlink{structrah_1_1iterator__range}{rah\+::iterator\+\_\+range}} of \mbox{\hyperlink{structrah_1_1view_1_1filter__iterator}{rah\+::view\+::filter\+\_\+iterator}}.
 \end{DoxyItemize}
 \item Then you have to create a function taking a range and parameters (or no range for generator)
 \end{DoxyItemize}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename} R> \textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}(R\&\& range)}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename} R> \textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{retro}}(R\&\& range)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a4e145bfeb8a932058e20fc4cb4e7c206}{make\_iterator\_range}}(}
-\DoxyCodeLine{        std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}}(range)), std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_ad248c9fcef327fc3e31ef8bf6ea70f6f}{begin}}(range)));}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a0a3dd43bb465c99137bfdebb2292b102}{make\_iterator\_range}}(}
+\DoxyCodeLine{        std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(range)), std::make\_reverse\_iterator(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(range)));}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -52,9 +52,9 @@ A view is a range returned by a function an which doesn\textquotesingle{}t modif
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}()}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{retro}}()}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{\textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_a9f47b2859b0a8a7e136f09d5c33b89e6}{retro}}(range); \});}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a9beb2a94a054fd0caefd5a20b1c0f0d9}{make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{\textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_ab7e756d22f9204231b4854b9deb51f6f}{retro}}(range); \});}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -79,13 +79,13 @@ There is in {\bfseries{rah}} an helper to create iterators\+: {\ttfamily \mbox{\
 
 \section*{How to make a pipeable view or algorithm}
 
-Use the \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah\+::make\+\_\+pipeable}} function. \subsection*{How to create a pipeable \+:}
+Use the \mbox{\hyperlink{namespacerah_a9beb2a94a054fd0caefd5a20b1c0f0d9}{rah\+::make\+\_\+pipeable}} function. \subsection*{How to create a pipeable \+:}
 
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{test_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(\textcolor{keywordtype}{int} i)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a274b78c4c0af5dd58ce280f02223fb55}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{std::count}}(\mbox{\hyperlink{namespacerah_ad248c9fcef327fc3e31ef8bf6ea70f6f}{begin}}(range), \mbox{\hyperlink{namespacerah_ac309d041d5f4110ecf2d1b44f4282275}{end}}(range), i); \});}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_a9beb2a94a054fd0caefd5a20b1c0f0d9}{rah::make\_pipeable}}([=](\textcolor{keyword}{auto}\&\& range) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{std::count}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(range), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(range), i); \});}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
 \subsection*{How to use a pipeable \+:}

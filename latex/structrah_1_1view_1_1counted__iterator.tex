@@ -2,16 +2,32 @@
 \label{structrah_1_1view_1_1counted__iterator}\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
 
 
-{\ttfamily \#include $<$rah.\+hpp$>$}
+{\ttfamily \#include $<$rah -\/ Copie.\+hpp$>$}
 
 Inheritance diagram for rah\+::view\+::counted\+\_\+iterator$<$ I $>$\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.736434cm]{structrah_1_1view_1_1counted__iterator}
+\includegraphics[height=0.868217cm]{structrah_1_1view_1_1counted__iterator}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a73f275166ac5f41bd93d96ccab15eab0}{counted\+\_\+iterator}} ()=default
+\item 
+\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_aa26e9c047e175303c296758316634890}{counted\+\_\+iterator}} (I iter, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a8113f67743f49650c0b4c872bcfd560e}{increment}} ()
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_abef44b581abb0c70a79dbd6a61ccd200}{advance}} (intptr\+\_\+t off)
+\item 
+void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_abeb34df8feb243fce3eec27d45b19aa2}{decrement}} ()
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_afee4b1d8525979cc4b711eba9b524f1d}{distance\+\_\+to}} (\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}} r) const
+\item 
+auto \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_aa0478a9f3d2083f2cd9c42d32e8e4dd5}{dereference}} () const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a907dba6ac64293e4c5718e522da4972e}{iter\+\_\+}})
+\item 
+bool \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a71ee9eea167eec16b04373885dbff741}{equal}} (\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}} r) const
 \item 
 \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a73f275166ac5f41bd93d96ccab15eab0}{counted\+\_\+iterator}} ()=default
 \item 
@@ -42,14 +58,28 @@ size\+\_\+t \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a235949f8f72
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_a73f275166ac5f41bd93d96ccab15eab0}\label{structrah_1_1view_1_1counted__iterator_a73f275166ac5f41bd93d96ccab15eab0}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!counted\_iterator@{counted\_iterator}}
 \index{counted\_iterator@{counted\_iterator}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{counted\_iterator()}{counted\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{counted\_iterator()}{counted\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_aa26e9c047e175303c296758316634890}\label{structrah_1_1view_1_1counted__iterator_aa26e9c047e175303c296758316634890}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!counted\_iterator@{counted\_iterator}}
 \index{counted\_iterator@{counted\_iterator}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{counted\_iterator()}{counted\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\subsubsection{\texorpdfstring{counted\_iterator()}{counted\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{I}]{iter,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_a73f275166ac5f41bd93d96ccab15eab0}\label{structrah_1_1view_1_1counted__iterator_a73f275166ac5f41bd93d96ccab15eab0}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!counted\_iterator@{counted\_iterator}}
+\index{counted\_iterator@{counted\_iterator}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{counted\_iterator()}{counted\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_aa26e9c047e175303c296758316634890}\label{structrah_1_1view_1_1counted__iterator_aa26e9c047e175303c296758316634890}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!counted\_iterator@{counted\_iterator}}
+\index{counted\_iterator@{counted\_iterator}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{counted\_iterator()}{counted\_iterator()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}} (\begin{DoxyParamCaption}\item[{I}]{iter,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -59,42 +89,84 @@ size\+\_\+t \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a235949f8f72
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_abef44b581abb0c70a79dbd6a61ccd200}\label{structrah_1_1view_1_1counted__iterator_abef44b581abb0c70a79dbd6a61ccd200}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!advance@{advance}}
 \index{advance@{advance}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{advance()}{advance()}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_abef44b581abb0c70a79dbd6a61ccd200}\label{structrah_1_1view_1_1counted__iterator_abef44b581abb0c70a79dbd6a61ccd200}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!advance@{advance}}
+\index{advance@{advance}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{advance()}{advance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::advance (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{off }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_abeb34df8feb243fce3eec27d45b19aa2}\label{structrah_1_1view_1_1counted__iterator_abeb34df8feb243fce3eec27d45b19aa2}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!decrement@{decrement}}
 \index{decrement@{decrement}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{decrement()}{decrement()}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_abeb34df8feb243fce3eec27d45b19aa2}\label{structrah_1_1view_1_1counted__iterator_abeb34df8feb243fce3eec27d45b19aa2}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!decrement@{decrement}}
+\index{decrement@{decrement}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{decrement()}{decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::decrement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_aa0478a9f3d2083f2cd9c42d32e8e4dd5}\label{structrah_1_1view_1_1counted__iterator_aa0478a9f3d2083f2cd9c42d32e8e4dd5}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!dereference@{dereference}}
 \index{dereference@{dereference}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{dereference()}{dereference()}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a907dba6ac64293e4c5718e522da4972e}{iter\+\_\+}}) \hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_aa0478a9f3d2083f2cd9c42d32e8e4dd5}\label{structrah_1_1view_1_1counted__iterator_aa0478a9f3d2083f2cd9c42d32e8e4dd5}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!dereference@{dereference}}
+\index{dereference@{dereference}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{dereference()}{dereference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::dereference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ decltype($\ast$\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator_a907dba6ac64293e4c5718e522da4972e}{iter\+\_\+}}) \hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_afee4b1d8525979cc4b711eba9b524f1d}\label{structrah_1_1view_1_1counted__iterator_afee4b1d8525979cc4b711eba9b524f1d}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!distance\_to@{distance\_to}}
 \index{distance\_to@{distance\_to}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+auto \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_afee4b1d8525979cc4b711eba9b524f1d}\label{structrah_1_1view_1_1counted__iterator_afee4b1d8525979cc4b711eba9b524f1d}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!distance\_to@{distance\_to}}
+\index{distance\_to@{distance\_to}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{distance\_to()}{distance\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 auto \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::distance\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_a71ee9eea167eec16b04373885dbff741}\label{structrah_1_1view_1_1counted__iterator_a71ee9eea167eec16b04373885dbff741}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!equal@{equal}}
 \index{equal@{equal}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{equal()}{equal()}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+bool \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_a71ee9eea167eec16b04373885dbff741}\label{structrah_1_1view_1_1counted__iterator_a71ee9eea167eec16b04373885dbff741}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!equal@{equal}}
+\index{equal@{equal}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{equal()}{equal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 bool \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{counted\+\_\+iterator}}$<$ I $>$}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_a8113f67743f49650c0b4c872bcfd560e}\label{structrah_1_1view_1_1counted__iterator_a8113f67743f49650c0b4c872bcfd560e}} 
 \index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!increment@{increment}}
 \index{increment@{increment}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
-\subsubsection{\texorpdfstring{increment()}{increment()}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename I $>$ \\
+void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{structrah_1_1view_1_1counted__iterator_a8113f67743f49650c0b4c872bcfd560e}\label{structrah_1_1view_1_1counted__iterator_a8113f67743f49650c0b4c872bcfd560e}} 
+\index{rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}!increment@{increment}}
+\index{increment@{increment}!rah::view::counted\_iterator$<$ I $>$@{rah::view::counted\_iterator$<$ I $>$}}
+\subsubsection{\texorpdfstring{increment()}{increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename I $>$ \\
 void \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator}}$<$ I $>$\+::increment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -117,6 +189,7 @@ I \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counte
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+rah/\mbox{\hyperlink{rah_01-_01_copie_8hpp}{rah -\/ Copie.\+hpp}}\item 
 rah/\mbox{\hyperlink{rah_8hpp}{rah.\+hpp}}\end{DoxyCompactItemize}

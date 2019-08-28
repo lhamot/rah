@@ -70,33 +70,33 @@ $(function() {
 <h1>How to create a range</h1>
 <p>In <b>rah</b> this is done by <code><a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range</a></code>. Two way to create an iterator_range:</p><ul>
 <li><code><a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range</a>&lt;iterator_type&gt;(begin_iter, end_iter);</code></li>
-<li><code><a class="el" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206" title="Create a rah::iterator_range with two given iterators.">rah::make_iterator_range</a> (begin_iter, end_iter);</code></li>
+<li><code><a class="el" href="namespacerah.html#a0a3dd43bb465c99137bfdebb2292b102" title="Create a rah::iterator_range with two given iterators.">rah::make_iterator_range</a> (begin_iter, end_iter);</code></li>
 </ul>
 <h1>What is a view</h1>
 <p>A view is a range returned by a function an which doesn't modify it's input range.<br />
  The computing is often done in a "lazy" way, that is to say at the moment of iteration.<br />
  There is two kind of view:</p><ul>
 <li>Views which take a range and give a modified view on it:<ul>
-<li>Example: <code><a class="el" href="namespacerah_1_1view.html#a69010369aadc2a36ee9517195f783e9a" title="Create a view with only elements which are filtered.">rah::view::filter</a></code>, <code><a class="el" href="namespacerah_1_1view.html#a73d98aff6def51242231b9ec440dd026" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a></code></li>
+<li>Example: <code><a class="el" href="namespacerah_1_1view.html#a1eade9e2861e5bdae07b01ac9bf2c10c" title="Create a view with only elements which are filtered.">rah::view::filter</a></code>, <code><a class="el" href="namespacerah_1_1view.html#ad8750f5c95edcf4f26b0a1c1eec3d676" title="Create a view applying a transformation to each element of the input range.">rah::view::transform</a></code></li>
 </ul>
 </li>
 <li>Generators<ul>
-<li>Example: <code><a class="el" href="namespacerah_1_1view.html#aa5f05009b0c914331b0e5dbe62656b5a" title="Generate a range of sequential integers, increasing by a defined step.">rah::view::iota</a></code>, <code><a class="el" href="namespacerah_1_1view.html#a05a3de164c8d1fde6ca761119d90a789" title="Create an infinite range, repetitively calling func.">rah::view::generate</a></code></li>
+<li>Example: <code><a class="el" href="namespacerah_1_1view.html#ae66c3be408888c58118b1974cdece592" title="Generate a range of sequential integers, increasing by a defined step.">rah::view::iota</a></code>, <code><a class="el" href="namespacerah_1_1view.html#a9851b1ee90ae15252fb248417e084f69" title="Create an infinite range, repetitively calling func.">rah::view::generate</a></code></li>
 </ul>
 </li>
 </ul>
 <h1>How to make a view</h1>
 <ul>
 <li>To make a view you have to create an iterator.<ul>
-<li>For example the <a class="el" href="namespacerah_1_1view.html#a69010369aadc2a36ee9517195f783e9a" title="Create a view with only elements which are filtered.">rah::view::filter</a> view is an <a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range</a> of <a class="el" href="structrah_1_1view_1_1filter__iterator.html">rah::view::filter_iterator</a>.</li>
+<li>For example the <a class="el" href="namespacerah_1_1view.html#a1eade9e2861e5bdae07b01ac9bf2c10c" title="Create a view with only elements which are filtered.">rah::view::filter</a> view is an <a class="el" href="structrah_1_1iterator__range.html">rah::iterator_range</a> of <a class="el" href="structrah_1_1view_1_1filter__iterator.html">rah::view::filter_iterator</a>.</li>
 </ul>
 </li>
 <li>Then you have to create a function taking a range and parameters (or no range for generator)</li>
 </ul>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> R&gt; <span class="keyword">auto</span> <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">retro</a>(R&amp;&amp; range)</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a4e145bfeb8a932058e20fc4cb4e7c206">make_iterator_range</a>(</div><div class="line">        std::make_reverse_iterator(<a class="code" href="namespacerah.html#ac309d041d5f4110ecf2d1b44f4282275">end</a>(range)), std::make_reverse_iterator(<a class="code" href="namespacerah.html#ad248c9fcef327fc3e31ef8bf6ea70f6f">begin</a>(range)));</div><div class="line">}</div></div><!-- fragment --><ul>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> R&gt; <span class="keyword">auto</span> <a class="code" href="namespacerah_1_1view.html#ab7e756d22f9204231b4854b9deb51f6f">retro</a>(R&amp;&amp; range)</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a0a3dd43bb465c99137bfdebb2292b102">make_iterator_range</a>(</div><div class="line">        std::make_reverse_iterator(<a class="code" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>(range)), std::make_reverse_iterator(<a class="code" href="namespacerah.html#acccec48f25fb1a805854818f05d7b616">begin</a>(range)));</div><div class="line">}</div></div><!-- fragment --><ul>
 <li>Then you can add a pipeable version of the function</li>
 </ul>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">retro</a>()</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55">make_pipeable</a>([=](<span class="keyword">auto</span>&amp;&amp; range) {<span class="keywordflow">return</span> <a class="code" href="namespacerah_1_1view.html#a9f47b2859b0a8a7e136f09d5c33b89e6">retro</a>(range); });</div><div class="line">}</div></div><!-- fragment --><h1>How to make an iterator</h1>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacerah_1_1view.html#ab7e756d22f9204231b4854b9deb51f6f">retro</a>()</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a9beb2a94a054fd0caefd5a20b1c0f0d9">make_pipeable</a>([=](<span class="keyword">auto</span>&amp;&amp; range) {<span class="keywordflow">return</span> <a class="code" href="namespacerah_1_1view.html#ab7e756d22f9204231b4854b9deb51f6f">retro</a>(range); });</div><div class="line">}</div></div><!-- fragment --><h1>How to make an iterator</h1>
 <p>There is in <b>rah</b> an helper to create iterators: <code><a class="el" href="structrah_1_1iterator__facade.html" title="Inerit to make an iterator.">rah::iterator_facade</a></code> There are three kind of <code><a class="el" href="structrah_1_1iterator__facade.html" title="Inerit to make an iterator.">rah::iterator_facade</a></code>:</p><ul>
 <li><a class="el" href="structrah_1_1iterator__facade_3_01_i_00_01_r_00_01std_1_1forward__iterator__tag_01_4.html" title="Inerit to make a forward_iterator.">rah::iterator_facade&lt;I, R, std::forward_iterator_tag&gt;</a><ul>
 <li>For an example : <a class="el" href="structrah_1_1view_1_1generate__iterator.html">rah::view::generate_iterator</a></li>
@@ -112,8 +112,8 @@ $(function() {
 </li>
 </ul>
 <h1>How to make a pipeable view or algorithm</h1>
-<p>Use the <a class="el" href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55" title="Call to create a &quot;pipeable&quot; function (UFCS style in c++)">rah::make_pipeable</a> function. </p><h2>How to create a pipeable :</h2>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="test_8cpp.html#ae66a06c931008db2ce8bd097114223e2">test_count</a>(<span class="keywordtype">int</span> i)</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a274b78c4c0af5dd58ce280f02223fb55">rah::make_pipeable</a>([=](<span class="keyword">auto</span>&amp;&amp; range) { <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">std::count</a>(<a class="code" href="namespacerah.html#ad248c9fcef327fc3e31ef8bf6ea70f6f">begin</a>(range), <a class="code" href="namespacerah.html#ac309d041d5f4110ecf2d1b44f4282275">end</a>(range), i); });</div><div class="line">}</div></div><!-- fragment --><h2>How to use a pipeable :</h2>
+<p>Use the <a class="el" href="namespacerah.html#a9beb2a94a054fd0caefd5a20b1c0f0d9" title="Call to create a &quot;pipeable&quot; function (UFCS style in c++)">rah::make_pipeable</a> function. </p><h2>How to create a pipeable :</h2>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="test_8cpp.html#ae66a06c931008db2ce8bd097114223e2">test_count</a>(<span class="keywordtype">int</span> i)</div><div class="line">{</div><div class="line">    <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#a9beb2a94a054fd0caefd5a20b1c0f0d9">rah::make_pipeable</a>([=](<span class="keyword">auto</span>&amp;&amp; range) { <span class="keywordflow">return</span> <a class="code" href="namespacerah.html#aa528865cc4a45d4eb276329554f16b4b">std::count</a>(<a class="code" href="namespacerah.html#acccec48f25fb1a805854818f05d7b616">begin</a>(range), <a class="code" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>(range), i); });</div><div class="line">}</div></div><!-- fragment --><h2>How to use a pipeable :</h2>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; vec{ 0, 1, 2, 2, 3 };</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>((vec | <a class="code" href="test_8cpp.html#ae66a06c931008db2ce8bd097114223e2">test_count</a>(2)) == 2);</div></div><!-- fragment --></div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

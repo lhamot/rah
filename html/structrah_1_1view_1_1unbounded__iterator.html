@@ -74,14 +74,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="rah_8hpp_source.html">rah.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="rah_01-_01_copie_8hpp_source.html">rah - Copie.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for rah::view::unbounded_iterator&lt; I &gt;:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="structrah_1_1view_1_1unbounded__iterator.png" usemap="#rah::view::unbounded_5Fiterator_3C_20I_20_3E_map" alt=""/>
   <map id="rah::view::unbounded_5Fiterator_3C_20I_20_3E_map" name="rah::view::unbounded_5Fiterator_3C_20I_20_3E_map">
-<area href="structrah_1_1iterator__facade.html" alt="rah::iterator_facade&lt; unbounded_iterator&lt; I &gt;, decltype(*fake&lt; I &gt;()), std::forward_iterator_tag &gt;" shape="rect" coords="0,0,561,24"/>
+<area href="structrah_1_1iterator__facade.html" alt="rah::iterator_facade&lt; unbounded_iterator&lt; I &gt;, decltype(*fake&lt; I &gt;()), std ::iterator_traits&lt; I &gt;::iterator_category &gt;" shape="rect" coords="0,0,655,24"/>
+<area href="structrah_1_1iterator__facade.html" alt="rah::iterator_facade&lt; unbounded_iterator&lt; I &gt;, decltype(*fake&lt; I &gt;()), std ::iterator_traits&lt; I &gt;::iterator_category &gt;" shape="rect" coords="665,0,1320,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -89,10 +90,32 @@ Inheritance diagram for rah::view::unbounded_iterator&lt; I &gt;:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aecc43db612ed5ad8e6002356feb92b48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#aecc43db612ed5ad8e6002356feb92b48">unbounded_iterator</a> ()=default</td></tr>
 <tr class="separator:aecc43db612ed5ad8e6002356feb92b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6043d431a0b2db6691397dd8029287b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a6043d431a0b2db6691397dd8029287b4">unbounded_iterator</a> (I iter, bool <a class="el" href="namespacerah.html#ac309d041d5f4110ecf2d1b44f4282275">end</a>)</td></tr>
+<tr class="memitem:a6043d431a0b2db6691397dd8029287b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a6043d431a0b2db6691397dd8029287b4">unbounded_iterator</a> (I iter, bool <a class="el" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>)</td></tr>
 <tr class="separator:a6043d431a0b2db6691397dd8029287b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a903c96112b62831505ba8c7af80f6263"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a903c96112b62831505ba8c7af80f6263">increment</a> ()</td></tr>
 <tr class="separator:a903c96112b62831505ba8c7af80f6263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5605e2d9558a9569c0e24dcf7a78c10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#ac5605e2d9558a9569c0e24dcf7a78c10">advance</a> (intptr_t off)</td></tr>
+<tr class="separator:ac5605e2d9558a9569c0e24dcf7a78c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3f812c596c17777717ff92aad65e295"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#ab3f812c596c17777717ff92aad65e295">decrement</a> ()</td></tr>
+<tr class="separator:ab3f812c596c17777717ff92aad65e295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f5ca68b137f2fb1175a100a0839a71a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a3f5ca68b137f2fb1175a100a0839a71a">distance_to</a> (<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a> r) const</td></tr>
+<tr class="separator:a3f5ca68b137f2fb1175a100a0839a71a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99189d6052f625642f8e00ff6e58a860"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a99189d6052f625642f8e00ff6e58a860">dereference</a> () const -&gt; decltype(*<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a50affaae71d4122b92014b11763f6672">iter_</a>)</td></tr>
+<tr class="separator:a99189d6052f625642f8e00ff6e58a860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9234860041ae72e3b2667d8121fa224"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#ae9234860041ae72e3b2667d8121fa224">equal</a> (<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a> r) const</td></tr>
+<tr class="separator:ae9234860041ae72e3b2667d8121fa224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc43db612ed5ad8e6002356feb92b48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#aecc43db612ed5ad8e6002356feb92b48">unbounded_iterator</a> ()=default</td></tr>
+<tr class="separator:aecc43db612ed5ad8e6002356feb92b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6043d431a0b2db6691397dd8029287b4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a6043d431a0b2db6691397dd8029287b4">unbounded_iterator</a> (I iter, bool <a class="el" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>)</td></tr>
+<tr class="separator:a6043d431a0b2db6691397dd8029287b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903c96112b62831505ba8c7af80f6263"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a903c96112b62831505ba8c7af80f6263">increment</a> ()</td></tr>
+<tr class="separator:a903c96112b62831505ba8c7af80f6263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5605e2d9558a9569c0e24dcf7a78c10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#ac5605e2d9558a9569c0e24dcf7a78c10">advance</a> (intptr_t off)</td></tr>
+<tr class="separator:ac5605e2d9558a9569c0e24dcf7a78c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3f812c596c17777717ff92aad65e295"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#ab3f812c596c17777717ff92aad65e295">decrement</a> ()</td></tr>
+<tr class="separator:ab3f812c596c17777717ff92aad65e295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f5ca68b137f2fb1175a100a0839a71a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a3f5ca68b137f2fb1175a100a0839a71a">distance_to</a> (<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a> r) const</td></tr>
+<tr class="separator:a3f5ca68b137f2fb1175a100a0839a71a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99189d6052f625642f8e00ff6e58a860"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a99189d6052f625642f8e00ff6e58a860">dereference</a> () const -&gt; decltype(*<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a50affaae71d4122b92014b11763f6672">iter_</a>)</td></tr>
 <tr class="separator:a99189d6052f625642f8e00ff6e58a860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9234860041ae72e3b2667d8121fa224"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#ae9234860041ae72e3b2667d8121fa224">equal</a> (<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a> r) const</td></tr>
@@ -107,7 +130,7 @@ Public Attributes</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aecc43db612ed5ad8e6002356feb92b48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecc43db612ed5ad8e6002356feb92b48">&#9670;&nbsp;</a></span>unbounded_iterator() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc43db612ed5ad8e6002356feb92b48">&#9670;&nbsp;</a></span>unbounded_iterator() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +157,72 @@ template&lt;typename I &gt; </div>
 </div>
 </div>
 <a id="a6043d431a0b2db6691397dd8029287b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6043d431a0b2db6691397dd8029287b4">&#9670;&nbsp;</a></span>unbounded_iterator() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6043d431a0b2db6691397dd8029287b4">&#9670;&nbsp;</a></span>unbounded_iterator() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a> </td>
+          <td>(</td>
+          <td class="paramtype">I&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>end</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aecc43db612ed5ad8e6002356feb92b48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc43db612ed5ad8e6002356feb92b48">&#9670;&nbsp;</a></span>unbounded_iterator() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6043d431a0b2db6691397dd8029287b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6043d431a0b2db6691397dd8029287b4">&#9670;&nbsp;</a></span>unbounded_iterator() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,8 +260,118 @@ template&lt;typename I &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac5605e2d9558a9569c0e24dcf7a78c10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5605e2d9558a9569c0e24dcf7a78c10">&#9670;&nbsp;</a></span>advance() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::advance </td>
+          <td>(</td>
+          <td class="paramtype">intptr_t&#160;</td>
+          <td class="paramname"><em>off</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5605e2d9558a9569c0e24dcf7a78c10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5605e2d9558a9569c0e24dcf7a78c10">&#9670;&nbsp;</a></span>advance() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::advance </td>
+          <td>(</td>
+          <td class="paramtype">intptr_t&#160;</td>
+          <td class="paramname"><em>off</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3f812c596c17777717ff92aad65e295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3f812c596c17777717ff92aad65e295">&#9670;&nbsp;</a></span>decrement() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::decrement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab3f812c596c17777717ff92aad65e295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3f812c596c17777717ff92aad65e295">&#9670;&nbsp;</a></span>decrement() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::decrement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a99189d6052f625642f8e00ff6e58a860"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99189d6052f625642f8e00ff6e58a860">&#9670;&nbsp;</a></span>dereference()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a99189d6052f625642f8e00ff6e58a860">&#9670;&nbsp;</a></span>dereference() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,8 +397,119 @@ template&lt;typename I &gt; </div>
 
 </div>
 </div>
+<a id="a99189d6052f625642f8e00ff6e58a860"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99189d6052f625642f8e00ff6e58a860">&#9670;&nbsp;</a></span>dereference() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::dereference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; decltype(*<a class="el" href="structrah_1_1view_1_1unbounded__iterator.html#a50affaae71d4122b92014b11763f6672">iter_</a>) </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f5ca68b137f2fb1175a100a0839a71a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f5ca68b137f2fb1175a100a0839a71a">&#9670;&nbsp;</a></span>distance_to() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::distance_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a>&lt; I &gt;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f5ca68b137f2fb1175a100a0839a71a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f5ca68b137f2fb1175a100a0839a71a">&#9670;&nbsp;</a></span>distance_to() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::distance_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a>&lt; I &gt;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae9234860041ae72e3b2667d8121fa224"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9234860041ae72e3b2667d8121fa224">&#9670;&nbsp;</a></span>equal()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9234860041ae72e3b2667d8121fa224">&#9670;&nbsp;</a></span>equal() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::equal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">unbounded_iterator</a>&lt; I &gt;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9234860041ae72e3b2667d8121fa224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9234860041ae72e3b2667d8121fa224">&#9670;&nbsp;</a></span>equal() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +537,34 @@ template&lt;typename I &gt; </div>
 </div>
 </div>
 <a id="a903c96112b62831505ba8c7af80f6263"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a903c96112b62831505ba8c7af80f6263">&#9670;&nbsp;</a></span>increment()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a903c96112b62831505ba8c7af80f6263">&#9670;&nbsp;</a></span>increment() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename I &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structrah_1_1view_1_1unbounded__iterator.html">rah::view::unbounded_iterator</a>&lt; I &gt;::increment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a903c96112b62831505ba8c7af80f6263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a903c96112b62831505ba8c7af80f6263">&#9670;&nbsp;</a></span>increment() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,7 +623,8 @@ template&lt;typename I &gt; </div>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>rah/<a class="el" href="rah_01-_01_copie_8hpp_source.html">rah - Copie.hpp</a></li>
 <li>rah/<a class="el" href="rah_8hpp_source.html">rah.hpp</a></li>
 </ul>
 </div><!-- contents -->
