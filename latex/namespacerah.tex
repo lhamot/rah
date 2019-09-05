@@ -214,6 +214,22 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{size}} ()
 \begin{DoxyCompactList}\small\item\em Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out The resulting range is also sorted. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I\+N1 , typename I\+N2 , typename O\+UT $>$ }\\void \mbox{\hyperlink{namespacerah_a41cb09a0285e2a6814b8aa99f90ba987}{set\+\_\+intersection}} (I\+N1 \&\&in1, I\+N2 \&\&in2, O\+UT \&\&out)
 \begin{DoxyCompactList}\small\item\em Copies the elements from the sorted range in1 which are also found in the sorted range in2 to the range out The resulting range is also sorted. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , std \+::enable\+\_\+if\+\_\+t$<$ is\+\_\+range$<$ R $>$\+::value, int $>$  = 0$>$ }\\auto \mbox{\hyperlink{namespacerah_a84983065bc08e1416b730260a0ab033c}{max\+\_\+element}} (R \&\&range)
+\begin{DoxyCompactList}\small\item\em Finds the greatest element in the range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_a6553b7209f85e70a671b3c3c6153d255}{max\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em Finds the greatest element in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a46840028da6087e1ae3348b1ce8ce381}{max\+\_\+element}} (R \&\&range, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Finds the greatest element in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P , std \+::enable\+\_\+if\+\_\+t$<$!is\+\_\+range$<$ P $>$\+::value, int $>$  = 0$>$ }\\auto \mbox{\hyperlink{namespacerah_a8e6f0498df081347423d319c8ab919d1}{max\+\_\+element}} (P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Finds the greatest element in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , std \+::enable\+\_\+if\+\_\+t$<$ is\+\_\+range$<$ R $>$\+::value, int $>$  = 0$>$ }\\auto \mbox{\hyperlink{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}{min\+\_\+element}} (R \&\&range)
+\begin{DoxyCompactList}\small\item\em Finds the smallest element in the range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_a8b5a2712dbebe5144ea1635f3f346514}{min\+\_\+element}} ()
+\begin{DoxyCompactList}\small\item\em Finds the smallest element in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_ae2ea3fdd33de831fcc7b281154d5a37c}{min\+\_\+element}} (R \&\&range, P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Finds the smallest element in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename P , std \+::enable\+\_\+if\+\_\+t$<$!is\+\_\+range$<$ P $>$\+::value, int $>$  = 0$>$ }\\auto \mbox{\hyperlink{namespacerah_a28dcdb4c5a25916a18532f1dbb520aa9}{min\+\_\+element}} (P \&\&pred)
+\begin{DoxyCompactList}\small\item\em Finds the smallest element in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I\+N1 , typename I\+N2 , typename O\+U\+T\+\_\+ $>$ }\\void \mbox{\hyperlink{namespacerah_a8e9bc244c82d3435e1c8b6bf08696161}{set\+\_\+difference}} (I\+N1 \&\&in1, I\+N2 \&\&in2, O\+U\+T\+\_\+ \&\&out)
 \begin{DoxyCompactList}\small\item\em Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out The resulting range is also sorted. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I\+N1 , typename I\+N2 , typename O\+U\+T\+\_\+ $>$ }\\void \mbox{\hyperlink{namespacerah_a8819752794096b634c6153560fc21cc5}{set\+\_\+intersection}} (I\+N1 \&\&in1, I\+N2 \&\&in2, O\+U\+T\+\_\+ \&\&out)
@@ -1187,6 +1203,152 @@ Call to create a \char`\"{}pipeable\char`\"{} function (U\+F\+CS style in c++)
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vec\{ 0, 1, 2, 2, 3 \};}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((vec | \mbox{\hyperlink{test_8cpp_ae66a06c931008db2ce8bd097114223e2}{test\_count}}(2)) == 2);}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a84983065bc08e1416b730260a0ab033c}\label{namespacerah_a84983065bc08e1416b730260a0ab033c}} 
+\index{rah@{rah}!max\_element@{max\_element}}
+\index{max\_element@{max\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{max\_element()}{max\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename R , std \+::enable\+\_\+if\+\_\+t$<$ is\+\_\+range$<$ R $>$\+::value, int $>$  = 0$>$ \\
+auto rah\+::max\+\_\+element (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+
+
+Finds the greatest element in the range. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = \mbox{\hyperlink{namespacerah_a84983065bc08e1416b730260a0ab033c}{rah::max\_element}}(in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == 5);}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a6553b7209f85e70a671b3c3c6153d255}\label{namespacerah_a6553b7209f85e70a671b3c3c6153d255}} 
+\index{rah@{rah}!max\_element@{max\_element}}
+\index{max\_element@{max\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{max\_element()}{max\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily auto rah\+::max\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds the greatest element in the range. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_a84983065bc08e1416b730260a0ab033c}{rah::max\_element}}();}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == 5);}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a46840028da6087e1ae3348b1ce8ce381}\label{namespacerah_a46840028da6087e1ae3348b1ce8ce381}} 
+\index{rah@{rah}!max\_element@{max\_element}}
+\index{max\_element@{max\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{max\_element()}{max\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename R , typename P $>$ \\
+auto rah\+::max\+\_\+element (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Finds the greatest element in the range. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<std::pair<int, int>> in\{ \{100, 3\}, \{0, 5\}, \{0, 1\}, \{0, 4\} \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = \mbox{\hyperlink{namespacerah_a84983065bc08e1416b730260a0ab033c}{rah::max\_element}}(in, [](\textcolor{keyword}{auto}\&\& a, \textcolor{keyword}{auto}\& b) \{\textcolor{keywordflow}{return} a.second < b.second; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == (std::pair<int, int>\{0, 5\}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a8e6f0498df081347423d319c8ab919d1}\label{namespacerah_a8e6f0498df081347423d319c8ab919d1}} 
+\index{rah@{rah}!max\_element@{max\_element}}
+\index{max\_element@{max\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{max\_element()}{max\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename P , std \+::enable\+\_\+if\+\_\+t$<$!is\+\_\+range$<$ P $>$\+::value, int $>$  = 0$>$ \\
+auto rah\+::max\+\_\+element (\begin{DoxyParamCaption}\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Finds the greatest element in the range. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<std::pair<int, int>> in\{ \{100, 3\}, \{0, 5\}, \{0, 1\}, \{0, 4\} \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_a84983065bc08e1416b730260a0ab033c}{rah::max\_element}}([](\textcolor{keyword}{auto}\&\& a, \textcolor{keyword}{auto}\& b) \{\textcolor{keywordflow}{return} a.second < b.second; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == (std::pair<int, int>\{0, 5\}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}\label{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}} 
+\index{rah@{rah}!min\_element@{min\_element}}
+\index{min\_element@{min\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{min\_element()}{min\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename R , std \+::enable\+\_\+if\+\_\+t$<$ is\+\_\+range$<$ R $>$\+::value, int $>$  = 0$>$ \\
+auto rah\+::min\+\_\+element (\begin{DoxyParamCaption}\item[{R \&\&}]{range }\end{DoxyParamCaption})}
+
+
+
+Finds the smallest element in the range. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, -5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = \mbox{\hyperlink{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}{rah::min\_element}}(in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == -5);}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a8b5a2712dbebe5144ea1635f3f346514}\label{namespacerah_a8b5a2712dbebe5144ea1635f3f346514}} 
+\index{rah@{rah}!min\_element@{min\_element}}
+\index{min\_element@{min\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{min\_element()}{min\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily auto rah\+::min\+\_\+element (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds the smallest element in the range. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, -5, 3, 4 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}{rah::min\_element}}();}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == -5);}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_ae2ea3fdd33de831fcc7b281154d5a37c}\label{namespacerah_ae2ea3fdd33de831fcc7b281154d5a37c}} 
+\index{rah@{rah}!min\_element@{min\_element}}
+\index{min\_element@{min\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{min\_element()}{min\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename R , typename P $>$ \\
+auto rah\+::min\+\_\+element (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Finds the smallest element in the range. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<std::pair<int, int>> in\{ \{-100, 3\}, \{0, -5\}, \{0, 1\}, \{0, 4\} \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = \mbox{\hyperlink{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}{rah::min\_element}}(in, [](\textcolor{keyword}{auto}\&\& a, \textcolor{keyword}{auto}\& b) \{\textcolor{keywordflow}{return} a.second < b.second; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == (std::pair<int, int>\{0, -5\}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a28dcdb4c5a25916a18532f1dbb520aa9}\label{namespacerah_a28dcdb4c5a25916a18532f1dbb520aa9}} 
+\index{rah@{rah}!min\_element@{min\_element}}
+\index{min\_element@{min\_element}!rah@{rah}}
+\subsubsection{\texorpdfstring{min\_element()}{min\_element()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename P , std \+::enable\+\_\+if\+\_\+t$<$!is\+\_\+range$<$ P $>$\+::value, int $>$  = 0$>$ \\
+auto rah\+::min\+\_\+element (\begin{DoxyParamCaption}\item[{P \&\&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Finds the smallest element in the range. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<std::pair<int, int>> in\{ \{-100, 3\}, \{0, -5\}, \{0, 1\}, \{0, 4\} \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_ac30d42caf315f29ed784dd3c4f46d533}{rah::min\_element}}([](\textcolor{keyword}{auto}\&\& a, \textcolor{keyword}{auto}\& b) \{\textcolor{keywordflow}{return} a.second < b.second; \});}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(*iter == (std::pair<int, int>\{0, -5\}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}\label{namespacerah_a5ce2d92c6f0b3dd5eb6d70600e949a97}} 
 \index{rah@{rah}!mismatch@{mismatch}}
