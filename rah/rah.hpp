@@ -1701,6 +1701,82 @@ template<typename P> auto find_if_not(P&& pred)
 	return make_pipeable([=](auto&& range) {return find_if_not(range, pred); });
 }
 
+// ************************************* max_element **********************************************
+
+/// @brief Finds the greatest element in the range
+///
+/// @snippet test.cpp rah::max_element
+template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0> 
+auto max_element(R&& range)
+{
+	return RAH_STD::max_element(begin(range), end(range));
+}
+
+/// @brief Finds the greatest element in the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::max_element_pipeable
+inline auto max_element()
+{
+	return make_pipeable([=](auto&& range) {return max_element(range); });
+}
+
+/// @brief Finds the greatest element in the range
+///
+/// @snippet test.cpp rah::max_element_pred
+template<typename R, typename P> auto max_element(R&& range, P&& pred)
+{
+	return RAH_STD::max_element(begin(range), end(range), RAH_STD::forward<P>(pred));
+}
+
+/// @brief Finds the greatest element in the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::max_element_pred_pipeable
+template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0> 
+auto max_element(P&& pred)
+{
+	return make_pipeable([=](auto&& range) {return max_element(range, pred); });
+}
+
+// ************************************* min_element **********************************************
+
+/// @brief Finds the smallest element in the range
+///
+/// @snippet test.cpp rah::min_element
+template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0> 
+auto min_element(R&& range)
+{
+	return RAH_STD::min_element(begin(range), end(range));
+}
+
+/// @brief Finds the smallest element in the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::min_element_pipeable
+inline auto min_element()
+{
+	return make_pipeable([=](auto&& range) {return min_element(range); });
+}
+
+/// @brief Finds the smallest element in the range
+///
+/// @snippet test.cpp rah::min_element_pred
+template<typename R, typename P> auto min_element(R&& range, P&& pred)
+{
+	return RAH_STD::min_element(begin(range), end(range), RAH_STD::forward<P>(pred));
+}
+
+/// @brief Finds the smallest element in the range
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::min_element_pred_pipeable
+template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0> 
+auto min_element(P&& pred)
+{
+	return make_pipeable([=](auto&& range) {return min_element(range, pred); });
+}
+
 // *************************************** copy ***************************************************
 
 /// @brief Copy in range into an other

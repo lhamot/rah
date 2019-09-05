@@ -1104,6 +1104,65 @@ int main()
 	}
 
 	{
+		/// [rah::max_element]
+		std::vector<int> in{ 1, 5, 3, 4 };
+		auto iter = rah::max_element(in);
+		assert(*iter == 5);
+		/// [rah::max_element]
+	}
+	{
+		/// [rah::max_element_pipeable]
+		std::vector<int> in{ 1, 5, 3, 4 };
+		auto iter = in | rah::max_element();
+		assert(*iter == 5);
+		/// [rah::max_element_pipeable]
+	}
+	{
+		/// [rah::max_element_pred]
+		std::vector<std::pair<int, int>> in{ {100, 3}, {0, 5}, {0, 1}, {0, 4} };
+		auto iter = rah::max_element(in, [](auto&& a, auto& b) {return a.second < b.second; });
+		assert(*iter == (std::pair<int, int>{0, 5}));
+		/// [rah::max_element_pred]
+	}
+	{
+		/// [rah::max_element_pred_pipeable]
+		std::vector<std::pair<int, int>> in{ {100, 3}, {0, 5}, {0, 1}, {0, 4} };
+		auto iter = in | rah::max_element([](auto&& a, auto& b) {return a.second < b.second; });
+		assert(*iter == (std::pair<int, int>{0, 5}));
+		/// [rah::max_element_pred_pipeable]
+	}
+	
+	{
+		/// [rah::min_element]
+		std::vector<int> in{ 1, -5, 3, 4 };
+		auto iter = rah::min_element(in);
+		assert(*iter == -5);
+		/// [rah::min_element]
+	}
+	{
+		/// [rah::min_element_pipeable]
+		std::vector<int> in{ 1, -5, 3, 4 };
+		auto iter = in | rah::min_element();
+		assert(*iter == -5);
+		/// [rah::min_element_pipeable]
+	}
+	{
+		/// [rah::min_element_pred]
+		std::vector<std::pair<int, int>> in{ {-100, 3}, {0, -5}, {0, 1}, {0, 4} };
+		auto iter = rah::min_element(in, [](auto&& a, auto& b) {return a.second < b.second; });
+		assert(*iter == (std::pair<int, int>{0, -5}));
+		/// [rah::min_element_pred]
+	}
+	{
+		/// [rah::min_element_pred_pipeable]
+		std::vector<std::pair<int, int>> in{ {-100, 3}, {0, -5}, {0, 1}, {0, 4} };
+		auto iter = in | rah::min_element([](auto&& a, auto& b) {return a.second < b.second; });
+		assert(*iter == (std::pair<int, int>{0, -5}));
+		/// [rah::min_element_pred_pipeable]
+	}
+
+
+	{
 		/// [rah::size]
 		std::vector<int> vec3{ 1, 2, 3 };
 		assert(rah::size(vec3) == 3);
