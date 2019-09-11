@@ -1320,6 +1320,24 @@ int main()
 		assert(in == std::vector<int>({ 4, 5 }));
 		/// [rah::remove_if_pipeable]
 	}
+	{
+		/// [rah::remove]
+		std::vector<int> in{ 1, 2, 1, 3, 1 };
+		auto range_to_erase_begin = rah::remove(in, 1);
+		in.erase(range_to_erase_begin, end(in));
+		std::sort(in.begin(), in.end());
+		assert(in == std::vector<int>({ 2, 3 }));
+		/// [rah::remove]
+	}
+	{
+		/// [rah::remove_pipeable]
+		std::vector<int> in{ 1, 2, 1, 3, 1 };
+		auto range_to_erase_begin = in | rah::remove(1);
+		in.erase(range_to_erase_begin, end(in));
+		std::sort(in.begin(), in.end());
+		assert(in == std::vector<int>({ 2, 3 }));
+		/// [rah::remove_pipeable]
+	}
 
 	{
 		/// [rah::partition]
@@ -1563,6 +1581,22 @@ int main()
 		assert(&result == &in);
 		assert(in == std::vector<int>({ 4, 5 }));
 		/// [rah::action::remove_if_pipeable]
+	}
+	{
+		/// [rah::action::remove]
+		std::vector<int> in{ 1, 2, 1, 3, 1 };
+		auto&& result = rah::action::remove(in, 1);
+		assert(&result == &in);
+		assert(in == std::vector<int>({ 2, 3 }));
+		/// [rah::action::remove]
+	}
+	{
+		/// [rah::action::remove_pipeable]
+		std::vector<int> in{ 1, 2, 1, 3, 1 };
+		auto&& result = in | rah::action::remove(1);
+		assert(&result == &in);
+		assert(in == std::vector<int>({ 2, 3 }));
+		/// [rah::action::remove_pipeable]
 	}
 	{
 		/// [rah::action::sort]

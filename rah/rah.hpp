@@ -1946,6 +1946,27 @@ template<typename P> auto remove_if(P&& pred)
 	return make_pipeable([=](auto&& range) { return remove_if(range, pred); });
 }
 
+// *********************************** remove *****************************************************
+
+/// @brief Keep at the begining of the range only elements not equal to value\n
+/// @return Return iterator to the part of the range to erase.
+///
+/// @snippet test.cpp rah::remove
+template<typename R, typename V> auto remove(R&& range, V&& value)
+{
+	return RAH_STD::remove(begin(range), end(range), RAH_STD::forward<V>(value));
+}
+
+/// @brief Keep at the begining of the range only elements not equal to value\n
+/// @return Return iterator to the part of the range to erase.
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::remove_pipeable
+template<typename V> auto remove(V&& value)
+{
+	return make_pipeable([=](auto&& range) { return remove(RAH_STD::forward<decltype(range)>(range), value); });
+}
+
 // *********************************** partition **************************************************
 
 /// @brief Reorders the elements in the @b range in such a way that all elements for which the 
@@ -2190,6 +2211,28 @@ template<typename C, typename P> auto&& remove_if(C&& container, P&& pred)
 template<typename P> auto remove_if(P&& pred)
 {
 	return make_pipeable([=](auto&& range) -> auto&& { return remove_if(RAH_STD::forward<decltype(range)>(range), pred); });
+}
+
+// *********************************** remove *****************************************************
+
+/// @brief Keep only elements not equal to @b value
+/// @return reference to the container
+///
+/// @snippet test.cpp rah::action::remove
+template<typename C, typename V> auto&& remove(C&& container, V&& value)
+{
+	container.erase(RAH_NAMESPACE::remove(container, RAH_STD::forward<V>(value)), container.end());
+	return RAH_STD::forward<C>(container);
+}
+
+/// @brief Keep only elements not equal to @b value
+/// @return reference to the container
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp rah::action::remove_pipeable
+template<typename V> auto remove(V&& value)
+{
+	return make_pipeable([=](auto&& range) -> auto&& { return remove(RAH_STD::forward<decltype(range)>(range), value); });
 }
 
 // *********************************** sort *******************************************************
