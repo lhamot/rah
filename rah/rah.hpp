@@ -578,6 +578,11 @@ template<typename T = size_t> auto ints(T b = 0, T e = RAH_STD::numeric_limits<T
 	return iterator_range<ints_iterator<T>>{ { b }, { e }};
 }
 
+template<typename T = size_t> auto closed_ints(T b = 0, T e = RAH_STD::numeric_limits<T>::max() - 1)
+{
+	return iterator_range<ints_iterator<T>>{ { b }, { e + 1 }};
+}
+
 // ********************************** iota ********************************************************
 
 /// @see rah::iota

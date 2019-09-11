@@ -147,6 +147,15 @@ int main()
 	}
 
 	{
+		/// [closed_ints]
+		std::vector<int> result;
+		for (int i : rah::view::closed_ints(10, 14))
+			result.push_back(i);
+		assert(result == std::vector<int>({ 10, 11, 12, 13, 14 }));
+		/// [closed_ints]
+	}
+
+	{
 		std::vector<int> result;
 		for (int i : rah::view::ints(10) | rah::view::slice(2, 5))
 			result.push_back(i);
@@ -231,14 +240,33 @@ int main()
 		
 	{
 		/// [for_each_pipeable]
+		auto range = rah::view::ints(0, 3) | rah::view::for_each([&](int z)
+		{
+			return rah::view::ints(3, 6) | rah::view::for_each([&, z](int y)
+			{
+				return rah::view::ints(6, 9) | rah::view::for_each([&, y, z](int x)
+				{
+					return rah::view::single(x + y * 3 + z * 9);
+				});
+			});
+		});
+		assert(equal(range, rah::view::ints(15, 42)));
+		/// [for_each_pipeable]
+	}
+
+	{
 		size_t count = 0;
+		size_t count2 = 0;
+		size_t count3 = 0;
 		auto range = rah::view::ints(0, 3) | rah::view::for_each([&](int z)
 		{
 			++count;
-			return rah::view::ints(3, 6) | rah::view::for_each([z](int y)
+			return rah::view::ints(3, 6) | rah::view::for_each([&, z](int y)
 			{
-				return rah::view::ints(6, 9) | rah::view::for_each([z, y](int x)
+				++count2;
+				return rah::view::ints(6, 9) | rah::view::for_each([&, y, z](int x)
 				{
+					++count3;
 					return rah::view::single(x + y * 3 + z * 9);
 				});
 			});
@@ -246,7 +274,8 @@ int main()
 
 		assert(equal(range, rah::view::ints(15, 42)));
 		assert(count == 3);
-		/// [for_each_pipeable]
+		assert(count2 == 9);
+		assert(count3 == 27);
 	}
 
 
