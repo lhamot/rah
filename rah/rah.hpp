@@ -673,8 +673,9 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 				return;
 			else
 			{
-				subRange_->subRangeIter = begin(*rangeIter_);
-				subRange_->subRangeEnd = end(*rangeIter_);
+				auto&& subRange = *rangeIter_;
+				subRange_->subRangeIter = begin(subRange);
+				subRange_->subRangeEnd = end(subRange);
 			}
 		}
 	}
@@ -708,7 +709,8 @@ template<typename R> auto join(R&& range_of_ranges)
 	}
 	else
 	{
-		join_iterator_type b(rangeRef, rangeBegin, begin(*rangeBegin), end(*rangeBegin));
+		auto&& firstSubRange = *rangeBegin;
+		join_iterator_type b(rangeRef, rangeBegin, begin(firstSubRange), end(firstSubRange));
 		join_iterator_type e(rangeRef, rangeEnd);
 		return make_iterator_range(b, e);
 	}

@@ -231,8 +231,10 @@ int main()
 		
 	{
 		/// [for_each_pipeable]
-		auto range = rah::view::ints(0, 3) | rah::view::for_each([](int z)
+		size_t count = 0;
+		auto range = rah::view::ints(0, 3) | rah::view::for_each([&](int z)
 		{
+			++count;
 			return rah::view::ints(3, 6) | rah::view::for_each([z](int y)
 			{
 				return rah::view::ints(6, 9) | rah::view::for_each([z, y](int x)
@@ -243,6 +245,7 @@ int main()
 		});
 
 		assert(equal(range, rah::view::ints(15, 42)));
+		assert(count == 3);
 		/// [for_each_pipeable]
 	}
 
