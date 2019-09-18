@@ -116,6 +116,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a551824ac5386f3feb4c54ca097b76b92"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#a551824ac5386f3feb4c54ca097b76b92">fill</a> (V &amp;&amp;value)</td></tr>
 <tr class="memdesc:a551824ac5386f3feb4c54ca097b76b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the given value to the elements in the range [first, last)  <a href="#a551824ac5386f3feb4c54ca097b76b92">More...</a><br /></td></tr>
 <tr class="separator:a551824ac5386f3feb4c54ca097b76b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a5825476817e46f3b0ce51259c294d"><td class="memTemplParams" colspan="2">template&lt;typename C , typename V &gt; </td></tr>
+<tr class="memitem:a67a5825476817e46f3b0ce51259c294d"><td class="memTemplItemLeft" align="right" valign="top">auto &amp;&amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#a67a5825476817e46f3b0ce51259c294d">remove</a> (C &amp;&amp;container, V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a67a5825476817e46f3b0ce51259c294d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep only elements not equal to <b>value</b>.  <a href="#a67a5825476817e46f3b0ce51259c294d">More...</a><br /></td></tr>
+<tr class="separator:a67a5825476817e46f3b0ce51259c294d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc1911e57bc7d5541f49e7662e3e44de"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:abc1911e57bc7d5541f49e7662e3e44de"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah_1_1action.html#abc1911e57bc7d5541f49e7662e3e44de">remove</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:abc1911e57bc7d5541f49e7662e3e44de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep only elements not equal to <b>value</b>.  <a href="#abc1911e57bc7d5541f49e7662e3e44de">More...</a><br /></td></tr>
+<tr class="separator:abc1911e57bc7d5541f49e7662e3e44de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="afee3c0ce8604f13a4e8a6f1975d335f6"></a>
@@ -171,6 +179,63 @@ template&lt;typename V &gt; </div>
 <p>Assigns the given value to the elements in the range [first, last) </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 3 };</div><div class="line">        std::vector&lt;int&gt; out{ 0, 0, 0, 4, 5 };</div><div class="line">        <span class="keyword">auto</span> iter = in | <a class="code" href="namespacerah.html#a1d0f36ff683cedc9090956ea389b3312">rah::copy</a>(out);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>((<a class="code" href="namespacerah.html#a0a3dd43bb465c99137bfdebb2292b102">rah::make_iterator_range</a>(iter, <a class="code" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>(out)) | <a class="code" href="namespacerah.html#abf321dffb33d6a2d752aa091fdba7bbf">rah::equal</a>(std::initializer_list&lt;int&gt;{ 4, 5 })));</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(out == (std::vector&lt;int&gt;{ 1, 2, 3, 4, 5 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a67a5825476817e46f3b0ce51259c294d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a5825476817e46f3b0ce51259c294d">&#9670;&nbsp;</a></span>remove() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto&amp;&amp; rah::action::remove </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&amp;&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keep only elements not equal to <b>value</b>. </p>
+<dl class="section return"><dt>Returns</dt><dd>reference to the container</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 1, 3, 1 };</div><div class="line">        <span class="keyword">auto</span>&amp;&amp; result = <a class="code" href="namespacerah_1_1action.html#a67a5825476817e46f3b0ce51259c294d">rah::action::remove</a>(in, 1);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(&amp;result == &amp;in);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 3 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="abc1911e57bc7d5541f49e7662e3e44de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc1911e57bc7d5541f49e7662e3e44de">&#9670;&nbsp;</a></span>remove() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::action::remove </td>
+          <td>(</td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keep only elements not equal to <b>value</b>. </p>
+<dl class="section return"><dt>Returns</dt><dd>reference to the container </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 1, 3, 1 };</div><div class="line">        <span class="keyword">auto</span>&amp;&amp; result = in | <a class="code" href="namespacerah_1_1action.html#a67a5825476817e46f3b0ce51259c294d">rah::action::remove</a>(1);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(&amp;result == &amp;in);</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 3 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="ab774cddf0da3ae6a4b505d8a2e05b0c7"></a>

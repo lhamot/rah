@@ -24,7 +24,11 @@
 {\footnotesize template$<$typename R1 , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_afee3c0ce8604f13a4e8a6f1975d335f6}{fill}} (R1 \&\&in, V \&\&value)
 \begin{DoxyCompactList}\small\item\em Assigns the given value to the elements in the range \mbox{[}first, last) \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a551824ac5386f3feb4c54ca097b76b92}{fill}} (V \&\&value)
-\begin{DoxyCompactList}\small\item\em Assigns the given value to the elements in the range \mbox{[}first, last) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Assigns the given value to the elements in the range \mbox{[}first, last) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename C , typename V $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a67a5825476817e46f3b0ce51259c294d}{remove}} (C \&\&container, V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep only elements not equal to {\bfseries{value}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_abc1911e57bc7d5541f49e7662e3e44de}{remove}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep only elements not equal to {\bfseries{value}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -68,6 +72,51 @@ pipeable syntax
 \DoxyCodeLine{        \textcolor{keyword}{auto} iter = in | \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{rah::copy}}(out);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((\mbox{\hyperlink{namespacerah_a0a3dd43bb465c99137bfdebb2292b102}{rah::make\_iterator\_range}}(iter, \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(out)) | \mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{rah::equal}}(std::initializer\_list<int>\{ 4, 5 \})));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<int>\{ 1, 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1action_a67a5825476817e46f3b0ce51259c294d}\label{namespacerah_1_1action_a67a5825476817e46f3b0ce51259c294d}} 
+\index{rah::action@{rah::action}!remove@{remove}}
+\index{remove@{remove}!rah::action@{rah::action}}
+\subsubsection{\texorpdfstring{remove()}{remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename C , typename V $>$ \\
+auto\&\& rah\+::action\+::remove (\begin{DoxyParamCaption}\item[{C \&\&}]{container,  }\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Keep only elements not equal to {\bfseries{value}}. 
+
+\begin{DoxyReturn}{Returns}
+reference to the container
+\end{DoxyReturn}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 1, 3, 1 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = \mbox{\hyperlink{namespacerah_1_1action_a67a5825476817e46f3b0ce51259c294d}{rah::action::remove}}(in, 1);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 3 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1action_abc1911e57bc7d5541f49e7662e3e44de}\label{namespacerah_1_1action_abc1911e57bc7d5541f49e7662e3e44de}} 
+\index{rah::action@{rah::action}!remove@{remove}}
+\index{remove@{remove}!rah::action@{rah::action}}
+\subsubsection{\texorpdfstring{remove()}{remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename V $>$ \\
+auto rah\+::action\+::remove (\begin{DoxyParamCaption}\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Keep only elements not equal to {\bfseries{value}}. 
+
+\begin{DoxyReturn}{Returns}
+reference to the container 
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 1, 3, 1 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto}\&\& result = in | \mbox{\hyperlink{namespacerah_1_1action_a67a5825476817e46f3b0ce51259c294d}{rah::action::remove}}(1);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\&result == \&in);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 3 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}\label{namespacerah_1_1action_ab774cddf0da3ae6a4b505d8a2e05b0c7}} 
 \index{rah::action@{rah::action}!remove\_if@{remove\_if}}

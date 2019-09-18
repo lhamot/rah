@@ -42,6 +42,8 @@ struct \mbox{\hyperlink{structrah_1_1is__lesser}{rah\+::is\+\_\+lesser}}
 \begin{DoxyCompactList}\small\item\em Apply the \textquotesingle{}$<$\textquotesingle{} operator on two values of any type. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1take__iterator}{rah\+::view\+::take\+\_\+iterator$<$ I $>$}}
 \item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1sliding__iterator}{rah\+::view\+::sliding\+\_\+iterator$<$ I $>$}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1counted__iterator}{rah\+::view\+::counted\+\_\+iterator$<$ I $>$}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1unbounded__iterator}{rah\+::view\+::unbounded\+\_\+iterator$<$ I $>$}}
@@ -133,11 +135,25 @@ auto \mbox{\hyperlink{namespacerah_1_1view_aeed660f7f6a4e0fbefffa4e42de7642a}{ra
 \begin{DoxyCompactList}\small\item\em Given a source {\bfseries{range}} and an integral {\bfseries{count}}, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements. \end{DoxyCompactList}\item 
 auto \mbox{\hyperlink{namespacerah_1_1view_ad0ee883cff948aff77ad05a26dad0f92}{rah\+::view\+::take}} (size\+\_\+t count)
 \begin{DoxyCompactList}\small\item\em Given a source {\bfseries{range}} and an integral {\bfseries{count}}, return a range consisting of the first count elements from the source range, or the complete range if it has fewer elements. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ad72c07068dabce4709cc2cc4af992ce7}{rah\+::view\+::sliding}} (R \&\&range, size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Given a range and a count n, place a window over the first n elements of the underlying range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a4635f54615d1c4409c9455fd09f9853f}{rah\+::view\+::sliding}} (size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Given a range and a count n, place a window over the first n elements of the underlying range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a85c6a5a689128acf31de380ec19cf6d6}{rah\+::view\+::drop\+\_\+exactly}} (R \&\&range, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a383766e5c4c363ff39ad92f174919667}{rah\+::view\+::drop\+\_\+exactly}} (size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1efbe9a7438d94b8c91a2904752ed8da}{rah\+::view\+::drop}} (R \&\&range, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a410f314410afe512785c40e30c4f3111}{rah\+::view\+::drop}} (size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a9ea4acac3be1e0c4bf367c61a5252653}{rah\+::view\+::counted}} (I \&\&it, size\+\_\+t n, decltype(++it, 0)=0)
 \begin{DoxyCompactList}\small\item\em Given an iterator {\bfseries{it}} and a count {\bfseries{n}}, create a range that starts at {\bfseries{it}} and includes the next {\bfseries{n}} elements. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a4a484f6d91dbf5795a4c60693c560592}{rah\+::view\+::unbounded}} (I \&\&it)
 \begin{DoxyCompactList}\small\item\em Given an iterator, return an infinite range that begins at that position. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah\+::view\+::ints}} (T b=0, T e=std \+::numeric\+\_\+limits$<$ T $>$\+::max())
+\begin{DoxyCompactList}\small\item\em Generate a range of monotonically increasing ints. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1f8c1c978aa638b078d9e81387d83c7c}{rah\+::view\+::closed\+\_\+ints}} (T b=0, T e=std \+::numeric\+\_\+limits$<$ T $>$\+::max() -\/ 1)
 \begin{DoxyCompactList}\small\item\em Generate a range of monotonically increasing ints. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ae66c3be408888c58118b1974cdece592}{rah\+::view\+::iota}} (T b, T e, T step=1)
 \begin{DoxyCompactList}\small\item\em Generate a range of sequential integers, increasing by a defined step. \end{DoxyCompactList}\item 
@@ -327,6 +343,12 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{rah\+::siz
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_af598cf91c554f6d6938c320578e6bb02}{rah\+::remove\+\_\+if}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a17e1a9932fa73843f5431920ebf6cefb}{rah\+::remove}} (R \&\&range, V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements not equal to value~\newline
+. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a8f9d8b6cbb2431bddd42cc4e2378f13f}{rah\+::remove}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements not equal to value~\newline
+. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_a97ae3ed90fe486c2dd3a90fee811bcd7}{rah\+::partition}} (R \&\&range, P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Reorders the elements in the {\bfseries{range}} in such a way that all elements for which the predicate {\bfseries{pred}} returns {\ttfamily true} precede the elements for which predicate {\bfseries{pred}} returns {\ttfamily false}. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_afeced5adb7a17c0c8f34b64559ddc60c}{rah\+::partition}} (P \&\&pred)
@@ -369,6 +391,10 @@ auto \mbox{\hyperlink{namespacerah_aaee48fa7a804b4fd19c6a78bdd8d4c85}{rah\+::siz
 {\footnotesize template$<$typename P $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_a708ce68c6ed2b20ef9c0cdb6b697c980}{rah\+::action\+::remove\+\_\+if}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Keep only elements for which pred(elt) is false~\newline
 . \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename C , typename V $>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a67a5825476817e46f3b0ce51259c294d}{rah\+::action\+::remove}} (C \&\&container, V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep only elements not equal to {\bfseries{value}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_abc1911e57bc7d5541f49e7662e3e44de}{rah\+::action\+::remove}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep only elements not equal to {\bfseries{value}}. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename C , typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$is\+\_\+range$<$\+C$>$\+::value$>$$>$ }\\auto \&\& \mbox{\hyperlink{namespacerah_1_1action_a2bddee3b65a2ecf86d2c3ac49bb41183}{rah\+::action\+::sort}} (C \&\&container, P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Sort a range in place, using the given predicate. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1action_ac1603fdf8fc87e84c277c216a5176674}{rah\+::action\+::sort}} (P \&\&pred=\{\})

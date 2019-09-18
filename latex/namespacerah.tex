@@ -230,6 +230,12 @@ auto \mbox{\hyperlink{namespacerah_a8b5a2712dbebe5144ea1635f3f346514}{min\+\_\+e
 \begin{DoxyCompactList}\small\item\em Finds the smallest element in the range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P , std \+::enable\+\_\+if\+\_\+t$<$!is\+\_\+range$<$ P $>$\+::value, int $>$  = 0$>$ }\\auto \mbox{\hyperlink{namespacerah_a28dcdb4c5a25916a18532f1dbb520aa9}{min\+\_\+element}} (P \&\&pred)
 \begin{DoxyCompactList}\small\item\em Finds the smallest element in the range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R , typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a17e1a9932fa73843f5431920ebf6cefb}{remove}} (R \&\&range, V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements not equal to value~\newline
+. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename V $>$ }\\auto \mbox{\hyperlink{namespacerah_a8f9d8b6cbb2431bddd42cc4e2378f13f}{remove}} (V \&\&value)
+\begin{DoxyCompactList}\small\item\em Keep at the begining of the range only elements not equal to value~\newline
+. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I\+N1 , typename I\+N2 , typename O\+U\+T\+\_\+ $>$ }\\void \mbox{\hyperlink{namespacerah_a8e9bc244c82d3435e1c8b6bf08696161}{set\+\_\+difference}} (I\+N1 \&\&in1, I\+N2 \&\&in2, O\+U\+T\+\_\+ \&\&out)
 \begin{DoxyCompactList}\small\item\em Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out The resulting range is also sorted. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename I\+N1 , typename I\+N2 , typename O\+U\+T\+\_\+ $>$ }\\void \mbox{\hyperlink{namespacerah_a8819752794096b634c6153560fc21cc5}{set\+\_\+intersection}} (I\+N1 \&\&in1, I\+N2 \&\&in2, O\+U\+T\+\_\+ \&\&out)
@@ -1499,6 +1505,55 @@ pipeable syntax
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{        std::vector<int> vecIn1\{ 1, 2, 3, 4 \};}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}((vecIn1 | \mbox{\hyperlink{namespacerah_a407b50a4f029e3f2a3cd0ba9142aea84}{rah::reduce}}(0, [](\textcolor{keyword}{auto} a, \textcolor{keyword}{auto} b) \{\textcolor{keywordflow}{return} a + b; \})) == 10);}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a17e1a9932fa73843f5431920ebf6cefb}\label{namespacerah_a17e1a9932fa73843f5431920ebf6cefb}} 
+\index{rah@{rah}!remove@{remove}}
+\index{remove@{remove}!rah@{rah}}
+\subsubsection{\texorpdfstring{remove()}{remove()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R , typename V $>$ \\
+auto rah\+::remove (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Keep at the begining of the range only elements not equal to value~\newline
+. 
+
+\begin{DoxyReturn}{Returns}
+Return iterator to the part of the range to erase.
+\end{DoxyReturn}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 1, 3, 1 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range\_to\_erase\_begin = \mbox{\hyperlink{namespacerah_a17e1a9932fa73843f5431920ebf6cefb}{rah::remove}}(in, 1);}
+\DoxyCodeLine{        in.erase(range\_to\_erase\_begin, \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(in));}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), in.end());}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 3 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_a8f9d8b6cbb2431bddd42cc4e2378f13f}\label{namespacerah_a8f9d8b6cbb2431bddd42cc4e2378f13f}} 
+\index{rah@{rah}!remove@{remove}}
+\index{remove@{remove}!rah@{rah}}
+\subsubsection{\texorpdfstring{remove()}{remove()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename V $>$ \\
+auto rah\+::remove (\begin{DoxyParamCaption}\item[{V \&\&}]{value }\end{DoxyParamCaption})}
+
+
+
+Keep at the begining of the range only elements not equal to value~\newline
+. 
+
+\begin{DoxyReturn}{Returns}
+Return iterator to the part of the range to erase. 
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 1, 2, 1, 3, 1 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range\_to\_erase\_begin = in | \mbox{\hyperlink{namespacerah_a17e1a9932fa73843f5431920ebf6cefb}{rah::remove}}(1);}
+\DoxyCodeLine{        in.erase(range\_to\_erase\_begin, \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(in));}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}{std::sort}}(in.begin(), in.end());}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(in == std::vector<int>(\{ 2, 3 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_afba9495316f20f6caee735c15feb349c}\label{namespacerah_afba9495316f20f6caee735c15feb349c}} 
 \index{rah@{rah}!remove\_if@{remove\_if}}

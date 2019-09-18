@@ -471,6 +471,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a28dcdb4c5a25916a18532f1dbb520aa9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a28dcdb4c5a25916a18532f1dbb520aa9">min_element</a> (P &amp;&amp;pred)</td></tr>
 <tr class="memdesc:a28dcdb4c5a25916a18532f1dbb520aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the smallest element in the range.  <a href="#a28dcdb4c5a25916a18532f1dbb520aa9">More...</a><br /></td></tr>
 <tr class="separator:a28dcdb4c5a25916a18532f1dbb520aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17e1a9932fa73843f5431920ebf6cefb"><td class="memTemplParams" colspan="2">template&lt;typename R , typename V &gt; </td></tr>
+<tr class="memitem:a17e1a9932fa73843f5431920ebf6cefb"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a17e1a9932fa73843f5431920ebf6cefb">remove</a> (R &amp;&amp;range, V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a17e1a9932fa73843f5431920ebf6cefb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep at the begining of the range only elements not equal to value<br />
+.  <a href="#a17e1a9932fa73843f5431920ebf6cefb">More...</a><br /></td></tr>
+<tr class="separator:a17e1a9932fa73843f5431920ebf6cefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f9d8b6cbb2431bddd42cc4e2378f13f"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
+<tr class="memitem:a8f9d8b6cbb2431bddd42cc4e2378f13f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a8f9d8b6cbb2431bddd42cc4e2378f13f">remove</a> (V &amp;&amp;value)</td></tr>
+<tr class="memdesc:a8f9d8b6cbb2431bddd42cc4e2378f13f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep at the begining of the range only elements not equal to value<br />
+.  <a href="#a8f9d8b6cbb2431bddd42cc4e2378f13f">More...</a><br /></td></tr>
+<tr class="separator:a8f9d8b6cbb2431bddd42cc4e2378f13f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e9bc244c82d3435e1c8b6bf08696161"><td class="memTemplParams" colspan="2">template&lt;typename IN1 , typename IN2 , typename OUT_ &gt; </td></tr>
 <tr class="memitem:a8e9bc244c82d3435e1c8b6bf08696161"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacerah.html#a8e9bc244c82d3435e1c8b6bf08696161">set_difference</a> (IN1 &amp;&amp;in1, IN2 &amp;&amp;in2, OUT_ &amp;&amp;out)</td></tr>
 <tr class="memdesc:a8e9bc244c82d3435e1c8b6bf08696161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the elements from the sorted range in1 which are not found in the sorted range in2 to the range out The resulting range is also sorted.  <a href="#a8e9bc244c82d3435e1c8b6bf08696161">More...</a><br /></td></tr>
@@ -2292,6 +2302,65 @@ template&lt;typename I , typename F &gt; </div>
 <p>Executes a reducer function on each element of the range, resulting in a single output value. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
 <div class="fragment"><div class="line">        std::vector&lt;int&gt; vecIn1{ 1, 2, 3, 4 };</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>((vecIn1 | <a class="code" href="namespacerah.html#a407b50a4f029e3f2a3cd0ba9142aea84">rah::reduce</a>(0, [](<span class="keyword">auto</span> a, <span class="keyword">auto</span> b) {<span class="keywordflow">return</span> a + b; })) == 10);</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a17e1a9932fa73843f5431920ebf6cefb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17e1a9932fa73843f5431920ebf6cefb">&#9670;&nbsp;</a></span>remove() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename R , typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::remove </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keep at the begining of the range only elements not equal to value<br />
+. </p>
+<dl class="section return"><dt>Returns</dt><dd>Return iterator to the part of the range to erase.</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 1, 3, 1 };</div><div class="line">        <span class="keyword">auto</span> range_to_erase_begin = <a class="code" href="namespacerah.html#a17e1a9932fa73843f5431920ebf6cefb">rah::remove</a>(in, 1);</div><div class="line">        in.erase(range_to_erase_begin, <a class="code" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>(in));</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(in.begin(), in.end());</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 3 }));</div></div><!-- fragment -->
+</div>
+</div>
+<a id="a8f9d8b6cbb2431bddd42cc4e2378f13f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f9d8b6cbb2431bddd42cc4e2378f13f">&#9670;&nbsp;</a></span>remove() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename V &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto rah::remove </td>
+          <td>(</td>
+          <td class="paramtype">V &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keep at the begining of the range only elements not equal to value<br />
+. </p>
+<dl class="section return"><dt>Returns</dt><dd>Return iterator to the part of the range to erase. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>pipeable syntax</dd></dl>
+<div class="fragment"><div class="line">        std::vector&lt;int&gt; in{ 1, 2, 1, 3, 1 };</div><div class="line">        <span class="keyword">auto</span> range_to_erase_begin = in | <a class="code" href="namespacerah.html#a17e1a9932fa73843f5431920ebf6cefb">rah::remove</a>(1);</div><div class="line">        in.erase(range_to_erase_begin, <a class="code" href="namespacerah.html#a20a3e45aee90bb5534a00c6b14e06069">end</a>(in));</div><div class="line">        <a class="code" href="namespacerah_1_1view.html#a343ff36ca2b6470f2a55a89dfb4e3dc9">std::sort</a>(in.begin(), in.end());</div><div class="line">        <a class="code" href="test_8cpp.html#a697b813778d7c62ced8c21c69291b30a">assert</a>(in == std::vector&lt;int&gt;({ 2, 3 }));</div></div><!-- fragment -->
 </div>
 </div>
 <a id="afba9495316f20f6caee735c15feb349c"></a>

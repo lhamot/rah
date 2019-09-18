@@ -30,6 +30,8 @@ struct \mbox{\hyperlink{structrah_1_1view_1_1repeat__iterator}{repeat\+\_\+itera
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1set__difference__iterator}{set\+\_\+difference\+\_\+iterator}}
 \item 
+struct \mbox{\hyperlink{structrah_1_1view_1_1sliding__iterator}{sliding\+\_\+iterator}}
+\item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1stride__iterator}{stride\+\_\+iterator}}
 \item 
 struct \mbox{\hyperlink{structrah_1_1view_1_1take__iterator}{take\+\_\+iterator}}
@@ -127,6 +129,20 @@ auto \mbox{\hyperlink{namespacerah_1_1view_aac8d9437b8c96e0e8e972c4c10d584e5}{ma
 \begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename P  = is\+\_\+lesser, typename  = std \+::enable\+\_\+if\+\_\+t$<$not is\+\_\+range$<$\+P$>$\+::value$>$$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_aee3389bbe781c123aceb0d017a470e11}{sort}} (P \&\&pred=\{\})
 \begin{DoxyCompactList}\small\item\em Make a sorted view of a range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_ad72c07068dabce4709cc2cc4af992ce7}{sliding}} (R \&\&range, size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Given a range and a count n, place a window over the first n elements of the underlying range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a4635f54615d1c4409c9455fd09f9853f}{sliding}} (size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Given a range and a count n, place a window over the first n elements of the underlying range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a85c6a5a689128acf31de380ec19cf6d6}{drop\+\_\+exactly}} (R \&\&range, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a383766e5c4c363ff39ad92f174919667}{drop\+\_\+exactly}} (size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1efbe9a7438d94b8c91a2904752ed8da}{drop}} (R \&\&range, size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{namespacerah_1_1view_a410f314410afe512785c40e30c4f3111}{drop}} (size\+\_\+t \mbox{\hyperlink{namespacerah_aa528865cc4a45d4eb276329554f16b4b}{count}})
+\begin{DoxyCompactList}\small\item\em Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T  = size\+\_\+t$>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a1f8c1c978aa638b078d9e81387d83c7c}{closed\+\_\+ints}} (T b=0, T e=std \+::numeric\+\_\+limits$<$ T $>$\+::max() -\/ 1)
+\begin{DoxyCompactList}\small\item\em Generate a range of monotonically increasing ints. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R1 , typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a84654eafe15215fce621133f069eefc4}{set\+\_\+difference}} (R1 \&\&range1, R2 \&\&range2)
 \item 
 {\footnotesize template$<$typename R2 $>$ }\\auto \mbox{\hyperlink{namespacerah_1_1view_a8b675093c1b9012369f071f5ba0fbee5}{set\+\_\+difference}} (R2 \&\&range2)
@@ -197,6 +213,26 @@ pipeable syntax
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} elts : vec\_01234 | \mbox{\hyperlink{namespacerah_1_1view_aa4ea72dd93cb1d17db2f4755bdee0cef}{rah::view::chunk}}(2))}
 \DoxyCodeLine{            result.emplace\_back(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(elts), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(elts));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<std::vector<int>>(\{ \{0, 1\}, \{ 2, 3 \}, \{ 4 \} \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a1f8c1c978aa638b078d9e81387d83c7c}\label{namespacerah_1_1view_a1f8c1c978aa638b078d9e81387d83c7c}} 
+\index{rah::view@{rah::view}!closed\_ints@{closed\_ints}}
+\index{closed\_ints@{closed\_ints}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{closed\_ints()}{closed\_ints()}}
+{\footnotesize\ttfamily template$<$typename T  = size\+\_\+t$>$ \\
+rah\+::view\+::closed\+\_\+ints (\begin{DoxyParamCaption}\item[{T}]{b = {\ttfamily 0},  }\item[{T}]{e = {\ttfamily std~\+:\+:numeric\+\_\+limits$<$T$>$\+:\+:max()~-\/~1} }\end{DoxyParamCaption})}
+
+
+
+Generate a range of monotonically increasing ints. 
+
+When used without arguments, it generates the quasi-\/infinite range \mbox{[}0,1,2,3...\mbox{]}. It can also be called with a lower bound, or with a lower and upper bound (inclusive). \mbox{[}lower, uppder\mbox{]}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> result;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : \mbox{\hyperlink{namespacerah_1_1view_a1f8c1c978aa638b078d9e81387d83c7c}{rah::view::closed\_ints}}(10, 14))}
+\DoxyCodeLine{            result.push\_back(i);}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 10, 11, 12, 13, 14 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}\label{namespacerah_1_1view_ad7cd13dd36976288286478b47c3f5747}} 
 \index{rah::view@{rah::view}!concat@{concat}}
@@ -312,6 +348,88 @@ pipeable syntax
 \DoxyCodeLine{        std::vector<int> out;}
 \DoxyCodeLine{        std::copy\_n(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(cy), 8, \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 0, 1, 2, 0, 1, 2, 0, 1 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a1efbe9a7438d94b8c91a2904752ed8da}\label{namespacerah_1_1view_a1efbe9a7438d94b8c91a2904752ed8da}} 
+\index{rah::view@{rah::view}!drop@{drop}}
+\index{drop@{drop}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{drop()}{drop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+rah\+::view\+::drop (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. 
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_a1efbe9a7438d94b8c91a2904752ed8da}{rah::view::drop}}(in, 6);}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(range), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 6, 7, 8, 9 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a410f314410afe512785c40e30c4f3111}\label{namespacerah_1_1view_a410f314410afe512785c40e30c4f3111}} 
+\index{rah::view@{rah::view}!drop@{drop}}
+\index{drop@{drop}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{drop()}{drop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily rah\+::view\+::drop (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. 
+
+\begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = in | \mbox{\hyperlink{namespacerah_1_1view_a1efbe9a7438d94b8c91a2904752ed8da}{rah::view::drop}}(6);}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(range), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 6, 7, 8, 9 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a85c6a5a689128acf31de380ec19cf6d6}\label{namespacerah_1_1view_a85c6a5a689128acf31de380ec19cf6d6}} 
+\index{rah::view@{rah::view}!drop\_exactly@{drop\_exactly}}
+\index{drop\_exactly@{drop\_exactly}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{drop\_exactly()}{drop\_exactly()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+rah\+::view\+::drop\+\_\+exactly (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. 
+
+The source range must have at least that many elements.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_a85c6a5a689128acf31de380ec19cf6d6}{rah::view::drop\_exactly}}(in, 6);}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(range), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 6, 7, 8, 9 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a383766e5c4c363ff39ad92f174919667}\label{namespacerah_1_1view_a383766e5c4c363ff39ad92f174919667}} 
+\index{rah::view@{rah::view}!drop\_exactly@{drop\_exactly}}
+\index{drop\_exactly@{drop\_exactly}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{drop\_exactly()}{drop\_exactly()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily rah\+::view\+::drop\+\_\+exactly (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. 
+
+The source range must have at least that many elements. \begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 \};}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = in | \mbox{\hyperlink{namespacerah_1_1view_a85c6a5a689128acf31de380ec19cf6d6}{rah::view::drop\_exactly}}(6);}
+\DoxyCodeLine{        std::vector<int> out;}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(range), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(range), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out));}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == std::vector<int>(\{ 6, 7, 8, 9 \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a420160b047554df1bf986946050238ed}\label{namespacerah_1_1view_a420160b047554df1bf986946050238ed}} 
 \index{rah::view@{rah::view}!enumerate@{enumerate}}
@@ -432,17 +550,16 @@ pipeable syntax
 \end{DoxyRemark}
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(0, 3) | \mbox{\hyperlink{namespacerah_1_1view_aeecb42c8a3ea83ad0c50ca3b74a8d62c}{rah::view::for\_each}}([](\textcolor{keywordtype}{int} z)}
+\DoxyCodeLine{        \textcolor{keyword}{auto} range = \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(0, 3) | \mbox{\hyperlink{namespacerah_1_1view_aeecb42c8a3ea83ad0c50ca3b74a8d62c}{rah::view::for\_each}}([\&](\textcolor{keywordtype}{int} z)}
 \DoxyCodeLine{        \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(3, 6) | \mbox{\hyperlink{namespacerah_1_1view_aeecb42c8a3ea83ad0c50ca3b74a8d62c}{rah::view::for\_each}}([z](\textcolor{keywordtype}{int} y)}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(3, 6) | \mbox{\hyperlink{namespacerah_1_1view_aeecb42c8a3ea83ad0c50ca3b74a8d62c}{rah::view::for\_each}}([\&, z](\textcolor{keywordtype}{int} y)}
 \DoxyCodeLine{            \{}
-\DoxyCodeLine{                \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(6, 9) | \mbox{\hyperlink{namespacerah_1_1view_aeecb42c8a3ea83ad0c50ca3b74a8d62c}{rah::view::for\_each}}([z, y](\textcolor{keywordtype}{int} x)}
+\DoxyCodeLine{                \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(6, 9) | \mbox{\hyperlink{namespacerah_1_1view_aeecb42c8a3ea83ad0c50ca3b74a8d62c}{rah::view::for\_each}}([\&, y, z](\textcolor{keywordtype}{int} x)}
 \DoxyCodeLine{                \{}
 \DoxyCodeLine{                    \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacerah_1_1view_ad37c24275c6eb4642a20466545a9baa3}{rah::view::single}}(x + y * 3 + z * 9);}
 \DoxyCodeLine{                \});}
 \DoxyCodeLine{            \});}
 \DoxyCodeLine{        \});}
-\DoxyCodeLine{}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(\mbox{\hyperlink{namespacerah_abf321dffb33d6a2d752aa091fdba7bbf}{equal}}(range, \mbox{\hyperlink{namespacerah_1_1view_a215e11ea5b9b06b56a794410e4285976}{rah::view::ints}}(15, 42)));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}\label{namespacerah_1_1view_a9851b1ee90ae15252fb248417e084f69}} 
@@ -482,7 +599,7 @@ auto rah\+::view\+::ints (\begin{DoxyParamCaption}\item[{T}]{b = {\ttfamily 0}, 
 
 Generate a range of monotonically increasing ints. 
 
-When used without arguments, it generates the quasi-\/infinite range \mbox{[}0,1,2,3...\mbox{]}. It can also be called with a lower bound, or with a lower and upper bound (exclusive).
+When used without arguments, it generates the quasi-\/infinite range \mbox{[}0,1,2,3...\mbox{]}. It can also be called with a lower bound, or with a lower and upper bound (exclusive). \mbox{[}lower, uppder\mbox{[}
 
 
 \begin{DoxyCodeInclude}{0}
@@ -775,6 +892,62 @@ pipeable syntax
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i : vec | \mbox{\hyperlink{namespacerah_1_1view_a419374b95b3b9601655b0edf753963c3}{rah::view::slice}}(2, 6))}
 \DoxyCodeLine{            result.push\_back(i);}
 \DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(result == std::vector<int>(\{ 2, 3, 4, 5 \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_ad72c07068dabce4709cc2cc4af992ce7}\label{namespacerah_1_1view_ad72c07068dabce4709cc2cc4af992ce7}} 
+\index{rah::view@{rah::view}!sliding@{sliding}}
+\index{sliding@{sliding}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{sliding()}{sliding()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename R $>$ \\
+rah\+::view\+::sliding (\begin{DoxyParamCaption}\item[{R \&\&}]{range,  }\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Given a range and a count n, place a window over the first n elements of the underlying range. 
+
+Return the contents of that window as the first element of the adapted range, then slide the window forward one element at a time until hitting the end of the underlying range.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{        std::vector<std::vector<int>> out;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} subRange : \mbox{\hyperlink{namespacerah_1_1view_ad72c07068dabce4709cc2cc4af992ce7}{rah::view::sliding}}(in, 3))}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            out.emplace\_back();}
+\DoxyCodeLine{            \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(subRange), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(subRange), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out.back()));}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<std::vector<int>>\{ }
+\DoxyCodeLine{            \{ 0, 1, 2 \}, }
+\DoxyCodeLine{            \{ 1, 2, 3 \}, }
+\DoxyCodeLine{            \{ 2, 3, 4 \}, }
+\DoxyCodeLine{            \{ 3, 4, 5 \} \}));}
+\end{DoxyCodeInclude}
+\mbox{\Hypertarget{namespacerah_1_1view_a4635f54615d1c4409c9455fd09f9853f}\label{namespacerah_1_1view_a4635f54615d1c4409c9455fd09f9853f}} 
+\index{rah::view@{rah::view}!sliding@{sliding}}
+\index{sliding@{sliding}!rah::view@{rah::view}}
+\subsubsection{\texorpdfstring{sliding()}{sliding()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily rah\+::view\+::sliding (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Given a range and a count n, place a window over the first n elements of the underlying range. 
+
+Return the contents of that window as the first element of the adapted range, then slide the window forward one element at a time until hitting the end of the underlying range. \begin{DoxyRemark}{Remarks}
+pipeable syntax
+\end{DoxyRemark}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{        std::vector<int> in\{ 0, 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{        std::vector<std::vector<int>> out;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} subRange : in | \mbox{\hyperlink{namespacerah_1_1view_ad72c07068dabce4709cc2cc4af992ce7}{rah::view::sliding}}(3))}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            out.emplace\_back();}
+\DoxyCodeLine{            \mbox{\hyperlink{namespacerah_a1d0f36ff683cedc9090956ea389b3312}{std::copy}}(\mbox{\hyperlink{namespacerah_acccec48f25fb1a805854818f05d7b616}{begin}}(subRange), \mbox{\hyperlink{namespacerah_a20a3e45aee90bb5534a00c6b14e06069}{end}}(subRange), \mbox{\hyperlink{namespacerah_a0698f952bc3c4f1961929bbddb5812fe}{std::back\_inserter}}(out.back()));}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        \mbox{\hyperlink{test_8cpp_a697b813778d7c62ced8c21c69291b30a}{assert}}(out == (std::vector<std::vector<int>>\{}
+\DoxyCodeLine{            \{ 0, 1, 2 \},}
+\DoxyCodeLine{            \{ 1, 2, 3 \},}
+\DoxyCodeLine{            \{ 2, 3, 4 \},}
+\DoxyCodeLine{            \{ 3, 4, 5 \} \}));}
 \end{DoxyCodeInclude}
 \mbox{\Hypertarget{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}\label{namespacerah_1_1view_a343ff36ca2b6470f2a55a89dfb4e3dc9}} 
 \index{rah::view@{rah::view}!sort@{sort}}
