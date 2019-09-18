@@ -155,6 +155,17 @@
 ///
 /// @snippet test.cpp drop_exactly_pipeable
 
+/// @fn rah::view::sliding(R&& range, size_t n)
+/// @brief Given a range and a count n, place a window over the first n elements of the underlying range. Return the contents of that window as the first element of the adapted range, then slide the window forward one element at a time until hitting the end of the underlying range. 
+///
+/// @snippet test.cpp sliding
+
+/// @fn rah::view::sliding(size_t n)
+/// @brief Given a range and a count n, place a window over the first n elements of the underlying range. Return the contents of that window as the first element of the adapted range, then slide the window forward one element at a time until hitting the end of the underlying range. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp sliding_pipeable
+
 /// @fn rah::view::counted(I&& it, size_t n, decltype(++it, 0) = 0)
 /// @brief Given an iterator @b it and a count @b n, create a range that starts at @b it and includes the next @b n elements. 
 ///

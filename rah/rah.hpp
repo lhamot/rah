@@ -456,6 +456,67 @@ inline auto take(size_t count)
 	return make_pipeable([=](auto&& range) {return take(range, count); });
 }
 
+// ******************************************* sliding ********************************************
+
+template<typename I>
+struct sliding_iterator : iterator_facade<
+	sliding_iterator<I>,
+	iterator_range<I>,
+	typename RAH_STD::iterator_traits<I>::iterator_category
+>
+{
+	// Actually store a closed range [begin, last] 
+	//   to avoid to exceed the end iterator of the underlying range
+	I subRangeBegin_;
+	I subRangeLast_;
+
+	sliding_iterator() = default;
+	sliding_iterator(I subRangeBegin, I subRangeLast) 
+		: subRangeBegin_(subRangeBegin)
+		, subRangeLast_(subRangeLast)
+	{
+	}
+
+	void increment() { ++subRangeBegin_; ++subRangeLast_; }
+	void advance(intptr_t off) { subRangeBegin_ += off; subRangeLast_ += off; }
+	void decrement() { --subRangeBegin_; --subRangeLast_; }
+	auto distance_to(sliding_iterator const& r) const { return subRangeBegin_ - r.subRangeBegin_; }
+	auto dereference() const 
+	{ 
+		I endIter = subRangeLast_;
+		++endIter;
+		return make_iterator_range(subRangeBegin_, endIter);
+	}
+	bool equal(sliding_iterator const& r) const { return subRangeBegin_ == r.subRangeBegin_; }
+};
+
+template<typename R> auto sliding(R&& range, size_t n)
+{
+	size_t const closedSubRangeSize = n - 1;
+	auto const rangeEnd = end(range);
+	using iterator = sliding_iterator<range_begin_type_t<R>>;
+	auto subRangeBegin = begin(range);
+	auto subRangeLast = subRangeBegin;
+	for (size_t i = 0; i != closedSubRangeSize; ++i)
+	{
+		if (subRangeLast == rangeEnd)
+			return make_iterator_range(iterator(rangeEnd, rangeEnd), iterator(rangeEnd, rangeEnd));
+		++subRangeLast;
+	}
+
+	auto endSubRangeBegin = rangeEnd;
+	RAH_STD::advance(endSubRangeBegin, -intptr_t(n - 1));
+
+	iterator iter1(subRangeBegin, subRangeLast);
+	iterator iter2(endSubRangeBegin, rangeEnd);
+	return make_iterator_range(iter1, iter2);
+}
+
+inline auto sliding(size_t n)
+{
+	return make_pipeable([=](auto&& range) {return sliding(range, n); });
+}
+
 // ******************************************* drop_exactly ***************************************
 
 template<typename R> auto drop_exactly(R&& range, size_t count)

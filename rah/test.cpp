@@ -408,6 +408,20 @@ int main()
 	}
 
 	{
+		/// [take_pipeable]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = in | rah::view::take(5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+		auto range2 = in | rah::view::take(1000);
+		std::vector<int> out2;
+		std::copy(begin(range2), end(range2), std::back_inserter(out2));
+		assert(out2 == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+		/// [take_pipeable]
+	}
+
+	{
 		/// [drop]
 		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		auto range = rah::view::drop(in, 6);
@@ -456,17 +470,81 @@ int main()
 	}
 
 	{
-		/// [take_pipeable]
-		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		auto range = in | rah::view::take(5);
-		std::vector<int> out;
-		std::copy(begin(range), end(range), std::back_inserter(out));
-		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
-		auto range2 = in | rah::view::take(1000);
-		std::vector<int> out2;
-		std::copy(begin(range2), end(range2), std::back_inserter(out2));
-		assert(out2 == std::vector<int>({ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
-		/// [take_pipeable]
+		/// [sliding]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange : rah::view::sliding(in, 3))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{ 
+			{ 0, 1, 2 }, 
+			{ 1, 2, 3 }, 
+			{ 2, 3, 4 }, 
+			{ 3, 4, 5 } }));
+		/// [sliding]
+	}
+
+	{
+		/// [sliding_pipeable]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange : in | rah::view::sliding(3))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{
+			{ 0, 1, 2 },
+			{ 1, 2, 3 },
+			{ 2, 3, 4 },
+			{ 3, 4, 5 } }));
+		/// [sliding_pipeable]
+	}
+
+	{
+		std::vector<int> in{ 0, 1, 2, 3 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange : rah::view::sliding(in, 4))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{ {0, 1, 2, 3}}));
+	}
+
+	{
+		std::vector<int> in{ 0, 1 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange : rah::view::sliding(in, 4))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{}));
+	}
+
+	{
+		std::vector<int> in{ 0, 1, 2, 3 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange : rah::view::sliding(in, 0))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{}));
+	}
+
+	{
+		std::vector<int> in{ 0, 1, 2, 3 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange : in | rah::view::sliding(1))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{ {0}, { 1 }, { 2 }, { 3 }, }));
 	}
 
 	{
