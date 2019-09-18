@@ -456,6 +456,41 @@ inline auto take(size_t count)
 	return make_pipeable([=](auto&& range) {return take(range, count); });
 }
 
+// ******************************************* drop_exactly ***************************************
+
+template<typename R> auto drop_exactly(R&& range, size_t count)
+{
+	auto iter1 = begin(range);
+	auto iter2 = end(range);
+	RAH_STD::advance(iter1, count);
+	return make_iterator_range(iter1, iter2);
+}
+
+inline auto drop_exactly(size_t count)
+{
+	return make_pipeable([=](auto&& range) {return drop_exactly(range, count); });
+}
+
+// ******************************************* drop ***********************************************
+
+template<typename R> auto drop(R&& range, size_t count)
+{
+	auto iter1 = begin(range);
+	auto iter2 = end(range);
+	for(size_t i = 0; i < count; ++i)
+	{
+		if (iter1 == iter2)
+			break;
+		++iter1;
+	}
+	return make_iterator_range(iter1, iter2);
+}
+
+inline auto drop(size_t count)
+{
+	return make_pipeable([=](auto&& range) {return drop(range, count); });
+}
+
 // ******************************************* counted ********************************************
 
 template<typename I>

@@ -408,6 +408,54 @@ int main()
 	}
 
 	{
+		/// [drop]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::drop(in, 6);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 6, 7, 8, 9 }));
+		/// [drop]
+	}
+
+	{
+		/// [drop_pipeable]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = in | rah::view::drop(6);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 6, 7, 8, 9 }));
+		/// [drop_pipeable]
+	}
+
+	{
+		std::vector<int> in{ 0, 1, 2 };
+		auto range = rah::view::drop(in, 6);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out.empty());
+	}
+
+	{
+		/// [drop_exactly]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::drop_exactly(in, 6);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 6, 7, 8, 9 }));
+		/// [drop_exactly]
+	}
+
+	{
+		/// [drop_exactly_pipeable]
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = in | rah::view::drop_exactly(6);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 6, 7, 8, 9 }));
+		/// [drop_exactly_pipeable]
+	}
+
+	{
 		/// [take_pipeable]
 		std::vector<int> in{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		auto range = in | rah::view::take(5);

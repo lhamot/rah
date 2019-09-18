@@ -133,6 +133,28 @@
 ///
 /// @snippet test.cpp take_pipeable
 
+/// @fn rah::view::drop(R&& range, size_t count)
+/// @brief Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. 
+///
+/// @snippet test.cpp drop
+
+/// @fn rah::view::drop(size_t count)
+/// @brief Given a source range and an integral count, return a range consisting of all but the first count elements from the source range, or an empty range if it has fewer elements. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp drop_pipeable
+
+/// @fn rah::view::drop_exactly(R&& range, size_t count)
+/// @brief Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. The source range must have at least that many elements. 
+///
+/// @snippet test.cpp drop_exactly
+
+/// @fn rah::view::drop_exactly(size_t count)
+/// @brief Given a source range and an integral count, return a range consisting of all but the first count elements from the source range. The source range must have at least that many elements. 
+/// @remark pipeable syntax
+///
+/// @snippet test.cpp drop_exactly_pipeable
+
 /// @fn rah::view::counted(I&& it, size_t n, decltype(++it, 0) = 0)
 /// @brief Given an iterator @b it and a count @b n, create a range that starts at @b it and includes the next @b n elements. 
 ///
