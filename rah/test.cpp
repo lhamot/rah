@@ -844,13 +844,19 @@ int main()
 		assert(result == (std::vector<double>{ 1.5, 2.5, 3.5, 4.5 }));
 		/// [map_value]
 	}
+
 	{
-		std::map<int, double> input{ { 1, 1.5 },{ 2, 2.5 },{ 3, 3.5 },{ 4, 4.5 } };
-		std::vector<double> result;
-		for (double& value : rah::view::map_value(input))
-			value += 0.25f;
-		assert(input == (std::map<int, double>({ { 1, 1.75 },{ 2, 2.75 },{ 3, 3.75 },{ 4, 4.75 } })));
+
+		bool bools[] = { false, true, true, false, false, true };
+		auto range = bools
+			| rah::view::enumerate()
+			| rah::view::filter([](auto&& index_bool) {return std::get<1>(index_bool); })
+			| rah::view::map_key();
+		std::vector<size_t> ref;
+		std::copy(begin(range), end(range), std::back_inserter(ref));
+		assert(ref == (std::vector<size_t>{1, 2, 5}));
 	}
+
 	{
 		/// [map_value_pipeable]
 		std::map<int, double> input{ {1, 1.5}, { 2, 2.5 }, { 3, 3.5 }, { 4, 4.5 } };
