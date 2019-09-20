@@ -1422,12 +1422,19 @@ inline auto enumerate()
 
 // ****************************** map_value ********************************************************
 
+template<size_t I>
+struct get_tuple_elt
+{
+	template<typename T>
+	auto operator()(T&& nvp) const -> RAH_STD::tuple_element_t<I, typename RAH_STD::remove_reference_t<decltype(nvp)>>
+	{
+		return RAH_STD::get<I>(nvp);
+	}
+};
+
 template<typename R> auto map_value(R&& range)
 {
-	return transform(RAH_STD::forward<R>(range), [](auto&& nvp) -> RAH_STD::tuple_element_t<1, typename RAH_STD::remove_reference_t<decltype(nvp)>>
-	{
-		return RAH_STD::get<1>(nvp); 
-	});
+	return transform(RAH_STD::forward<R>(range), get_tuple_elt<1>{});
 }
 
 inline auto map_value()
@@ -1439,10 +1446,7 @@ inline auto map_value()
 
 template<typename R> auto map_key(R&& range)
 {
-	return RAH_NAMESPACE::view::transform(RAH_STD::forward<R>(range), [](auto&& nvp) -> RAH_STD::tuple_element_t<0, typename RAH_STD::remove_reference_t<decltype(nvp)>>
-	{
-		return RAH_STD::get<0>(nvp); 
-	});
+	return RAH_NAMESPACE::view::transform(RAH_STD::forward<R>(range), get_tuple_elt<0>{});
 }
 
 inline auto map_key()
