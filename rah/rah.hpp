@@ -1426,9 +1426,12 @@ template<size_t I>
 struct get_tuple_elt
 {
 	template<typename T>
-	auto operator()(T&& nvp) const -> RAH_STD::tuple_element_t<I, typename RAH_STD::remove_reference_t<decltype(nvp)>>
+	auto operator()(T&& nvp) const -> decltype(RAH_STD::get<I>(RAH_STD::forward<decltype(nvp)>(nvp)))
 	{
-		return RAH_STD::get<I>(nvp);
+		static_assert(not RAH_STD::is_rvalue_reference<decltype(nvp)>::value, 
+			"map_value/map_key only apply only apply on lvalue pairs. "
+			"Pairs from map are ok but for generated pairs, prefer use view::tranform");
+		return RAH_STD::get<I>(RAH_STD::forward<decltype(nvp)>(nvp));
 	}
 };
 

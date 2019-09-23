@@ -845,8 +845,8 @@ int main()
 		/// [map_value]
 	}
 
-	{
-
+	/*{
+		// This can't work since enumerate return an rvalue pairs since map_key want an lvalue
 		bool bools[] = { false, true, true, false, false, true };
 		auto range = bools
 			| rah::view::enumerate()
@@ -855,7 +855,7 @@ int main()
 		std::vector<size_t> ref;
 		std::copy(begin(range), end(range), std::back_inserter(ref));
 		assert(ref == (std::vector<size_t>{1, 2, 5}));
-	}
+	}*/
 
 	{
 		/// [map_value_pipeable]
