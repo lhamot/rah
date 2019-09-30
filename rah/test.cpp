@@ -1817,6 +1817,12 @@ int main()
 		/// [rah::view::sort]
 	}
 	{
+		std::vector<int> in{ 2, 1, 5, 3, 4 };
+		auto&& result = in | rah::view::transform([](int& i) ->const int& {return i; }) | rah::view::sort() | rah::to_container<std::vector<int>>();
+		assert(in == std::vector<int>({ 2, 1, 5, 3, 4 }));
+		assert(result == std::vector<int>({ 1, 2, 3, 4, 5 }));
+	}
+	{
 		/// [rah::view::sort_pipeable]
 		std::vector<int> in{ 2, 1, 5, 3, 4 };
 		auto&& result = in | rah::view::sort();

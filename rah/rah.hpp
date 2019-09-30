@@ -1469,7 +1469,7 @@ template<typename R, typename P = is_lesser, typename = RAH_STD::enable_if_t<is_
 auto sort(R&& range, P&& pred = {})
 {
 	using value_type = range_value_type_t<R>;
-	using Container = typename RAH_STD::vector<value_type>;
+	using Container = typename RAH_STD::vector<RAH_STD::remove_cv_t<value_type>>;
 	Container result;
 	result.reserve(RAH_STD::distance(begin(range), end(range)));
 	RAH_STD::copy(begin(range), end(range), RAH_STD::back_inserter(result));
