@@ -843,13 +843,15 @@ struct cycle_iterator : iterator_facade<
 	Iterator beginIter_;
 	Iterator endIter_;
 	Iterator iter_;
+	int64_t cycleIndex_;
 
 	template<typename U>
-	explicit cycle_iterator(U&& range, Iterator iter)
+	explicit cycle_iterator(U&& range, Iterator iter, int64_t cycleIndex)
 		: range_(RAH_STD::forward<U>(range))
 		, beginIter_(begin(range_))
 		, endIter_(end(range_))
 		, iter_(iter)
+		, cycleIndex_(cycleIndex)
 	{
 	}
 
@@ -857,18 +859,24 @@ struct cycle_iterator : iterator_facade<
 	{
 		++iter_;
 		while (iter_ == endIter_)
+		{
 			iter_ = begin(range_);
+			++cycleIndex_;
+		}
 	}
 	void decrement()
 	{
 		while (iter_ == beginIter_)
+		{
 			iter_ = end(range_);
+			--cycleIndex_;
+		}
 		--iter_;
 	}
 	auto dereference() const ->decltype(*iter_) { return *iter_; }
-	bool equal(cycle_iterator) const
+	bool equal(cycle_iterator other) const
 	{
-			return false;
+		return cycleIndex_ == other.cycleIndex_ and iter_ == other.iter_;
 	}
 };
 
@@ -877,9 +885,9 @@ template<typename R> auto cycle(R&& range)
 	auto rangeRef = range | RAH_NAMESPACE::view::all();
 	using iterator_type = cycle_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>>;
 
-	iterator_type b(rangeRef, begin(rangeRef));
-	iterator_type e(rangeRef, begin(rangeRef));
-	return make_iterator_range(b, e);
+	iterator_type beginIter(rangeRef, begin(rangeRef), 0);
+	iterator_type endIter(rangeRef, end(rangeRef), -1);
+	return make_iterator_range(beginIter, endIter);
 }
 
 inline auto cycle()

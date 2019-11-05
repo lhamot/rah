@@ -499,8 +499,9 @@ int main()
 		for (auto subRange :
 			in 
 			| rah::view::cycle()
-			| rah::view::take(in.size() + 2)
-			| rah::view::sliding(3))
+			| rah::view::sliding(3)
+			| rah::view::take(in.size())
+			)
 		{
 			out.emplace_back();
 			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
