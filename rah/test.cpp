@@ -366,6 +366,14 @@ int main()
 	}
 
 	{
+		std::vector<int> in{ 0, 1, 2 };
+		auto cy = rah::view::cycle(in) | rah::view::retro();
+		std::vector<int> out;
+		std::copy_n(begin(cy), 8, std::back_inserter(out));
+		assert(out == std::vector<int>({ 2, 1, 0, 2, 1, 0, 2, 1 }));
+	}
+
+	{
 		/// [cycle_pipeable]
 		std::vector<int> in{ 0, 1, 2 };
 		auto cy = in | rah::view::cycle();
@@ -484,6 +492,27 @@ int main()
 			{ 2, 3, 4 }, 
 			{ 3, 4, 5 } }));
 		/// [sliding]
+	}
+	{
+		std::vector<int> in{ 0, 1, 2, 3, 4, 5 };
+		std::vector<std::vector<int>> out;
+		for (auto subRange :
+			in 
+			| rah::view::cycle()
+			| rah::view::take(in.size() + 2)
+			| rah::view::sliding(3))
+		{
+			out.emplace_back();
+			std::copy(begin(subRange), end(subRange), std::back_inserter(out.back()));
+		}
+		assert(out == (std::vector<std::vector<int>>{
+			{ 0, 1, 2 },
+			{ 1, 2, 3 },
+			{ 2, 3, 4 },
+			{ 3, 4, 5 },
+			{ 4, 5, 0 },
+			{ 5, 0, 1 },
+		}));
 	}
 
 	{

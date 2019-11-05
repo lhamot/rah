@@ -74,6 +74,14 @@ struct is_range { static constexpr bool value = false; };
 template<typename R>
 struct is_range <R, decltype(begin(fake<R>()), end(fake<R>()), 0)> { static constexpr bool value = true; };
 
+RAH_STD::output_iterator_tag get_common_iterator_tag(RAH_STD::output_iterator_tag, RAH_STD::output_iterator_tag);
+RAH_STD::forward_iterator_tag get_common_iterator_tag(RAH_STD::forward_iterator_tag, RAH_STD::forward_iterator_tag);
+RAH_STD::bidirectional_iterator_tag get_common_iterator_tag(RAH_STD::bidirectional_iterator_tag, RAH_STD::bidirectional_iterator_tag);
+RAH_STD::random_access_iterator_tag get_common_iterator_tag(RAH_STD::random_access_iterator_tag, RAH_STD::random_access_iterator_tag);
+
+template<typename A, typename B>
+using common_iterator_tag = decltype(get_common_iterator_tag(A{}, B{}));
+
 // ******************************** iterator_range ************************************************
 
 template<typename I>
@@ -825,7 +833,10 @@ inline auto join()
 // ********************************** cycle ********************************************************
 
 template<typename R>
-struct cycle_iterator : iterator_facade<cycle_iterator<R>, range_ref_type_t<R>, RAH_STD::forward_iterator_tag>
+struct cycle_iterator : iterator_facade<
+	cycle_iterator<R>, 
+	range_ref_type_t<R>, 
+	common_iterator_tag<RAH_STD::bidirectional_iterator_tag, range_iter_categ_t<R>>>
 {
 	R range_;
 	using Iterator = range_begin_type_t<R>;
@@ -847,6 +858,12 @@ struct cycle_iterator : iterator_facade<cycle_iterator<R>, range_ref_type_t<R>, 
 		++iter_;
 		while (iter_ == endIter_)
 			iter_ = begin(range_);
+	}
+	void decrement()
+	{
+		while (iter_ == beginIter_)
+			iter_ = end(range_);
+		--iter_;
 	}
 	auto dereference() const ->decltype(*iter_) { return *iter_; }
 	bool equal(cycle_iterator) const
