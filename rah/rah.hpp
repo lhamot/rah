@@ -1341,20 +1341,20 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	bool equal(filter_iterator other) const { return iter_ == other.iter_; }
 };
 
-template<typename R, typename F> auto filter(R&& range, F&& func)
+template<typename R, typename P> auto filter(R&& range, P&& pred)
 {
 	auto iter = begin(range);
 	auto endIter = end(range);
-	using Predicate = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>;
+	using Predicate = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<P>>;
 	return iterator_range<filter_iterator<RAH_STD::remove_reference_t<R>, Predicate>>{
-		{ iter, iter, endIter, func },
-		{ iter, endIter, endIter, func }
+		{ iter, iter, endIter, pred },
+		{ iter, endIter, endIter, pred }
 	};
 }
 
-template<typename F> auto filter(F&& func)
+template<typename P> auto filter(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return filter(range, func); });
+	return make_pipeable([=](auto&& range) {return filter(range, pred); });
 }
 
 // ***************************************** concat ***********************************************
