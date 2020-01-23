@@ -1116,15 +1116,28 @@ inline auto stride(size_t step)
 
 // ***************************************** retro ************************************************
 
-template<typename R> auto retro(R&& range)
+template<typename R> [[deprecated]] auto retro(R&& range)
 {
 	return make_iterator_range(
 		RAH_STD::make_reverse_iterator(end(range)), RAH_STD::make_reverse_iterator(begin(range)));
 }
 
-inline auto retro()
+[[deprecated]] inline auto retro()
 {
 	return make_pipeable([=](auto&& range) {return retro(range); });
+}
+
+// ***************************************** reverse **********************************************
+
+template<typename R> auto reverse(R&& range)
+{
+	return make_iterator_range(
+		RAH_STD::make_reverse_iterator(end(range)), RAH_STD::make_reverse_iterator(begin(range)));
+}
+
+inline auto reverse()
+{
+	return make_pipeable([=](auto&& range) {return reverse(range); });
 }
 
 // ********************************** single ******************************************************

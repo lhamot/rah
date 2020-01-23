@@ -204,12 +204,12 @@
 ///
 /// @snippet test.cpp stride_pipeable
 
-/// @fn rah::view::retro(R&& range)
+/// @fn rah::view::reverse(R&& range)
 /// @brief Create a view that traverses the source range in reverse order
 ///
-/// @snippet test.cpp retro
+/// @snippet test.cpp reverse
 
-/// @fn rah::view::retro()
+/// @fn rah::view::reverse()
 /// @brief Create a view that traverses the source range in reverse order
 /// @remark pipeable syntax
 ///
@@ -355,7 +355,7 @@
  * - Then you have to create a function taking a range and parameters (or no range for generator)
  *
 * @code{.cpp}
-template<typename R> auto retro(R&& range)
+template<typename R> auto reverse(R&& range)
 {
 	return make_iterator_range(
 		std::make_reverse_iterator(end(range)), std::make_reverse_iterator(begin(range)));
@@ -364,9 +364,9 @@ template<typename R> auto retro(R&& range)
  * - Then you can add a pipeable version of the function
  *
  * @code{.cpp}
-auto retro()
+auto reverse()
 {
-	return make_pipeable([=](auto&& range) {return retro(range); });
+	return make_pipeable([=](auto&& range) {return reverse(range); });
 }
  * @endcode
  *

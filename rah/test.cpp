@@ -367,7 +367,7 @@ int main()
 
 	{
 		std::vector<int> in{ 0, 1, 2 };
-		auto cy = rah::view::cycle(in) | rah::view::retro();
+		auto cy = rah::view::cycle(in) | rah::view::reverse();
 		std::vector<int> out;
 		std::copy_n(begin(cy), 8, std::back_inserter(out));
 		assert(out == std::vector<int>({ 2, 1, 0, 2, 1, 0, 2, 1 }));
@@ -697,22 +697,22 @@ int main()
 	}
 
 	{
-		/// [retro]
+		/// [reverse]
 		std::vector<int> vec{ 0, 1, 2, 3 };
 		std::vector<int> result;
-		for (int i : rah::view::retro(vec))
+		for (int i : rah::view::reverse(vec))
 			result.push_back(i);
 		assert(result == std::vector<int>({ 3, 2, 1, 0 }));
-		/// [retro]
+		/// [reverse]
 	}
 	{
-		/// [retro_pipeable]
+		/// [reverse_pipeable]
 		std::vector<int> vec{ 0, 1, 2, 3 };
 		std::vector<int> result;
-		for (int i : vec | rah::view::retro())
+		for (int i : vec | rah::view::reverse())
 			result.push_back(i);
 		assert(result == std::vector<int>({ 3, 2, 1, 0 }));
-		/// [retro_pipeable]
+		/// [reverse_pipeable]
 	}
 
 	{
@@ -2018,17 +2018,17 @@ int main()
 	);
 
 	EQUAL_RANGE(
-		(iota(10, 15) | retro()),
+		(iota(10, 15) | reverse()),
 		(il<int>{14, 13, 12, 11, 10})
 	);
 
 	EQUAL_RANGE(
-		(iota(0, 100) | slice(10, 15) | retro()),
+		(iota(0, 100) | slice(10, 15) | reverse()),
 		(il<int>{14, 13, 12, 11, 10})
 	);
 
 	EQUAL_RANGE(
-		(iota(10, 15) | enumerate() | retro()),
+		(iota(10, 15) | enumerate() | reverse()),
 		(il<std::tuple<size_t, int>>{ {4, 14}, { 3, 13 }, { 2, 12 }, { 1, 11 }, { 0, 10 }})
 	);
 
@@ -2038,7 +2038,7 @@ int main()
 	);
 
 	EQUAL_RANGE(
-		(iota(0, 100) | enumerate() | slice(10, 15) | retro()),
+		(iota(0, 100) | enumerate() | slice(10, 15) | reverse()),
 		(il<std::tuple<size_t, int>>{ {14, 14}, { 13, 13 }, { 12, 12 }, { 11, 11 }, { 10, 10 } })
 	);
 
