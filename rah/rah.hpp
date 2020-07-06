@@ -21,6 +21,7 @@
 #include <numeric>
 #include <vector>
 #include <array>
+#include <memory>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -203,12 +204,14 @@ template<typename T> struct optional
 	}
 	optional& operator=(T const& other)
 	{
+		reset();
 		new(getPtr()) T(other);
 		is_allocated_ = true;
 		return *this;
 	}
 	optional& operator=(T&& other)
 	{
+		reset();
 		new(getPtr()) T(RAH_STD::move(other));
 		is_allocated_ = true;
 		return *this;
@@ -405,6 +408,32 @@ template<typename C> auto back_inserter(C&& container)
 	auto end = back_insert_iterator<Container>(container);
 	return RAH_NAMESPACE::make_iterator_range(begin, end);
 }
+
+// ********************************** inserter ***********************************************
+
+/// @see rah::back_inserter
+template<typename C>
+struct insert_iterator : iterator_facade<insert_iterator<C>, range_ref_type_t<C>, RAH_STD::output_iterator_tag>
+{
+	C* container_;
+	using Iterator = RAH_NAMESPACE::range_begin_type_t<C>;
+	Iterator iter_;
+	template<typename I>
+	insert_iterator(C& container, I&& iter) : container_(&container), iter_(std::forward<I>(iter)){ }
+	template<typename V> void put(V&& value) const { container_->insert(iter_, value); }
+};
+
+/// @brief Make a range which insert into the back of the a container
+///
+/// @snippet test.cpp rah::back_inserter
+template<typename C, typename I> auto inserter(C&& container, I&& iter)
+{
+	using Container = RAH_STD::remove_reference_t<C>;
+	auto begin = insert_iterator<Container>(container, std::forward<I>(iter));
+	auto end = insert_iterator<Container>(container, std::forward<I>(iter));
+	return RAH_NAMESPACE::make_iterator_range(begin, end);
+}
+
 
 /// Apply the '<' operator on two values of any type
 struct is_lesser
@@ -746,20 +775,37 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 {
 	R range_;
 	using Iterator1 = range_begin_type_t<R>;
+	using SubRangeType = RAH_STD::remove_reference_t<decltype(*fake<Iterator1>())>;
 	using Iterator2 = range_begin_type_t<decltype(*fake<Iterator1>())>;
 	Iterator1 rangeIter_;
 	struct SubRange
 	{
+		RAH_STD::shared_ptr<SubRangeType> subRangeShared;
 		Iterator2 subRangeIter;
 		Iterator2 subRangeEnd;
+
+		template<typename SR>
+		SubRange(SR&& sr)
+			: subRangeShared(RAH_STD::make_shared<SubRangeType>(RAH_STD::move(sr)))
+			, subRangeIter(begin(*subRangeShared))
+			, subRangeEnd(end(*subRangeShared))
+		{
+		}
+
+		template<typename SR>
+		SubRange(SR& sr)
+			: subRangeIter(begin(sr))
+			, subRangeEnd(end(sr))
+		{
+		}
 	};
 	RAH_NAMESPACE::details::optional<SubRange> subRange_;
 
-	template<typename U>
-	join_iterator(U&& range, Iterator1 rangeIter, Iterator2 subRangeIter, Iterator2 subRangeEnd)
+	template<typename U, typename SR>
+	join_iterator(U&& range, Iterator1 rangeIter, SR&& subRange)
 		: range_(RAH_STD::forward<U>(range))
 		, rangeIter_(rangeIter)
-		, subRange_(SubRange{ subRangeIter, subRangeEnd })
+		, subRange_(SubRange(RAH_STD::forward<SR>(subRange)))
 	{
 		if (rangeIter_ == end(range_))
 			return;
@@ -782,9 +828,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 				return;
 			else
 			{
-				auto&& subRange = *rangeIter_;
-				subRange_->subRangeIter = begin(subRange);
-				subRange_->subRangeEnd = end(subRange);
+				subRange_ = SubRange( *rangeIter_ );
 			}
 		}
 	}
@@ -819,7 +863,10 @@ template<typename R> auto join(R&& range_of_ranges)
 	else
 	{
 		auto&& firstSubRange = *rangeBegin;
-		join_iterator_type b(rangeRef, rangeBegin, begin(firstSubRange), end(firstSubRange));
+		join_iterator_type b(
+			rangeRef, 
+			rangeBegin, 
+			std::forward<decltype(firstSubRange)>(firstSubRange));
 		join_iterator_type e(rangeRef, rangeEnd);
 		return make_iterator_range(b, e);
 	}
@@ -933,6 +980,7 @@ struct transform_iterator : iterator_facade<
 	range_begin_type_t<R> iter_;
 	RAH_NAMESPACE::details::optional<F> func_;
 
+	transform_iterator() = default;
 	transform_iterator(range_begin_type_t<R> const& iter, F const& func) : iter_(iter), func_(func) {}
 
 	transform_iterator& operator=(transform_iterator const& ot)
@@ -1116,12 +1164,14 @@ inline auto stride(size_t step)
 
 // ***************************************** retro ************************************************
 
+// Use reverse instead of retro
 template<typename R> [[deprecated]] auto retro(R&& range)
 {
 	return make_iterator_range(
 		RAH_STD::make_reverse_iterator(end(range)), RAH_STD::make_reverse_iterator(begin(range)));
 }
 
+// Use reverse instead of retro
 [[deprecated]] inline auto retro()
 {
 	return make_pipeable([=](auto&& range) {return retro(range); });
@@ -2266,7 +2316,7 @@ auto unique(R&& range, P&& pred = {})
 	return RAH_STD::unique(begin(range), end(range), pred);
 }
 
-/// @brief Remove all but first successuve values which are equals. Without resizing the range.
+/// @brief Remove all but first successive values which are equals. Without resizing the range.
 /// @return The end part of the range, which have to be remove.
 /// @remark pipeable syntax
 ///

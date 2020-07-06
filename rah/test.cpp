@@ -18,6 +18,7 @@
 #include <sstream>
 #include <random>
 #include <atomic>
+#include <set>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -104,6 +105,27 @@ bool is_odd(int val)
 
 template<typename T>
 struct WhatIs;
+
+// Test creation of a custom iterator
+struct CustomGenerator : rah::iterator_facade<CustomGenerator, int, RAH_STD::forward_iterator_tag>
+{
+	int y = 1;
+
+	void increment()
+	{
+		y *= 2;
+	}
+	auto dereference() const
+	{
+		return y;
+	}
+	bool equal(CustomGenerator) const { return y > 10; }
+};
+
+auto customGenerate()
+{
+	return rah::iterator_range<CustomGenerator>{};
+}
 
 int main()
 {
@@ -207,6 +229,15 @@ int main()
 		std::copy(begin(range), end(range), std::back_inserter(result));
 		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
 		/// [join]
+	}
+	{
+		// Test join on a range of rvalue
+		auto range = rah::view::iota(0, 6) 
+			| rah::view::transform([](int i) {return std::vector<int>(1, i); })
+			| rah::view::join();
+		std::vector<int> result;
+		std::copy(begin(range), end(range), std::back_inserter(result));
+		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
 	}
 
 	{
@@ -606,6 +637,14 @@ int main()
 	}
 
 	{
+		int in[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		auto range = rah::view::unbounded((int const*const)std::begin(in)) | rah::view::slice(0, 5);
+		std::vector<int> out;
+		std::copy(begin(range), end(range), std::back_inserter(out));
+		assert(out == std::vector<int>({ 0, 1, 2, 3, 4 }));
+	}
+
+	{
 		/// [counted_pipeable]
 		std::vector<int> in{ 0, 1, 2, 3, 4, 5 };
 		auto range = in | rah::view::counted(9);
@@ -643,6 +682,17 @@ int main()
 			result.push_back(i);
 		assert(result == std::vector<int>({ 0, 2, 4, 6 }));
 		/// [rah::view::transform]
+	}
+	{
+		std::vector<int> vec{ 0, 1, 2, 3 };
+		std::vector<int> result;
+		auto valueSelector = [](auto a) {return a * 2; };
+		auto selectedValuesRange = rah::view::transform(vec, valueSelector);
+		auto bounds = std::minmax_element(begin(selectedValuesRange), end(selectedValuesRange));
+		auto min = *bounds.first;
+		assert(min == 0);
+		auto max = *bounds.second;
+		assert(max == 6); // 3 * 2
 	}
 	{
 		/// [rah::view::transform_pipeable]
@@ -790,6 +840,29 @@ int main()
 		for (int i : rah::view::filter(vec_01234, [](auto a) {return a % 2 == 0; }))
 			result.push_back(i);
 		assert(result == std::vector<int>({ 0, 2, 4 }));
+	}
+	{
+		std::vector<std::vector<int>> vec_01234 =
+		{
+			{0},
+			{1},
+			{2},
+			{3},
+			{4},
+		};
+		std::vector<bool> vec_bool =
+		{
+			true,
+			true,
+			true,
+			true,
+			true,
+		};
+		std::vector<std::vector<int>> result;
+		for (auto&& i : rah::view::zip(vec_01234, vec_bool) | rah::view::filter([](auto&& a) {return std::get<0>(a).front() % 2 == 0; }))
+			result.push_back(std::get<0>(i));
+		assert(result == (std::vector<std::vector<int>>{ { 0 }, { 2 }, { 4 } }));
+		assert(vec_01234 == (std::vector<std::vector<int>>{ { 0 }, { 1 }, { 2 }, { 3 }, { 4 }}));
 	}
 	{
 		/// [filter_pipeable]
@@ -1485,6 +1558,13 @@ int main()
 		assert(out == (std::vector<int>{ 1, 2, 3 }));
 	}
 	{
+		// Test rah::inserter
+		std::vector<int> in{ 1, 3, 5 };
+		std::set<int> out{ 2, 4 };
+		in | rah::copy(rah::inserter(out, end(out)));
+		assert(out == (std::set<int>{ 1, 2, 3, 4, 5 }));
+	}
+	{
 		/// [rah::stream_inserter]
 		std::string in("Test");
 		std::stringstream out;
@@ -2054,6 +2134,14 @@ int main()
 		// 	(rah::view::generate_n(4, [&y]() mutable { auto prev = y; y *= 2; return prev; }) | slice(1, End - 1)),
 		// 	(il<int>{ 2, 4 })
 		// );
+	}
+
+	{
+		// Test creation of a custom iterator
+		auto gen = customGenerate();
+		std::vector<int> gen_copy;
+		std::copy(begin(gen), end(gen), std::back_inserter(gen_copy));
+		EQUAL_RANGE(gen_copy, std::vector<int>({ 1, 2, 4, 8 }));
 	}
 
 	{
