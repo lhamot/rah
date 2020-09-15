@@ -387,6 +387,28 @@ struct iterator_facade<I, R, RAH_STD::random_access_iterator_tag> : iterator_fac
 	auto operator[](intptr_t increment) const { return *(self() + increment); }
 };
 
+#ifdef RAH_DONT_USE_STD
+
+// If rah is binded to an other standard library, learn to use std iterators anyway.
+
+template<typename I, typename R>
+struct iterator_facade<I, R, std::forward_iterator_tag> :
+	iterator_facade<I, R, RAH_STD::forward_iterator_tag> {};
+
+template<typename I, typename R>
+struct iterator_facade<I, R, std::output_iterator_tag> :
+	iterator_facade<I, R, RAH_STD::output_iterator_tag> {};
+
+template<typename I, typename R>
+struct iterator_facade<I, R, std::bidirectional_iterator_tag> :
+	iterator_facade<I, R, RAH_STD::bidirectional_iterator_tag> {};
+
+template<typename I, typename R>
+struct iterator_facade<I, R, std::random_access_iterator_tag> :
+	iterator_facade<I, R, RAH_STD::random_access_iterator_tag> {};
+
+#endif
+
 // ********************************** back_inserter ***********************************************
 
 /// @see rah::back_inserter
