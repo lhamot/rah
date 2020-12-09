@@ -919,7 +919,29 @@ int main()
 		}
 		/// [concat]
 	}
-	{
+    {
+        std::vector<int> inputA{ };
+        std::vector<int> inputB{ 1, 2, 3, 4};
+        {
+            std::vector<int> result;
+            for (int i : rah::view::concat(inputA, inputB))
+                result.push_back(i);
+            assert(result == std::vector<int>({ 1, 2, 3, 4 }));
+        }
+        {
+            std::vector<int> result;
+            for (int i : rah::view::concat(inputA, inputB))
+                result.push_back(i);
+            assert(result == std::vector<int>({ 1, 2, 3, 4 }));
+        }
+        {
+            std::vector<int> result;
+            for (int i : rah::view::concat(inputA, inputA))
+                result.push_back(i);
+            assert(result == std::vector<int>({ }));
+        }
+    }
+    {
 		/// [enumerate]
 		std::vector<int> input{ 4, 5, 6, 7 };
 		std::vector<std::tuple<size_t, int>> result;

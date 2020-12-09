@@ -1454,6 +1454,11 @@ struct concat_iterator : iterator_facade<concat_iterator<IterPair, V>, V, RAH_ST
 	concat_iterator(IterPair const& iter, IterPair const& end, size_t range_index)
 		: iter_(iter), end_(end), range_index_(range_index)
 	{
+		if (range_index == 0)
+		{
+			if(RAH_STD::get<0>(iter_) == RAH_STD::get<0>(end_))
+				range_index_ = 1;
+		}
 	}
 
 	void increment()
