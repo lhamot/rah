@@ -51,18 +51,14 @@ template<class T, size_t N> T* begin(T(&array)[N]) { return (T*)array; }
 
 template<class T, size_t N> T* end(T(&array)[N]) noexcept { return array + N; }
 
-template<class T, size_t N> T* rah_begin(T(&array)[N]) { return (T*)array; }
-
-template<class T, size_t N> T* rah_end(T(&array)[N]) noexcept { return array + N; }
-
 template<typename Container, typename Check = int>
-struct has_inner_begin_end
+struct has_member_begin_end
 {
     static constexpr bool value = false;
 };
 
 template<typename Container>
-struct has_inner_begin_end<
+struct has_member_begin_end<
     Container, 
     decltype(
         std::declval<Container>().begin(),
@@ -73,19 +69,63 @@ struct has_inner_begin_end<
 };
 
 template< class T >
-constexpr bool has_inner_begin_end_v = has_inner_begin_end<T>::value;
+constexpr bool has_member_begin_end_v = has_member_begin_end<T>::value;
 
+template<typename Container, typename Check = int>
+struct has_free_begin_end
+{
+	static constexpr bool value = false;
+};
 
-template<class Container, std::enable_if_t<has_inner_begin_end_v<Container>, int> = 0> 
+template<typename Container>
+struct has_free_begin_end<
+	Container,
+	decltype(
+		begin(std::declval<Container>()),
+		end(std::declval<Container>()),
+		0)>
+{
+	static constexpr bool value = true;
+};
+
+template< class T >
+constexpr bool has_free_begin_end_v = has_free_begin_end<T>::value;
+
+template<class T, size_t N> T* rah_begin(T(&array)[N]) { return (T*)array; }
+
+template<class T, size_t N> T* rah_end(T(&array)[N]) noexcept { return array + N; }
+
+/// Call the member begin if it exists
+/// This avoid some ADL fail when using conteners with mixed namespaces
+template<class Container, std::enable_if_t<has_member_begin_end_v<Container>, int> = 0> 
 auto rah_begin(Container&& container)
 { 
     return container.begin(); 
 }
 
-template<class Container, std::enable_if_t<has_inner_begin_end_v<Container>, int> = 0> 
+/// Call the member end if it exists
+template<class Container, std::enable_if_t<has_member_begin_end_v<Container>, int> = 0> 
 auto rah_end(Container&& container)
 { 
     return container.end(); 
+}
+
+/// Call the free begin if there is no member begin
+template<
+	class Container, 
+	std::enable_if_t<has_free_begin_end_v<Container> and not has_member_begin_end_v<Container>, int> = 0>
+auto rah_begin(Container&& container)
+{
+	return begin(container);
+}
+
+/// Call the free end if there is no member end
+template<
+	class Container, 
+	std::enable_if_t<has_free_begin_end_v<Container> and not has_member_begin_end_v<Container>, int> = 0>
+auto rah_end(Container&& container)
+{
+	return end(container);
 }
 
 /// Used in decltype to get an instance of a type
