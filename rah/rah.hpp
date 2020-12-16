@@ -51,17 +51,54 @@ template<class T, size_t N> T* begin(T(&array)[N]) { return (T*)array; }
 
 template<class T, size_t N> T* end(T(&array)[N]) noexcept { return array + N; }
 
+template<class T, size_t N> T* rah_begin(T(&array)[N]) { return (T*)array; }
+
+template<class T, size_t N> T* rah_end(T(&array)[N]) noexcept { return array + N; }
+
+template<typename Container, typename Check = int>
+struct has_inner_begin_end
+{
+    static constexpr bool value = false;
+};
+
+template<typename Container>
+struct has_inner_begin_end<
+    Container, 
+    decltype(
+        std::declval<Container>().begin(),
+        std::declval<Container>().end(),
+        0)>
+{
+    static constexpr bool value = true;
+};
+
+template< class T >
+constexpr bool has_inner_begin_end_v = has_inner_begin_end<T>::value;
+
+
+template<class Container, std::enable_if_t<has_inner_begin_end_v<Container>, int> = 0> 
+auto rah_begin(Container&& container)
+{ 
+    return container.begin(); 
+}
+
+template<class Container, std::enable_if_t<has_inner_begin_end_v<Container>, int> = 0> 
+auto rah_end(Container&& container)
+{ 
+    return container.end(); 
+}
+
 /// Used in decltype to get an instance of a type
 template<typename T> T& fake() { return *((RAH_STD::remove_reference_t<T>*)nullptr); }
 
 template<typename T>
-using range_begin_type_t = decltype(begin(fake<T>()));
+using range_begin_type_t = decltype(rah_begin(fake<T>()));
 
 template<typename T>
-using range_end_type_t = decltype(end(fake<T>()));
+using range_end_type_t = decltype(rah_end(fake<T>()));
 
 template<typename T>
-using range_ref_type_t = decltype(*begin(fake<T>()));
+using range_ref_type_t = decltype(*rah_begin(fake<T>()));
 
 template<typename T>
 using range_value_type_t = RAH_STD::remove_reference_t<range_ref_type_t<T>>;
@@ -73,7 +110,7 @@ template<typename R, typename = int>
 struct is_range { static constexpr bool value = false; };
 
 template<typename R>
-struct is_range <R, decltype(begin(fake<R>()), end(fake<R>()), 0)> { static constexpr bool value = true; };
+struct is_range <R, decltype(rah_begin(fake<R>()), rah_end(fake<R>()), 0)> { static constexpr bool value = true; };
 
 RAH_STD::output_iterator_tag get_common_iterator_tag(RAH_STD::output_iterator_tag, RAH_STD::output_iterator_tag);
 RAH_STD::forward_iterator_tag get_common_iterator_tag(RAH_STD::forward_iterator_tag, RAH_STD::forward_iterator_tag);
@@ -471,7 +508,7 @@ namespace view
 
 template<typename R> auto all(R&& range)
 {
-	return iterator_range<range_begin_type_t<R>>{begin(range), end(range)};
+	return iterator_range<range_begin_type_t<R>>{rah_begin(range), rah_end(range)};
 }
 
 inline auto all()
@@ -505,8 +542,8 @@ struct take_iterator : iterator_facade<
 template<typename R> auto take(R&& range, size_t count)
 {
 	using iterator = take_iterator<range_begin_type_t<R>>;
-	iterator iter1(begin(range), 0);
-	iterator iter2(end(range), count);
+	iterator iter1(rah_begin(range), 0);
+	iterator iter2(rah_end(range), count);
 	return make_iterator_range(iter1, iter2);
 }
 
@@ -552,9 +589,9 @@ struct sliding_iterator : iterator_facade<
 template<typename R> auto sliding(R&& range, size_t n)
 {
 	size_t const closedSubRangeSize = n - 1;
-	auto const rangeEnd = end(range);
+	auto const rangeEnd = rah_end(range);
 	using iterator = sliding_iterator<range_begin_type_t<R>>;
-	auto subRangeBegin = begin(range);
+	auto subRangeBegin = rah_begin(range);
 	auto subRangeLast = subRangeBegin;
 	for (size_t i = 0; i != closedSubRangeSize; ++i)
 	{
@@ -580,8 +617,8 @@ inline auto sliding(size_t n)
 
 template<typename R> auto drop_exactly(R&& range, size_t count)
 {
-	auto iter1 = begin(range);
-	auto iter2 = end(range);
+	auto iter1 = rah_begin(range);
+	auto iter2 = rah_end(range);
 	RAH_STD::advance(iter1, count);
 	return make_iterator_range(iter1, iter2);
 }
@@ -595,8 +632,8 @@ inline auto drop_exactly(size_t count)
 
 template<typename R> auto drop(R&& range, size_t count)
 {
-	auto iter1 = begin(range);
-	auto iter2 = end(range);
+	auto iter1 = rah_begin(range);
+	auto iter2 = rah_end(range);
 	for(size_t i = 0; i < count; ++i)
 	{
 		if (iter1 == iter2)
@@ -644,7 +681,7 @@ template<typename I> auto counted(I&& it, size_t n, decltype(++it, 0) = 0)
 
 /// @cond
 // Obsolete
-template<typename R> auto counted(R&& range, size_t n, decltype(begin(range), 0) = 0)
+template<typename R> auto counted(R&& range, size_t n, decltype(rah_begin(range), 0) = 0)
 {
 	return take(range, n);
 }
@@ -809,15 +846,15 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		template<typename SR>
 		SubRange(SR&& sr)
 			: subRangeShared(RAH_STD::make_shared<SubRangeType>(RAH_STD::move(sr)))
-			, subRangeIter(begin(*subRangeShared))
-			, subRangeEnd(end(*subRangeShared))
+			, subRangeIter(rah_begin(*subRangeShared))
+			, subRangeEnd(rah_end(*subRangeShared))
 		{
 		}
 
 		template<typename SR>
 		SubRange(SR& sr)
-			: subRangeIter(begin(sr))
-			, subRangeEnd(end(sr))
+			: subRangeIter(rah_begin(sr))
+			, subRangeEnd(rah_end(sr))
 		{
 		}
 	};
@@ -829,7 +866,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		, rangeIter_(rangeIter)
 		, subRange_(SubRange(RAH_STD::forward<SR>(subRange)))
 	{
-		if (rangeIter_ == end(range_))
+		if (rangeIter_ == rah_end(range_))
 			return;
 		next_valid();
 	}
@@ -846,7 +883,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		while (subRange_->subRangeIter == subRange_->subRangeEnd)
 		{
 			++rangeIter_;
-			if (rangeIter_ == end(range_))
+			if (rangeIter_ == rah_end(range_))
 				return;
 			else
 			{
@@ -863,7 +900,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 	auto dereference() const ->decltype(*subRange_->subRangeIter) { return *subRange_->subRangeIter; }
 	bool equal(join_iterator other) const
 	{
-		if (rangeIter_ == end(range_))
+		if (rangeIter_ == rah_end(range_))
 			return rangeIter_ == other.rangeIter_;
 		else
 			return rangeIter_ == other.rangeIter_ && subRange_->subRangeIter == other.subRange_->subRangeIter;
@@ -874,8 +911,8 @@ template<typename R> auto join(R&& range_of_ranges)
 {
 	auto rangeRef = range_of_ranges | RAH_NAMESPACE::view::all();
 	using join_iterator_type = join_iterator<decltype(rangeRef)>;
-	auto rangeBegin = begin(rangeRef);
-	auto rangeEnd = end(rangeRef);
+	auto rangeBegin = rah_begin(rangeRef);
+	auto rangeEnd = rah_end(rangeRef);
 	if (empty(rangeRef))
 	{
 		join_iterator_type b(rangeRef, rangeBegin);
@@ -917,8 +954,8 @@ struct cycle_iterator : iterator_facade<
 	template<typename U>
 	explicit cycle_iterator(U&& range, Iterator iter, int64_t cycleIndex)
 		: range_(RAH_STD::forward<U>(range))
-		, beginIter_(begin(range_))
-		, endIter_(end(range_))
+		, beginIter_(rah_begin(range_))
+		, endIter_(rah_end(range_))
 		, iter_(iter)
 		, cycleIndex_(cycleIndex)
 	{
@@ -929,7 +966,7 @@ struct cycle_iterator : iterator_facade<
 		++iter_;
 		while (iter_ == endIter_)
 		{
-			iter_ = begin(range_);
+			iter_ = rah_begin(range_);
 			++cycleIndex_;
 		}
 	}
@@ -937,7 +974,7 @@ struct cycle_iterator : iterator_facade<
 	{
 		while (iter_ == beginIter_)
 		{
-			iter_ = end(range_);
+			iter_ = rah_end(range_);
 			--cycleIndex_;
 		}
 		--iter_;
@@ -954,8 +991,8 @@ template<typename R> auto cycle(R&& range)
 	auto rangeRef = range | RAH_NAMESPACE::view::all();
 	using iterator_type = cycle_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>>;
 
-	iterator_type beginIter(rangeRef, begin(rangeRef), 0);
-	iterator_type endIter(rangeRef, end(rangeRef), -1);
+	iterator_type beginIter(rangeRef, rah_begin(rangeRef), 0);
+	iterator_type endIter(rangeRef, rah_end(rangeRef), -1);
 	return make_iterator_range(beginIter, endIter);
 }
 
@@ -1024,8 +1061,8 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using Functor = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>;
 	using iterator = transform_iterator<RAH_STD::remove_reference_t<R>, Functor>;
-	auto iter1 = begin(range);
-	auto iter2 = end(range);
+	auto iter1 = rah_begin(range);
+	auto iter2 = rah_end(range);
 	return iterator_range<iterator>{ { iter1, func }, { iter2, func } };
 }
 
@@ -1085,8 +1122,8 @@ template<typename R1, typename R2> auto set_difference(R1&& range1, R2&& range2)
 	using Iter2 = range_begin_type_t<R2>;
 	using Iterator = set_difference_iterator<Iter1, Iter2>;
 	return iterator_range<Iterator>{ 
-		{ Iterator(begin(range1), end(range1), begin(range2), end(range2)) },
-		{ Iterator(end(range1), end(range1), end(range2), end(range2)) },
+		{ Iterator(rah_begin(range1), rah_end(range1), rah_begin(range2), rah_end(range2)) },
+		{ Iterator(rah_end(range1), rah_end(range1), rah_end(range2), rah_end(range2)) },
 	};
 }
 
@@ -1128,8 +1165,8 @@ template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)
 			return b;
 		}
 	};
-	auto b_in = begin(range);
-	auto e_in = end(range);
+	auto b_in = rah_begin(range);
+	auto e_in = rah_end(range);
 	auto b_out = findIter(b_in, e_in, begin_idx);
 	auto e_out = findIter(b_in, e_in, end_idx);
 	return iterator_range<decltype(b_out)>{ {b_out}, { e_out } };
@@ -1173,8 +1210,8 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 
 template<typename R> auto stride(R&& range, size_t step)
 {
-	auto iter = begin(range);
-	auto endIter = end(range);
+	auto iter = rah_begin(range);
+	auto endIter = rah_end(range);
 	return iterator_range<stride_iterator<RAH_STD::remove_reference_t<R>>>{
 		{ iter, endIter, step}, { endIter, endIter, step }};
 }
@@ -1190,7 +1227,7 @@ inline auto stride(size_t step)
 template<typename R> [[deprecated]] auto retro(R&& range)
 {
 	return make_iterator_range(
-		RAH_STD::make_reverse_iterator(end(range)), RAH_STD::make_reverse_iterator(begin(range)));
+		RAH_STD::make_reverse_iterator(rah_end(range)), RAH_STD::make_reverse_iterator(rah_begin(range)));
 }
 
 // Use reverse instead of retro
@@ -1204,7 +1241,7 @@ template<typename R> [[deprecated]] auto retro(R&& range)
 template<typename R> auto reverse(R&& range)
 {
 	return make_iterator_range(
-		RAH_STD::make_reverse_iterator(end(range)), RAH_STD::make_reverse_iterator(begin(range)));
+		RAH_STD::make_reverse_iterator(rah_end(range)), RAH_STD::make_reverse_iterator(rah_begin(range)));
 }
 
 inline auto reverse()
@@ -1316,8 +1353,8 @@ struct zip_iterator : iterator_facade<
 
 template<typename ...R> auto zip(R&&... _ranges)
 {
-	auto iterTup = RAH_STD::make_tuple(begin(RAH_STD::forward<R>(_ranges))...);
-	auto endTup = RAH_STD::make_tuple(end(RAH_STD::forward<R>(_ranges))...);
+	auto iterTup = RAH_STD::make_tuple(rah_begin(RAH_STD::forward<R>(_ranges))...);
+	auto endTup = RAH_STD::make_tuple(rah_end(RAH_STD::forward<R>(_ranges))...);
 	return iterator_range<zip_iterator<decltype(iterTup)>>{ { iterTup }, { endTup }};
 }
 
@@ -1353,8 +1390,8 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 
 template<typename R> auto chunk(R&& range, size_t step)
 {
-	auto iter = begin(range);
-	auto endIter = end(range);
+	auto iter = rah_begin(range);
+	auto endIter = rah_end(range);
 	using iterator = chunk_iterator<RAH_STD::remove_reference_t<R>>;
 	iterator begin = { iter, iter, endIter, step };
 	begin.increment();
@@ -1428,8 +1465,8 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 
 template<typename R, typename P> auto filter(R&& range, P&& pred)
 {
-	auto iter = begin(range);
-	auto endIter = end(range);
+	auto iter = rah_begin(range);
+	auto endIter = rah_end(range);
 	using Predicate = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<P>>;
 	return iterator_range<filter_iterator<RAH_STD::remove_reference_t<R>, Predicate>>{
 		{ iter, iter, endIter, pred },
@@ -1501,10 +1538,10 @@ template<typename R1> auto concat(R1&& range1)
 
 template<typename R1, typename R2> auto concat(R1&& range1, R2&& range2)
 {
-	auto begin_range1 = RAH_STD::make_pair(begin(range1), begin(range2));
-	auto begin_range2 = RAH_STD::make_pair(end(range1), end(range2));
-	auto end_range1 = RAH_STD::make_pair(end(range1), end(range2));
-	auto end_range2 = RAH_STD::make_pair(end(range1), end(range2));
+	auto begin_range1 = RAH_STD::make_pair(rah_begin(range1), rah_begin(range2));
+	auto begin_range2 = RAH_STD::make_pair(rah_end(range1), rah_end(range2));
+	auto end_range1 = RAH_STD::make_pair(rah_end(range1), rah_end(range2));
+	auto end_range2 = RAH_STD::make_pair(rah_end(range1), rah_end(range2));
 	return iterator_range<
 		concat_iterator<
 		RAH_STD::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
@@ -1526,7 +1563,7 @@ auto concat(R1&& range1, R2&& range2, Ranges&&... ranges)
 
 template<typename R> auto enumerate(R&& range)
 {
-	size_t const dist = RAH_STD::distance(begin(RAH_STD::forward<R>(range)), end(RAH_STD::forward<R>(range)));
+	size_t const dist = RAH_STD::distance(rah_begin(RAH_STD::forward<R>(range)), rah_end(RAH_STD::forward<R>(range)));
 	return zip(iota(size_t(0), dist), RAH_STD::forward<R>(range));
 }
 
@@ -1586,9 +1623,9 @@ auto sort(R&& range, P&& pred = {})
 	using value_type = range_value_type_t<R>;
 	using Container = typename RAH_STD::vector<RAH_STD::remove_cv_t<value_type>>;
 	Container result;
-	result.reserve(RAH_STD::distance(begin(range), end(range)));
-	RAH_STD::copy(begin(range), end(range), RAH_STD::back_inserter(result));
-	RAH_STD::sort(begin(result), end(result), pred);
+	result.reserve(RAH_STD::distance(rah_begin(range), rah_end(range)));
+	RAH_STD::copy(rah_begin(range), rah_end(range), RAH_STD::back_inserter(result));
+	RAH_STD::sort(rah_begin(result), rah_end(result), pred);
 	return result;
 }
 
@@ -1614,7 +1651,7 @@ auto sort(P&& pred = {})
 /// @snippet test.cpp rah::empty
 template<typename R> bool empty(R&& range)
 {
-	return begin(range) == end(range);
+	return rah_begin(range) == rah_end(range);
 }
 
 /// @brief Check if the range if empty
@@ -1634,7 +1671,7 @@ inline auto empty()
 template<typename R, typename V>
 auto equal_range(R&& range, V&& value, RAH_STD::enable_if_t<is_range<R>::value, int> = 0)
 {
-	auto pair = RAH_STD::equal_range(begin(range), end(range), RAH_STD::forward<V>(value));
+	auto pair = RAH_STD::equal_range(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value));
 	return make_iterator_range(RAH_STD::get<0>(pair), RAH_STD::get<1>(pair));
 }
 
@@ -1654,7 +1691,7 @@ template<typename V> auto equal_range(V&& value)
 template<typename R, typename V, typename P>
 auto equal_range(R&& range, V&& value, P&& pred)
 {
-	auto pair = RAH_STD::equal_range(begin(range), end(range), RAH_STD::forward<V>(value), RAH_STD::forward<P>(pred));
+	auto pair = RAH_STD::equal_range(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value), RAH_STD::forward<P>(pred));
 	return make_iterator_range(RAH_STD::get<0>(pair), RAH_STD::get<1>(pair));
 }
 
@@ -1676,7 +1713,7 @@ auto equal_range(V&& value, P&& pred, RAH_STD::enable_if_t<!is_range<V>::value, 
 /// @snippet test.cpp rah::binary_search
 template<typename R, typename V> auto binary_search(R&& range, V&& value)
 {
-	return RAH_STD::binary_search(begin(range), end(range), RAH_STD::forward<V>(value));
+	return RAH_STD::binary_search(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value));
 }
 
 /// @brief Checks if an element equivalent to value appears within the range
@@ -1696,7 +1733,7 @@ template<typename V> auto binary_search(V&& value)
 template<typename RI, typename RO, typename F>
 auto transform(RI&& rangeIn, RO&& rangeOut, F&& unary_op)
 {
-	return RAH_STD::transform(begin(rangeIn), end(rangeIn), begin(rangeOut), RAH_STD::forward<F>(unary_op));
+	return RAH_STD::transform(rah_begin(rangeIn), rah_end(rangeIn), rah_begin(rangeOut), RAH_STD::forward<F>(unary_op));
 }
 
 /// @brief The binary operation binary_op is applied to pairs of elements from two ranges
@@ -1706,9 +1743,9 @@ template<typename RI1, typename RI2, typename RO, typename F>
 auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& binary_op)
 {
 	return RAH_STD::transform(
-		begin(rangeIn1), end(rangeIn1),
-		begin(rangeIn2),
-		begin(rangeOut),
+		rah_begin(rangeIn1), rah_end(rangeIn1),
+		rah_begin(rangeIn2),
+		rah_begin(rangeOut),
 		RAH_STD::forward<F>(binary_op));
 }
 
@@ -1719,7 +1756,7 @@ auto transform(RI1&& rangeIn1, RI2&& rangeIn2, RO&& rangeOut, F&& binary_op)
 /// @snippet test.cpp rah::reduce
 template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&& reducer)
 {
-	return RAH_STD::accumulate(begin(range), end(range), RAH_STD::forward<I>(init), RAH_STD::forward<F>(reducer));
+	return RAH_STD::accumulate(rah_begin(range), rah_end(range), RAH_STD::forward<I>(init), RAH_STD::forward<F>(reducer));
 }
 
 /// @brief Executes a reducer function on each element of the range, resulting in a single output value
@@ -1739,7 +1776,7 @@ auto reduce(I&& init, F&& reducer)
 /// @snippet test.cpp rah::any_of
 template<typename R, typename F> bool any_of(R&& range, F&& pred)
 {
-	return RAH_STD::any_of(begin(range), end(range), RAH_STD::forward<F>(pred));
+	return RAH_STD::any_of(rah_begin(range), rah_end(range), RAH_STD::forward<F>(pred));
 }
 
 /// @brief Checks if unary predicate pred returns true for at least one element in the range
@@ -1758,7 +1795,7 @@ template<typename P> auto any_of(P&& pred)
 /// @snippet test.cpp rah::all_of
 template<typename R, typename P> bool all_of(R&& range, P&& pred)
 {
-	return RAH_STD::all_of(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::all_of(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Checks if unary predicate pred returns true for all elements in the range
@@ -1777,7 +1814,7 @@ template<typename P> auto all_of(P&& pred)
 /// @snippet test.cpp rah::none_of
 template<typename R, typename P> bool none_of(R&& range, P&& pred)
 {
-	return RAH_STD::none_of(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::none_of(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Checks if unary predicate pred returns true for no elements in the range 
@@ -1796,7 +1833,7 @@ template<typename P> auto none_of(P&& pred)
 /// @snippet test.cpp rah::count
 template<typename R, typename V> auto count(R&& range, V&& value)
 {
-	return RAH_STD::count(begin(range), end(range), RAH_STD::forward<V>(value));
+	return RAH_STD::count(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value));
 }
 
 /// @brief Counts the elements that are equal to value
@@ -1814,7 +1851,7 @@ template<typename V> auto count(V&& value)
 /// @snippet test.cpp rah::count_if
 template<typename R, typename P> auto count_if(R&& range, P&& pred)
 {
-	return RAH_STD::count_if(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::count_if(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Counts elements for which predicate pred returns true
@@ -1832,7 +1869,7 @@ template<typename P> auto count_if(P&& pred)
 /// @snippet test.cpp rah::for_each
 template<typename R, typename F> auto for_each(R&& range, F&& func)
 {
-	return ::RAH_STD::for_each(begin(range), end(range), RAH_STD::forward<F>(func));
+	return ::RAH_STD::for_each(rah_begin(range), rah_end(range), RAH_STD::forward<F>(func));
 }
 
 /// @brief Applies the given function func to each element of the range
@@ -1851,7 +1888,7 @@ template<typename F> auto for_each(F&& func)
 /// @snippet test.cpp rah::to_container
 template<typename C, typename R> auto to_container(R&& range)
 {
-	return C(begin(range), end(range));
+	return C(rah_begin(range), rah_end(range));
 }
 
 /// @brief Return a container of type C, filled with the content of range
@@ -1870,7 +1907,7 @@ template<typename C> auto to_container()
 /// @snippet test.cpp rah::mismatch
 template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 {
-	return RAH_STD::mismatch(begin(range1), end(range1), begin(range2), end(range2));
+	return RAH_STD::mismatch(rah_begin(range1), rah_end(range1), rah_begin(range2), rah_end(range2));
 }
 
 // ****************************************** find ************************************************
@@ -1880,7 +1917,7 @@ template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
 /// @snippet test.cpp rah::find
 template<typename R, typename V> auto find(R&& range, V&& value)
 {
-	return RAH_STD::find(begin(range), end(range), RAH_STD::forward<V>(value));
+	return RAH_STD::find(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value));
 }
 
 /// @brief Finds the first element equal to value
@@ -1897,7 +1934,7 @@ template<typename V> auto find(V&& value)
 /// @snippet test.cpp rah::find_if
 template<typename R, typename P> auto find_if(R&& range, P&& pred)
 {
-	return RAH_STD::find_if(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::find_if(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Finds the first element satisfying specific criteria
@@ -1914,7 +1951,7 @@ template<typename P> auto find_if(P&& pred)
 /// @snippet test.cpp rah::find_if_not
 template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 {
-	return RAH_STD::find_if_not(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::find_if_not(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Finds the first element not satisfying specific criteria
@@ -1934,7 +1971,7 @@ template<typename P> auto find_if_not(P&& pred)
 template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0> 
 auto max_element(R&& range)
 {
-	return RAH_STD::max_element(begin(range), end(range));
+	return RAH_STD::max_element(rah_begin(range), rah_end(range));
 }
 
 /// @brief Finds the greatest element in the range
@@ -1951,7 +1988,7 @@ inline auto max_element()
 /// @snippet test.cpp rah::max_element_pred
 template<typename R, typename P> auto max_element(R&& range, P&& pred)
 {
-	return RAH_STD::max_element(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::max_element(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Finds the greatest element in the range
@@ -1972,7 +2009,7 @@ auto max_element(P&& pred)
 template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0> 
 auto min_element(R&& range)
 {
-	return RAH_STD::min_element(begin(range), end(range));
+	return RAH_STD::min_element(rah_begin(range), rah_end(range));
 }
 
 /// @brief Finds the smallest element in the range
@@ -1989,7 +2026,7 @@ inline auto min_element()
 /// @snippet test.cpp rah::min_element_pred
 template<typename R, typename P> auto min_element(R&& range, P&& pred)
 {
-	return RAH_STD::min_element(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::min_element(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Finds the smallest element in the range
@@ -2010,7 +2047,7 @@ auto min_element(P&& pred)
 /// @snippet test.cpp rah::copy
 template<typename R1, typename R2> auto copy(R1&& in, R2&& out)
 {
-	return RAH_STD::copy(begin(in), end(in), begin(out));
+	return RAH_STD::copy(rah_begin(in), rah_end(in), rah_begin(out));
 }
 
 /// @brief Copy in range into an other
@@ -2031,7 +2068,7 @@ template<typename R2> auto copy(R2&& out)
 /// @snippet test.cpp rah::copy
 template<typename R1, typename V> auto fill(R1&& in, V&& value)
 {
-	return RAH_STD::fill(begin(in), end(in), value);
+	return RAH_STD::fill(rah_begin(in), rah_end(in), value);
 }
 
 /// @brief Assigns the given value to the elements in the range [first, last)
@@ -2070,7 +2107,7 @@ template<typename R2> auto back_insert(R2&& out)
 /// @snippet test.cpp rah::copy_if
 template<typename R1, typename R2, typename P> auto copy_if(R1&& in, R2&& out, P&& pred)
 {
-	return RAH_STD::copy_if(begin(in), end(in), begin(out), RAH_STD::forward<P>(pred));
+	return RAH_STD::copy_if(rah_begin(in), rah_end(in), rah_begin(out), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Copies the elements for which the predicate pred returns true
@@ -2091,7 +2128,7 @@ template<typename R2, typename P> auto copy_if(R2&& out, P&& pred)
 /// @snippet test.cpp rah::size
 template<typename R> auto size(R&& range)
 {
-	return RAH_STD::distance(begin(range), end(range));
+	return RAH_STD::distance(rah_begin(range), rah_end(range));
 }
 
 /// @brief Get the size of range
@@ -2111,9 +2148,9 @@ inline auto size()
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 {
 #ifdef EASTL_VERSION
-	return RAH_STD::identical(begin(range1), end(range1), begin(range2), end(range2));
+	return RAH_STD::identical(rah_begin(range1), rah_end(range1), rah_begin(range2), rah_end(range2));
 #else
-	return RAH_STD::equal(begin(range1), end(range1), begin(range2), end(range2));
+	return RAH_STD::equal(rah_begin(range1), rah_end(range1), rah_begin(range2), rah_end(range2));
 #endif
 }
 
@@ -2156,7 +2193,7 @@ template<typename S> auto stream_inserter(S&& stream)
 /// @snippet test.cpp rah::remove_if
 template<typename R, typename P> auto remove_if(R&& range, P&& pred)
 {
-	return RAH_STD::remove_if(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::remove_if(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @brief Keep at the begining of the range only elements for which pred(elt) is false\n
@@ -2177,7 +2214,7 @@ template<typename P> auto remove_if(P&& pred)
 /// @snippet test.cpp rah::remove
 template<typename R, typename V> auto remove(R&& range, V&& value)
 {
-	return RAH_STD::remove(begin(range), end(range), RAH_STD::forward<V>(value));
+	return RAH_STD::remove(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value));
 }
 
 /// @brief Keep at the begining of the range only elements not equal to value\n
@@ -2200,7 +2237,7 @@ template<typename V> auto remove(V&& value)
 /// @snippet test.cpp rah::partition
 template<typename R, typename P> auto partition(R&& range, P&& pred)
 {
-	return RAH_STD::partition(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::partition(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @see rah::partition(R&&, P&&)
@@ -2222,7 +2259,7 @@ template<typename P> auto partition(P&& pred)
 /// @snippet test.cpp rah::stable_partition
 template<typename R, typename P> auto stable_partition(R&& range, P&& pred)
 {
-	return RAH_STD::stable_partition(begin(range), end(range), RAH_STD::forward<P>(pred));
+	return RAH_STD::stable_partition(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
 /// @see rah::stable_partition(R&&, P&&)
@@ -2242,7 +2279,7 @@ template<typename P> auto stable_partition(P&& pred)
 /// @snippet test.cpp rah::erase
 template<typename C, typename R> auto erase(C&& container, R&& subrange)
 {
-	container.erase(begin(subrange), end(subrange));
+	container.erase(rah_begin(subrange), rah_end(subrange));
 	return container | RAH_NAMESPACE::view::all();
 }
 
@@ -2266,7 +2303,7 @@ template<typename R> auto erase(R&& range)
 template<typename R, typename P = is_lesser, typename = RAH_STD::enable_if_t<is_range<R>::value>>
 void sort(R& range, P&& pred = {})
 {
-	RAH_STD::sort(begin(range), end(range), pred);
+	RAH_STD::sort(rah_begin(range), rah_end(range), pred);
 }
 
 /// @brief Sort a range in place, using the given predicate.
@@ -2289,7 +2326,7 @@ auto sort(P&& pred = {})
 template<typename R, typename P = is_lesser, typename = RAH_STD::enable_if_t<is_range<R>::value>>
 void stable_sort(R& range, P&& pred = {})
 {
-	RAH_STD::stable_sort(begin(range), end(range), pred);
+	RAH_STD::stable_sort(rah_begin(range), rah_end(range), pred);
 }
 
 /// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved. 
@@ -2311,7 +2348,7 @@ auto stable_sort(P&& pred = {})
 template<typename R, typename URBG>
 void shuffle(R& range, URBG&& g)
 {
-	RAH_STD::shuffle(begin(range), end(range), RAH_STD::forward<URBG>(g));
+	RAH_STD::shuffle(rah_begin(range), rah_end(range), RAH_STD::forward<URBG>(g));
 }
 
 /// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
@@ -2340,7 +2377,7 @@ struct is_equal
 template<typename R, typename P = is_equal, typename = RAH_STD::enable_if_t<is_range<R>::value>>
 auto unique(R&& range, P&& pred = {})
 {
-	return RAH_STD::unique(begin(range), end(range), pred);
+	return RAH_STD::unique(rah_begin(range), rah_end(range), pred);
 }
 
 /// @brief Remove all but first successive values which are equals. Without resizing the range.
@@ -2365,9 +2402,9 @@ template<typename IN1, typename IN2, typename OUT_>
 void set_difference(IN1&& in1, IN2&& in2, OUT_&& out)
 {
 	RAH_STD::set_difference(
-		begin(in1), end(in1),
-		begin(in2), end(in2),
-		begin(out));
+		rah_begin(in1), rah_end(in1),
+		rah_begin(in2), rah_end(in2),
+		rah_begin(out));
 }
 
 // *********************************** set_intersection ************************************************
@@ -2380,9 +2417,9 @@ template<typename IN1, typename IN2, typename OUT_>
 void set_intersection(IN1&& in1, IN2&& in2, OUT_&& out)
 {
 	RAH_STD::set_intersection(
-		begin(in1), end(in1),
-		begin(in2), end(in2),
-		begin(out));
+		rah_begin(in1), rah_end(in1),
+		rah_begin(in2), rah_end(in2),
+		rah_begin(out));
 }
 
 namespace action
@@ -2516,7 +2553,7 @@ auto shuffle(URBG&& g)
 /// @snippet test.cpp rah::copy
 template<typename R1, typename V> auto fill(R1&& in, V&& value)
 {
-	RAH_STD::fill(begin(in), end(in), value);
+	RAH_STD::fill(rah_begin(in), rah_end(in), value);
 	return RAH_STD::forward<R1>(in);
 }
 
