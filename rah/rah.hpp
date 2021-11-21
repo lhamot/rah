@@ -548,12 +548,28 @@ namespace view
 
 template<typename R> auto all(R&& range)
 {
+	static_assert(not RAH_STD::is_rvalue_reference_v<R&&>, "Can't call 'all' on a rvalue container");
 	return iterator_range<range_begin_type_t<R>>{rah_begin(range), rah_end(range)};
+}
+
+template<typename I> auto all(std::initializer_list<I> range)
+{
+	return iterator_range<decltype(rah_begin(range))>{rah_begin(range), rah_end(range)};
+}
+
+template<typename I> auto all(iterator_range<I>&& range) -> decltype(std::move(range))
+{
+	return std::move(range);
+}
+
+template<typename I> iterator_range<I> const& all(iterator_range<I> const& range)
+{
+	return range;
 }
 
 inline auto all()
 {
-	return make_pipeable([=](auto&& range) {return all(range); });
+	return make_pipeable([=](auto&& range) {return all(std::forward<decltype(range)>(range)); });
 }
 
 // ******************************************* take ***********************************************
