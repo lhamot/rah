@@ -1,4 +1,4 @@
-﻿//
+//
 // Copyright (c) 2019 Loïc HAMOT
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
@@ -59,7 +59,7 @@ struct has_member_begin_end
 
 template<typename Container>
 struct has_member_begin_end<
-    Container, 
+    Container,
     decltype(
         std::declval<Container>().begin(),
         std::declval<Container>().end(),
@@ -97,22 +97,22 @@ template<class T, size_t N> T* rah_end(T(&array)[N]) noexcept { return array + N
 
 /// Call the member begin if it exists
 /// This avoid some ADL fail when using conteners with mixed namespaces
-template<class Container, std::enable_if_t<has_member_begin_end_v<Container>, int> = 0> 
+template<class Container, std::enable_if_t<has_member_begin_end_v<Container>, int> = 0>
 auto rah_begin(Container&& container)
-{ 
-    return container.begin(); 
+{
+    return container.begin();
 }
 
 /// Call the member end if it exists
-template<class Container, std::enable_if_t<has_member_begin_end_v<Container>, int> = 0> 
+template<class Container, std::enable_if_t<has_member_begin_end_v<Container>, int> = 0>
 auto rah_end(Container&& container)
-{ 
-    return container.end(); 
+{
+    return container.end();
 }
 
 /// Call the free begin if there is no member begin
 template<
-	class Container, 
+	class Container,
 	std::enable_if_t<has_free_begin_end_v<Container> and not has_member_begin_end_v<Container>, int> = 0>
 auto rah_begin(Container&& container)
 {
@@ -121,7 +121,7 @@ auto rah_begin(Container&& container)
 
 /// Call the free end if there is no member end
 template<
-	class Container, 
+	class Container,
 	std::enable_if_t<has_free_begin_end_v<Container> and not has_member_begin_end_v<Container>, int> = 0>
 auto rah_end(Container&& container)
 {
@@ -250,7 +250,7 @@ template<typename T> struct optional
 		}
 		return *this;
 	}
-	optional& operator = (optional&& other)
+	optional& operator = (optional&& other) noexcept
 	{
 		if (has_value())
 		{
@@ -320,7 +320,7 @@ private:
 	T const* getPtr() const { return (T const*)&value_; }
 	void destruct_value() { get().~T(); }
 
-	RAH_STD::aligned_storage_t<sizeof(T), RAH_STD::alignment_of<T>::value> value_;
+	RAH_STD::aligned_storage_t<sizeof(T), RAH_STD::alignment_of<T>::value> value_{};
 	bool is_allocated_ = false;
 };
 }
@@ -601,13 +601,13 @@ struct sliding_iterator : iterator_facade<
 	typename RAH_STD::iterator_traits<I>::iterator_category
 >
 {
-	// Actually store a closed range [begin, last] 
+	// Actually store a closed range [begin, last]
 	//   to avoid to exceed the end iterator of the underlying range
 	I subRangeBegin_;
 	I subRangeLast_;
 
 	sliding_iterator() = default;
-	sliding_iterator(I subRangeBegin, I subRangeLast) 
+	sliding_iterator(I subRangeBegin, I subRangeLast)
 		: subRangeBegin_(subRangeBegin)
 		, subRangeLast_(subRangeLast)
 	{
@@ -617,8 +617,8 @@ struct sliding_iterator : iterator_facade<
 	void advance(intptr_t off) { subRangeBegin_ += off; subRangeLast_ += off; }
 	void decrement() { --subRangeBegin_; --subRangeLast_; }
 	auto distance_to(sliding_iterator const& r) const { return subRangeBegin_ - r.subRangeBegin_; }
-	auto dereference() const 
-	{ 
+	auto dereference() const
+	{
 		I endIter = subRangeLast_;
 		++endIter;
 		return make_iterator_range(subRangeBegin_, endIter);
@@ -752,7 +752,7 @@ struct unbounded_iterator : iterator_facade<
 	void advance(intptr_t off) { iter_ += off; }
 	void decrement() { --iter_; }
 	auto distance_to(unbounded_iterator r) const
-	{ 
+	{
 		if (end_)
 		{
 			if (r.end_)
@@ -771,8 +771,8 @@ struct unbounded_iterator : iterator_facade<
 
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
 	bool equal(unbounded_iterator r) const 
-	{ 
-		return end_? 
+	{
+		return end_?
 			r.end_:
 			(r.end_? false: r.iter_ == iter_);
 	}
@@ -963,8 +963,8 @@ template<typename R> auto join(R&& range_of_ranges)
 	{
 		auto&& firstSubRange = *rangeBegin;
 		join_iterator_type b(
-			rangeRef, 
-			rangeBegin, 
+			rangeRef,
+			rangeBegin,
 			std::forward<decltype(firstSubRange)>(firstSubRange));
 		join_iterator_type e(rangeRef, rangeEnd);
 		return make_iterator_range(b, e);
@@ -980,8 +980,8 @@ inline auto join()
 
 template<typename R>
 struct cycle_iterator : iterator_facade<
-	cycle_iterator<R>, 
-	range_ref_type_t<R>, 
+	cycle_iterator<R>,
+	range_ref_type_t<R>,
 	common_iterator_tag<RAH_STD::bidirectional_iterator_tag, range_iter_categ_t<R>>>
 {
 	R range_;
@@ -1125,7 +1125,7 @@ struct set_difference_iterator : iterator_facade<
 	InputIt2 first2_;
 	InputIt2 last2_;
 
-	set_difference_iterator(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2) 
+	set_difference_iterator(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
 		: first1_(first1) , last1_(last1) , first2_(first2), last2_(last2)
 	{
 		next_value();
@@ -1147,8 +1147,8 @@ struct set_difference_iterator : iterator_facade<
 		}
 	}
 
-	void increment() 
-	{ 
+	void increment()
+	{
 		++first1_;
 		next_value();
 	}
@@ -1161,7 +1161,7 @@ template<typename R1, typename R2> auto set_difference(R1&& range1, R2&& range2)
 	using Iter1 = range_begin_type_t<R1>;
 	using Iter2 = range_begin_type_t<R2>;
 	using Iterator = set_difference_iterator<Iter1, Iter2>;
-	return iterator_range<Iterator>{ 
+	return iterator_range<Iterator>{
 		{ Iterator(rah_begin(range1), rah_end(range1), rah_begin(range2), rah_end(range2)) },
 		{ Iterator(rah_end(range1), rah_end(range1), rah_end(range2), rah_end(range2)) },
 	};
@@ -1298,7 +1298,7 @@ auto single(V&& value)
 }
 
 // *************************** zip ****************************************************************
-/// \cond PRIVATE 
+/// \cond PRIVATE
 namespace details
 {
 template <typename Tuple, typename F, size_t ...Indices>
@@ -1455,7 +1455,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	RAH_NAMESPACE::details::optional<F> func_;
 	typename RAH_STD::iterator_traits<range_begin_type_t<R>>::pointer value_pointer_;
 
-	// Get a pointer to the pointed value, 
+	// Get a pointer to the pointed value,
 	//   OR a pointer to a copy of the pointed value (when not a reference iterator)
 	template <class I> struct get_pointer
 	{
@@ -1571,9 +1571,9 @@ struct concat_iterator : iterator_facade<concat_iterator<IterPair, V>, V, RAH_ST
 };
 
 /// @brief return the same range
-template<typename R1> auto concat(R1&& range1) 
-{ 
-	return RAH_STD::forward<R1>(range1); 
+template<typename R1> auto concat(R1&& range1)
+{
+	return RAH_STD::forward<R1>(range1);
 }
 
 template<typename R1, typename R2> auto concat(R1&& range1, R2&& range2)
@@ -1593,7 +1593,7 @@ template<typename R1, typename R2> auto concat(R1&& range1, R2&& range2)
 }
 
 /// @see rah::view::concat(R1&& range1, R2&& range2)
-template<typename R1, typename R2, typename ...Ranges> 
+template<typename R1, typename R2, typename ...Ranges>
 auto concat(R1&& range1, R2&& range2, Ranges&&... ranges)
 {
 	return concat(concat(RAH_STD::forward<R1>(range1), RAH_STD::forward<R2>(range2)), ranges...);
@@ -1620,7 +1620,7 @@ struct get_tuple_elt
 	template<typename T>
 	auto operator()(T&& nvp) const -> decltype(RAH_STD::get<I>(RAH_STD::forward<decltype(nvp)>(nvp)))
 	{
-		static_assert(not RAH_STD::is_rvalue_reference<decltype(nvp)>::value, 
+		static_assert(not RAH_STD::is_rvalue_reference<decltype(nvp)>::value,
 			"map_value/map_key only apply only apply on lvalue pairs. "
 			"Pairs from map are ok but for generated pairs, prefer use view::tranform");
 		return RAH_STD::get<I>(RAH_STD::forward<decltype(nvp)>(nvp));
@@ -1849,7 +1849,7 @@ template<typename P> auto all_of(P&& pred)
 
 // ************************* none_of *******************************************
 
-/// @brief Checks if unary predicate pred returns true for no elements in the range 
+/// @brief Checks if unary predicate pred returns true for no elements in the range
 ///
 /// @snippet test.cpp rah::none_of
 template<typename R, typename P> bool none_of(R&& range, P&& pred)
@@ -1857,7 +1857,7 @@ template<typename R, typename P> bool none_of(R&& range, P&& pred)
 	return RAH_STD::none_of(rah_begin(range), rah_end(range), RAH_STD::forward<P>(pred));
 }
 
-/// @brief Checks if unary predicate pred returns true for no elements in the range 
+/// @brief Checks if unary predicate pred returns true for no elements in the range
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::none_of_pipeable
@@ -1942,7 +1942,7 @@ template<typename C> auto to_container()
 
 // ************************* mismatch *************************************************************
 
-/// @brief Finds the first position where two ranges differ 
+/// @brief Finds the first position where two ranges differ
 ///
 /// @snippet test.cpp rah::mismatch
 template<typename R1, typename R2> auto mismatch(R1&& range1, R2&& range2)
@@ -2008,7 +2008,7 @@ template<typename P> auto find_if_not(P&& pred)
 /// @brief Finds the greatest element in the range
 ///
 /// @snippet test.cpp rah::max_element
-template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0> 
+template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0>
 auto max_element(R&& range)
 {
 	return RAH_STD::max_element(rah_begin(range), rah_end(range));
@@ -2035,7 +2035,7 @@ template<typename R, typename P> auto max_element(R&& range, P&& pred)
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::max_element_pred_pipeable
-template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0> 
+template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0>
 auto max_element(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return max_element(range, pred); });
@@ -2046,7 +2046,7 @@ auto max_element(P&& pred)
 /// @brief Finds the smallest element in the range
 ///
 /// @snippet test.cpp rah::min_element
-template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0> 
+template<typename R, RAH_STD::enable_if_t<is_range<R>::value, int> = 0>
 auto min_element(R&& range)
 {
 	return RAH_STD::min_element(rah_begin(range), rah_end(range));
@@ -2073,7 +2073,7 @@ template<typename R, typename P> auto min_element(R&& range, P&& pred)
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::min_element_pred_pipeable
-template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0> 
+template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0>
 auto min_element(P&& pred)
 {
 	return make_pipeable([=](auto&& range) {return min_element(range, pred); });
@@ -2182,7 +2182,7 @@ inline auto size()
 
 // *************************************** equal **************************************************
 
-/// @brief Determines if two sets of elements are the same 
+/// @brief Determines if two sets of elements are the same
 ///
 /// @snippet test.cpp rah::equal
 template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
@@ -2194,7 +2194,7 @@ template<typename R1, typename R2> auto equal(R1&& range1, R2&& range2)
 #endif
 }
 
-/// @brief Determines if two sets of elements are the same 
+/// @brief Determines if two sets of elements are the same
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::equal_pipeable
@@ -2269,10 +2269,10 @@ template<typename V> auto remove(V&& value)
 
 // *********************************** partition **************************************************
 
-/// @brief Reorders the elements in the @b range in such a way that all elements for which the 
-/// predicate @b pred returns `true` precede the elements for which predicate @b pred returns `false`. 
-/// Relative order of the elements is not preserved. 
-/// @return Iterator to the first element of the second group. 
+/// @brief Reorders the elements in the @b range in such a way that all elements for which the
+/// predicate @b pred returns `true` precede the elements for which predicate @b pred returns `false`.
+/// Relative order of the elements is not preserved.
+/// @return Iterator to the first element of the second group.
 ///
 /// @snippet test.cpp rah::partition
 template<typename R, typename P> auto partition(R&& range, P&& pred)
@@ -2291,10 +2291,10 @@ template<typename P> auto partition(P&& pred)
 
 // *********************************** stable_partition *******************************************
 
-/// @brief Reorders the elements in the @b range in such a way that all elements for which 
-/// the predicate @b pred returns `true` precede the elements for which predicate @b pred returns false. 
-/// Relative order of the elements is preserved. 
-/// @return Iterator to the first element of the second group. 
+/// @brief Reorders the elements in the @b range in such a way that all elements for which
+/// the predicate @b pred returns `true` precede the elements for which predicate @b pred returns false.
+/// Relative order of the elements is preserved.
+/// @return Iterator to the first element of the second group.
 ///
 /// @snippet test.cpp rah::stable_partition
 template<typename R, typename P> auto stable_partition(R&& range, P&& pred)
@@ -2359,7 +2359,7 @@ auto sort(P&& pred = {})
 
 // *********************************** stable_sort ************************************************
 
-/// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved. 
+/// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved.
 ///
 /// @snippet test.cpp rah::stable_sort
 /// @snippet test.cpp rah::stable_sort_pred
@@ -2369,7 +2369,7 @@ void stable_sort(R& range, P&& pred = {})
 	RAH_STD::stable_sort(rah_begin(range), rah_end(range), pred);
 }
 
-/// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved. 
+/// @brief Sorts the elements in the range in ascending order. The order of equivalent elements is guaranteed to be preserved.
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::stable_sort_pipeable
@@ -2382,7 +2382,7 @@ auto stable_sort(P&& pred = {})
 
 // *********************************** shuffle *******************************************************
 
-/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.
 ///
 /// @snippet test.cpp rah::shuffle
 template<typename R, typename URBG>
@@ -2391,7 +2391,7 @@ void shuffle(R& range, URBG&& g)
 	RAH_STD::shuffle(rah_begin(range), rah_end(range), RAH_STD::forward<URBG>(g));
 }
 
-/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.
 /// @remark pipeable syntax
 ///
 /// @snippet test.cpp rah::shuffle_pipeable
@@ -2563,7 +2563,7 @@ auto sort(P&& pred = {})
 
 // *********************************** shuffle *******************************************************
 
-/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.
 /// @return reference to container
 ///
 /// @snippet test.cpp rah::action::shuffle
@@ -2575,7 +2575,7 @@ auto&& shuffle(C&& container, URBG&& g)
 	return RAH_STD::forward<C>(container);
 }
 
-/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance. 
+/// @brief Reorders the elements in the given range such that each possible permutation of those elements has equal probability of appearance.
 /// @return reference to container
 /// @remark pipeable syntax
 ///
