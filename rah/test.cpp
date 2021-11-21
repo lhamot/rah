@@ -230,15 +230,15 @@ int main()
 		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
 		/// [join]
 	}
-	{
-		// Test join on a range of rvalue
-		auto range = rah::view::iota(0, 6) 
-			| rah::view::transform([](int i) {return std::vector<int>(1, i); })
-			| rah::view::join();
-		std::vector<int> result;
-		std::copy(begin(range), end(range), std::back_inserter(result));
-		assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
-	}
+	//{
+	//	// Test join on a range of rvalue
+	//	auto range = rah::view::iota(0, 6) 
+	//		| rah::view::transform([](int i) {return std::vector<int>(1, i); })
+	//		| rah::view::join();
+	//	std::vector<int> result;
+	//	std::copy(begin(range), end(range), std::back_inserter(result));
+	//	assert(result == std::vector<int>({ 0, 1, 2, 3, 4, 5 }));
+	//}
 
 	{
 		/// [join_pipeable]

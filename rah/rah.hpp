@@ -21,7 +21,6 @@
 #include <numeric>
 #include <vector>
 #include <array>
-#include <memory>
 #ifdef MSVC
 #pragma warning(pop)
 #endif
@@ -910,27 +909,18 @@ template<typename V> auto repeat(V&& value)
 template<typename R>
 struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_ref_type_t<R>>, RAH_STD::forward_iterator_tag>
 {
-	R range_;
 	using Iterator1 = range_begin_type_t<R>;
-	using SubRangeType = RAH_STD::remove_reference_t<decltype(*fake<Iterator1>())>;
+	using SubRangeType = RAH_STD::remove_reference_t<decltype(all(*fake<Iterator1>()))>;
 	using Iterator2 = range_begin_type_t<decltype(*fake<Iterator1>())>;
 	Iterator1 rangeIter_;
+	Iterator1 rangeEnd_;
 	struct SubRange
 	{
-		RAH_STD::shared_ptr<SubRangeType> subRangeShared;
 		Iterator2 subRangeIter;
 		Iterator2 subRangeEnd;
 
 		template<typename SR>
 		SubRange(SR&& sr)
-			: subRangeShared(RAH_STD::make_shared<SubRangeType>(RAH_STD::move(sr)))
-			, subRangeIter(rah_begin(*subRangeShared))
-			, subRangeEnd(rah_end(*subRangeShared))
-		{
-		}
-
-		template<typename SR>
-		SubRange(SR& sr)
 			: subRangeIter(rah_begin(sr))
 			, subRangeEnd(rah_end(sr))
 		{
@@ -938,21 +928,20 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 	};
 	RAH_NAMESPACE::details::optional<SubRange> subRange_;
 
-	template<typename U, typename SR>
-	join_iterator(U&& range, Iterator1 rangeIter, SR&& subRange)
-		: range_(RAH_STD::forward<U>(range))
-		, rangeIter_(rangeIter)
-		, subRange_(SubRange(RAH_STD::forward<SR>(subRange)))
+	template<typename SR>
+	join_iterator(Iterator1 rangeIter, Iterator1 rangeEnd, SR&& subRange)
+		: rangeIter_(rangeIter)
+		, rangeEnd_(rangeEnd)
+		, subRange_(SubRange(all(RAH_STD::forward<SR>(subRange))))
 	{
-		if (rangeIter_ == rah_end(range_))
+		if (rangeIter_ == rangeEnd_)
 			return;
 		next_valid();
 	}
 
-	template<typename U>
-	join_iterator(U&& range, Iterator1 rangeIter)
-		: range_(RAH_STD::forward<U>(range))
-		, rangeIter_(rangeIter)
+	join_iterator(Iterator1 rangeIter, Iterator1 rangeEnd)
+		: rangeIter_(rangeIter)
+		, rangeEnd_(rangeEnd)
 	{
 	}
 
@@ -961,11 +950,11 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		while (subRange_->subRangeIter == subRange_->subRangeEnd)
 		{
 			++rangeIter_;
-			if (rangeIter_ == rah_end(range_))
+			if (rangeIter_ == rangeEnd_)
 				return;
 			else
 			{
-				subRange_ = SubRange( *rangeIter_ );
+				subRange_ = SubRange( all(*rangeIter_) );
 			}
 		}
 	}
@@ -978,7 +967,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 	auto dereference() const ->decltype(*subRange_->subRangeIter) { return *subRange_->subRangeIter; }
 	bool equal(join_iterator const& other) const
 	{
-		if (rangeIter_ == rah_end(range_))
+		if (rangeIter_ == rangeEnd_)
 			return rangeIter_ == other.rangeIter_;
 		else
 			return rangeIter_ == other.rangeIter_ && subRange_->subRangeIter == other.subRange_->subRangeIter;
@@ -993,18 +982,18 @@ template<typename R> auto join(R&& range_of_ranges)
 	auto rangeEnd = rah_end(rangeRef);
 	if (empty(rangeRef))
 	{
-		join_iterator_type b(rangeRef, rangeBegin);
-		join_iterator_type e(rangeRef, rangeEnd);
+		join_iterator_type b(rangeBegin, rangeEnd);
+		join_iterator_type e(rangeEnd, rangeEnd);
 		return make_iterator_range(b, e);
 	}
 	else
 	{
 		auto&& firstSubRange = *rangeBegin;
 		join_iterator_type b(
-			rangeRef,
 			rangeBegin,
+			rangeEnd,
 			RAH_STD::forward<decltype(firstSubRange)>(firstSubRange));
-		join_iterator_type e(rangeRef, rangeEnd);
+		join_iterator_type e(rangeEnd, rangeEnd);
 		return make_iterator_range(b, e);
 	}
 }
@@ -1069,8 +1058,8 @@ template<typename R> auto cycle(R&& range)
 	auto rangeRef = range | RAH_NAMESPACE::view::all();
 	using iterator_type = cycle_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>>;
 	auto view = all(RAH_STD::forward<R>(range));
-	iterator_type beginIter(rangeRef, rah_begin(range), 0);
-	iterator_type endIter(rangeRef, rah_end(range), -1);
+	iterator_type beginIter(rangeRef, rah_begin(view), 0);
+	iterator_type endIter(rangeRef, rah_end(view), -1);
 	return make_iterator_range(beginIter, endIter);
 }
 
