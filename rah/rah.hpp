@@ -375,8 +375,8 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 		return self().dereference(); 
 	}
 	auto operator->() const { return pointer_type<R>::to_pointer(self().dereference()); }
-	bool operator!=(I other) const { return not self().equal(other); }
-	bool operator==(I other) const { return self().equal(other); }
+	bool operator!=(I const& other) const { return not self().equal(other); }
+	bool operator==(I const& other) const { return self().equal(other); }
 };
 
 template<typename I, typename R>
@@ -574,9 +574,9 @@ struct take_iterator : iterator_facade<
 	void increment() { ++iter_; ++count_; }
 	void advance(intptr_t off) { iter_ += off; count_ += off; }
 	void decrement() { --iter_; --count_; }
-	auto distance_to(take_iterator r) const { return RAH_STD::min<intptr_t>(iter_ - r.iter_, count_ - r.count_); }
+	auto distance_to(take_iterator const& r) const { return RAH_STD::min<intptr_t>(iter_ - r.iter_, count_ - r.count_); }
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
-	bool equal(take_iterator r) const { return count_ == r.count_ || iter_ == r.iter_; }
+	bool equal(take_iterator const& r) const { return count_ == r.count_ || iter_ == r.iter_; }
 };
 
 template<typename R> auto take(R&& range, size_t count)
@@ -706,9 +706,9 @@ struct counted_iterator : iterator_facade<
 	void increment() { ++iter_; ++count_; }
 	void advance(intptr_t off) { iter_ += off; count_ += off; }
 	void decrement() { --iter_; --count_; }
-	auto distance_to(counted_iterator r) const { return count_ - r.count_; }
+	auto distance_to(counted_iterator const& r) const { return count_ - r.count_; }
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
-	bool equal(counted_iterator r) const { return count_ == r.count_; }
+	bool equal(counted_iterator const& r) const { return count_ == r.count_; }
 };
 
 template<typename I> auto counted(I&& it, size_t n, decltype(++it, 0) = 0)
@@ -751,7 +751,7 @@ struct unbounded_iterator : iterator_facade<
 
 	void advance(intptr_t off) { iter_ += off; }
 	void decrement() { --iter_; }
-	auto distance_to(unbounded_iterator r) const
+	auto distance_to(unbounded_iterator const& r) const
 	{
 		if (end_)
 		{
@@ -770,7 +770,7 @@ struct unbounded_iterator : iterator_facade<
 	}
 
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
-	bool equal(unbounded_iterator r) const 
+	bool equal(unbounded_iterator const& r) const
 	{
 		return end_?
 			r.end_:
@@ -800,9 +800,9 @@ struct ints_iterator : iterator_facade<ints_iterator<T>, T, RAH_STD::random_acce
 	void increment() { ++val_; }
 	void advance(intptr_t value) { val_ += T(value); }
 	void decrement() { --val_; }
-	auto distance_to(ints_iterator other) const { return (val_ - other.val_); }
+	auto distance_to(ints_iterator const& other) const { return (val_ - other.val_); }
 	auto dereference() const { return val_; }
-	bool equal(ints_iterator other) const { return val_ == other.val_; }
+	bool equal(ints_iterator const& other) const { return val_ == other.val_; }
 };
 
 template<typename T = size_t> auto ints(T b = 0, T e = RAH_STD::numeric_limits<T>::max())
@@ -830,9 +830,9 @@ struct iota_iterator : iterator_facade<iota_iterator<T>, T, RAH_STD::random_acce
 	void increment() { val_ += step_; }
 	void advance(intptr_t value) { val_ += T(step_ * value); }
 	void decrement() { val_ -= step_; }
-	auto distance_to(iota_iterator other) const { return (val_ - other.val_) / step_; }
+	auto distance_to(iota_iterator const& other) const { return (val_ - other.val_) / step_; }
 	auto dereference() const { return val_; }
-	bool equal(iota_iterator other) const { return val_ == other.val_; }
+	bool equal(iota_iterator const& other) const { return val_ == other.val_; }
 };
 
 template<typename T = size_t> auto iota(T b, T e, T step = 1)
@@ -859,7 +859,7 @@ struct repeat_iterator : iterator_facade<repeat_iterator<V>, V const&, RAH_STD::
 	void advance(intptr_t value) { }
 	void decrement() { }
 	V const& dereference() const { return val_; }
-	bool equal(repeat_iterator) const { return false; }
+	bool equal(repeat_iterator const&) const { return false; }
 };
 
 template<typename V> auto repeat(V&& value)
@@ -938,7 +938,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 		next_valid();
 	}
 	auto dereference() const ->decltype(*subRange_->subRangeIter) { return *subRange_->subRangeIter; }
-	bool equal(join_iterator other) const
+	bool equal(join_iterator const& other) const
 	{
 		if (rangeIter_ == rah_end(range_))
 			return rangeIter_ == other.rangeIter_;
@@ -1020,7 +1020,7 @@ struct cycle_iterator : iterator_facade<
 		--iter_;
 	}
 	auto dereference() const ->decltype(*iter_) { return *iter_; }
-	bool equal(cycle_iterator other) const
+	bool equal(cycle_iterator const& other) const
 	{
 		return cycleIndex_ == other.cycleIndex_ and iter_ == other.iter_;
 	}
@@ -1053,7 +1053,7 @@ struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F
 
 	void increment() { }
 	auto dereference() const { return (*func_)(); }
-	bool equal(generate_iterator) const { return false; }
+	bool equal(generate_iterator const&) const { return false; }
 };
 
 template<typename F> auto generate(F&& func)
@@ -1082,19 +1082,12 @@ struct transform_iterator : iterator_facade<
 	transform_iterator() = default;
 	transform_iterator(range_begin_type_t<R> const& iter, F const& func) : iter_(iter), func_(func) {}
 
-	transform_iterator& operator=(transform_iterator const& ot)
-	{
-		iter_ = ot.iter_;
-		func_ = ot.func_;
-		return *this;
-	}
-
 	void increment() { ++iter_; }
 	void advance(intptr_t off) { iter_ += off; }
 	void decrement() { --iter_; }
-	auto distance_to(transform_iterator r) const { return iter_ - r.iter_; }
+	auto distance_to(transform_iterator const& r) const { return iter_ - r.iter_; }
 	auto dereference() const -> decltype((*func_)(*iter_)) { return (*func_)(*iter_); }
-	bool equal(transform_iterator r) const { return iter_ == r.iter_; }
+	bool equal(transform_iterator const& r) const { return iter_ == r.iter_; }
 };
 
 template<typename R, typename F> auto transform(R&& range, F&& func)
@@ -1153,7 +1146,7 @@ struct set_difference_iterator : iterator_facade<
 		next_value();
 	}
 	auto dereference() const -> decltype(*first1_) { return *first1_; }
-	bool equal(set_difference_iterator r) const { return first1_ == r.first1_; }
+	bool equal(set_difference_iterator const& r) const { return first1_ == r.first1_; }
 };
 
 template<typename R1, typename R2> auto set_difference(R1&& range1, R2&& range2)
@@ -1243,8 +1236,8 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 
 	void advance(intptr_t value) { iter_ += step_ * value; }
 	auto dereference() const -> decltype(*iter_) { return *iter_; }
-	bool equal(stride_iterator other) const { return iter_ == other.iter_; }
-	auto distance_to(stride_iterator other) const { return (iter_ - other.iter_) / step_; }
+	bool equal(stride_iterator const& other) const { return iter_ == other.iter_; }
+	auto distance_to(stride_iterator const other) const { return (iter_ - other.iter_) / step_; }
 };
 
 
@@ -1387,8 +1380,8 @@ struct zip_iterator : iterator_facade<
 	void advance(intptr_t val) { for_each(iters_, [val](auto& iter) { iter += val; }); }
 	void decrement() { details::for_each(iters_, [](auto& iter) { --iter; }); }
 	auto dereference() const { return details::deref(iters_); }
-	auto distance_to(zip_iterator other) const { return RAH_STD::get<0>(iters_) - RAH_STD::get<0>(other.iters_); }
-	bool equal(zip_iterator other) const { return details::equal(iters_, other.iters_); }
+	auto distance_to(zip_iterator const& other) const { return RAH_STD::get<0>(iters_) - RAH_STD::get<0>(other.iters_); }
+	bool equal(zip_iterator const& other) const { return details::equal(iters_, other.iters_); }
 };
 
 template<typename ...R> auto zip(R&&... _ranges)
@@ -1425,7 +1418,7 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 	}
 
 	auto dereference() const { return make_iterator_range(iter_, iter2_); }
-	bool equal(chunk_iterator other) const { return iter_ == other.iter_; }
+	bool equal(chunk_iterator const& other) const { return iter_ == other.iter_; }
 };
 
 template<typename R> auto chunk(R&& range, size_t step)
@@ -1500,7 +1493,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 	}
 
 	auto dereference() const -> decltype(*iter_) { return *value_pointer_; }
-	bool equal(filter_iterator other) const { return iter_ == other.iter_; }
+	bool equal(filter_iterator const& other) const { return iter_ == other.iter_; }
 };
 
 template<typename R, typename P> auto filter(R&& range, P&& pred)
@@ -1559,7 +1552,7 @@ struct concat_iterator : iterator_facade<concat_iterator<IterPair, V>, V, RAH_ST
 			return *RAH_STD::get<1>(iter_);
 	}
 
-	bool equal(concat_iterator other) const
+	bool equal(concat_iterator const& other) const
 	{
 		if (range_index_ != other.range_index_)
 			return false;
