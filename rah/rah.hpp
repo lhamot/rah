@@ -518,7 +518,7 @@ struct insert_iterator : iterator_facade<insert_iterator<C>, range_ref_type_t<C>
 	using Iterator = RAH_NAMESPACE::range_begin_type_t<C>;
 	Iterator iter_;
 	template<typename I>
-	insert_iterator(C& container, I&& iter) : container_(&container), iter_(std::forward<I>(iter)){ }
+	insert_iterator(C& container, I&& iter) : container_(&container), iter_(RAH_STD::forward<I>(iter)){ }
 	template<typename V> void put(V&& value) const { container_->insert(iter_, value); }
 };
 
@@ -528,8 +528,8 @@ struct insert_iterator : iterator_facade<insert_iterator<C>, range_ref_type_t<C>
 template<typename C, typename I> auto inserter(C&& container, I&& iter)
 {
 	using Container = RAH_STD::remove_reference_t<C>;
-	auto begin = insert_iterator<Container>(container, std::forward<I>(iter));
-	auto end = insert_iterator<Container>(container, std::forward<I>(iter));
+	auto begin = insert_iterator<Container>(container, RAH_STD::forward<I>(iter));
+	auto end = insert_iterator<Container>(container, RAH_STD::forward<I>(iter));
 	return RAH_NAMESPACE::make_iterator_range(begin, end);
 }
 
@@ -569,7 +569,10 @@ template<typename I> iterator_range<I> const& all(iterator_range<I> const& range
 
 inline auto all()
 {
-	return make_pipeable([=](auto&& range) {return all(std::forward<decltype(range)>(range)); });
+	return make_pipeable([=](auto&& range)
+		{
+			return all(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // ******************************************* take ***********************************************
@@ -598,14 +601,18 @@ struct take_iterator : iterator_facade<
 template<typename R> auto take(R&& range, size_t count)
 {
 	using iterator = take_iterator<range_begin_type_t<R>>;
-	iterator iter1(rah_begin(range), 0);
-	iterator iter2(rah_end(range), count);
+	auto view = all(RAH_STD::forward<R>(range));
+	iterator iter1(rah_begin(view), 0);
+	iterator iter2(rah_end(view), count);
 	return make_iterator_range(iter1, iter2);
 }
 
 inline auto take(size_t count)
 {
-	return make_pipeable([=](auto&& range) {return take(range, count); });
+	return make_pipeable([=](auto&& range)
+		{
+			return take(RAH_STD::forward<decltype(range)>(range), count);
+		});
 }
 
 // ******************************************* sliding ********************************************
@@ -645,9 +652,10 @@ struct sliding_iterator : iterator_facade<
 template<typename R> auto sliding(R&& range, size_t n)
 {
 	size_t const closedSubRangeSize = n - 1;
-	auto const rangeEnd = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto const rangeEnd = rah_end(view);
 	using iterator = sliding_iterator<range_begin_type_t<R>>;
-	auto subRangeBegin = rah_begin(range);
+	auto subRangeBegin = rah_begin(view);
 	auto subRangeLast = subRangeBegin;
 	for (size_t i = 0; i != closedSubRangeSize; ++i)
 	{
@@ -666,30 +674,38 @@ template<typename R> auto sliding(R&& range, size_t n)
 
 inline auto sliding(size_t n)
 {
-	return make_pipeable([=](auto&& range) {return sliding(range, n); });
+	return make_pipeable([=](auto&& range)
+		{
+			return sliding(RAH_STD::forward<decltype(range)>(range), n);
+		});
 }
 
 // ******************************************* drop_exactly ***************************************
 
 template<typename R> auto drop_exactly(R&& range, size_t count)
 {
-	auto iter1 = rah_begin(range);
-	auto iter2 = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto iter1 = rah_begin(view);
+	auto iter2 = rah_end(view);
 	RAH_STD::advance(iter1, count);
 	return make_iterator_range(iter1, iter2);
 }
 
 inline auto drop_exactly(size_t count)
 {
-	return make_pipeable([=](auto&& range) {return drop_exactly(range, count); });
+	return make_pipeable([=](auto&& range)
+		{
+			return drop_exactly(RAH_STD::forward<decltype(range)>(range), count);
+		});
 }
 
 // ******************************************* drop ***********************************************
 
 template<typename R> auto drop(R&& range, size_t count)
 {
-	auto iter1 = rah_begin(range);
-	auto iter2 = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto iter1 = rah_begin(view);
+	auto iter2 = rah_end(view);
 	for(size_t i = 0; i < count; ++i)
 	{
 		if (iter1 == iter2)
@@ -701,7 +717,10 @@ template<typename R> auto drop(R&& range, size_t count)
 
 inline auto drop(size_t count)
 {
-	return make_pipeable([=](auto&& range) {return drop(range, count); });
+	return make_pipeable([=](auto&& range)
+		{
+			return drop(RAH_STD::forward<decltype(range)>(range), count);
+		});
 }
 
 // ******************************************* counted ********************************************
@@ -744,7 +763,10 @@ template<typename R> auto counted(R&& range, size_t n, decltype(rah_begin(range)
 
 inline auto counted(size_t n)
 {
-	return make_pipeable([=](auto&& range) {return take(range, n); });
+	return make_pipeable([=](auto&& range)
+		{
+			return take(RAH_STD::forward<decltype(range)>(range), n);
+		});
 }
 /// @endcond
 
@@ -965,7 +987,7 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 
 template<typename R> auto join(R&& range_of_ranges)
 {
-	auto rangeRef = range_of_ranges | RAH_NAMESPACE::view::all();
+	auto rangeRef = RAH_NAMESPACE::view::all(range_of_ranges);
 	using join_iterator_type = join_iterator<decltype(rangeRef)>;
 	auto rangeBegin = rah_begin(rangeRef);
 	auto rangeEnd = rah_end(rangeRef);
@@ -981,7 +1003,7 @@ template<typename R> auto join(R&& range_of_ranges)
 		join_iterator_type b(
 			rangeRef,
 			rangeBegin,
-			std::forward<decltype(firstSubRange)>(firstSubRange));
+			RAH_STD::forward<decltype(firstSubRange)>(firstSubRange));
 		join_iterator_type e(rangeRef, rangeEnd);
 		return make_iterator_range(b, e);
 	}
@@ -1046,9 +1068,9 @@ template<typename R> auto cycle(R&& range)
 {
 	auto rangeRef = range | RAH_NAMESPACE::view::all();
 	using iterator_type = cycle_iterator<RAH_STD::remove_reference_t<decltype(rangeRef)>>;
-
-	iterator_type beginIter(rangeRef, rah_begin(rangeRef), 0);
-	iterator_type endIter(rangeRef, rah_end(rangeRef), -1);
+	auto view = all(RAH_STD::forward<R>(range));
+	iterator_type beginIter(rangeRef, rah_begin(range), 0);
+	iterator_type endIter(rangeRef, rah_end(range), -1);
 	return make_iterator_range(beginIter, endIter);
 }
 
@@ -1110,14 +1132,18 @@ template<typename R, typename F> auto transform(R&& range, F&& func)
 {
 	using Functor = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<F>>;
 	using iterator = transform_iterator<RAH_STD::remove_reference_t<R>, Functor>;
-	auto iter1 = rah_begin(range);
-	auto iter2 = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto iter1 = rah_begin(view);
+	auto iter2 = rah_end(view);
 	return iterator_range<iterator>{ { iter1, func }, { iter2, func } };
 }
 
 template<typename F> auto transform(F&& func)
 {
-	return make_pipeable([=](auto&& range) {return transform(range, func); });
+	return make_pipeable([=](auto&& range)
+		{
+			return transform(RAH_STD::forward<decltype(range)>(range), func);
+		});
 }
 
 // ******************************************* set_difference *************************************
@@ -1170,9 +1196,11 @@ template<typename R1, typename R2> auto set_difference(R1&& range1, R2&& range2)
 	using Iter1 = range_begin_type_t<R1>;
 	using Iter2 = range_begin_type_t<R2>;
 	using Iterator = set_difference_iterator<Iter1, Iter2>;
+	auto view1 = all(RAH_STD::forward<R1>(range1));
+	auto view2 = all(RAH_STD::forward<R2>(range2));
 	return iterator_range<Iterator>{
-		{ Iterator(rah_begin(range1), rah_end(range1), rah_begin(range2), rah_end(range2)) },
-		{ Iterator(rah_end(range1), rah_end(range1), rah_end(range2), rah_end(range2)) },
+		{ Iterator(rah_begin(view1), rah_end(view1), rah_begin(view2), rah_end(view2)) },
+		{ Iterator(rah_end(view1), rah_end(view1), rah_end(view2), rah_end(view2)) },
 	};
 }
 
@@ -1191,7 +1219,10 @@ template<typename R, typename F> auto for_each(R&& range, F&& func)
 template<typename F>
 inline auto for_each(F&& func)
 {
-	return make_pipeable([=](auto&& range) {return RAH_NAMESPACE::view::for_each(range, func); });
+	return make_pipeable([=](auto&& range)
+		{
+			return RAH_NAMESPACE::view::for_each(RAH_STD::forward<decltype(range)>(range), func);
+		});
 }
 
 // ***************************************** slice ************************************************
@@ -1214,8 +1245,9 @@ template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)
 			return b;
 		}
 	};
-	auto b_in = rah_begin(range);
-	auto e_in = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto b_in = rah_begin(view);
+	auto e_in = rah_end(view);
 	auto b_out = findIter(b_in, e_in, begin_idx);
 	auto e_out = findIter(b_in, e_in, end_idx);
 	return iterator_range<decltype(b_out)>{ {b_out}, { e_out } };
@@ -1223,7 +1255,10 @@ template<typename R> auto slice(R&& range, intptr_t begin_idx, intptr_t end_idx)
 
 inline auto slice(intptr_t begin, intptr_t end)
 {
-	return make_pipeable([=](auto&& range) {return slice(range, begin, end); });
+	return make_pipeable([=](auto&& range)
+		{
+			return slice(RAH_STD::forward<decltype(range)>(range), begin, end);
+		});
 }
 
 // ***************************************** stride ***********************************************
@@ -1259,15 +1294,19 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 
 template<typename R> auto stride(R&& range, size_t step)
 {
-	auto iter = rah_begin(range);
-	auto endIter = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto iter = rah_begin(view);
+	auto endIter = rah_end(view);
 	return iterator_range<stride_iterator<RAH_STD::remove_reference_t<R>>>{
 		{ iter, endIter, step}, { endIter, endIter, step }};
 }
 
 inline auto stride(size_t step)
 {
-	return make_pipeable([=](auto&& range) {return stride(range, step); });
+	return make_pipeable([=](auto&& range)
+		{
+			return stride(RAH_STD::forward<decltype(range)>(range), step);
+		});
 }
 
 // ***************************************** retro ************************************************
@@ -1275,27 +1314,35 @@ inline auto stride(size_t step)
 // Use reverse instead of retro
 template<typename R> [[deprecated]] auto retro(R&& range)
 {
+	auto view = all(RAH_STD::forward<R>(range));
 	return make_iterator_range(
-		RAH_STD::make_reverse_iterator(rah_end(range)), RAH_STD::make_reverse_iterator(rah_begin(range)));
+		RAH_STD::make_reverse_iterator(rah_end(view)), RAH_STD::make_reverse_iterator(rah_begin(view)));
 }
 
 // Use reverse instead of retro
 [[deprecated]] inline auto retro()
 {
-	return make_pipeable([=](auto&& range) {return retro(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return retro(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // ***************************************** reverse **********************************************
 
 template<typename R> auto reverse(R&& range)
 {
+	auto view = all(RAH_STD::forward<R>(range));
 	return make_iterator_range(
-		RAH_STD::make_reverse_iterator(rah_end(range)), RAH_STD::make_reverse_iterator(rah_begin(range)));
+		RAH_STD::make_reverse_iterator(rah_end(view)), RAH_STD::make_reverse_iterator(rah_begin(view)));
 }
 
 inline auto reverse()
 {
-	return make_pipeable([=](auto&& range) {return reverse(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return reverse(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // ********************************** single ******************************************************
@@ -1402,8 +1449,9 @@ struct zip_iterator : iterator_facade<
 
 template<typename ...R> auto zip(R&&... _ranges)
 {
-	auto iterTup = RAH_STD::make_tuple(rah_begin(RAH_STD::forward<R>(_ranges))...);
-	auto endTup = RAH_STD::make_tuple(rah_end(RAH_STD::forward<R>(_ranges))...);
+	auto views = RAH_STD::make_tuple(all(RAH_STD::forward<R>(_ranges))...);
+	auto iterTup = details::transform_each(views, [](auto&& v){ return rah_begin(v);});
+	auto endTup = details::transform_each(views, [](auto&& v){ return rah_end(v);});
 	return iterator_range<zip_iterator<decltype(iterTup)>>{ { iterTup }, { endTup }};
 }
 
@@ -1439,8 +1487,9 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 
 template<typename R> auto chunk(R&& range, size_t step)
 {
-	auto iter = rah_begin(range);
-	auto endIter = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto iter = rah_begin(view);
+	auto endIter = rah_end(view);
 	using iterator = chunk_iterator<RAH_STD::remove_reference_t<R>>;
 	iterator begin = { iter, iter, endIter, step };
 	begin.increment();
@@ -1449,7 +1498,10 @@ template<typename R> auto chunk(R&& range, size_t step)
 
 inline auto chunk(size_t step)
 {
-	return make_pipeable([=](auto&& range) {return chunk(range, step); });
+	return make_pipeable([=](auto&& range)
+		{
+			return chunk(RAH_STD::forward<decltype(range)>(range), step);
+		});
 }
 
 // ***************************************** filter ***********************************************
@@ -1514,8 +1566,9 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 
 template<typename R, typename P> auto filter(R&& range, P&& pred)
 {
-	auto iter = rah_begin(range);
-	auto endIter = rah_end(range);
+	auto view = all(RAH_STD::forward<R>(range));
+	auto iter = rah_begin(view);
+	auto endIter = rah_end(view);
 	using Predicate = RAH_STD::remove_cv_t<RAH_STD::remove_reference_t<P>>;
 	return iterator_range<filter_iterator<RAH_STD::remove_reference_t<R>, Predicate>>{
 		{ iter, iter, endIter, pred },
@@ -1525,7 +1578,10 @@ template<typename R, typename P> auto filter(R&& range, P&& pred)
 
 template<typename P> auto filter(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return filter(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return filter(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ***************************************** concat ***********************************************
@@ -1587,10 +1643,12 @@ template<typename R1> auto concat(R1&& range1)
 
 template<typename R1, typename R2> auto concat(R1&& range1, R2&& range2)
 {
-	auto begin_range1 = RAH_STD::make_pair(rah_begin(range1), rah_begin(range2));
-	auto begin_range2 = RAH_STD::make_pair(rah_end(range1), rah_end(range2));
-	auto end_range1 = RAH_STD::make_pair(rah_end(range1), rah_end(range2));
-	auto end_range2 = RAH_STD::make_pair(rah_end(range1), rah_end(range2));
+	auto view1 = all(RAH_STD::forward<R1>(range1));
+	auto view2 = all(RAH_STD::forward<R2>(range2));
+	auto begin_range1 = RAH_STD::make_pair(rah_begin(view1), rah_begin(view2));
+	auto begin_range2 = RAH_STD::make_pair(rah_end(view1), rah_end(view2));
+	auto end_range1 = RAH_STD::make_pair(rah_end(view1), rah_end(view2));
+	auto end_range2 = RAH_STD::make_pair(rah_end(view1), rah_end(view2));
 	return iterator_range<
 		concat_iterator<
 		RAH_STD::pair<range_begin_type_t<R1>, range_begin_type_t<R2>>,
@@ -1612,13 +1670,17 @@ auto concat(R1&& range1, R2&& range2, Ranges&&... ranges)
 
 template<typename R> auto enumerate(R&& range)
 {
-	size_t const dist = RAH_STD::distance(rah_begin(RAH_STD::forward<R>(range)), rah_end(RAH_STD::forward<R>(range)));
-	return zip(iota(size_t(0), dist), RAH_STD::forward<R>(range));
+	auto view = all(RAH_STD::forward<R>(range));
+	size_t const dist = RAH_STD::distance(rah_begin(view), rah_end(view));
+	return zip(iota(size_t(0), dist), view);
 }
 
 inline auto enumerate()
 {
-	return make_pipeable([=](auto&& range) {return enumerate(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return enumerate(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // ****************************** map_value ********************************************************
@@ -1643,7 +1705,10 @@ template<typename R> auto map_value(R&& range)
 
 inline auto map_value()
 {
-	return make_pipeable([=](auto&& range) {return map_value(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return map_value(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // ****************************** map_key **********************************************************
@@ -1655,7 +1720,10 @@ template<typename R> auto map_key(R&& range)
 
 inline auto map_key()
 {
-	return make_pipeable([=](auto&& range) {return map_key(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return map_key(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // *********************************** sort *******************************************************
@@ -1672,8 +1740,9 @@ auto sort(R&& range, P&& pred = {})
 	using value_type = range_value_type_t<R>;
 	using Container = typename RAH_STD::vector<RAH_STD::remove_cv_t<value_type>>;
 	Container result;
-	result.reserve(RAH_STD::distance(rah_begin(range), rah_end(range)));
-	RAH_STD::copy(rah_begin(range), rah_end(range), RAH_STD::back_inserter(result));
+	auto view = all(RAH_STD::forward<R>(range));
+	result.reserve(RAH_STD::distance(rah_begin(view), rah_end(view)));
+	RAH_STD::copy(rah_begin(view), rah_end(view), RAH_STD::back_inserter(result));
 	RAH_STD::sort(rah_begin(result), rah_end(result), pred);
 	return result;
 }
@@ -1688,7 +1757,10 @@ auto sort(R&& range, P&& pred = {})
 template<typename P = is_lesser, typename = RAH_STD::enable_if_t<not is_range<P>::value>>
 auto sort(P&& pred = {})
 {
-	return make_pipeable([=](auto&& range) { return view::sort(RAH_STD::forward<decltype(range)>(range), pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return view::sort(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 } // namespace view
@@ -1720,7 +1792,8 @@ inline auto empty()
 template<typename R, typename V>
 auto equal_range(R&& range, V&& value, RAH_STD::enable_if_t<is_range<R>::value, int> = 0)
 {
-	auto pair = RAH_STD::equal_range(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value));
+	auto view = view::all(RAH_STD::forward<R>(range));
+	auto pair = RAH_STD::equal_range(rah_begin(view), rah_end(view), RAH_STD::forward<V>(value));
 	return make_iterator_range(RAH_STD::get<0>(pair), RAH_STD::get<1>(pair));
 }
 
@@ -1730,7 +1803,10 @@ auto equal_range(R&& range, V&& value, RAH_STD::enable_if_t<is_range<R>::value, 
 /// @snippet test.cpp rah::equal_range_pipeable
 template<typename V> auto equal_range(V&& value)
 {
-	return make_pipeable([=](auto&& range) {return equal_range(RAH_STD::forward<decltype(range)>(range), value); });
+	return make_pipeable([=](auto&& range)
+		{
+			return equal_range(RAH_STD::forward<decltype(range)>(range), value);
+		});
 }
 
 /// @brief Returns a range containing all elements equivalent to value in the range
@@ -1740,7 +1816,8 @@ template<typename V> auto equal_range(V&& value)
 template<typename R, typename V, typename P>
 auto equal_range(R&& range, V&& value, P&& pred)
 {
-	auto pair = RAH_STD::equal_range(rah_begin(range), rah_end(range), RAH_STD::forward<V>(value), RAH_STD::forward<P>(pred));
+	auto view = view::all(RAH_STD::forward<R>(range));
+	auto pair = RAH_STD::equal_range(rah_begin(view), rah_end(view), RAH_STD::forward<V>(value), RAH_STD::forward<P>(pred));
 	return make_iterator_range(RAH_STD::get<0>(pair), RAH_STD::get<1>(pair));
 }
 
@@ -1752,7 +1829,10 @@ auto equal_range(R&& range, V&& value, P&& pred)
 template<typename V, typename P>
 auto equal_range(V&& value, P&& pred, RAH_STD::enable_if_t<!is_range<V>::value, int> = 0)
 {
-	return make_pipeable([=](auto&& range) {return equal_range(RAH_STD::forward<decltype(range)>(range), value, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return equal_range(RAH_STD::forward<decltype(range)>(range), value, pred);
+		});
 }
 
 // ****************************************** binary_search ***********************************************
@@ -1771,7 +1851,10 @@ template<typename R, typename V> auto binary_search(R&& range, V&& value)
 /// @snippet test.cpp rah::binary_search_pipeable
 template<typename V> auto binary_search(V&& value)
 {
-	return make_pipeable([=](auto&& range) {return binary_search(RAH_STD::forward<decltype(range)>(range), value); });
+	return make_pipeable([=](auto&& range)
+		{
+			return binary_search(RAH_STD::forward<decltype(range)>(range), value);
+		});
 }
 
 // ****************************************** transform *******************************************
@@ -1815,7 +1898,10 @@ template<typename R, typename I, typename F> auto reduce(R&& range, I&& init, F&
 template<typename I, typename F>
 auto reduce(I&& init, F&& reducer)
 {
-	return make_pipeable([=](auto&& range) {return reduce(range, init, reducer); });
+	return make_pipeable([=](auto&& range)
+		{
+			return reduce(RAH_STD::forward<decltype(range)>(range), init, reducer);
+		});
 }
 
 // ************************* any_of *******************************************
@@ -1834,7 +1920,10 @@ template<typename R, typename F> bool any_of(R&& range, F&& pred)
 /// @snippet test.cpp rah::any_of_pipeable
 template<typename P> auto any_of(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return any_of(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return any_of(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ************************* all_of *******************************************
@@ -1853,7 +1942,10 @@ template<typename R, typename P> bool all_of(R&& range, P&& pred)
 /// @snippet test.cpp rah::all_of_pipeable
 template<typename P> auto all_of(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return all_of(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return all_of(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ************************* none_of *******************************************
@@ -1872,7 +1964,10 @@ template<typename R, typename P> bool none_of(R&& range, P&& pred)
 /// @snippet test.cpp rah::none_of_pipeable
 template<typename P> auto none_of(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return none_of(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return none_of(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ************************* count ****************************************************************
@@ -1891,7 +1986,10 @@ template<typename R, typename V> auto count(R&& range, V&& value)
 /// @snippet test.cpp rah::count_pipeable
 template<typename V> auto count(V&& value)
 {
-	return make_pipeable([=](auto&& range) {return count(range, value); });
+	return make_pipeable([=](auto&& range)
+		{
+			return count(RAH_STD::forward<decltype(range)>(range), value);
+		});
 }
 
 /// @brief Counts elements for which predicate pred returns true
@@ -1908,7 +2006,10 @@ template<typename R, typename P> auto count_if(R&& range, P&& pred)
 /// @snippet test.cpp rah::count_if_pipeable
 template<typename P> auto count_if(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return count_if(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return count_if(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ************************* foreach **************************************************************
@@ -1927,7 +2028,10 @@ template<typename R, typename F> auto for_each(R&& range, F&& func)
 /// @snippet test.cpp rah::for_each_pipeable
 template<typename F> auto for_each(F&& func)
 {
-	return make_pipeable([=](auto&& range) {return for_each(range, func); });
+	return make_pipeable([=](auto&& range)
+		{
+			return for_each(RAH_STD::forward<decltype(range)>(range), func);
+		});
 }
 
 // ***************************** to_container *****************************************************
@@ -1946,7 +2050,10 @@ template<typename C, typename R> auto to_container(R&& range)
 /// @snippet test.cpp rah::to_container_pipeable
 template<typename C> auto to_container()
 {
-	return make_pipeable([=](auto&& range) {return to_container<C>(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return to_container<C>(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // ************************* mismatch *************************************************************
@@ -1975,7 +2082,10 @@ template<typename R, typename V> auto find(R&& range, V&& value)
 /// @snippet test.cpp rah::find_pipeable
 template<typename V> auto find(V&& value)
 {
-	return make_pipeable([=](auto&& range) {return find(range, value); });
+	return make_pipeable([=](auto&& range)
+		{
+			return find(RAH_STD::forward<decltype(range)>(range), value);
+		});
 }
 
 /// @brief Finds the first element satisfying specific criteria
@@ -1992,7 +2102,10 @@ template<typename R, typename P> auto find_if(R&& range, P&& pred)
 /// @snippet test.cpp rah::find_if_pipeable
 template<typename P> auto find_if(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return find_if(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return find_if(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 /// @brief Finds the first element not satisfying specific criteria
@@ -2009,7 +2122,10 @@ template<typename R, typename P> auto find_if_not(R&& range, P&& pred)
 /// @snippet test.cpp rah::find_if_not_pipeable
 template<typename P> auto find_if_not(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return find_if_not(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return find_if_not(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ************************************* max_element **********************************************
@@ -2029,7 +2145,10 @@ auto max_element(R&& range)
 /// @snippet test.cpp rah::max_element_pipeable
 inline auto max_element()
 {
-	return make_pipeable([=](auto&& range) {return max_element(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return max_element(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 /// @brief Finds the greatest element in the range
@@ -2047,7 +2166,10 @@ template<typename R, typename P> auto max_element(R&& range, P&& pred)
 template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0>
 auto max_element(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return max_element(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return max_element(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // ************************************* min_element **********************************************
@@ -2067,7 +2189,10 @@ auto min_element(R&& range)
 /// @snippet test.cpp rah::min_element_pipeable
 inline auto min_element()
 {
-	return make_pipeable([=](auto&& range) {return min_element(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return min_element(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 /// @brief Finds the smallest element in the range
@@ -2085,7 +2210,10 @@ template<typename R, typename P> auto min_element(R&& range, P&& pred)
 template<typename P, RAH_STD::enable_if_t<!is_range<P>::value, int> = 0>
 auto min_element(P&& pred)
 {
-	return make_pipeable([=](auto&& range) {return min_element(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return min_element(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // *************************************** copy ***************************************************
@@ -2186,7 +2314,10 @@ template<typename R> auto size(R&& range)
 /// @snippet test.cpp rah::size_pipeable
 inline auto size()
 {
-	return make_pipeable([=](auto&& range) { return size(range); });
+	return make_pipeable([=](auto&& range)
+		{
+			return size(RAH_STD::forward<decltype(range)>(range));
+		});
 }
 
 // *************************************** equal **************************************************
@@ -2252,7 +2383,10 @@ template<typename R, typename P> auto remove_if(R&& range, P&& pred)
 /// @snippet test.cpp rah::remove_if_pipeable
 template<typename P> auto remove_if(P&& pred)
 {
-	return make_pipeable([=](auto&& range) { return remove_if(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return remove_if(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // *********************************** remove *****************************************************
@@ -2273,7 +2407,10 @@ template<typename R, typename V> auto remove(R&& range, V&& value)
 /// @snippet test.cpp rah::remove_pipeable
 template<typename V> auto remove(V&& value)
 {
-	return make_pipeable([=](auto&& range) { return remove(RAH_STD::forward<decltype(range)>(range), value); });
+	return make_pipeable([=](auto&& range)
+		{
+			return remove(RAH_STD::forward<decltype(range)>(range), value);
+		});
 }
 
 // *********************************** partition **************************************************
@@ -2295,7 +2432,10 @@ template<typename R, typename P> auto partition(R&& range, P&& pred)
 /// @snippet test.cpp rah::partition_pipeable
 template<typename P> auto partition(P&& pred)
 {
-	return make_pipeable([=](auto&& range) { return partition(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return partition(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // *********************************** stable_partition *******************************************
@@ -2317,7 +2457,10 @@ template<typename R, typename P> auto stable_partition(R&& range, P&& pred)
 /// @snippet test.cpp rah::stable_partition_pipeable
 template<typename P> auto stable_partition(P&& pred)
 {
-	return make_pipeable([=](auto&& range) { return stable_partition(range, pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return stable_partition(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // *********************************** erase ******************************************************
@@ -2438,7 +2581,10 @@ auto unique(R&& range, P&& pred = {})
 template<typename P = is_equal, typename = RAH_STD::enable_if_t<not is_range<P>::value>>
 auto unique(P&& pred = {})
 {
-	return make_pipeable([=](auto&& range) { return unique(RAH_STD::forward<decltype(range)>(range), pred); });
+	return make_pipeable([=](auto&& range)
+		{
+			return unique(RAH_STD::forward<decltype(range)>(range), pred);
+		});
 }
 
 // *********************************** set_difference ************************************************
@@ -2497,7 +2643,10 @@ auto&& unique(C&& container, P&& pred = {})
 template<typename P = is_equal, typename = RAH_STD::enable_if_t<not is_range<P>::value>>
 auto unique(P&& pred = {})
 {
-	return make_pipeable([=](auto&& range) -> auto&& { return action::unique(RAH_STD::forward<decltype(range)>(range), pred); });
+	return make_pipeable([=](auto&& range) -> auto&&
+	{
+		return action::unique(RAH_STD::forward<decltype(range)>(range), pred);
+	});
 }
 
 // *********************************** remove_if **************************************************
@@ -2519,7 +2668,10 @@ template<typename C, typename P> auto&& remove_if(C&& container, P&& pred)
 /// @snippet test.cpp rah::action::remove_if_pipeable
 template<typename P> auto remove_if(P&& pred)
 {
-	return make_pipeable([=](auto&& range) -> auto&& { return remove_if(RAH_STD::forward<decltype(range)>(range), pred); });
+	return make_pipeable([=](auto&& range) -> auto&&
+	{
+		return remove_if(RAH_STD::forward<decltype(range)>(range), pred);
+	});
 }
 
 // *********************************** remove *****************************************************
@@ -2541,7 +2693,10 @@ template<typename C, typename V> auto&& remove(C&& container, V&& value)
 /// @snippet test.cpp rah::action::remove_pipeable
 template<typename V> auto remove(V&& value)
 {
-	return make_pipeable([=](auto&& range) -> auto&& { return remove(RAH_STD::forward<decltype(range)>(range), value); });
+	return make_pipeable([=](auto&& range) -> auto&&
+	{
+		return remove(RAH_STD::forward<decltype(range)>(range), value);
+	});
 }
 
 // *********************************** sort *******************************************************
@@ -2567,7 +2722,10 @@ auto&& sort(C&& container, P&& pred = {})
 template<typename P = is_lesser, typename = RAH_STD::enable_if_t<not is_range<P>::value>>
 auto sort(P&& pred = {})
 {
-	return make_pipeable([=](auto&& range) -> auto&& { return action::sort(RAH_STD::forward<decltype(range)>(range), pred); });
+	return make_pipeable([=](auto&& range) -> auto&&
+	{
+		return action::sort(RAH_STD::forward<decltype(range)>(range), pred);
+	});
 }
 
 // *********************************** shuffle *******************************************************

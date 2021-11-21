@@ -1980,8 +1980,9 @@ int main()
 	}
 
 	{
-		auto&& result = rah::view::iota(0, 10, 2)
-			| rah::view::sort([](auto a, auto b) {return b < a; })
+		auto&& sorted = rah::view::iota(0, 10, 2)
+			| rah::view::sort([](auto a, auto b) {return b < a; });
+		auto&& result = sorted
 			| rah::view::transform([](auto v) {return v - 10; }) 
 			| rah::to_container<std::vector<int>>();
 		assert(result == std::vector<int>({ -2, -4, -6, -8, -10 }));
@@ -2163,7 +2164,7 @@ int main()
 		auto gen = customGenerate();
 		std::vector<int> gen_copy;
 		std::copy(begin(gen), end(gen), std::back_inserter(gen_copy));
-		EQUAL_RANGE(gen_copy, std::vector<int>({ 1, 2, 4, 8 }));
+		EQUAL_RANGE(gen_copy, il<int>({ 1, 2, 4, 8 }));
 	}
 
 	{
