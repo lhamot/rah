@@ -326,6 +326,9 @@ private:
 
 template<typename I, typename R, typename C> struct iterator_facade;
 
+#define RAH_SELF (*static_cast<I*>(this))
+#define RAH_SELF_CONST (*static_cast<I const*>(this))
+
 template<typename I, typename R>
 struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 {
@@ -359,12 +362,6 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 
 	static_assert(not RAH_STD::is_reference<value_type>::value, "value_type can't be a reference");
 
-	I& self() { return *static_cast<I*>(this); }
-	I const& self() const { return *static_cast<I const*>(this); }
-
-	#define RAH_SELF (*static_cast<I*>(this))
-	#define RAH_SELF_CONST (*static_cast<I const*>(this))
-
 	auto& operator++()
 	{
 		RAH_SELF.increment();
@@ -379,8 +376,6 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 	auto operator->() const { return pointer_type<R>::to_pointer(RAH_SELF_CONST.dereference()); }
 	bool operator!=(I const& other) const { return not RAH_SELF_CONST.equal(other); }
 	bool operator==(I const& other) const { return RAH_SELF_CONST.equal(other); }
-
-	#undef RAH_SELF 
 };
 
 template<typename I, typename R>
@@ -394,9 +389,6 @@ struct iterator_facade<I, R, RAH_STD::output_iterator_tag>
 
 	static_assert(not RAH_STD::is_reference<value_type>::value, "value_type can't be a reference");
 
-	I& self() { return *static_cast<I*>(this); }
-	I const& self() const { return *static_cast<I const*>(this); }
-
 	auto& operator++() { return *this; }
 	auto& operator*() const { return *this; }
 	bool operator!=(I other) const { return true; }
@@ -405,8 +397,8 @@ struct iterator_facade<I, R, RAH_STD::output_iterator_tag>
 	template<typename V>
 	auto operator=(V&& value) const
 	{
-		self().put(RAH_STD::forward<V>(value));
-		return self();
+		RAH_SELF_CONST.put(RAH_STD::forward<V>(value));
+		return RAH_SELF_CONST;
 	}
 };
 
@@ -416,12 +408,9 @@ struct iterator_facade<I, R, RAH_STD::bidirectional_iterator_tag> : iterator_fac
 {
 	using iterator_category = RAH_STD::bidirectional_iterator_tag;
 
-	I& self() { return *static_cast<I*>(this); }
-	I const& self() const { return *static_cast<I const*>(this); }
-
 	auto& operator--()
 	{
-		self().decrement();
+		RAH_SELF.decrement();
 		return *this;
 	}
 };
@@ -431,42 +420,42 @@ struct iterator_facade<I, R, RAH_STD::random_access_iterator_tag> : iterator_fac
 {
 	using iterator_category = RAH_STD::random_access_iterator_tag;
 
-	I& self() { return *static_cast<I*>(this); }
-	I const& self() const { return *static_cast<I const*>(this); }
-
 	auto& operator+=(intptr_t increment)
 	{
-		self().advance(increment);
+		RAH_SELF.advance(increment);
 		return *this;
 	}
 
 	auto operator+(intptr_t increment)
 	{
-		auto iter = self();
+		auto iter = RAH_SELF;
 		iter.advance(increment);
 		return iter;
 	}
 
 	auto& operator-=(intptr_t increment)
 	{
-		self().advance(-increment);
+		RAH_SELF.advance(-increment);
 		return *this;
 	}
 
 	auto operator-(intptr_t increment)
 	{
-		auto iter = self();
+		auto iter = RAH_SELF;
 		iter.advance(-increment);
 		return iter;
 	}
 
-	auto operator-(I other) const { return self().distance_to(other); }
-	bool operator<(I other) const { return self().distance_to(other) < 0; }
-	bool operator<=(I other) const { return self().distance_to(other) <= 0; }
-	bool operator>(I other) const { return self().distance_to(other) > 0; }
-	bool operator>=(I other) const { return self().distance_to(other) >= 0; }
-	auto operator[](intptr_t increment) const { return *(self() + increment); }
+	auto operator-(I other) const { return RAH_SELF_CONST.distance_to(other); }
+	bool operator<(I other) const { return RAH_SELF_CONST.distance_to(other) < 0; }
+	bool operator<=(I other) const { return RAH_SELF_CONST.distance_to(other) <= 0; }
+	bool operator>(I other) const { return RAH_SELF_CONST.distance_to(other) > 0; }
+	bool operator>=(I other) const { return RAH_SELF_CONST.distance_to(other) >= 0; }
+	auto operator[](intptr_t increment) const { return *(RAH_SELF_CONST + increment); }
 };
+
+#undef RAH_SELF 
+
 
 #ifdef RAH_DONT_USE_STD
 
