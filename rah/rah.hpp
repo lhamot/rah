@@ -362,20 +362,25 @@ struct iterator_facade<I, R, RAH_STD::forward_iterator_tag>
 	I& self() { return *static_cast<I*>(this); }
 	I const& self() const { return *static_cast<I const*>(this); }
 
+	#define RAH_SELF (*static_cast<I*>(this))
+	#define RAH_SELF_CONST (*static_cast<I const*>(this))
+
 	auto& operator++()
 	{
-		self().increment();
+		RAH_SELF.increment();
 		return *this;
 	}
 
 	reference operator*() const 
 	{ 
-		static_assert(RAH_STD::is_same<decltype(self().dereference()), reference>::value, "");
-		return self().dereference(); 
+		static_assert(RAH_STD::is_same<decltype(RAH_SELF_CONST.dereference()), reference>::value, "");
+		return RAH_SELF_CONST.dereference(); 
 	}
-	auto operator->() const { return pointer_type<R>::to_pointer(self().dereference()); }
-	bool operator!=(I const& other) const { return not self().equal(other); }
-	bool operator==(I const& other) const { return self().equal(other); }
+	auto operator->() const { return pointer_type<R>::to_pointer(RAH_SELF_CONST.dereference()); }
+	bool operator!=(I const& other) const { return not RAH_SELF_CONST.equal(other); }
+	bool operator==(I const& other) const { return RAH_SELF_CONST.equal(other); }
+
+	#undef RAH_SELF 
 };
 
 template<typename I, typename R>
@@ -844,12 +849,12 @@ struct ints_iterator : iterator_facade<ints_iterator<T>, T, RAH_STD::random_acce
 
 template<typename T = size_t> auto ints(T b = 0, T e = RAH_STD::numeric_limits<T>::max())
 {
-	return iterator_range<ints_iterator<T>>{ { b }, { e }};
+	return iterator_range<ints_iterator<T>>{ b, e};
 }
 
 template<typename T = size_t> auto closed_ints(T b = 0, T e = RAH_STD::numeric_limits<T>::max() - 1)
 {
-	return iterator_range<ints_iterator<T>>{ { b }, { e + 1 }};
+	return iterator_range<ints_iterator<T>>{ b, e + 1};
 }
 
 // ********************************** iota ********************************************************
@@ -914,25 +919,17 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 	using Iterator2 = range_begin_type_t<decltype(*fake<Iterator1>())>;
 	Iterator1 rangeIter_;
 	Iterator1 rangeEnd_;
-	struct SubRange
-	{
-		Iterator2 subRangeIter;
-		Iterator2 subRangeEnd;
+	Iterator2 subRangeIter;
+	Iterator2 subRangeEnd;
 
-		template<typename SR>
-		SubRange(SR&& sr)
-			: subRangeIter(rah_begin(sr))
-			, subRangeEnd(rah_end(sr))
-		{
-		}
-	};
-	RAH_NAMESPACE::details::optional<SubRange> subRange_;
+	join_iterator() = default;
 
 	template<typename SR>
 	join_iterator(Iterator1 rangeIter, Iterator1 rangeEnd, SR&& subRange)
 		: rangeIter_(rangeIter)
 		, rangeEnd_(rangeEnd)
-		, subRange_(SubRange(all(RAH_STD::forward<SR>(subRange))))
+		, subRangeIter(rah_begin(subRange))
+		, subRangeEnd(rah_end(subRange))
 	{
 		if (rangeIter_ == rangeEnd_)
 			return;
@@ -947,30 +944,32 @@ struct join_iterator : iterator_facade<join_iterator<R>, range_ref_type_t<range_
 
 	void next_valid()
 	{
-		while (subRange_->subRangeIter == subRange_->subRangeEnd)
+		while (subRangeIter == subRangeEnd)
 		{
 			++rangeIter_;
 			if (rangeIter_ == rangeEnd_)
 				return;
 			else
 			{
-				subRange_ = SubRange( all(*rangeIter_) );
+				auto view = all(*rangeIter_);
+				subRangeIter = rah_begin(view);
+				subRangeEnd = rah_end(view);
 			}
 		}
 	}
 
 	void increment()
 	{
-		++subRange_->subRangeIter;
+		++subRangeIter;
 		next_valid();
 	}
-	auto dereference() const ->decltype(*subRange_->subRangeIter) { return *subRange_->subRangeIter; }
+	auto dereference() const ->decltype(*subRangeIter) { return *subRangeIter; }
 	bool equal(join_iterator const& other) const
 	{
 		if (rangeIter_ == rangeEnd_)
 			return rangeIter_ == other.rangeIter_;
 		else
-			return rangeIter_ == other.rangeIter_ && subRange_->subRangeIter == other.subRange_->subRangeIter;
+			return rangeIter_ == other.rangeIter_ && subRangeIter == other.subRangeIter;
 	}
 };
 
@@ -988,7 +987,7 @@ template<typename R> auto join(R&& range_of_ranges)
 	}
 	else
 	{
-		auto&& firstSubRange = *rangeBegin;
+		auto firstSubRange = all(*rangeBegin);
 		join_iterator_type b(
 			rangeBegin,
 			rangeEnd,
@@ -1018,6 +1017,7 @@ struct cycle_iterator : iterator_facade<
 	Iterator iter_;
 	int64_t cycleIndex_;
 
+	cycle_iterator() = default;
 	template<typename U>
 	explicit cycle_iterator(U&& range, Iterator iter, int64_t cycleIndex)
 		: range_(RAH_STD::forward<U>(range))
@@ -1076,6 +1076,7 @@ struct generate_iterator : iterator_facade<generate_iterator<F>, decltype(fake<F
 {
 	mutable RAH_NAMESPACE::details::optional<F> func_;
 
+	generate_iterator() = default;
 	generate_iterator(F const& func) : func_(func) {}
 
 	void increment() { }
@@ -1149,6 +1150,7 @@ struct set_difference_iterator : iterator_facade<
 	InputIt2 first2_;
 	InputIt2 last2_;
 
+	set_difference_iterator() = default;
 	set_difference_iterator(InputIt1 first1, InputIt1 last1, InputIt2 first2, InputIt2 last2)
 		: first1_(first1) , last1_(last1) , first2_(first2), last2_(last2)
 	{
@@ -1259,6 +1261,7 @@ struct stride_iterator : iterator_facade<stride_iterator<R>, range_ref_type_t<R>
 	range_end_type_t<R> end_;
 	size_t step_;
 
+	stride_iterator() = default;
 	stride_iterator(range_begin_type_t<R> const& iter, range_end_type_t<R> const& end, size_t step)
 		: iter_(iter), end_(end), step_(step) {}
 
@@ -1454,6 +1457,7 @@ struct chunk_iterator : iterator_facade<chunk_iterator<R>, iterator_range<range_
 	range_end_type_t<R> end_;
 	size_t step_;
 
+	chunk_iterator() = default;
 	chunk_iterator(
 		range_begin_type_t<R> const& iter,
 		range_begin_type_t<R> const& iter2,
@@ -1516,6 +1520,7 @@ struct filter_iterator : iterator_facade<filter_iterator<R, F>, range_ref_type_t
 		static auto get(V* ptr) { return ptr; }
 	};
 
+	filter_iterator() = default;
 	filter_iterator(
 		range_begin_type_t<R> const& begin,
 		range_begin_type_t<R> const& iter,
@@ -1582,6 +1587,7 @@ struct concat_iterator : iterator_facade<concat_iterator<IterPair, V>, V, RAH_ST
 	IterPair end_;
 	size_t range_index_;
 
+	concat_iterator() = default;
 	concat_iterator(IterPair const& iter, IterPair const& end, size_t range_index)
 		: iter_(iter), end_(end), range_index_(range_index)
 	{
@@ -2338,7 +2344,8 @@ template<typename R1> auto equal(R1&& range2)
 template<typename S>
 struct stream_inserter_iterator : iterator_facade<stream_inserter_iterator<S>, typename S::char_type, RAH_STD::output_iterator_tag>
 {
-	S* stream_;
+	S* stream_ = nullptr;
+	stream_inserter_iterator() = default;
 	stream_inserter_iterator(S& stream) : stream_(&stream) { }
 	template<typename V> void put(V&& value) const { (*stream_) << value; }
 };
