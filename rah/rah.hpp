@@ -39,6 +39,11 @@
 #define RAH_NAMESPACE rah
 #endif
 
+namespace RAH_STD
+{
+	template<class T, std::size_t Extent> class span;
+}
+
 namespace RAH_NAMESPACE
 {
 
@@ -391,8 +396,8 @@ struct iterator_facade<I, R, RAH_STD::output_iterator_tag>
 
 	auto& operator++() { return *this; }
 	auto& operator*() const { return *this; }
-	bool operator!=(I other) const { return true; }
-	bool operator==(I other) const { return false; }
+	bool operator!=(I const& other) const { return true; }
+	bool operator==(I const& other) const { return false; }
 
 	template<typename V>
 	auto operator=(V&& value) const
@@ -446,11 +451,11 @@ struct iterator_facade<I, R, RAH_STD::random_access_iterator_tag> : iterator_fac
 		return iter;
 	}
 
-	auto operator-(I other) const { return RAH_SELF_CONST.distance_to(other); }
-	bool operator<(I other) const { return RAH_SELF_CONST.distance_to(other) < 0; }
-	bool operator<=(I other) const { return RAH_SELF_CONST.distance_to(other) <= 0; }
-	bool operator>(I other) const { return RAH_SELF_CONST.distance_to(other) > 0; }
-	bool operator>=(I other) const { return RAH_SELF_CONST.distance_to(other) >= 0; }
+	auto operator-(I const& other) const { return RAH_SELF_CONST.distance_to(other); }
+	bool operator<(I const& other) const { return RAH_SELF_CONST.distance_to(other) < 0; }
+	bool operator<=(I const& other) const { return RAH_SELF_CONST.distance_to(other) <= 0; }
+	bool operator>(I const& other) const { return RAH_SELF_CONST.distance_to(other) > 0; }
+	bool operator>=(I const& other) const { return RAH_SELF_CONST.distance_to(other) >= 0; }
 	auto operator[](intptr_t increment) const { return *(RAH_SELF_CONST + increment); }
 };
 
@@ -546,6 +551,11 @@ template<typename R> auto all(R&& range)
 }
 
 template<typename I> auto all(std::initializer_list<I> range)
+{
+	return iterator_range<decltype(rah_begin(range))>{rah_begin(range), rah_end(range)};
+}
+
+template<typename I, std::size_t E> auto all(RAH_STD::span<I, E>&& range)
 {
 	return iterator_range<decltype(rah_begin(range))>{rah_begin(range), rah_end(range)};
 }
